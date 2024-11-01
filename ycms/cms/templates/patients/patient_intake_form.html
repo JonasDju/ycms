@@ -114,4 +114,30 @@
             </div>
         </form>
     </div>
+    <!-- When changing the admission date, the estimated discharge date is modified to be one week after the changed admission date -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const admissionDateLabel = document.querySelector("label[for='{{ bed_form.admission_date.id_for_label }}']");
+            const dischargeDateLabel = document.querySelector("label[for='{{ bed_form.discharge_date.id_for_label }}']");
+
+            const admissionDateInput = admissionDateLabel ? document.getElementById(admissionDateLabel.htmlFor) : null;
+            const dischargeDateInput = dischargeDateLabel ? document.getElementById(dischargeDateLabel.htmlFor) : null;
+
+            if (admissionDateInput && dischargeDateInput) {
+                admissionDateInput.addEventListener("change", function() {
+                    const admissionDate = new Date(admissionDateInput.value);
+                    if (!isNaN(admissionDate.getTime())) {
+                        const dischargeDate = new Date(admissionDate);
+                        dischargeDate.setDate(admissionDate.getDate() + 7);
+                        const year = dischargeDate.getFullYear();
+                        const month = String(dischargeDate.getMonth() + 1).padStart(2, '0');
+                        const day = String(dischargeDate.getDate()).padStart(2, '0');
+                        const hours = String(dischargeDate.getHours()).padStart(2, '0');
+                        const minutes = String(dischargeDate.getMinutes()).padStart(2, '0');
+                        dischargeDateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+                    }
+                });
+            }
+        });
+    </script>
 {% endblock content %}

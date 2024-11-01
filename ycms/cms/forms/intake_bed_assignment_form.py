@@ -2,6 +2,7 @@ import datetime
 import logging
 
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from ..models import BedAssignment
@@ -48,6 +49,23 @@ class IntakeBedAssignmentForm(CustomModelForm):
         self.fields[
             "discharge_date"
         ].initial = current_or_travelled_time() + datetime.timedelta(days=7)
+
+    def clean(self):
+        """
+        This method extends the default ``clean()``-method of the base :class:`~django.forms.ModelForm`
+        to check if the admission date is before the discharge date.
+
+        :return: The cleaned data
+        """
+        cleaned_data = super().clean()
+        admission_date = cleaned_data.get("admission_date")
+        discharge_date = cleaned_data.get("discharge_date")
+        if admission_date and discharge_date:
+            if admission_date > discharge_date:
+                raise ValidationError(
+                    "Admission date cannot be later than discharge date."
+                )
+        return cleaned_data
 
     def save(self, commit=True):
         """
