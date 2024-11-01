@@ -3,7 +3,16 @@ URLconf for login-protected views of the cms package.
 """
 from django.urls import include, path
 
-from ..views import authentication, index, patients, timeline, user_settings_view, ward
+from ..views import (
+    authentication,
+    floor,
+    index,
+    patients,
+    timeline,
+    user_settings_view,
+    ward,
+)
+from ..views.floor.floor_view import FloorView  # Importiere die FloorView hier
 from ..views.utility.autocomplete import autocomplete_icd10, autocomplete_patient
 
 urlpatterns = [
@@ -126,4 +135,5 @@ urlpatterns = [
         ),
     ),
     path("settings/", user_settings_view.UserSettingsView.as_view(), name="settings"),
+    path("floor/", FloorView.as_view(), name="floor"),
 ]
