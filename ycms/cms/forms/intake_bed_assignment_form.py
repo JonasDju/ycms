@@ -60,10 +60,36 @@ class IntakeBedAssignmentForm(CustomModelForm):
         cleaned_data = super().clean()
         admission_date = cleaned_data.get("admission_date")
         discharge_date = cleaned_data.get("discharge_date")
+        # check if admission date is before discharge date
         if admission_date and discharge_date:
             if admission_date > discharge_date:
                 raise ValidationError(
                     "Admission date cannot be later than discharge date."
+                )
+        # make sure that the medical record is set
+        if (
+            not hasattr(self.instance, "medical_record")
+            or not self.instance.medical_record
+        ):
+            raise ValidationError(
+                "Medical record is required to validate hospital stay periods."
+            )
+        # get all existing assignments for the patient
+        patient = self.instance.medical_record.patient
+        existing_assignments = BedAssignment.objects.filter(
+            medical_record__patient=patient
+        ).exclude(
+            pk=self.instance.pk
+        )  # exclude the current assignment
+        # check if the new assignment overlaps with existing assignments
+        for assignment in existing_assignments:
+            # if the new assignment is within the time frame of an existing assignment, raise an error
+            if assignment.admission_date <= discharge_date and (
+                assignment.discharge_date is None
+                or admission_date <= assignment.discharge_date
+            ):
+                raise ValidationError(
+                    "The selected admission and discharge times overlap with an existing hospital stay."
                 )
         return cleaned_data
 
