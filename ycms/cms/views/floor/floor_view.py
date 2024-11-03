@@ -7,11 +7,14 @@ class FloorView(TemplateView):
     template_name = "floor/floor.html"
 
     def get_context_data(self, **kwargs):
-        # Rufe den Kontext der übergeordneten Klasse ab
         context = super().get_context_data(**kwargs)
 
-        # Füge die aktuelle Etage hinzu
-        context[
-            "current_floor"
-        ] = 3  # Ersetze dies durch die tatsächliche Logik zur Bestimmung der Etage
+        # Aktuelle Etage aus der URL-Parameter abrufen
+        current_floor = self.request.GET.get("floor", 1)  # standard 1
+        context["current_floor"] = int(current_floor)
+        context["total_floors"] = self.get_number_of_floor()
+
         return context
+
+    def get_number_of_floor(self):
+        return 4

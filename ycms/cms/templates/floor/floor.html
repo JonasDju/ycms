@@ -11,38 +11,39 @@
 
 {# Hauptinhalt #}
 {% block content %}
-    <div class="flex flex-col h-screen">  <!-- Flex-Container für volle Bildschirmhöhe -->
-
-        {# Obere Etage #}
-        <div class="flex justify-center items-center w-full">
-            <div onclick="location.href='#top'" class="bg-gray-300 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
-                ETAGE
-            </div>
-        </div>
+    <div class="flex flex-col h-screen">
 
         {# Linke Seite: Sidebar #}
-        <div class="flex flex-1">  <!-- Flex-Container für Sidebar und Hauptinhalt -->
-            <div class="w-1/8 mt-4 mb-4">  <!-- Margin oben und unten hinzugefügt -->
-                {% include "floor/floor_sidebar.html" %} {# Sidebar-Vorlage einfügen #}
+        <div class="flex flex-1 justify-center items-center">
+            <div class="w-1/8 h-[90vh] mt-4 mb-4">
+                {% include "floor/floor_sidebar.html" %}
             </div>
 
-            {# Rechte Seite: Etagenübersicht #}
-            <div class="w-3/4 p-4 flex flex-col justify-center items-center"> <!-- Container für die Etagenübersicht, vertikale Anordnung und zentrierte Items -->
-                {# Hier oben kann später Inhalt eingefügt werden #}
+            {# Rechte Seite: Container für die Etagenübersicht #}
+            <div class="flex flex-col justify-between w-3/4 h-[90vh] p-4">
 
-                <div class="bg-gray-300 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full">
-                    CORRIDOR
+                {# Obere Etage #}
+                <div class="flex justify-center items-center w-full">
+                    <div onclick="location.href='?floor={{ current_floor|add:-1 }}'" class="bg-gray-500 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
+                        ETAGE {{ current_floor|add:-1 }}
+                    </div>
                 </div>
 
-                {# Hier unten kann später Inhalt eingefügt werden #}
+                {# Corridor #}
+                <div class="flex-grow flex justify-center items-center w-full">
+                    <div class="bg-gray-500 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full">
+                        CORRIDOR
+                    </div>
+                </div>
+
+                {# Untere Etage #}
+                <div class="flex justify-center items-center w-full">
+                    <div onclick="location.href='?floor={{ current_floor|add:1 }}'" class="bg-gray-500 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
+                        ETAGE {{ current_floor|add:1 }}
+                    </div>
+                </div>
             </div>
         </div>
 
-        {# Untere Etage #}
-        <div class="flex justify-center items-center w-full">
-            <div onclick="location.href='#bottom'" class="bg-gray-300 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
-                ETAGE
-            </div>
-        </div>
     </div>
 {% endblock content %}
