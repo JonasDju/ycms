@@ -15,7 +15,7 @@
 import logging
 
 from django import forms
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 from ...constants import group_names
 from ...models import User
