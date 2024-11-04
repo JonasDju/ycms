@@ -1,0 +1,27 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=ycms
+      - POSTGRES_DB=ycms
+      - POSTGRES_PASSWORD=password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ycms -d ycms"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+  ycms-dev:
+    build:
+      dockerfile: ./docker/dev/Dockerfile
+      context: .
+    environment:
+      - YCMS_DB_HOST=db
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./:/bed-management/ycms
+    profiles: [dev]
+    depends_on:
+      db:
+        condition: service_healthy
