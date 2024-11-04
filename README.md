@@ -65,7 +65,6 @@ some_folder/
    ├─ docker
    ├─ docs
    └─ ...
-
 ```
 
 To start the development server, run: `./tools/run.sh`
