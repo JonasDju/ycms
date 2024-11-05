@@ -8,11 +8,6 @@ function listen_for_devserver {
     echo "✔ Started YCMS at http://localhost:${YCMS_PORT}"
 }
 
-# Install JavaScript dependencies
-echo "Installing JavaScript dependencies..."
-npm install --no-fund
-echo "✔ Installed JavaScript dependencies"
-
 # Check if python virtual environment exists
 if [[ ! -f ".venv/bin/activate" ]]; then
     echo "Creating virtual environment for $(${PYTHON} --version)..."
@@ -26,10 +21,8 @@ fi
 # Activate virtual environment
 source .venv/bin/activate
 
-# Install pip dependencies
-echo "Installing Python dependencies..."
-pip install -e .[dev-pinned,pinned]
-echo "✔ Installed Python dependencies"
+# Install python and js dependencies
+../install_dependencies.sh
 
 # Perform migration (if required)
 echo "Performing migrations if required..."

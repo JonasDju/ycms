@@ -30,10 +30,10 @@ RUN python3 -m venv .venv && \
 # Change ownership of patient-to-room-assignment repository
 RUN chown -R 1000:1000 /bed-management/patient-to-room_assignment
 
-# Copy entrypoint
+# Copy scripts
 WORKDIR /bed-management
-COPY docker/dev/entrypoint.sh entrypoint.sh
-RUN chmod +x entrypoint.sh
+COPY docker/dev/entrypoint.sh docker/dev/install_dependencies.sh .
+RUN chmod +x entrypoint.sh install_dependencies.sh
 
 # Switch to a non-root user
 USER ubuntu
