@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2024-11-07 18:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -113,6 +113,16 @@ msgstr "Ein Account für die Email \"{}\" existiert bereits."
 #: cms/forms/custom_model_form.py
 msgid "Enter {} here"
 msgstr "{} hier eingeben"
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid "Admission date cannot be later than discharge date."
+msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid ""
+"The selected admission and discharge dates overlap with an existing hospital "
+"stay."
+msgstr "Der ausgewählte Zeitraum kollidiert mit einem existierenden Krankenhausaufenthalt."
 
 #: cms/forms/intake_record_form.py
 msgid "Search for existing patient"
@@ -403,8 +413,7 @@ msgstr "Vorname des Angestellten / der Angestellten"
 msgid "Last name of the employee"
 msgstr "Nachname des Angestellten / der Angestellten"
 
-#: cms/models/user.py cms/templates/_base.html
-#: cms/templates/ward/ward_selection_form.html
+#: cms/models/user.py cms/templates/ward/ward_selection_form.html
 msgid "Ward"
 msgstr "Station"
 
@@ -463,6 +472,16 @@ msgstr "Stationsverwaltung"
 #: cms/templates/_base.html
 msgid "Patient Data"
 msgstr "Patientendaten"
+
+#: cms/templates/_base.html
+msgid "Views"
+msgstr ""
+
+#: cms/templates/_base.html cms/templates/floor/floor.html
+#, fuzzy
+#| msgid "Ward View"
+msgid "Floor View"
+msgstr "Stationsansicht"
 
 #: cms/templates/_base.html
 msgid "Ward View"
