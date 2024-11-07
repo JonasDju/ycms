@@ -7,8 +7,19 @@
 {% endblock title %}
 {% block content %}
     <div class="max-w-6xl mx-auto mt-6">
-        <form enctype="multipart/form-data"
-              method="post"
+        <!-- Intake model toggle switch -->
+        <div class="flex items-center container mx-auto justify-center">
+            <label for="intake-mode-switch" class="font-normal text-gray-700 my-3">{% translate "Normal intake" %}</label>
+            <input type="checkbox"
+            name="intake_emergency"
+            id="intake-mode-switch"
+            class="m-3 relative w-[3.25rem] h-7 p-px !bg-red-600 border-transparent  !rounded-full cursor-pointer transition-colors ease-in-out duration-200 checked:bg-none checked:text-red-600 before:inline-block before:w-6 before:h-6 before:bg-white dark:before:bg-gray-300 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 peer-focus:ring-red-400"
+            checked>
+            <label for="intake-mode-switch" class="font-normal text-gray-700 my-3">{% translate "Emergency intake" %}</label>
+        </div>
+        <!-- Intake forms -->
+            <form enctype="multipart/form-data"
+            method="post"
               id="patient_form"
               class="mb-12"
               data-unsaved-warning>
@@ -16,7 +27,7 @@
             <div class="grid xl:grid-cols-2 gap-x-24">
                 {% with WIDGET_ERROR_CLASS="border-red-500" %}
                     <div class="flex flex-col gap-8">
-                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option">
+                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option" id="existing-option">
                             <h1 class="heading">{% translate "Select existing patient" %}</h1>
                             <div class="mt-4">
                                 {% render_field record_form.patient %}
@@ -26,7 +37,7 @@
                                 {% translate "reset form" %}
                             </div>
                         </div>
-                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option">
+                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option" id="emergency-option">
                             <h1 class="heading">{% translate "Or perform emergency intake" %}</h1>
                             <div class="mt-4">
                                 <div>
@@ -51,7 +62,8 @@
                                 {% translate "reset form" %}
                             </div>
                         </div>
-                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option">
+                        {% comment %} class md:columns-3 {% endcomment %}
+                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option" id="new-option">
                             <h1 class="heading">{% translate "Or create new patient" %}</h1>
                             {% for field in patient_form %}
                                 <div>
@@ -116,6 +128,7 @@
     </div>
     <!-- When changing the admission date, the estimated discharge date is modified to be one week after the changed admission date -->
     <script>
+        // TODO: move these scripts to ycms/static/src/js/patient-select-or-create.ts
         document.addEventListener("DOMContentLoaded", function() {
             const admissionDateLabel = document.querySelector("label[for='{{ bed_form.admission_date.id_for_label }}']");
             const dischargeDateLabel = document.querySelector("label[for='{{ bed_form.discharge_date.id_for_label }}']");
@@ -146,5 +159,27 @@
             }
         });
     });
+        const normalIntakeForms = [document.querySelector('#existing-option'), document.querySelector('#new-option')];
+        const emergencyIntakeForms = [document.querySelector('#emergency-option')];
+
+        function toggleEmergencyIntake() {
+            normalIntakeForms.forEach((form) => {
+                form.style.display = mode_switch.checked ? 'none' : '';
+            });
+            emergencyIntakeForms.forEach((form) => {
+                form.style.display = mode_switch.checked ? '' : 'none';
+            });
+        }
+
+        const mode_switch = document.getElementById("intake-mode-switch");
+        mode_switch.addEventListener('change', toggleEmergencyIntake);
+
+        // initial intake mode
+        // TODO: pass as argument from view
+        toggleEmergencyIntake();
+
+        // const form = document.getElementById("IntakeSelectionId");
+        // var data = FormData(form);
+        // data.append("intake-choice", "emergency"); // add new field to form data so backend knows which to take
     </script>
 {% endblock content %}
