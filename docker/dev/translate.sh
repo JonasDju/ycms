@@ -8,10 +8,6 @@ compute_hash() {
 # Change directory to make sure to ignore files in the venv
 cd ycms || exit 1
 
-# Execute the makemessages command update the .po files
-echo "Scanning Python and HTML source code and extracting translatable strings from it..."
-ycms-cli makemessages -l de --add-location file --verbosity 1
-
 # Compute the SHA256 hash of the file
 FILE_PATH="locale/de/LC_MESSAGES/django.po"
 CURRENT_HASH=$(compute_hash "$FILE_PATH")

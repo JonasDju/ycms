@@ -56,7 +56,7 @@ check_node_deps() {
 }
 
 # Ensure the .dockercache directory exists
-mkdir -p .dockercache
+mkdir -p .dockercache/packages
 
 # Check and install Python dependencies
 check_python_deps

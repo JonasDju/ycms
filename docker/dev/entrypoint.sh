@@ -1,5 +1,17 @@
 #!/bin/bash
 
+#Define cleanup procedure
+cleanup() {
+    # Execute the makemessages command update the .po files on exit
+    cd "ycms"
+    ycms-cli makemessages -l de --add-location file --verbosity 0
+}
+
+#Trap SIGTERM -> execute cleanup procedure
+trap 'cleanup' SIGTERM
+
+
+# Change into the ycms directory
 cd ycms
 
 # Temporary solution to migrate users from .packagestate to .dockercache
@@ -69,4 +81,6 @@ done
 
 # Show success message once dev server is up
 listen_for_devserver &
-ycms-cli runserver "0.0.0.0:${YCMS_PORT}"
+ycms-cli runserver "0.0.0.0:${YCMS_PORT}" &
+
+wait $!
