@@ -475,11 +475,9 @@ msgstr "Patientendaten"
 
 #: cms/templates/_base.html
 msgid "Views"
-msgstr ""
+msgstr "Ansichten"
 
 #: cms/templates/_base.html cms/templates/floor/floor.html
-#, fuzzy
-#| msgid "Ward View"
 msgid "Floor View"
 msgstr "Stationsansicht"
 
