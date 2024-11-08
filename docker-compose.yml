@@ -12,7 +12,7 @@ services:
       retries: 10
 
   ycms-dev:
-    image: ycms-dev:0.1
+    image: ycms-dev:0.2
     pull_policy: never
     build:
       dockerfile: ./docker/dev/Dockerfile

@@ -8,7 +8,7 @@ compute_hash() {
 # Function to check and install Python dependencies
 check_python_deps() {
     local file="pyproject.toml"
-    local hash_file=".packagestate/${file}.sha256"
+    local hash_file=".dockercache/packages/${file}.sha256"
     local current_hash=$(compute_hash "$file")
 
     if [ ! -f "$hash_file" ]; then
@@ -31,8 +31,8 @@ check_python_deps() {
 check_node_deps() {
     local file="package.json"
     local lock_file="package-lock.json"
-    local hash_file=".packagestate/${file}.sha256"
-    local lock_hash_file=".packagestate/${lock_file}.sha256"
+    local hash_file=".dockercache/packages/${file}.sha256"
+    local lock_hash_file=".dockercache/packages/${lock_file}.sha256"
     local current_hash=$(compute_hash "$file")
     local current_lock_hash=$(compute_hash "$lock_file")
 
@@ -55,8 +55,8 @@ check_node_deps() {
     fi
 }
 
-# Ensure the .packagestate directory exists
-mkdir -p .packagestate
+# Ensure the .dockercache directory exists
+mkdir -p .dockercache/packages
 
 # Check and install Python dependencies
 check_python_deps
