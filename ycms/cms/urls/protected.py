@@ -113,6 +113,7 @@ urlpatterns = [
                 path(
                     "manage/", ward.WardManagementView.as_view(), name="ward_management"
                 ),
+                path("manage/", ward.WardManagementView.as_view(), name="ward_edit"),
             ]
         ),
     ),

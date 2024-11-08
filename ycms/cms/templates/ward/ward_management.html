@@ -120,6 +120,9 @@
                             <th align="left">{% translate "Number of Beds" %}</th>
                             <th align="left">{% translate "Available" %}</th>
                             <th align="left">{% translate "Occupied" %}</th>
+
+                            <th align="left"></th>
+
                         </tr>
                         {% for ward in wards %}
                             <tr>
@@ -128,6 +131,9 @@
                                 <td>{{ ward.total_beds }}</td>
                                 <td>{{ ward.available_beds }}</td>
                                 <td>{{ ward.occupied_beds }}</td>
+
+                                <td align="center">
+                                    <button class="btn btn-danger">edit</button></td>
                             </tr>
                         {% endfor %}
                     </table>
