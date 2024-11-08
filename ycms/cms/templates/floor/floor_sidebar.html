@@ -1,16 +1,25 @@
-<div class="sidebar bg-gray-500 p-1 h-full flex flex-col rounded-full">
+<div class="sidebar bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 p-1 h-full flex flex-col rounded-full">
     <ul class="mt-4 flex-grow w-full">
-        <li class="bg-gray-500 rounded mb-2 w-full">
-            <button onclick="location.href='?floor=1'" class="block py-4 text-white hover:bg-gray-400 rounded w-full text-center min-w-[50px] {% if current_floor == 1 %}bg-gray-400{% endif %}">1</button>
-        </li>
-        <li class="bg-gray-500 rounded mb-2 w-full">
-            <button onclick="location.href='?floor=2'" class="block py-4 text-white hover:bg-gray-400 rounded w-full text-center min-w-[50px] {% if current_floor == 2 %}bg-gray-400{% endif %}">2</button>
-        </li>
-        <li class="bg-gray-500 rounded mb-2 w-full">
-            <button onclick="location.href='?floor=3'" class="block py-4 text-white hover:bg-gray-400 rounded w-full text-center min-w-[50px] {% if current_floor == 3 %}bg-gray-400{% endif %}">3</button>
-        </li>
-        <li class="bg-gray-500 rounded mb-2 w-full">
-            <button onclick="location.href='?floor=4'" class="block py-4 text-white hover:bg-gray-400 rounded w-full text-center min-w-[50px] {% if current_floor == 4 %}bg-gray-400{% endif %}">4</button>
-        </li>
+
+        {# Add Button #}
+        {% if user.is_staff %}
+            <li class="bg-gray-50 rounded mb-2 w-full border border-green-300 bg-green-50 dark:bg-green-500">
+                <button onclick="location.href='/add_floor/'" class="flex py-4 text-black dark:text-white hover:bg-green-200 dark:hover:bg-green-200 rounded w-full text-center min-w-[50px] items-center justify-center transition-all duration-300 transform hover:-translate-y-2 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 hover:shadow-md dark:hover:shadow-md">
+                    <svg class="h-5 w-5 text-green-600 dark:text-green-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                </button>
+            </li>
+        {% endif %}
+
+        {# Etage Buttons #}
+        {% for floor in floors %}
+            <li class="bg-gray-50 rounded mb-2 w-full">
+                <button onclick="location.href='?floor={{ floor }}'" class="block py-4 border border-gray-200 dark:bg-gray-600 dark:border-gray-700 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-gray-400 rounded w-full text-center min-w-[50px] {% if current_floor == floor %}bg-gray-300 dark:bg-gray-400{% endif %} transition-all duration-300 transform hover:-translate-y-2 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 hover:shadow-md dark:hover:shadow-md">
+                    {{ floor }}
+                </button>
+            </li>
+        {% endfor %}
+
     </ul>
 </div>
