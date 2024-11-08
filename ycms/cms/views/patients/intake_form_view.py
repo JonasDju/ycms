@@ -18,6 +18,10 @@ from ...forms import (
 from ...models import Patient
 from ...models.timetravel_manager import current_or_travelled_time
 
+from pathlib import Path
+from ...import_data import import_data
+import os
+
 logger = logging.getLogger(__name__)
 
 
@@ -28,6 +32,21 @@ class IntakeFormView(TemplateView):
     """
 
     template_name = "patients/patient_intake_form.html"
+
+    # upload patients with a csv file
+    def import_patients_from_csv(request):
+        tmp_folder = Path("./../../../temp")
+        tmp_folder.mkdir(parents=True, exist_ok=True)
+        tmp_csv = Path(tmp_folder, "temp.csv")
+        # write chunks to a temporary file
+        with open(tmp_csv, "wb") as f:
+            for chunk in request.FILES["filepath"].chunks():
+                f.write(chunk)
+        # read temporary file and use it for import
+        import_data(tmp_csv, sep=",")
+        # delete temporary file
+        os.remove(tmp_csv)
+        return redirect("cms:protected:patients")
 
     def get_context_data(self, **kwargs):
         """

@@ -30,7 +30,7 @@ class Command(BaseCommand):
     Management Command to load new test data
     """
 
-    help = "parse new tet data and store in fixture"
+    help = "parse new test data and store in fixture"
 
     @staticmethod
     def _vorname(gender):
