@@ -15,44 +15,69 @@
 [![CircleCI](https://circleci.com/gh/charludo/ycms.svg?style=shield)](https://circleci.com/gh/charludo/ycms)
 [![ReadTheDocs](https://readthedocs.org/projects/ycms/badge/?version=latest)](https://ycms.readthedocs.io/en/latest/)
 
-This is a Django 4 based web application. The main goal is to...
 
-## TL;DR
+## Installation
 
-### Prerequisites
+This section describes how to setup a development environment to start contributing to this project. There are currently two ways to install YCMS, but both methods require you to have Docker installed on your system.
+Windows users should use the newest Version of [Docker Desktop](https://www.docker.com/products/docker-desktop/), Linux users should use [Docker Engine](https://docs.docker.com/engine/install/) (including the docker compose plugin).
 
+### Pure Docker installation (Recommended)
+```
+git clone git@github.com:JonasDju/ycms.git
+cd ycms
+docker compose --profile dev up
+```
+Building and starting the container for the first time will take several minutes. Subsequent runs of the project will start much faster.
+While the container is running, the WebUI can be accessed via `http://localhost:8086`. Any changes made to the source code or templates will be visible in real time without stopping the container.
+The containers can be stopped using `Ctrl+C`. If you wish to reset the database, use `docker compose --profile dev down` after stopping the containers.
+
+After changing or adding any translation strings inside .py or .html files, you need to stop the container (`Ctrl+C`), make manual modifications to the translation file located at `ycms/locale/de/LC_MESSAGES/django.po` and then restart the container using `docker compose --profile dev up`.
+
+### Local installation
 **Note:** if you absolutely MUST use Windows, follow the guide in `WSL.md`. No guarantees though.
 
-Following packages are required before installing the project (install them with your package manager):
+For Linux and Mac users, the following packages are required before installing the project (install them with your package manager):
 
 * `npm` version 7 or later
 * `nodejs` version 12 or later
 * `python3` version 3.9 or later
 * `python3-pip` (Debian-based distributions) / `python-pip` (Arch-based distributions)
 * `python3-venv` (only on Debian-based distributions)
-* `docker` to run a local database server
 
-### Installation
-
-````
-git clone git@github.com:charludo/ycms.git
-cd ycms
-./tools/install.sh --pre-commit
-````
-
-And if you want to use the "suggest assignment" functionality:
-- clone [TabeaBrandt/patient-to-room_assignment](https://github.com/TabeaBrandt/patient-to-room_assignment/tree/v1) next to where your copy of `ycms` lives
+If you want to use the "suggest assignment" functionality, additional steps are needed before installing YCMS:
+- clone [TabeaBrandt/patient-to-room_assignment](https://github.com/TabeaBrandt/patient-to-room_assignment/tree/v1) in a folder where you will later clone this repository
 - inside `patient-to-room_assignment`, do
     - `python -m venv .venv`
     - `. .venv/bin/activate`
     - `pip install gurobipy`
 
-### Run development server
-
+Continue with the installation of the YCMS project:
 ````
-./tools/run.sh
+git clone git@github.com:JonasDju/ycms.git
+cd ycms
+./tools/install.sh --pre-commit
 ````
 
+Your folder structure should look like this now:
+```
+some_folder/
+├─ patient-to-room_assignment/
+│  └─ ...
+└─ ycms/
+   ├─ docker
+   ├─ docs
+   └─ ...
+```
+
+Next, the translation files should be compiled with `./tools/translate.sh` to make sure that the german translation is available.
+To start the development server, run: `./tools/run.sh`
+Any changes made to the code or the templates will be visible in real time. If you wish to reset the database, delete the `.postgres` folder inside the `ycms` directory.
+
+After changing or adding any translation strings inside .py or .html files, you are required to update the translation file using `./tools/tranlsate.sh --skip-compile`, make manual modifications to the updated file located at `ycms/locale/de/LC_MESSAGES/django.po` and then compile the changes using `./tools/tranlsate.sh`. You can check if you forgot some manual translations by running `./tools/check_tranlsations.sh`.
+
+## Using the WebUI
+
+* Install and run the server using one of the options above
 * Go to your browser and open the URL `http://localhost:8086`
 * By default, the following users exist:
 
