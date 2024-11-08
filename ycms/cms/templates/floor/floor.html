@@ -15,7 +15,7 @@
 
         {# Linke Seite: Sidebar #}
         <div class="flex flex-1 justify-center items-center">
-            <div class="w-1/8 h-[90vh] mt-4 mb-4">
+            <div class="w-1/8 h-[90vh] mt-4 mb-4 ml-44">
                 {% include "floor/floor_sidebar.html" %}
             </div>
 
@@ -29,15 +29,28 @@
                     </div>
                 </div>
 
+                {# Container für nebeneinander angeordnete Cards #}
+                <div class="flex mt-4 space-x-4"> <!-- Flex Container und Abstand zwischen den Cards -->
+                    <div class="flex-1">
+                        {% include "floor/floor_ward_card.html" %}
+                    </div>
+                    <div class="flex-1">
+                        {% include "floor/floor_ward_card.html" %}
+                    </div>
+                    <div class="flex-1">
+                        {% include "floor/floor_ward_card.html" %}
+                    </div>
+                </div>
+
                 {# Corridor #}
-                <div class="flex-grow flex justify-center items-center w-full">
+                <div class="flex-grow flex justify-center w-full mt-4">
                     <div class="bg-gray-500 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full">
                         CORRIDOR
                     </div>
                 </div>
 
                 {# Untere Etage #}
-                <div class="flex justify-center items-center w-full">
+                <div class="flex justify-center items-center w-full mt-4">
                     <div onclick="location.href='?floor={{ current_floor|add:1 }}'" class="bg-gray-500 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
                         ETAGE {{ current_floor|add:1 }}
                     </div>
