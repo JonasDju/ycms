@@ -109,11 +109,16 @@ window.addEventListener("load", () => {
         existingPatientSelect.addEventListener("change", initialPatientSelection);
     }
 
+    const intakeModeLabels = document.querySelectorAll(`label[for="intake-mode-switch"]`);
+    const classLabelNormal = "font-normal text-gray-700 my-3 mx-2";
+    const classLabelHighlighted = "font-normal text-blue-600 my-3 mx-2";
+
     // Handle hiding and disabling fields in respective intake mode
     const intakeModeSwitch = <HTMLInputElement>document.querySelector("#intake-mode-switch");
     intakeModeSwitch.addEventListener("change", () => {
         const inEmergencyMode = intakeModeSwitch.checked;
-
+        intakeModeLabels[0].className = inEmergencyMode ? classLabelNormal : classLabelHighlighted;
+        intakeModeLabels[1].className = inEmergencyMode ? classLabelHighlighted : classLabelNormal;
         // show/hide forms
         /* eslint-disable no-param-reassign */
         normalIntakeForms.forEach((form) => {
