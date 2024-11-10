@@ -155,6 +155,8 @@ window.addEventListener("load", () => {
     ageSlider.addEventListener("input", () => {
         ageDisplay.innerHTML = ageSlider.value;
     });
+    // refresh initial value
+    ageSlider.dispatchEvent(new Event("input"));
 
     // If a patient was passed to the intake form, use it
     const urlParams = new URLSearchParams(window.location.href);
