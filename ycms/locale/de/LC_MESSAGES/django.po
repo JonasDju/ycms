@@ -1074,6 +1074,18 @@ msgstr "Verfügbare Betten"
 msgid "Occupied"
 msgstr "Belegten Betten"
 
+#: cms/templates/ward/ward_management.html
+msgid "Are you sure you want to delete this ward?"
+msgstr "Sind Sie sicher, dass Sie diese Station löschen wollen?"
+
+#: cms/templates/ward/ward_management.html
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: cms/templates/ward/ward_management.html
+msgid "Delete"
+msgstr "Löschen"
+
 #: cms/templates/ward/ward_modal.html
 msgid "Are you sure you want to discharge this patient?"
 msgstr "Sind Sie sicher, dass Sie diesen Patienten entlassen möchten?"

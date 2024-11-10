@@ -2,10 +2,11 @@ import json
 
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from ...constants import bed_types, job_types
 from ...decorators import permission_required
@@ -119,4 +120,22 @@ class WardManagementView(TemplateView):
                 room_counter, bed_counter, ward.name
             ),
         )
+        return redirect("cms:protected:ward_management")
+
+
+@method_decorator(permission_required("cms.delete_ward"), name="dispatch")
+class WardDeleteView(DeleteView):
+    """
+    View to delete a ward
+    """
+
+    model = Ward
+    success_url = reverse_lazy("cms:protected:ward_management")
+
+    def form_valid(self, form):
+        messages.success(self.request, _("Ward has been deleted."))
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        form.add_error_messages(self.request)
         return redirect("cms:protected:ward_management")
