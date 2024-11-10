@@ -63,6 +63,48 @@ window.addEventListener("load", () => {
     //     });
     // });
 
+    const firstNameField = <HTMLInputElement>document.querySelector("#id_first_name");
+    const lastNameField = <HTMLInputElement>document.querySelector("#id_last_name");
+    const genderFields = document.querySelectorAll<HTMLInputElement>("input[name='gender']");
+    const dateOfBirthField = <HTMLInputElement>document.querySelector("#id_date_of_birth");
+    const insuranceFields = document.querySelectorAll<HTMLInputElement>("input[name='insurance_type']");
+
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    const fillPatientFields = (json: any) => {
+        if (Object.keys(json).length === 0) {
+            // clear
+            firstNameField.value = "";
+            lastNameField.value = "";
+            genderFields.forEach((radio) => {
+                /* eslint-disable-next-line no-param-reassign */
+                radio.checked = false;
+            });
+            dateOfBirthField.value = "";
+            insuranceFields.forEach((radio) => {
+                /* eslint-disable-next-line no-param-reassign */
+                radio.checked = false;
+            });
+        } else {
+            firstNameField.value = json.first_name;
+            lastNameField.value = json.last_name;
+
+            for (const radio of genderFields) {
+                if (radio.value === json.gender) {
+                    radio.checked = true;
+                    break;
+                }
+            }
+
+            dateOfBirthField.valueAsDate = new Date(json.date_of_birth);
+
+            if (json.insurance_type) {
+                insuranceFields[1].checked = true;
+            } else {
+                insuranceFields[0].checked = true;
+            }
+        }
+    };
+
     // Handle disabling new patient inputs when an existing patient has been selected
     const initialPatientSelection = () => {
         // get patient selection div where we can track if an item is selected
@@ -95,8 +137,21 @@ window.addEventListener("load", () => {
                     existingPatientSelect.setAttribute("patient-selected", existingInputFilled.toString());
                 });
 
-                // TODO: fetch patient's data and fill out fields in new patient form
-                // or somehow get the reference to the tomselect instance
+                // TODO: currently already clears fields if field is only selected
+                // fetch patient's data and fill out fields in new patient form
+                const patientId = patientSelectDiv.querySelector(".item")?.getAttribute("data-value");
+                if (patientId != null) {
+                    console.log(`Patient ${patientId} selected`);
+
+                    const url = `/autocomplete/patient-details/?q=${encodeURIComponent(patientId)}`;
+
+                    fetch(url)
+                        .then((response) => response.json()) // may check response.status === 204...
+                        .then((json) => fillPatientFields(json));
+                } else {
+                    // clear fields
+                    fillPatientFields({});
+                }
             });
         });
 
@@ -117,6 +172,7 @@ window.addEventListener("load", () => {
 
     // Handle hiding and disabling fields in respective intake mode
     const intakeModeSwitch = <HTMLInputElement>document.querySelector("#intake-mode-switch");
+    // TODO: may be null since it's loaded on all pages...
     intakeModeSwitch.addEventListener("change", () => {
         const inEmergencyMode = intakeModeSwitch.checked;
         intakeModeLabels[0].className = inEmergencyMode ? classLabelNormal : classLabelHighlighted;
