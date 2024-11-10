@@ -125,6 +125,7 @@
 
                         </tr>
                         {% for ward in wards %}
+
                             <tr>
                                 <td>{{ ward.ward_number }}</td>
                                 <td>{{ ward.name }}</td>
@@ -132,8 +133,18 @@
                                 <td>{{ ward.available_beds }}</td>
                                 <td>{{ ward.occupied_beds }}</td>
 
-                                <td align="center">
-                                    <button class="btn btn-danger">edit</button></td>
+                                <td align="left">
+                                    <button type="submit" class="btn w-full md:w-auto self-center">{% translate "Edit" %}</button>
+                                </td>
+                                <td align="left">
+
+                                        {% csrf_token %}
+                                        <button type="submit" class="text-white bg-red-500 rounded px-4 py-2.5">
+                                        {% translate "Delete" %}
+                                        </button>
+
+                                </td>
+
                             </tr>
                         {% endfor %}
                     </table>

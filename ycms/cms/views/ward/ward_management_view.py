@@ -1,13 +1,11 @@
 import json
 
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
-from django.views.generic.edit import UpdateView
 
 from ...constants import bed_types, job_types
 from ...decorators import permission_required
@@ -49,45 +47,6 @@ class WardManagementView(TemplateView):
             {
                 "ward_form": ward_form,
                 "bed_types": bed_types.CHOICES,
-                **self._get_ward_info(),
-                **super().get_context_data(**kwargs),
-            },
-        )
-
-    """
-    edit_ward
-    """
-
-    def edit_ward(self, request, ward_id):
-        r"""
-        View to edit an existing ward.
-
-        :param request: The current request
-        :type request: ~django.http.HttpRequest
-        :param ward_id: ID of the ward to be edited
-        :type ward_id: int
-        :return: Rendered edit form or redirect upon successful save
-        :rtype: ~django.template.response.TemplateResponse
-        """
-        ward = get_object_or_404(Ward, id=ward_id)
-        if request.method == "POST":
-            ward_form = WardForm(data=request.POST, instance=ward)
-            if ward_form.is_valid():
-                ward_form.save()
-                messages.success(
-                    request, _('Ward "{}" updated successfully.').format(ward.name)
-                )
-                return HttpResponseRedirect(reverse("cms:protected:ward_management"))
-        else:
-            ward_form = WardForm(instance=ward)
-
-        return render(
-            request,
-            "ward/ward_edit.html",
-            {
-                "ward_form": ward_form,
-                "bed_types": bed_types.CHOICES,
-                "ward": ward,
                 **self._get_ward_info(),
                 **super().get_context_data(**kwargs),
             },
