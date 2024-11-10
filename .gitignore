@@ -69,6 +69,7 @@ coverage.xml
 .testmondata*
 
 # Translations
+*.mo
 *.pot
 
 # Django stuff:
@@ -153,3 +154,6 @@ dmypy.json
 
 # Media files
 ycms/media/*/*
+
+# Docker depencency states
+.dockercache

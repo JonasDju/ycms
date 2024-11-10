@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 {% load i18n %}
 {% load widget_tweaks %}
+{% load mathfilters %}
 {% block title %}
     {% translate "Assign the patient" %}
 {% endblock title %}
@@ -71,14 +72,14 @@
                                     data-room-id="{{ room.id }}"
                                     data-room-number="{{ room.room_number }}"
                                     data-room-gender-warning="{% if patient.gender not in room.genders and room.occupied_beds > 0 %}{% translate "Mixed Gender" %}{% endif %}"
-                                    data-room-age-warning="{% if patient.age|add:room.minus_max_age > 20 and room.occupied_beds > 0 %}{% translate "Age gap is large" %}{% endif %}"
+                                    data-room-age-warning="{% if patient.age|add:room.minus_max_age|abs > 20 and room.occupied_beds > 0 %}{% translate "Age gap is large" %}{% endif %}"
                                     data-room-insurance-warning="{% if patient.insurance_type not in room.insurance_types and room.occupied_beds > 0 %}{% translate "Mixed insurance" %}{% endif %}"
                                     assign-modal-text="{% translate "Are you sure you want to assign the patient to Room {}?" %}"
                                     warning-modal-text="{% translate "Assign to Room {} may cause:" %}"
                                     class="flex h-full">
                                     {% csrf_token %}
                                     <input type="hidden" name="bed_id" value="{{ room.assignable_beds.0.id }}" />
-                                    <div class="w-full p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 {% if room.available_beds == 0 %}opacity-75 filter grayscale bg-gray-200 pointer-events-none {% elif bed_assignment.accompanied and room.available_beds < 2 %}opacity-75 filter grayscale bg-gray-200 pointer-events-none {% elif patient.gender not in room.genders and room.occupied_beds > 0 %}bg-yellow-50 hover:bg-yellow-100 hover:text-gray-900 cursor-pointer dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:hover:text-gray-800 {% elif patient.age|add:room.minus_max_age > 20 and room.occupied_beds > 0 %}bg-yellow-50 hover:bg-yellow-100 hover:text-gray-900 cursor-pointer dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:hover:text-gray-800 {% elif patient.insurance_type not in room.insurance_types and room.occupied_beds > 0 %}bg-yellow-50 hover:bg-yellow-100 hover:text-gray-900 cursor-pointer dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:hover:text-gray-800 {% else %}bg-green-300 hover:bg-green-400 hover:text-gray-900 cursor-pointer dark:bg-green-500 dark:hover:bg-green-600 dark:hover:text-gray-800{% endif %}">
+                                    <div class="w-full p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 {% if room.available_beds == 0 %}opacity-75 filter grayscale bg-gray-200 pointer-events-none {% elif bed_assignment.accompanied and room.available_beds < 2 %}opacity-75 filter grayscale bg-gray-200 pointer-events-none {% elif patient.gender not in room.genders and room.occupied_beds > 0 %}bg-yellow-50 hover:bg-yellow-100 hover:text-gray-900 cursor-pointer dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:hover:text-gray-800 {% elif patient.age|add:room.minus_max_age|abs > 20 and room.occupied_beds > 0 %}bg-yellow-50 hover:bg-yellow-100 hover:text-gray-900 cursor-pointer dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:hover:text-gray-800 {% elif patient.insurance_type not in room.insurance_types and room.occupied_beds > 0 %}bg-yellow-50 hover:bg-yellow-100 hover:text-gray-900 cursor-pointer dark:bg-yellow-500 dark:hover:bg-yellow-600 dark:hover:text-gray-800 {% else %}bg-green-300 hover:bg-green-400 hover:text-gray-900 cursor-pointer dark:bg-green-500 dark:hover:bg-green-600 dark:hover:text-gray-800{% endif %}">
                                         {% include "ward/ward_room_card.html" %}
                                     </div>
                                 </div>
