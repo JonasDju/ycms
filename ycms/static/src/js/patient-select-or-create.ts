@@ -91,6 +91,8 @@ window.addEventListener("load", () => {
                 newPatientInputs.forEach((input) => {
                     /* eslint-disable-next-line no-param-reassign */
                     input.disabled = existingInputFilled;
+                    // save state in DOM (needed to reconstruct state after intake mode switch)
+                    existingPatientSelect.setAttribute("patient-selected", existingInputFilled.toString());
                 });
 
                 // TODO: fetch patient's data and fill out fields in new patient form
@@ -133,7 +135,8 @@ window.addEventListener("load", () => {
             input.disabled = inEmergencyMode;
         });
         newPatientInputs.forEach((input) => {
-            input.disabled = inEmergencyMode;
+            // disable if in emergency intake mode or existing patient was selected prior
+            input.disabled = inEmergencyMode || existingPatientSelect.getAttribute("patient-selected") === "true";
             input.required = !inEmergencyMode;
         });
         unknownPatientInputs.forEach((input) => {
