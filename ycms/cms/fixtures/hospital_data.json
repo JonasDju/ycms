@@ -118,7 +118,8 @@
       "updated_at": "2023-11-05T11:25:26.692Z",
       "ward_number": "1",
       "floor": 1,
-      "name": "Allgemeinchirurgie"
+      "name": "Allgemeinchirurgie",
+      "nickname": "AlgCh"
     }
   },
   {
@@ -130,7 +131,8 @@
       "updated_at": "2023-11-05T11:25:26.692Z",
       "ward_number": "2",
       "floor": 1,
-      "name": "Pädiatrie"
+      "name": "Pädiatrie",
+      "nickname": "Päd"
     }
   },
   {
