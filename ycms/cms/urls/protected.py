@@ -5,6 +5,7 @@ from django.urls import include, path
 
 from ..views import authentication, index, patients, timeline, user_settings_view, ward
 from ..views.utility.autocomplete import autocomplete_icd10, autocomplete_patient
+from ..views.home.home_view import HomeView
 
 urlpatterns = [
     path("", index.UserBasedRedirectView.as_view(), name="index"),
@@ -126,4 +127,5 @@ urlpatterns = [
         ),
     ),
     path("settings/", user_settings_view.UserSettingsView.as_view(), name="settings"),
+    path("home/", HomeView.as_view(), name="home"),
 ]
