@@ -117,6 +117,7 @@
                         <tr>
                             <th align="left">{% translate "Ward Number" %}</th>
                             <th align="left">{% translate "Ward Name" %}</th>
+                            <th align="left">{% translate "Ward Nickname" %}</th>
                             <th align="left">{% translate "Number of Beds" %}</th>
                             <th align="left">{% translate "Available" %}</th>
                             <th align="left">{% translate "Occupied" %}</th>
@@ -125,6 +126,7 @@
                             <tr>
                                 <td>{{ ward.ward_number }}</td>
                                 <td>{{ ward.name }}</td>
+                                <td>{{ ward.nickname }}</td>
                                 <td>{{ ward.total_beds }}</td>
                                 <td>{{ ward.available_beds }}</td>
                                 <td>{{ ward.occupied_beds }}</td>

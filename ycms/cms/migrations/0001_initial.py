@@ -214,6 +214,15 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
+                    "nickname",
+                    models.CharField(
+                        help_text="Nickname of this ward",
+                        max_length=32,
+                        verbose_name="ward nickname",
+                        null=True,
+                    ),
+                ),
+                (
                     "creator",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,

@@ -32,6 +32,12 @@ class Ward(AbstractBaseModel):
         verbose_name=_("ward name"),
         help_text=_("Name this ward is commonly referred to by"),
     )
+    nickname = models.CharField(
+        max_length=32,
+        verbose_name=_("ward nickname"),
+        help_text=_("Nickname of this ward"),
+        blank=True,
+    )
 
     @cached_property
     def total_beds(self):
