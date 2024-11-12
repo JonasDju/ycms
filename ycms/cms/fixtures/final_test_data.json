@@ -1,5 +1,38 @@
 [
   {
+    "model": "cms.floor",
+    "pk": 1,
+    "fields": {
+      "created_at": "2024-01-16T06:15:18.398Z",
+      "updated_at": "2024-01-16T06:15:18.398Z",
+      "order": 0,
+      "short_name": "EG",
+      "full_name": "Erdgeschoss"
+    }
+  },
+  {
+    "model": "cms.floor",
+    "pk": 2,
+    "fields": {
+      "created_at": "2024-01-16T06:15:18.398Z",
+      "updated_at": "2024-01-16T06:15:18.398Z",
+      "order": 1,
+      "short_name": "1. OG",
+      "full_name": "1. Obergeschoss"
+    }
+  },
+  {
+    "model": "cms.floor",
+    "pk": 3,
+    "fields": {
+      "created_at": "2024-01-16T06:15:18.398Z",
+      "updated_at": "2024-01-16T06:15:18.398Z",
+      "order": -1,
+      "short_name": "1. UG",
+      "full_name": "1. Untergeschoss"
+    }
+  },
+  {
     "model": "cms.ward",
     "pk": 3,
     "fields": {
@@ -7,7 +40,7 @@
       "created_at": "2024-01-16T06:15:18.398Z",
       "updated_at": "2024-01-16T06:15:18.398Z",
       "ward_number": "intensivmedizin",
-      "floor": 1,
+      "floor": 3,
       "name": "Intensivmedizin"
     }
   },

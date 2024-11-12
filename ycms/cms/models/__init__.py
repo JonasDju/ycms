@@ -4,6 +4,7 @@ Please refer to :mod:`django.db.models` for general information about Django mod
 """
 from .bed import Bed
 from .bed_assignment import BedAssignment
+from .floor import Floor
 from .icd10_entry import ICD10Entry
 from .medical_record import MedicalRecord
 from .patient import Patient

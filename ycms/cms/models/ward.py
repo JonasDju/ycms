@@ -4,6 +4,7 @@ from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
 from .abstract_base_model import AbstractBaseModel
+from .floor import Floor
 from .patient import Patient
 from .timetravel_manager import current_or_travelled_time
 from .user import User
@@ -23,10 +24,7 @@ class Ward(AbstractBaseModel):
         verbose_name=_("ward number"),
         help_text=_("Number of the ward"),
     )
-    floor = models.IntegerField(
-        verbose_name=_("floor"),
-        help_text=_("Floor on which the nurse station for this ward is located"),
-    )
+    floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
     name = models.CharField(
         max_length=32,
         verbose_name=_("ward name"),
