@@ -50,7 +50,6 @@ class Migration(migrations.Migration):
                 (
                     "order",
                     models.IntegerField(
-                        default=0,
                         help_text="Order of the floor",
                         verbose_name="floor order",
                     ),
