@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "webpack_loader",
     "widget_tweaks",
+    "mathfilters",
 ]
 
 MIDDLEWARE = [
