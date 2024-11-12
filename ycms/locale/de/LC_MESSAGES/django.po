@@ -1256,12 +1256,6 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
-#~ msgid "Views"
-#~ msgstr "Ansichten"
-
-#~ msgid "Floor View"
-#~ msgstr "Stationsansicht"
-
 #~ msgid "Assign"
 #~ msgstr "Zuweisen"
 
