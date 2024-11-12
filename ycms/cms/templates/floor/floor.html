@@ -44,43 +44,29 @@
 
                 {# Obere Etage #}
                 <div class="flex justify-center items-center w-full">
-                    {% if current_floor != upper_bound_floor %}
-                    <div onclick="location.href='?floor={{ current_floor|add:1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Etage {{ current_floor|add:1 }}</h5>
+                    {% if next_floor_name != None %}
+                    <div onclick="location.href='?floor={{ current_floor.order|add:1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            {{ next_floor_name }}
+                        </h5>
                     </div>
                     {% endif %}
                 </div>
 
                 {# Container für nebeneinander angeordnete Cards mit Grid-System #}
                 <div class="grid grid-cols-3 gap-4 mt-4 mb-4">
-                    <div class="min-w-[250px]">
-                        {% include "floor/floor_ward_card.html" %}
-                    </div>
-                    <div class="min-w-[250px]">
-                        {% include "floor/floor_ward_card.html" %}
-                    </div>
-                    <div class="min-w-[250px]">
-                        {% include "floor/floor_ward_card.html" %}
-                    </div>
-                    <div class="min-w-[250px]">
-                        {% include "floor/floor_ward_card.html" %}
-                    </div>
-                    <div class="min-w-[250px]">
-                        {% include "floor/floor_ward_card.html" %}
-                    </div>
-                    <div class="min-w-[250px]">
-                        {% include "floor/floor_ward_card.html" %}
-                    </div>
-                    <div class="min-w-[250px]">
-                        {% include "floor/floor_ward_card.html" %}
-                    </div>
+                    {% for ward in floor_wards %}
+                        <div class="min-w-[250px]">
+                            {% include "floor/floor_ward_card.html" %}
+                        </div>
+                    {% endfor %}
                 </div>
 
                 {# Untere Etage #}
                     <div class="flex justify-center items-center w-full ">
-                        {% if current_floor != 0 %}
-                        <div onclick="location.href='?floor={{ current_floor|add:-1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Etage {{ current_floor|add:-1 }} </h5>
+                        {% if prev_floor_order != None %}
+                        <div onclick="location.href='?floor={{ current_floor.order|add:-1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> {{ prev_floor_order }} </h5>
                         </div>
                         {% endif %}
                     </div>
