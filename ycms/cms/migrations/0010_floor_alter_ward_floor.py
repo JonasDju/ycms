@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ),
                 ("updated_at", models.DateTimeField(auto_now=True)),
                 (
-                    "full_name",
+                    "name",
                     models.CharField(
                         help_text="Name of the floor",
                         max_length=30,
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "short_name",
+                    "code",
                     models.CharField(
                         help_text="Shortname of the floor",
                         max_length=10,
