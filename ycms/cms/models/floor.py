@@ -18,13 +18,13 @@ class Floor(AbstractBaseModel):
     order = models.IntegerField(
         verbose_name=_("floor order"), help_text=_("Order of the floor")
     )
-    full_name = models.CharField(
+    name = models.CharField(
         null=True,
         max_length=30,
         verbose_name=_("floor name"),
         help_text=_("Name of the floor"),
     )
-    short_name = models.CharField(
+    code = models.CharField(
         null=True,
         max_length=10,
         verbose_name=_("floor code"),
