@@ -114,4 +114,37 @@
             </div>
         </form>
     </div>
+    <!-- When changing the admission date, the estimated discharge date is modified to be one week after the changed admission date -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const admissionDateLabel = document.querySelector("label[for='{{ bed_form.admission_date.id_for_label }}']");
+            const dischargeDateLabel = document.querySelector("label[for='{{ bed_form.discharge_date.id_for_label }}']");
+
+            const admissionDateInput = admissionDateLabel ? document.getElementById(admissionDateLabel.htmlFor) : null;
+            const dischargeDateInput = dischargeDateLabel ? document.getElementById(dischargeDateLabel.htmlFor) : null;
+
+        // Mark whether the user has manually modified the discharge date
+        dischargeDateInput.addEventListener('input', function() {
+            dischargeDateInput.setAttribute('data-manually-changed', 'true');
+        });
+
+        admissionDateInput.addEventListener('input', function() {
+            const admissionDate = new Date(admissionDateInput.value);
+            // Check if the discharge date has been manually modified
+            const isDischargeManuallyChanged = dischargeDateInput.getAttribute('data-manually-changed') === 'true';
+            // Only when the discharge date is not manually modified, it is automatically set to one week after admission
+            if (!isDischargeManuallyChanged) {
+                const dischargeDate = new Date(admissionDate);
+                dischargeDate.setDate(admissionDate.getDate() + 7);
+                // Format as "YYYY-MM-DDTHH:MM"
+                const year = dischargeDate.getFullYear();
+                const month = String(dischargeDate.getMonth() + 1).padStart(2, '0');
+                const day = String(dischargeDate.getDate()).padStart(2, '0');
+                const hours = String(dischargeDate.getHours()).padStart(2, '0');
+                const minutes = String(dischargeDate.getMinutes()).padStart(2, '0');
+                dischargeDateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+            }
+        });
+    });
+    </script>
 {% endblock content %}
