@@ -10,7 +10,6 @@ class Migration(migrations.Migration):
     dependencies = [("cms", "0009_rename_discharge_date")]
 
     operations = [
-        migrations.DeleteModel(name="Floor"),
         migrations.CreateModel(
             name="Floor",
             fields=[
