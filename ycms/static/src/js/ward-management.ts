@@ -65,4 +65,22 @@ window.addEventListener("load", () => {
         (wardForm.querySelector("#rooms") as HTMLInputElement).value = gatherRoomData();
         wardForm.submit();
     });
+
+    document.querySelectorAll("[data-delete-ward]").forEach((deleteButton) => {
+        deleteButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            const occupiedBeds = parseInt(deleteButton.getAttribute("data-occupied-beds") || "0", 10);
+            const formId = deleteButton.getAttribute("data-form-id") || "";
+            const form = document.getElementById(formId) as HTMLFormElement;
+            let confirmMessage = "Are you sure you want to delete this ward?";
+            if (occupiedBeds > 0) {
+                confirmMessage = `This ward has ${occupiedBeds} occupied bed(s). Are you sure you want to delete this ward?`;
+            }
+            // eslint-disable-next-line no-restricted-globals, no-alert
+            if (confirm(confirmMessage) && form) {
+                console.log("Form confirmed for submission");
+                form.submit();
+            }
+        });
+    });
 });

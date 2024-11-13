@@ -139,18 +139,21 @@
                                             data-drawer-show="drawer-right-{{ ward.ward_number }}"
                                             data-drawer-target="drawer-right-{{ ward.ward_number }}"
                                             data-drawer-placement="right"
-                                            aria-controls="drawer-right-{{ room.room_number }}">
+                                            aria-controls="drawer-right-{{ ward.ward_number }}">
                                         <i icon-name="pencil" class="text-blue-600 cursor-pointer"></i>
-                                            </button>
+                                    </button>
                                     <button class="grow text-red-700 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
+                                            data-delete-ward
+                                            data-occupied-beds="{{ ward.occupied_beds }}"
+                                            data-form-id="delete-ward-{{ ward.id }}"
                                             form="delete-ward-{{ ward.id }}"
-                                            onclick="return confirm('{% translate "Are you sure you want to delete this ward?" %}')">
-                                        <form hidden
-                                              id="delete-ward-{{ ward.id }}"
-                                              method="post"
-                                              action="{% url "cms:protected:delete_ward" ward.id %}">
-                                            {% csrf_token %}
-                                        </form>
+                                    >
+                                           <form hidden
+                                                id="delete-ward-{{ ward.id }}"
+                                                method="post"
+                                                action="{% url "cms:protected:delete_ward" ward.id %}">
+                                                {% csrf_token %}
+                                            </form>
                                         <i icon-name="minus-circle" class="element-remover text-red-600 cursor-pointer"></i>
                                     </button>
                                 </td>
