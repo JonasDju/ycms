@@ -135,7 +135,11 @@
                                 <td>{{ ward.available_beds }}</td>
                                 <td>{{ ward.occupied_beds }}</td>
                                 <td align="left">
-                                    <button class="grow text-red-700 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-900">
+                                    <button class="grow text-red-700 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
+                                            data-drawer-show="drawer-right-{{ ward.ward_number }}"
+                                            data-drawer-target="drawer-right-{{ ward.ward_number }}"
+                                            data-drawer-placement="right"
+                                            aria-controls="drawer-right-{{ room.room_number }}">
                                         <i icon-name="pencil" class="text-blue-600 cursor-pointer"></i>
                                             </button>
                                     <button class="grow text-red-700 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
@@ -150,84 +154,12 @@
                                         <i icon-name="minus-circle" class="element-remover text-red-600 cursor-pointer"></i>
                                     </button>
                                 </td>
-
                             </tr>
+                           {% include "ward/ward_edit_drawer.html" %}
                         {% endfor %}
                     </table>
                 </div>
             </div>
-
-            <br>
-            <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2">
-                <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
-                    <div class="mb-4 text-2xl font-semibold dark:text-white">{% translate "Edit" %}</div>
-                    <br>
-                    <form enctype="multipart/form-data"
-                          method="post"
-                          id="ward_form"
-                          class="mb-8"
-                          data-unsaved-warning>
-                        {% csrf_token %}
-                        <div class="grid xl:grid-cols-3 gap-4">
-                            {% for field in ward_form %}
-                                <div class="grow w-full">
-                                    <label for="{{ field.id_for_label }}"
-                                           {% if field.field.required %}class="field-required"{% endif %}>
-                                        {{ field.label }}
-                                    </label>
-                                    {% render_field field %}
-                                    <div class="help-text">{{ field.help_text }}</div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <input type="hidden" id="rooms" name="rooms" value="">
-                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2 mt-4 mb-6">
-                            <div class="hidden new-room-prototype new-room flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                                <div class="!-mb-4 help-text">{% translate "Room number" %}</div>
-                                <div class="flex items-center gap-2">
-                                    <input class="w-full"
-                                           type="text"
-                                           placeholder="{% translate "Room number" %}" />
-                                    <i icon-name="minus-circle"
-                                       class="element-remover text-red-600 cursor-pointer"></i>
-                                </div>
-                                <div class="!-mb-4 help-text">{% translate "Beds" %}</div>
-                                <div class="new-bed-prototype flex items-center gap-2">
-                                    <select>
-                                        {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
-                                    </select>
-                                    <div>
-                                        <i icon-name="minus-circle"
-                                           class="element-remover text-red-600 cursor-pointer"></i>
-                                    </div>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <select>
-                                        {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
-                                    </select>
-                                    <div>
-                                        <i icon-name="minus-circle"
-                                           class="element-remover text-red-600 cursor-pointer"></i>
-                                    </div>
-                                </div>
-                                <div class="bed-adder flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                                    <p class="hover:text-blue-600">
-                                        {% translate "Add bed" %} <i icon-name="plus-circle"></i>
-                                    </p>
-                                </div>
-                            </div>
-                            <div id="new-room-button"
-                                 class="flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                                <h2 class="hover:text-blue-600">
-                                    {% translate "Add room" %} <i icon-name="plus-circle"></i>
-                                </h2>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn w-full md:w-auto self-center">{% translate "Save" %}</button>
-                    </form>
-                </div>
-            </div>
-
         </div>
     </div>
 {% endblock content %}
