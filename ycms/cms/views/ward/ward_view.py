@@ -1,12 +1,15 @@
+from django.contrib import messages
 from django.db import models
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView
+from django.utils.translation import gettext as _
+from django.views.generic import TemplateView, UpdateView
 
 from ...constants import gender
 from ...decorators import permission_required
-from ...forms import IntakeBedAssignmentForm, PatientForm
-from ...models import BedAssignment, Ward
+from ...forms import IntakeBedAssignmentForm, PatientForm, WardForm
+from ...models import Bed, BedAssignment, Room, User, Ward
 from ...models.timetravel_manager import current_or_travelled_time
 
 
@@ -105,3 +108,47 @@ class WardView(TemplateView):
         if selected_ward_id := request.POST.get("ward"):
             return redirect("cms:protected:ward_detail", pk=selected_ward_id)
         return redirect("cms:protected:index")
+
+
+@method_decorator(permission_required("cms.change_ward"), name="dispatch")
+class WardEditView(UpdateView):
+    model = Ward
+    form_class = WardForm
+    template_name = "ward/ward_card.html"
+    success_url = reverse_lazy("cms:protected:ward_management")
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get("pk")
+        return get_object_or_404(Ward, pk=pk)
+
+    def form_valid(self, form):
+        messages.success(
+            self.request, _("Ward information has been successfully updated.")
+        )
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        pk = kwargs.get("pk")
+        ward = Ward.objects.get(id=pk)
+        rooms = [
+            (
+                room,
+                [
+                    (
+                        patient,
+                        PatientForm(instance=patient),
+                        IntakeBedAssignmentForm(instance=patient.current_stay),
+                    )
+                    for patient in room.patients()
+                ],
+            )
+            for room in ward.rooms.all()
+        ]
+        wards = Ward.objects.all()
+        return {
+            "rooms": rooms,
+            "ward": ward,
+            "wards": wards,
+            "selected_ward_id": pk,
+            **super().get_context_data(**kwargs),
+        }
