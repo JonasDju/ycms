@@ -181,9 +181,10 @@
                 return Math.floor(timeDifference / (1000 * 3600 * 24));
             }
 
-        // Mark whether the user has manually modified the discharge date
         dischargeDateInput.addEventListener('input', function() {
+            // Mark whether the user has manually modified the discharge date
             dischargeDateInput.setAttribute('data-manually-changed', 'true');
+            //Adjust duration of stay
             const duration = getNightsBetweenAdmissionAndDischarge();
             if(duration >= 0) {
                 durationInput.value = duration;
@@ -199,11 +200,24 @@
             if (!isDischargeManuallyChanged) {
                 updateDischargeDate(7);
             }
+            //Adjust duration of stay
             const duration = getNightsBetweenAdmissionAndDischarge();
             if(duration >= 0) {
                 durationInput.value = duration;
             } else {
                 durationInput.value = 0;
+            }
+        });
+
+        //Avoid an admission date that lies behind a discharge date
+        dischargeDateInput.addEventListener('focusout', function() {
+            if(getNightsBetweenAdmissionAndDischarge() < 0) {
+                dischargeDateInput.value = admissionDateInput.value;
+            }
+        });
+        admissionDateInput.addEventListener('focusout', function() {
+            if(getNightsBetweenAdmissionAndDischarge() < 0) {
+                admissionDateInput.value = dischargeDateInput.value;
             }
         });
 
