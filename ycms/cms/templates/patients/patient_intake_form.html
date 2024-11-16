@@ -103,6 +103,22 @@
                                     <div class="help-text">{{ bed_form.admission_date.help_text }}</div>
                                 </div>
                                 <div>
+                                    <form>
+                                        <label for="input-patient-intake-stay-duration"
+                                            class="field-required">{% translate "Estimated nights to stay" %}</label>
+                                        <input
+                                            type="number"
+                                            id="input-patient-intake-stay-duration"
+                                            class="form-input"
+                                            step="1"
+                                            value="7"
+                                            min="0"
+                                            required
+                                        />
+                                        <p class="helptext">{% translate "estimated duration of hospital stay in nights" %}</p>
+                                    </form>
+                                </div>
+                                <div>
                                     <label for="{{ bed_form.discharge_date.id_for_label }}"
                                            class="field-required">{{ bed_form.discharge_date.label }}</label>
                                     {% render_field bed_form.discharge_date %}
@@ -138,20 +154,13 @@
             const admissionDateInput = admissionDateLabel ? document.getElementById(admissionDateLabel.htmlFor) : null;
             const dischargeDateInput = dischargeDateLabel ? document.getElementById(dischargeDateLabel.htmlFor) : null;
 
-        // Mark whether the user has manually modified the discharge date
-        dischargeDateInput.addEventListener('input', function() {
-            dischargeDateInput.setAttribute('data-manually-changed', 'true');
-        });
+            const durationInput = document.getElementById("input-patient-intake-stay-duration");
 
-        admissionDateInput.addEventListener('input', function() {
-            const admissionDate = new Date(admissionDateInput.value);
-            // Check if the discharge date has been manually modified
-            const isDischargeManuallyChanged = dischargeDateInput.getAttribute('data-manually-changed') === 'true';
-            // Only when the discharge date is not manually modified, it is automatically set to one week after admission
-            if (!isDischargeManuallyChanged) {
+            function updateDischargeDate(daysAfterAdmission) {
+                const admissionDate = new Date(admissionDateInput.value);
                 const dischargeDate = new Date(admissionDate);
-                dischargeDate.setDate(admissionDate.getDate() + 7);
-                // Format as "YYYY-MM-DDTHH:MM"
+                dischargeDate.setDate(admissionDate.getDate() + daysAfterAdmission);
+                // Format the discharge date as "YYYY-MM-DD HH:MM"
                 const year = dischargeDate.getFullYear();
                 const month = String(dischargeDate.getMonth() + 1).padStart(2, '0');
                 const day = String(dischargeDate.getDate()).padStart(2, '0');
@@ -159,7 +168,64 @@
                 const minutes = String(dischargeDate.getMinutes()).padStart(2, '0');
                 dischargeDateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
             }
+
+            function getNightsBetweenAdmissionAndDischarge() {
+                const admissionDate = new Date(admissionDateInput.value);
+                const dischargeDate = new Date(dischargeDateInput.value);
+                let timeDifference = dischargeDate.getTime() - admissionDate.getTime();
+                if(timeDifference < 0) {
+                    return -1;      //Invalid! admission lies before discharge!
+                }
+                //ensure that e.g. 12h over night count as one night
+                timeDifference = timeDifference + admissionDate.getHours() * 3600000 + admissionDate.getMinutes() * 60000;
+                return Math.floor(timeDifference / (1000 * 3600 * 24));
+            }
+
+        // Mark whether the user has manually modified the discharge date
+        dischargeDateInput.addEventListener('input', function() {
+            dischargeDateInput.setAttribute('data-manually-changed', 'true');
+            const duration = getNightsBetweenAdmissionAndDischarge();
+            if(duration >= 0) {
+                durationInput.value = duration;
+            } else {
+                durationInput.value = 0;
+            }
         });
+
+        admissionDateInput.addEventListener('input', function() {
+            // Check if the discharge date has been manually modified
+            const isDischargeManuallyChanged = dischargeDateInput.getAttribute('data-manually-changed') === 'true';
+            // Only when the discharge date is not manually modified, it is automatically set to one week after admission
+            if (!isDischargeManuallyChanged) {
+                updateDischargeDate(7);
+            }
+            const duration = getNightsBetweenAdmissionAndDischarge();
+            if(duration >= 0) {
+                durationInput.value = duration;
+            } else {
+                durationInput.value = 0;
+            }
+        });
+
+        //Handle duration in nights input
+        durationInput.addEventListener('keypress', function(event) {
+            if (!/^[0-9]$/.test(event.key)) {       //Avoid input that is no digit
+                event.preventDefault();
+            }
+        });
+        durationInput.addEventListener('input', function () {
+            // Remove leading zeros
+            if (this.value.startsWith('0') && this.value.length > 1) {
+                this.value = this.value.replace(/^0+/, '');
+            }
+            if(this.value.length === 0) {
+                this.value = '0';
+            }
+            //Adjust Discharge date according to the duration in nights
+            updateDischargeDate(parseInt(this.value));
+        });
+
+
     });
     </script>
 {% endblock content %}
