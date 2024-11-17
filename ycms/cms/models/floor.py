@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
-from ..constants import insurance_types
+from . import Patient
 from .abstract_base_model import AbstractBaseModel
 from .timetravel_manager import current_or_travelled_time
 
@@ -30,6 +30,61 @@ class Floor(AbstractBaseModel):
         verbose_name=_("floor code"),
         help_text=_("Shortname of the floor"),
     )
+
+    @cached_property
+    def total_beds(self):
+        """
+        Helper property for accessing the floor bed count
+
+        :return: number of beds in the ward
+        :rtype: int
+        """
+        return sum(ward.total_beds for ward in self.wards.all())
+
+    @cached_property
+    def available_beds(self):
+        """
+        Helper property for accessing the floor free bed count
+
+        :return: number of free beds in the ward
+        :rtype: int
+        """
+        return sum(ward.available_beds for ward in self.wards.all())
+
+    @cached_property
+    def occupied_beds(self):
+        """
+        Helper property for accessing the floor occupied bed count
+
+        :return: number of occupied beds in the ward
+        :rtype: int
+        """
+        return self.total_beds - self.available_beds
+
+    @cached_property
+    def patients(self):
+        """
+        Helper property for accessing all patients currently stationed on the floor
+
+        :return: patients in the ward
+        :rtype: list [ ~ycms.cms.models.patient.Patient ]
+        """
+        BedAssignment = apps.get_model(app_label="cms", model_name="BedAssignment")
+        patient_ids = []
+
+        for ward in self.wards.all():
+            patient_ids += BedAssignment.objects.filter(
+                models.Q(bed__room__ward=ward)
+                & (
+                    models.Q(admission_date__lte=current_or_travelled_time())
+                    & (
+                        models.Q(discharge_date__gt=current_or_travelled_time())
+                        | models.Q(discharge_date__isnull=True)
+                    )
+                )
+            ).values_list("medical_record__patient", flat=True)
+        patients = Patient.objects.filter(pk__in=patient_ids)
+        return patients
 
     def __str__(self):
         """

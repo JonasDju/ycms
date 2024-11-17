@@ -157,3 +157,6 @@ ycms/media/*/*
 
 # Docker depencency states
 .packagestate
+
+# mac
+.DS_Store
