@@ -485,6 +485,14 @@ msgstr "Etagenansicht"
 msgid "Go to Ward"
 msgstr "Zur Station"
 
+#: cms/templates/floor/floor_ward_card.html
+msgid "Occupation rate"
+msgstr "Belegungsrate"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Occupied beds"
+msgstr "Belegte Betten"
+
 #: cms/templates/floor/floor.html
 msgid "Admin detected"
 msgstr "Admin erkannt"
