@@ -6,7 +6,7 @@
 
 {# Titel der Seite #}
 {% block title %}
-    {% translate "Floor View" %}
+    {% trans "Floor View" %}
 {% endblock title %}
 
 {# Hauptinhalt #}
@@ -17,17 +17,17 @@
             <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
             </svg>
-            <span class="sr-only">Info</span>
-            <h3 class="text-lg font-medium">Admin detected</h3>
+            <span class="sr-only">{% trans "Info" %}</span>
+            <h3 class="text-lg font-medium">{% trans "Admin detected" %}</h3>
             <div class="flex ml-3">
                 <button type="button" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                     <svg class="me-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path d="M6 10L12 4l6 6M12 4v16" />
                     </svg>
-                    Delete floor
+                    {% trans "Delete floor" %}
                 </button>
-                <button type="button" class="text-green-800 bg-transparent border border-green-800 hover:bg-green-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-green-600 dark:border-green-600 dark:text-green-400 dark:hover:text-white dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="Close">
-                    Dismiss
+                <button type="button" class="text-green-800 bg-transparent border border-green-800 hover:bg-green-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:hover:bg-green-600 dark:border-green-600 dark:text-green-400 dark:hover:text-white dark:focus:ring-green-800" data-dismiss-target="#alert-additional-content-3" aria-label="{% trans 'Close' %}">
+                    {% trans "Close" %}
                 </button>
             </div>
         </div>
@@ -63,13 +63,15 @@
                 </div>
 
                 {# Untere Etage #}
-                    <div class="flex justify-center items-center w-full ">
-                        {% if prev_floor_order != None %}
-                        <div onclick="location.href='?floor={{ current_floor.order|add:-1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> {{ prev_floor_order }} </h5>
-                        </div>
-                        {% endif %}
+                <div class="flex justify-center items-center w-full ">
+                    {% if prev_floor_order != None %}
+                    <div onclick="location.href='?floor={{ current_floor.order|add:-1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            {{ prev_floor_order }}
+                        </h5>
                     </div>
+                    {% endif %}
+                </div>
 
             </div>
         </div>
