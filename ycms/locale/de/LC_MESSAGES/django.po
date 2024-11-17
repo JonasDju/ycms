@@ -477,9 +477,33 @@ msgstr "Patientendaten"
 msgid "Views"
 msgstr "Ansichten"
 
-#: cms/templates/_base.html cms/templates/floor/floor.html
+#: cms/templates/_base.html
 msgid "Floor View"
-msgstr "Stationsansicht"
+msgstr "Etagenansicht"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Go to Ward"
+msgstr "Zur Station"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Occupation rate"
+msgstr "Belegungsrate"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Occupied beds"
+msgstr "Belegte Betten"
+
+#: cms/templates/floor/floor.html
+msgid "Admin detected"
+msgstr "Admin erkannt"
+
+#: cms/templates/floor/floor.html
+msgid "Delete floor"
+msgstr "Etage löschen"
+
+#: cms/templates/floor/floor.html
+msgid "Close"
+msgstr "Schließen"
 
 #: cms/templates/_base.html
 msgid "Ward View"
@@ -657,6 +681,7 @@ msgstr "Nein"
 
 #: cms/templates/bed_assignment/bed_assignment_drawer.html
 #: cms/templates/ward/ward_info.html
+#: cms/templates/floor/floor_ward_card.html
 msgid "Unassigned Patients"
 msgstr "Nicht zugewiesene Patienten"
 
@@ -766,6 +791,7 @@ msgstr "Alter"
 
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
+#: cms/templates/floor/floor_ward_card.html
 msgid "Gender"
 msgstr "Geschlecht"
 
@@ -1007,7 +1033,7 @@ msgstr "Gesamt"
 msgid "Bed Availability"
 msgstr "Bettenverfügbarkeit"
 
-#: cms/templates/ward/ward_info.html
+#: cms/templates/ward/ward_info.html cms/templates/floor/floor_ward_card.html
 msgid "Available Beds"
 msgstr "Verfügbare Betten"
 
