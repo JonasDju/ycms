@@ -5,10 +5,19 @@
 
     {# Ward Info #}
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        Occupation rate: {{ ward.occupation_rate }}% <br>
+        Occupied beds: {{ ward.occupied_beds }} <br>
         Available beds: {{ ward.available_beds }} <br>
-        Unassigned patients: {{ unassigned_bed_assignments|length }} <br>
-        Gender: <span class="text-blue-500">{{ patient_info.male_patients }}</span> /
-        <span class="text-pink-500">{{ patient_info.female_patients }}</span>
+        Gender:
+        {% if ward.patient_genders|length > 0 %}
+            {% for gender, count in ward.patient_genders.items %}
+                {% if forloop.counter0 != 0 %} / {% endif %}<span class="text">{{ gender }}: {{ count }}</span>
+            {% endfor %}
+            <br>
+        {% else %}
+            <span class="text">------</span> <br>
+        {% endif %}
+        Unassigned patients: {{ ward.unassigned_patients|length }} <br>
     </p>
 
     {# Linie zwischen Text und Button #}
