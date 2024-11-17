@@ -217,7 +217,7 @@
         });
         admissionDateInput.addEventListener('focusout', function() {
             if(getNightsBetweenAdmissionAndDischarge() < 0) {
-                admissionDateInput.value = dischargeDateInput.value;
+                dischargeDateInput.value = admissionDateInput.value;
             }
         });
 
