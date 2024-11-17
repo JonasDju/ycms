@@ -37,6 +37,7 @@ class Ward(AbstractBaseModel):
         verbose_name=_("ward nickname"),
         help_text=_("Nickname of this ward"),
         blank=True,
+        default="",
     )
 
     @cached_property
@@ -100,7 +101,11 @@ class Ward(AbstractBaseModel):
         :return: A readable string representation of the ward
         :rtype: str
         """
-        return f"{self.name} (ward {self.ward_number})"
+
+        if (self.nickname != None and self.nickname != ""):
+            return f"{self.nickname} (ward {self.ward_number})"
+        else:
+            return f"{self.name} (ward {self.ward_number})"
 
     def get_repr(self):
         """
