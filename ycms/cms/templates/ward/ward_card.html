@@ -30,15 +30,55 @@
                                 </div>
                             {% endfor %}
                             <div class="mt-4">
-                                <h3 class="text-xl font-semibold dark:text-white mb-4">{% translate "Rooms in this Ward" %}</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {% for room in rooms %}
-                                        {% include "ward/ward_room_card.html" %}
-                                    {% endfor %}
+                                <h3 class="text-2xl font-semibold dark:text-white mb-4">{% translate "Rooms in this Ward" %}</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+                                    <input type="hidden" id="rooms" name="rooms" value="">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="hidden new-room-prototype new-room flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                            <div class="!-mb-4 help-text">{% translate "Room number" %}</div>
+                                            <div class="flex items-center gap-2">
+                                                <input class="w-full"
+                                                       type="text"
+                                                       placeholder="{% translate "Room number" %}" />
+                                                <i icon-name="minus-circle"
+                                                   class="element-remover text-red-600 cursor-pointer"></i>
+                                            </div>
+                                            <div class="!-mb-4 help-text">{% translate "Beds" %}</div>
+                                            <div class="new-bed-prototype flex items-center gap-2">
+                                                <select>
+                                                    {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                                                </select>
+                                                <div>
+                                                    <i icon-name="minus-circle"
+                                                       class="element-remover text-red-600 cursor-pointer"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <select>
+                                                    {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                                                </select>
+                                                <div>
+                                                    <i icon-name="minus-circle"
+                                                       class="element-remover text-red-600 cursor-pointer"></i>
+                                                </div>
+                                            </div>
+                                            <div class="bed-adder flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                                <p class="hover:text-blue-600">
+                                                    {% translate "Add bed" %} <i icon-name="plus-circle"></i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div id="new-edit-room-button"
+                                             class="flex justify-center items-center cursor-pointer col-span-2 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                            <h2 class="hover:text-blue-600">
+                                                {% translate "Add room" %} <i icon-name="plus-circle"></i>
+                                            </h2>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="flex justify-end border-t pt-2 border-gray-200 rounded-b dark:border-gray-600">
-                                <div class="flex gap-2">
+                            <div class="flex justify-end border-t pt-4 border-gray-200 rounded-b dark:border-gray-600">
+                                <div class="flex gap-4">
                                     <button type="submit"
                                             class="text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-700  rounded inline-flex items-center px-5 py-2.5 text-center">
                                         {% translate "Save" %}
