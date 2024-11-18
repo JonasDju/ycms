@@ -13,14 +13,14 @@
 {% block content %}
     {% if user.is_staff %}
     <div id="alert-additional-content-3" class="p-4 mb-4 text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
-        <div class="flex items-center">
+        <div class="flex flex-wrap items-center">
             <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
             </svg>
             <span class="sr-only">{% trans "Info" %}</span>
             <h3 class="text-lg font-medium">{% trans "Admin detected" %}</h3>
-            <div class="flex ml-3">
-                <button type="button" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            <div class="flex flex-wrap ml-3 space-y-2 md:space-y-0">
+                <button type="button" class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                     <svg class="me-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <path d="M6 10L12 4l6 6M12 4v16" />
                     </svg>
@@ -33,46 +33,47 @@
         </div>
     </div>
     {% endif %}
-        {# Linke Seite: Sidebar #}
-        <div class="flex flex-1 items-center">
-            <div class="w-1/8 h-[90vh] mt-4 mb-4 ml-4">
+
+    <div class="flex flex-col items-stretch h-screen">
+        <div class="flex flex-1">
+            {# Linke Seite: Sidebar #}
+            <div class="w-1/8 h-full mt-4 mb-4 ml-4">
                 {% include "floor/floor_sidebar.html" %}
             </div>
 
             {# Rechte Seite: Container für die Etagenübersicht #}
-            <div class="flex flex-col justify-between w-full h-[90vh] p-4">
-
+            <div class="flex flex-col w-full h-full p-4">
                 {# Obere Etage #}
-                <div class="flex justify-center items-center w-full">
+                <div class="flex justify-center items-center w-full mb-4">
                     {% if next_floor_name != None %}
-                    <div onclick="location.href='?floor={{ current_floor.order|add:1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <div onclick="location.href='?floor={{ current_floor.order|add:1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-lg md:text-xl flex items-center justify-center h-12 md:h-20 w-full cursor-pointer">
+                        <h5 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                             {{ next_floor_name }}
                         </h5>
                     </div>
                     {% endif %}
                 </div>
 
-                {# Container für nebeneinander angeordnete Cards mit Grid-System #}
-                <div class="grid grid-cols-3 gap-4 mt-4 mb-4">
+                {# Cards für Wards #}
+                <div class="grid grid-cols-1 gap-4 mt-4 mb-4 sm:grid-cols-2 lg:grid-cols-3 flex-grow">
                     {% for ward in floor_wards %}
-                        <div class="min-w-[250px]">
-                            {% include "floor/floor_ward_card.html" %}
-                        </div>
+                    <div class="min-w-[200px] md:min-w-[250px]">
+                        {% include "floor/floor_ward_card.html" %}
+                    </div>
                     {% endfor %}
                 </div>
 
                 {# Untere Etage #}
-                <div class="flex justify-center items-center w-full ">
+                <div class="flex justify-center items-center w-full mt-auto">
                     {% if prev_floor_order != None %}
-                    <div onclick="location.href='?floor={{ current_floor.order|add:-1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <div onclick="location.href='?floor={{ current_floor.order|add:-1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-lg md:text-xl flex items-center justify-center h-12 md:h-20 w-full cursor-pointer">
+                        <h5 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
                             {{ prev_floor_order }}
                         </h5>
                     </div>
                     {% endif %}
                 </div>
-
             </div>
         </div>
+    </div>
 {% endblock content %}

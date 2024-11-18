@@ -9,20 +9,20 @@
     {# Ward Info #}
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
         <span>
-            {% trans "Occupied beds" %}: {{ ward.occupied_beds }}</span>
+            {% trans "Occupied beds" %}: <strong> {{ ward.occupied_beds }} </strong></span>
         <br>
-        <span >{% trans "Available Beds" %}: {{ ward.available_beds }}</span>
-        <br>
-        <span style="color: #18aff5;">&#9794;</span><span style="color: #18aff5;">{{ ward.patient_genders.m|default:0 }}</span> /
-        <span style="color: #de1ee8;">&#9792;</span><span style="color: #de1ee8;">{{ ward.patient_genders.f|default:0 }}</span> /
-        <span style="color: #2ecc71;">&#9895;</span><span style="color: #2ecc71;">{{ ward.patient_genders.d|default:0 }}</span>
+        <span >{% trans "Available Beds" %}: <strong>{{ ward.available_beds }}</strong></span>
         <br>
         <span>
             {% trans "Unassigned Patients" %}
         </span>:
-        <span style="color: {% if ward.unassigned_patients|length > 0 %}red{% else %}black{% endif %};">
+        <strong style="color: {% if ward.unassigned_patients|length > 0 %}red{% endif %};">
             {{ ward.unassigned_patients|length }}
-        </span>
+        </strong>
+        <br>
+        <span style="color: #18aff5;">&#9794;</span><span style="color: #18aff5;">{{ ward.patient_genders.m|default:0 }}</span> /
+        <span style="color: #de1ee8;">&#9792;</span><span style="color: #de1ee8;">{{ ward.patient_genders.f|default:0 }}</span> /
+        <span style="color: #2ecc71;">&#9895;</span><span style="color: #2ecc71;">{{ ward.patient_genders.d|default:0 }}</span>
         <br>
     </p>
 
