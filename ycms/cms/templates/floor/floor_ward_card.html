@@ -14,13 +14,22 @@
         {% trans "Gender" %}:
         {% if ward.patient_genders|length > 0 %}
             {% for gender, count in ward.patient_genders.items %}
-                {% if forloop.counter0 != 0 %} / {% endif %}<span class="text">{{ gender }}: {{ count }}</span>
+                {% if forloop.counter0 != 0 %} | {% endif %}
+                <span class="text" style="color: {% if gender == 'm' %}#18aff5{% elif gender == 'f' %}#de1ee8{% endif %};">
+                    {{ count }}
+                </span>
             {% endfor %}
             <br>
         {% else %}
-            <span class="text">------</span> <br>
+            <span class="text">0 | 0</span> <br>
         {% endif %}
-        {% trans "Unassigned Patients" %}: {{ ward.unassigned_patients|length }} <br>
+
+        {% trans "Unassigned Patients" %}:
+        <span style="color: {% if ward.unassigned_patients|length > 0 %}red{% else %}black{% endif %};">
+            {{ ward.unassigned_patients|length }}
+        </span>
+        <br>
+
     </p>
 
     {# Linie zwischen Text und Button #}
@@ -28,11 +37,10 @@
 
     {# Button #}
     <div class="flex justify-center">
-        <a href="{% url 'cms:protected:ward_detail' ward.id %}" 
+        <a href="{% url 'cms:protected:ward_detail' ward.id %}"
            class="block py-4 border border-gray-200 dark:bg-gray-600 dark:border-gray-700 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-gray-400 rounded w-full text-center min-w-[50px] transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
             {% trans "Go to Ward" %}
             <i icon-name="bed" class="ms-2"></i>
         </a>
     </div>
 </div>
-
