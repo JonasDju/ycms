@@ -1,0 +1,52 @@
+<div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+    <div class="flex justify-between">
+        <div>
+            <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">Geschlechterverteilung</h5>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">Anteil der Geschlechter</p>
+        </div>
+    </div>
+    <div id="gender-pie-chart" class="w-full h-64"></div> <!-- Bereich für den Pie-Graphen -->
+</div>
+
+<!-- ApexCharts-Bibliothek einbinden -->
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const options = {
+            chart: {
+                height: 250,  // Höhe des Diagramms
+                width: '100%',  // Breite auf 100% setzen
+                type: 'pie',  // Diagrammtyp auf "pie" setzen
+                fontFamily: 'Inter, sans-serif',
+                dropShadow: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: false
+                }
+            },
+            tooltip: {
+                enabled: true
+            },
+            series: [60, 35, 5],  // Dummy-Daten: 60% männlich, 35% weiblich, 5% andere
+            labels: ['Male', 'Female', 'Other'],  // Labels für die Slices
+            colors: ['#3b82f6', '#ec4899', '#e5e7eb'],  // Farben für Male, Female, Other
+            legend: {
+                position: 'top',
+                horizontalAlign: 'center',
+                floating: true,
+                fontSize: '14px'
+            },
+            stroke: {
+                width: 0  // Entfernt den Rand des Kreises
+            }
+        };
+
+        // Überprüfen, ob das Element existiert, bevor der Chart gerendert wird
+        if (document.getElementById('gender-pie-chart') && typeof ApexCharts !== 'undefined') {
+            const chart = new ApexCharts(document.getElementById('gender-pie-chart'), options);
+            chart.render();
+        }
+    });
+</script>

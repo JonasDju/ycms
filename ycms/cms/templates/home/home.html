@@ -1,15 +1,11 @@
-{# Sidebar import #}
 {% extends "_base.html" %}
 
-{# Übersetzung import #}
 {% load i18n %}
 
-{# Titel der Seite #}
 {% block title %}
     {% translate "Home View" %}
 {% endblock title %}
 
-{# Hauptinhalt #}
 {% block content %}
-
+    {% include "home/home_patient.html" %}
 {% endblock content %}
