@@ -69,6 +69,8 @@ class Ward(AbstractBaseModel):
         :return: percentage rate of occupied beds rounded to two digits
         :rtype: float
         """
+        if self.total_beds == 0:
+            return 100.0
         return round(self.occupied_beds / self.total_beds * 100, 2)
 
     @cached_property
