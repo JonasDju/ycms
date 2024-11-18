@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2024-11-07 18:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -113,6 +113,16 @@ msgstr "Ein Account für die Email \"{}\" existiert bereits."
 #: cms/forms/custom_model_form.py
 msgid "Enter {} here"
 msgstr "{} hier eingeben"
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid "Admission date cannot be later than discharge date."
+msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid ""
+"The selected admission and discharge dates overlap with an existing hospital "
+"stay."
+msgstr "Der ausgewählte Zeitraum kollidiert mit einem existierenden Krankenhausaufenthalt."
 
 #: cms/forms/intake_record_form.py
 msgid "Search for existing patient"
@@ -403,8 +413,7 @@ msgstr "Vorname des Angestellten / der Angestellten"
 msgid "Last name of the employee"
 msgstr "Nachname des Angestellten / der Angestellten"
 
-#: cms/models/user.py cms/templates/_base.html
-#: cms/templates/ward/ward_selection_form.html
+#: cms/models/user.py cms/templates/ward/ward_selection_form.html
 msgid "Ward"
 msgstr "Station"
 
@@ -463,6 +472,38 @@ msgstr "Stationsverwaltung"
 #: cms/templates/_base.html
 msgid "Patient Data"
 msgstr "Patientendaten"
+
+#: cms/templates/_base.html
+msgid "Views"
+msgstr "Ansichten"
+
+#: cms/templates/_base.html
+msgid "Floor View"
+msgstr "Etagenansicht"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Go to Ward"
+msgstr "Zur Station"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Occupation rate"
+msgstr "Belegungsrate"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Occupied beds"
+msgstr "Belegte Betten"
+
+#: cms/templates/floor/floor.html
+msgid "Admin detected"
+msgstr "Admin erkannt"
+
+#: cms/templates/floor/floor.html
+msgid "Delete floor"
+msgstr "Etage löschen"
+
+#: cms/templates/floor/floor.html
+msgid "Close"
+msgstr "Schließen"
 
 #: cms/templates/_base.html
 msgid "Ward View"
@@ -640,6 +681,7 @@ msgstr "Nein"
 
 #: cms/templates/bed_assignment/bed_assignment_drawer.html
 #: cms/templates/ward/ward_info.html
+#: cms/templates/floor/floor_ward_card.html
 msgid "Unassigned Patients"
 msgstr "Nicht zugewiesene Patienten"
 
@@ -749,6 +791,7 @@ msgstr "Alter"
 
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
+#: cms/templates/floor/floor_ward_card.html
 msgid "Gender"
 msgstr "Geschlecht"
 
@@ -990,7 +1033,7 @@ msgstr "Gesamt"
 msgid "Bed Availability"
 msgstr "Bettenverfügbarkeit"
 
-#: cms/templates/ward/ward_info.html
+#: cms/templates/ward/ward_info.html cms/templates/floor/floor_ward_card.html
 msgid "Available Beds"
 msgstr "Verfügbare Betten"
 

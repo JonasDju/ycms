@@ -1,0 +1,46 @@
+{% load i18n %}
+<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
+    {# Ward Name #}
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        {{ ward.name }}
+    </h5>
+
+    {# Ward Info #}
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        {% trans "Occupation rate" %}: {{ ward.occupation_rate }}% <br>
+        {% trans "Occupied beds" %}: {{ ward.occupied_beds }} <br>
+        {% trans "Available Beds" %}: {{ ward.available_beds }} <br>
+        {% trans "Gender" %}:
+        {% if ward.patient_genders|length > 0 %}
+            {% for gender, count in ward.patient_genders.items %}
+                {% if forloop.counter0 != 0 %} | {% endif %}
+                <span class="text" style="color: {% if gender == 'm' %}#18aff5{% elif gender == 'f' %}#de1ee8{% endif %};">
+                    {{ count }}
+                </span>
+            {% endfor %}
+            <br>
+        {% else %}
+            <span class="text">0 | 0</span> <br>
+        {% endif %}
+
+        {% trans "Unassigned Patients" %}:
+        <span style="color: {% if ward.unassigned_patients|length > 0 %}red{% else %}black{% endif %};">
+            {{ ward.unassigned_patients|length }}
+        </span>
+        <br>
+
+    </p>
+
+    {# Linie zwischen Text und Button #}
+    <hr class="my-4 border-t border-gray-300 dark:border-gray-600">
+
+    {# Button #}
+    <div class="flex justify-center">
+        <a href="{% url 'cms:protected:ward_detail' ward.id %}"
+           class="block py-4 border border-gray-200 dark:bg-gray-600 dark:border-gray-700 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-gray-400 rounded w-full text-center min-w-[50px] transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            {% trans "Go to Ward" %}
+            <i icon-name="bed" class="ms-2"></i>
+        </a>
+    </div>
+</div>
