@@ -12,8 +12,6 @@ from ..views import (
     user_settings_view,
     ward,
 )
-from ..views.floor.floor_view import FloorView
-from ..views.floor.add_floor import add_floor
 from ..views.utility.autocomplete import autocomplete_icd10, autocomplete_patient
 
 urlpatterns = [
@@ -135,7 +133,20 @@ urlpatterns = [
             ]
         ),
     ),
+    path(
+        "floor/",
+        include(
+            [
+                path("", floor.FloorView.as_view(), name="floor"),
+                path("create/", floor.FloorCreateView.as_view(), name="create_floor"),
+                # path("update/<int:pk>/", floor.FloorUpdateView.as_view(), name="update_floor"),
+                path(
+                    "delete/<int:pk>",
+                    floor.FloorDeleteView.as_view(),
+                    name="delete_floor",
+                ),
+            ]
+        ),
+    ),
     path("settings/", user_settings_view.UserSettingsView.as_view(), name="settings"),
-    path("floor/", FloorView.as_view(), name="floor"),
-    path("add_floor/", add_floor, name="add_floor")
 ]

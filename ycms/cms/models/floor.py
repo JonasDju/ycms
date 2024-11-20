@@ -15,7 +15,9 @@ class Floor(AbstractBaseModel):
 
     created_at = models.DateTimeField(default=current_or_travelled_time, null=False)
     updated_at = models.DateTimeField(auto_now=True, null=False)
-    order = models.IntegerField(
+    # successor = models.ForeignKey('self') # TODO(jan) use this instead of order -> unique, make sure deletion is handled well
+    # predecessor = models.ForeignKey('self') # TODO(jan) use this instead of order -> unique, make sure deletion is handled well
+    order = models.IntegerField(  # TODO(jan) unique remove later
         verbose_name=_("floor order"), help_text=_("Order of the floor")
     )
     name = models.CharField(

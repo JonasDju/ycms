@@ -1,11 +1,17 @@
 {% load i18n %}
+{% load widget_tweaks %}
 
 <div id="addFloorModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center" style="z-index: 9999;">
     <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md">
         <h2 class="text-lg font-bold text-black dark:text-white mb-4">
             {% trans "Add New Floor" %}
         </h2>
-        <form method="POST">
+        <form enctype="multipart/form-data"
+              method="post"
+              id="floor_form"
+              class="mb-8"
+              action="/floor/create/"
+              data-unsaved-warning>
             {% csrf_token %}
             <div class="mb-4">
                 <label for="floorName" class="block text-sm font-medium text-gray-700 dark:text-gray-300">

@@ -4,6 +4,7 @@ Please refer to :mod:`django.forms` for general information about Django forms (
 """
 from .authentication.password_reset_request_form import PasswordResetRequestForm
 from .authentication.registration_form import RegistrationForm
+from .floor_form import FloorForm
 from .intake_bed_assignment_form import IntakeBedAssignmentForm
 from .intake_record_form import IntakeRecordForm
 from .patient_form import PatientForm
