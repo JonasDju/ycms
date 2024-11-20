@@ -485,6 +485,18 @@ msgstr "Etagenansicht"
 msgid "Go to Ward"
 msgstr "Zur Station"
 
+#: cms/templates/floor/add_floor.html
+msgid "Add New Floor"
+msgstr "Neue Etage hinzufügen"
+
+#: cms/templates/floor/add_floor.html
+msgid "Full Name"
+msgstr "Vollständiger Name"
+
+#: cms/templates/floor/add_floor.html
+msgid "Short Name"
+msgstr "Abkürzung"
+
 #: cms/templates/floor/floor_ward_card.html
 msgid "Occupation rate"
 msgstr "Belegungsrate"
