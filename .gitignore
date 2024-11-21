@@ -153,3 +153,6 @@ dmypy.json
 
 # Media files
 ycms/media/*/*
+
+# Docker depencency states
+.dockercache
