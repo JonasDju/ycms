@@ -33,6 +33,9 @@ The containers can be stopped using `Ctrl+C`. If you wish to reset the database,
 
 After changing or adding any translation strings inside .py or .html files, you need to stop the container (`Ctrl+C`), make manual modifications to the translation file located at `ycms/locale/de/LC_MESSAGES/django.po` and then restart the container using `docker compose --profile dev up`.
 
+After implementing some new features, you should add corresponding test cases. Tests are located in the `tests/` directory.
+To run existing tests, open a new terminal (while the containers are running) and execute `docker compose exec ycms-dev ./test.sh`. If you wish to only execute tests affected by recent changes, run `docker compose exec ycms-dev ./test --changed` instead.
+
 ### Local installation
 **Note:** if you absolutely MUST use Windows, follow the guide in `WSL.md`. No guarantees though.
 
@@ -74,6 +77,9 @@ To start the development server, run: `./tools/run.sh`
 Any changes made to the code or the templates will be visible in real time. If you wish to reset the database, delete the `.postgres` folder inside the `ycms` directory.
 
 After changing or adding any translation strings inside .py or .html files, you are required to update the translation file using `./tools/tranlsate.sh --skip-compile`, make manual modifications to the updated file located at `ycms/locale/de/LC_MESSAGES/django.po` and then compile the changes using `./tools/tranlsate.sh`. You can check if you forgot some manual translations by running `./tools/check_tranlsations.sh`.
+
+After implementing some new features, you should add corresponding test cases. Tests are located in the `tests/` directory.
+To run existing tests, open a new terminal and execute `./tools/test.sh`. If you wish to only execute tests affected by recent changes, run `./tools/test.sh --changed` instead.
 
 ## Using the WebUI
 
