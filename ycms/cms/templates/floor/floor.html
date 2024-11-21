@@ -84,4 +84,34 @@
     </div>
 
     {% include "floor/create_floor.html" %}
+
+    {% if user.is_staff %}
+    <script>
+        const floorOrder = document.getElementById("floorOrder");
+        function createFloorAtTop() {
+            {% if floors|length > 0 %}
+                {% with floors|last as last %}
+                    floorOrder.value = {{ last.id }} + 1;
+                {% endwith %}
+            {% else %}
+                floorOrder.value = 0;
+            {% endif %}
+        }
+        function createFloorAtBottom() {
+            {% with floors.0 as first %}
+                floorOrder.value = {{ first.id }} - 1;
+            {% endwith %}
+        }
+
+        const topButton = document.getElementById("addFloorButtonTop");
+        if (topButton) {
+            topButton.onclick = createFloorAtTop;
+        }
+        const bottomButton = document.getElementById("addFloorButtonBottom");
+        if (bottomButton) {
+            bottomButton.onclick = createFloorAtBottom;
+        }
+    </script>
+    {% endif %}
+
 {% endblock content %}
