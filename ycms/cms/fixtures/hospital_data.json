@@ -116,7 +116,6 @@
       "creator": 2,
       "created_at": "2023-11-05T11:25:08Z",
       "updated_at": "2023-11-05T11:25:26.692Z",
-      "ward_number": "1",
       "floor": 1,
       "name": "Allgemeinchirurgie",
       "nickname": "AlgCh"
@@ -129,7 +128,6 @@
       "creator": 2,
       "created_at": "2023-11-05T11:25:08Z",
       "updated_at": "2023-11-05T11:25:26.692Z",
-      "ward_number": "2",
       "floor": 1,
       "name": "Pädiatrie",
       "nickname": "Päd"

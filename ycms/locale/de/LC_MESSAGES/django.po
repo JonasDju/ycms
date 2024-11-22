@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the CMS package.
 # YCMS <info@ycms-app.de>
 # https://github.com/charludo/
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-11 20:49+0100\n"
+"POT-Creation-Date: 2024-11-22 18:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -419,14 +419,6 @@ msgstr "Benutzer"
 #: cms/models/user.py
 msgid "users"
 msgstr "Benutzer"
-
-#: cms/models/ward.py
-msgid "ward number"
-msgstr "Stationsnummer"
-
-#: cms/models/ward.py
-msgid "Number of the ward"
-msgstr "Nummer der Station"
 
 #: cms/models/ward.py
 msgid "floor"
@@ -1065,16 +1057,16 @@ msgid "Details about Wards"
 msgstr "Details über Stationen"
 
 #: cms/templates/ward/ward_management.html
-msgid "Ward Number"
-msgstr "Stationsnummer"
-
-#: cms/templates/ward/ward_management.html
 msgid "Ward Name"
 msgstr "Stationsname"
 
 #: cms/templates/ward/ward_management.html
 msgid "Ward Nickname"
 msgstr "kurzer Stationsname"
+
+#: cms/templates/ward/ward_management.html
+msgid "Floor"
+msgstr "Stockwerk"
 
 #: cms/templates/ward/ward_management.html
 msgid "Number of Beds"
@@ -1257,6 +1249,15 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "ward number"
+#~ msgstr "Stationsnummer"
+
+#~ msgid "Number of the ward"
+#~ msgstr "Nummer der Station"
+
+#~ msgid "Ward Number"
+#~ msgstr "Stationsnummer"
 
 #~ msgid "Assign"
 #~ msgstr "Zuweisen"

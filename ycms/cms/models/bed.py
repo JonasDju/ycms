@@ -66,7 +66,7 @@ class Bed(AbstractBaseModel):
         :return: A readable string representation of the bed
         :rtype: str
         """
-        return f"{self.bed_type} Bed (Nr. {self.id}, Room {self.room.room_number}, Ward {self.room.ward.ward_number})"
+        return f"{self.bed_type} Bed (Nr. {self.id}, Room {self.room.room_number}, Ward {self.room.ward.nickname})"
 
     def get_repr(self):
         """
