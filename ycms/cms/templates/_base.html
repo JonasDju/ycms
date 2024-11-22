@@ -70,7 +70,13 @@ limitations under the License.
                         </li>
                     {% endif %}
                     {% if perms.cms.change_patient %}
-                        <span class="block mt-5 px-5 text-gray-500 tracking-wide dark:text-gray-300">{% translate "Ward" %}</span>
+                        <span class="block mt-5 px-5 text-gray-500 tracking-wide dark:text-gray-300">{% translate "Views" %}</span>
+                        <li>
+                            {% url 'cms:protected:floor' as floor_url %}
+                            <a href="{{ floor_url }}" class="{% if request.path == floor_url %}selected{% endif %}">
+                                <i icon-name="building"></i> {% translate "Floor View" %}
+                            </a>
+                        </li>
                         <li>
                             {% url 'cms:protected:ward_detail_default' as url %}
                             {% url 'cms:protected:ward_management' as ward_management_url %}

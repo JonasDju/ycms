@@ -1,0 +1,16 @@
+<div class="sidebar bg-gray-500 p-1 h-full flex flex-col rounded-full">
+    <ul class="mt-4 flex-grow w-full">
+        <li class="bg-gray-500 rounded mb-2 w-full">
+            <button onclick="location.href='?floor=1'" class="block py-4 text-white hover:bg-gray-400 rounded w-full text-center min-w-[50px] {% if current_floor == 1 %}bg-gray-400{% endif %}">1</button>
+        </li>
+        <li class="bg-gray-500 rounded mb-2 w-full">
+            <button onclick="location.href='?floor=2'" class="block py-4 text-white hover:bg-gray-400 rounded w-full text-center min-w-[50px] {% if current_floor == 2 %}bg-gray-400{% endif %}">2</button>
+        </li>
+        <li class="bg-gray-500 rounded mb-2 w-full">
+            <button onclick="location.href='?floor=3'" class="block py-4 text-white hover:bg-gray-400 rounded w-full text-center min-w-[50px] {% if current_floor == 3 %}bg-gray-400{% endif %}">3</button>
+        </li>
+        <li class="bg-gray-500 rounded mb-2 w-full">
+            <button onclick="location.href='?floor=4'" class="block py-4 text-white hover:bg-gray-400 rounded w-full text-center min-w-[50px] {% if current_floor == 4 %}bg-gray-400{% endif %}">4</button>
+        </li>
+    </ul>
+</div>
