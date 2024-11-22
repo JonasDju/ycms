@@ -19,16 +19,45 @@
                           data-unsaved-warning>
                         {% csrf_token %}
                         <div class="grid gap-4">
-                            {% for field in ward_form %}
-                                <div>
-                                    <label for="{{ field.id_for_label }}"
-                                           {% if field.field.required %}class="field-required"{% endif %}>
-                                        {{ field.label }}
-                                    </label>
-                                    {% render_field field %}
-                                    <div class="help-text">{{ field.help_text }}</div>
-                                </div>
-                            {% endfor %}
+                            <div>
+                                <label for="id_ward_number"
+                                       class="{% if ward_form.fields.ward_number.required %}field-required{% endif %}">
+                                    Ward Number:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="id_ward_number"
+                                    name="ward_number"
+                                    value="{{ ward.ward_number }}"
+                                    class="form-control"
+                                    {% if ward_form.fields.ward_number.required %}required{% endif %} />
+                            </div>
+                            <div>
+                                <label for="id_floor"
+                                       class="{% if ward_form.fields.floor.required %}field-required{% endif %}">
+                                    Floor:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="id_floor"
+                                    name="floor"
+                                    value="{{ ward.floor }}"
+                                    class="form-control"
+                                    {% if ward_form.fields.floor.required %}required{% endif %} />
+                            </div>
+                            <div>
+                                <label for="id_name"
+                                       class="{% if ward_form.fields.name.required %}field-required{% endif %}">
+                                    Ward Name:
+                                </label>
+                                <input
+                                    type="text"
+                                    id="id_name"
+                                    name="name"
+                                    value="{{ ward.name }}"
+                                    class="form-control"
+                                    {% if ward_form.fields.name.required %}required{% endif %} />
+                            </div>
                             <div class="mt-4">
                                 <h3 class="text-2xl font-semibold dark:text-white mb-4">{% translate "Rooms in this Ward" %}</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-1 gap-4">

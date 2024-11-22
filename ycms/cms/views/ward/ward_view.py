@@ -1,6 +1,7 @@
 from django.contrib import messages
-from django.db import models
-from django.shortcuts import get_object_or_404, redirect
+from django.db import models, transaction
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
@@ -117,38 +118,14 @@ class WardEditView(UpdateView):
     template_name = "ward/ward_card.html"
     success_url = reverse_lazy("cms:protected:ward_management")
 
-    def get_object(self, queryset=None):
-        pk = self.kwargs.get("pk")
-        return get_object_or_404(Ward, pk=pk)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["rooms"] = self.object.rooms.all()
+        return context
 
     def form_valid(self, form):
+        form.save()
         messages.success(
-            self.request, _("Ward information has been successfully updated.")
+            self.request, _("Ward information has been successfully updated!")
         )
         return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        pk = kwargs.get("pk")
-        ward = Ward.objects.get(id=pk)
-        rooms = [
-            (
-                room,
-                [
-                    (
-                        patient,
-                        PatientForm(instance=patient),
-                        IntakeBedAssignmentForm(instance=patient.current_stay),
-                    )
-                    for patient in room.patients()
-                ],
-            )
-            for room in ward.rooms.all()
-        ]
-        wards = Ward.objects.all()
-        return {
-            "rooms": rooms,
-            "ward": ward,
-            "wards": wards,
-            "selected_ward_id": pk,
-            **super().get_context_data(**kwargs),
-        }
