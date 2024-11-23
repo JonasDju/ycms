@@ -1,0 +1,49 @@
+{# Sidebar import #}
+{% extends "_base.html" %}
+
+{# Übersetzung import #}
+{% load i18n %}
+
+{# Titel der Seite #}
+{% block title %}
+    {% translate "Floor View" %}
+{% endblock title %}
+
+{# Hauptinhalt #}
+{% block content %}
+    <div class="flex flex-col h-screen">
+
+        {# Linke Seite: Sidebar #}
+        <div class="flex flex-1 justify-center items-center">
+            <div class="w-1/8 h-[90vh] mt-4 mb-4">
+                {% include "floor/floor_sidebar.html" %}
+            </div>
+
+            {# Rechte Seite: Container für die Etagenübersicht #}
+            <div class="flex flex-col justify-between w-3/4 h-[90vh] p-4">
+
+                {# Obere Etage #}
+                <div class="flex justify-center items-center w-full">
+                    <div onclick="location.href='?floor={{ current_floor|add:-1 }}'" class="bg-gray-500 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
+                        ETAGE {{ current_floor|add:-1 }}
+                    </div>
+                </div>
+
+                {# Corridor #}
+                <div class="flex-grow flex justify-center items-center w-full">
+                    <div class="bg-gray-500 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full">
+                        CORRIDOR
+                    </div>
+                </div>
+
+                {# Untere Etage #}
+                <div class="flex justify-center items-center w-full">
+                    <div onclick="location.href='?floor={{ current_floor|add:1 }}'" class="bg-gray-500 rounded-2xl text-white text-xl flex items-center justify-center h-20 w-full cursor-pointer">
+                        ETAGE {{ current_floor|add:1 }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}
