@@ -93,6 +93,11 @@
                                 {% render_field record_form.note style="height: 145px;" %}
                                 <div class="help-text">{{ record_form.note.help_text }}</div>
                             </div>
+                            <div>
+                                <label for="{{ bed_form.recommended_ward.id_for_label }}">{{ bed_form.recommended_ward.label }}</label>
+                                {% render_field bed_form.recommended_ward %}
+                                <div class="help-text">{{ bed_form.recommended_ward.help_text }}</div>
+                            </div>
                         </div>
                         <div>
                             <div class="border-4 border-blue-500 rounded-lg p-4">
@@ -106,15 +111,28 @@
                                     <form>
                                         <label for="input-patient-intake-stay-duration"
                                             class="field-required">{% translate "Estimated nights to stay" %}</label>
-                                        <input
-                                            type="number"
-                                            id="input-patient-intake-stay-duration"
-                                            class="form-input"
-                                            step="1"
-                                            value="7"
-                                            min="0"
-                                            required
-                                        />
+                                        <div style="display: flex; gap: 10px; align-items: center;">
+                                            <input
+                                                type="number"
+                                                id="input-patient-intake-stay-duration"
+                                                class="form-input"
+                                                step="1"
+                                                value="7"
+                                                min="0"
+                                                required
+                                            />
+                                            <div class="inline-flex">
+                                              <button id="button-patient-intake-2n" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-l" style="white-space: nowrap;">
+                                                {% translate "two nights" %}
+                                              </button>
+                                              <button id="button-patient-intake-7n" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-r" style="white-space: nowrap;">
+                                                {% translate "one week" %}
+                                              </button>
+                                              <button id="button-patient-intake-14n" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-r" style="white-space: nowrap;">
+                                                {% translate "two weeks" %}
+                                              </button>
+                                            </div>
+                                        </div>
                                         <p class="helptext">{% translate "estimated duration of hospital stay in nights" %}</p>
                                     </form>
                                 </div>
@@ -124,11 +142,6 @@
                                     {% render_field bed_form.discharge_date %}
                                     <div class="help-text">{{ bed_form.discharge_date.help_text }}</div>
                                 </div>
-                            </div>
-                            <div>
-                                <label for="{{ bed_form.recommended_ward.id_for_label }}">{{ bed_form.recommended_ward.label }}</label>
-                                {% render_field bed_form.recommended_ward %}
-                                <div class="help-text">{{ bed_form.recommended_ward.help_text }}</div>
                             </div>
                             <div>
                                 <label class="flex items-center"
@@ -155,6 +168,10 @@
             const dischargeDateInput = dischargeDateLabel ? document.getElementById(dischargeDateLabel.htmlFor) : null;
 
             const durationInput = document.getElementById("input-patient-intake-stay-duration");
+
+            const buttonTwoNights = document.getElementById("button-patient-intake-2n");
+            const buttonSevenNights = document.getElementById("button-patient-intake-7n");
+            const buttonFourteenNights = document.getElementById("button-patient-intake-14n");
 
             function updateDischargeDate(daysAfterAdmission) {
                 const admissionDate = new Date(admissionDateInput.value);
@@ -238,6 +255,20 @@
             //Adjust Discharge date according to the duration in nights
             updateDischargeDate(parseInt(this.value));
         });
+
+        //Common stay duration buttons
+        buttonTwoNights.addEventListener('click', function () {
+            durationInput.value = 2;
+            updateDischargeDate(2);
+        })
+        buttonSevenNights.addEventListener('click', function () {
+            durationInput.value = 7;
+            updateDischargeDate(7);
+        })
+        buttonFourteenNights.addEventListener('click', function () {
+            durationInput.value = 14;
+            updateDischargeDate(14);
+        })
 
 
     });
