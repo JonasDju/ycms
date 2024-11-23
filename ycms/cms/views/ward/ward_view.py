@@ -123,9 +123,13 @@ class WardEditView(UpdateView):
         context["rooms"] = self.object.rooms.all()
         return context
 
+    def form_invalid(self, form):
+        form.add_error_messages(self.request)
+        return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
+
     def form_valid(self, form):
         form.save()
         messages.success(
             self.request, _("Ward information has been successfully updated!")
         )
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
