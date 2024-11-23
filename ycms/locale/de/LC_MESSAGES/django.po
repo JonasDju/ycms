@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2024-11-23 19:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -129,6 +129,10 @@ msgstr "Ungefähres Alter"
 #: cms/forms/unknown_patient_form.py
 msgid "Best guess for the patient's approximate age"
 msgstr "Schätzung des ungefähren Alters des Patienten/der Patientin"
+
+#: cms/forms/upload_csv_form.py
+msgid "Select CSV file"
+msgstr "CSV-Datei auswählen"
 
 #: cms/models/bed.py
 msgid "bed type"
@@ -895,6 +899,10 @@ msgid "Patients list"
 msgstr "Patientenliste"
 
 #: cms/templates/patients/patients_list.html
+msgid "Upload"
+msgstr "Hochladen"
+
+#: cms/templates/patients/patients_list.html
 msgid "Search for name..."
 msgstr "Nach Name suchen..."
 
@@ -1182,6 +1190,52 @@ msgstr "Krankenhausaufenthalt für Patient*in {}, {} wurde bearbeitet."
 #: cms/views/patients/patient_details_view.py
 msgid "The planned stay has been canceled."
 msgstr "Der geplante Krankenhausaufenthalt wurde abgesagt."
+
+#: cms/views/patients/patients_list_view.py
+msgid "Data was successfully imported."
+msgstr "Daten wurden erfolgreich importiert."
+
+#: cms/views/patients/patients_list_view.py
+msgid "New patients: {}"
+msgstr "Neue Patienten: {}"
+
+#: cms/views/patients/patients_list_view.py
+msgid "New diagnosis codes: {}"
+msgstr "Neue Diagnosecodes: {}"
+
+#: cms/views/patients/patients_list_view.py
+msgid "New medical records: {}"
+msgstr "Neue medizinische Unterlagen: {}"
+
+#: cms/views/patients/patients_list_view.py
+msgid "New bed assignments: {}"
+msgstr "Neue Bettzuweisungen: {}"
+
+#: cms/views/patients/patients_list_view.py
+msgid "No new entries were found in CSV file."
+msgstr "In der CSV-Datei wurden keine neuen Einträge gefunden."
+
+#: cms/views/patients/patients_list_view.py
+#, fuzzy
+#| msgid "New record has been created."
+msgid "No new entries were created."
+msgstr "Neue medizinische Unterlage wurde erstellt."
+
+#: cms/views/patients/patients_list_view.py
+msgid "The CSV file could not be read."
+msgstr "Die CSV-Datei konnte nicht gelesen werden."
+
+#: cms/views/patients/patients_list_view.py
+msgid "The CSV file does not contain all required column labels."
+msgstr "Die CSV-Datei beinhaltet nicht alle notwendigen Spaltenbezeichnungen."
+
+#: cms/views/patients/patients_list_view.py
+msgid "An error occured when importing entry no. {}."
+msgstr "Beim Importieren von Eintrag Nr. {} trat ein Fehler auf."
+
+#: cms/views/patients/patients_list_view.py
+msgid "An error occured while uploading the file."
+msgstr "Beim Hochladen der Datei trat ein Fehler auf."
 
 #: cms/views/patients/patients_list_view.py
 msgid "Patient {}, {} has been created."

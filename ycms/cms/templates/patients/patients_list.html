@@ -11,6 +11,18 @@
         <div class="w-full flex flex-col flex-wrap mb-6">
             <h1 class="heading">{% translate "Patients list" %}</h1>
         </div>
+        <!--TODO: Integrate the upload functionality consistent to the theme of the website-->
+        <!--Begin of upload form-->
+        <form
+            id="upload_data"
+            action="{% url "cms:protected:upload_data" %}"
+            enctype="multipart/form-data"
+            method="post">
+            {% csrf_token %}
+            {{upload_csv_form}}
+            <button type="submit">{% translate "Upload" %}</button>
+        </form>
+        <!--End of upload form-->
         <input id="search-patient-input"
                type="text"
                placeholder="{% translate "Search for name..." %}"

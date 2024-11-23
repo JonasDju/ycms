@@ -14,6 +14,11 @@ urlpatterns = [
             [
                 path("", patients.PatientsListView.as_view(), name="patients"),
                 path(
+                    "upload/",
+                    patients.UploadDataView.as_view(),
+                    name="upload_data",
+                ),
+                path(
                     "<int:pk>/",
                     patients.PatientDetailsView.as_view(),
                     name="patient_details",

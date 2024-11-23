@@ -7,11 +7,13 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 
 from ...decorators import permission_required
-from ...forms import PatientForm
+from ...forms import PatientForm, UploadCSVForm
 from ...models import Patient
+
+from ...import_data import import_data
 
 logger = logging.getLogger(__name__)
 
@@ -42,9 +44,92 @@ class PatientsListView(TemplateView):
                 .order_by("-updated_at")
             ],
             "new_patient_form": PatientForm(),
+            "upload_csv_form": UploadCSVForm(),
             **super().get_context_data(**kwargs),
         }
 
+@method_decorator(permission_required("cms.add_patient"), name="dispatch")
+class UploadDataView(FormView):
+    """
+    View to upload data of patients and their stays 
+    """
+
+    success_url = reverse_lazy("cms:protected:patients")
+    form_class = UploadCSVForm
+    
+    def form_valid(self, form):
+        csv_file = form.cleaned_data['file']
+        import_result = import_data(csv_file=csv_file, user=self.request.user, val_sep=",")
+        import_error = import_result["error"]
+        p_count, dc_count = import_result["patient_count"], import_result["diagnosis_code_count"]
+        mr_count, ba_count = import_result["medical_record_count"], import_result["bed_assignment_count"]
+
+        if import_error == None:
+            if sum ([p_count, dc_count, mr_count, ba_count]) > 0:
+                messages.success(
+                    self.request,
+                    _("Data was successfully imported."),
+                )
+                messages.info(
+                    self.request,
+                    _("New patients: {}").format(p_count),
+                )
+                messages.info(
+                    self.request,
+                    _("New diagnosis codes: {}").format(dc_count),
+                )
+                messages.info(
+                    self.request,
+                    _("New medical records: {}").format(mr_count),
+                )
+                messages.info(
+                    self.request,
+                    _("New bed assignments: {}").format(ba_count),
+                )
+            else:
+                messages.info(
+                    self.request,
+                    _("No new entries were found in CSV file.")
+                )
+                messages.info(
+                    self.request,
+                    _("No new entries were created."),
+                )
+        elif import_error == -1:
+            messages.error(
+                self.request,
+                _("The CSV file could not be read."),
+            )
+            messages.info(
+                self.request,
+                _("No new entries were created."),
+            )
+        elif import_error == -2:
+            messages.error(
+                self.request,
+                _("The CSV file does not contain all required column labels."),
+            )
+            messages.info(
+                self.request,
+                _("No new entries were created."),
+            )
+        else:
+            messages.error(
+                self.request,
+                _("An error occured when importing entry no. {}.").format(
+                    import_error
+                ),
+            )
+            messages.info(
+                self.request,
+                _("No new entries were created."),
+            )
+        
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, _("An error occured while uploading the file."))
+        return redirect("cms:protected:patients")
 
 @method_decorator(permission_required("cms.add_patient"), name="dispatch")
 class PatientCreateView(CreateView):
