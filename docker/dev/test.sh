@@ -75,5 +75,5 @@ echo "✔ Tests successfully completed"
 
 if [[ -d "${CODE_COVERAGE_DIR}" ]]; then
     echo -e "Open the following file in your browser to view the test coverage:\n"
-    echo -e "\tfile://${CODE_COVERAGE_DIR}/index.html\n"
+    echo -e "\t${CODE_COVERAGE_DIR}/index.html\n"
 fi
