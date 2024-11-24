@@ -72,15 +72,31 @@ window.addEventListener("load", () => {
             const occupiedBeds = parseInt(deleteButton.getAttribute("data-occupied-beds") || "0", 10);
             const formId = deleteButton.getAttribute("data-form-id") || "";
             const form = document.getElementById(formId) as HTMLFormElement;
-            let confirmMessage = "Are you sure you want to delete this ward?";
-            if (occupiedBeds > 0) {
-                confirmMessage = `This ward has ${occupiedBeds} occupied bed(s). Are you sure you want to delete this ward?`;
+
+            const modal = document.getElementById("confirm-modal");
+            const modalMessage = document.getElementById("modal-message");
+            const confirmButton = document.getElementById("modal-confirm");
+            const cancelButton = document.getElementById("modal-cancel");
+
+            if (!modal || !modalMessage || !confirmButton || !cancelButton || !form) {
+                return;
             }
-            // eslint-disable-next-line no-restricted-globals, no-alert
-            if (confirm(confirmMessage) && form) {
-                console.log("Form confirmed for submission");
+
+            modalMessage.innerText =
+                occupiedBeds > 0
+                    ? `This ward has ${occupiedBeds} occupied beds. Are you sure you want to delete it?`
+                    : "Are you sure you want to delete this ward?";
+
+            modal.style.display = "flex";
+
+            confirmButton.onclick = () => {
                 form.submit();
-            }
+                modal.style.display = "none";
+            };
+
+            cancelButton.onclick = () => {
+                modal.style.display = "none";
+            };
         });
     });
 });

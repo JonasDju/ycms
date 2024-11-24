@@ -430,6 +430,7 @@ msgstr "Nummer der Station"
 
 #: cms/models/ward.py
 #: cms/templates/ward/ward_management.html
+#: cms/templates/ward/ward_card.html
 msgid "floor"
 msgstr "Stockwerk"
 
@@ -1057,16 +1058,14 @@ msgid "Details about Wards"
 msgstr "Details über Stationen"
 
 #: cms/templates/ward/ward_management.html
+#: cms/templates/ward/ward_card.html
 msgid "Ward Number"
 msgstr "Stationsnummer"
 
 #: cms/templates/ward/ward_management.html
+#: cms/templates/ward/ward_card.html
 msgid "Ward Name"
 msgstr "Stationsname"
-
-#: cms/templates/ward/ward_management.html
-msgid "Floor"
-msgstr "Stockwerk"
 
 #: cms/templates/ward/ward_management.html
 msgid "Number of Beds"
@@ -1091,6 +1090,14 @@ msgstr "Bearbeiten"
 #: cms/templates/ward/ward_management.html
 msgid "Delete"
 msgstr "Löschen"
+
+#: cms/templates/ward/ward_card.html
+msgid "Ward Information"
+msgstr "Stationsinformationen"
+
+#: cms/templates/ward/ward_card.html
+msgid "Rooms in this Ward"
+msgstr "Zimmer in dieser Station"
 
 #: cms/templates/ward/ward_modal.html
 msgid "Are you sure you want to discharge this patient?"
@@ -1249,6 +1256,10 @@ msgstr "Hinzufügung der neuen Station \"{}\" erfolgreich!"
 #: cms/views/ward/ward_management_view.py
 msgid "Added {} rooms with {} beds to \"{}\"."
 msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
+
+#: cms/views/ward/ward_view.py
+msgid "Ward information has been successfully updated!"
+msgstr "Die Stationsinformationen wurden erfolgreich aktualisiert!"
 
 #: core/apps.py
 msgid "Core"
