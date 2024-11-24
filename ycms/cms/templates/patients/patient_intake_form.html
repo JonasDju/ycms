@@ -110,8 +110,8 @@
                                 <div>
                                     <form>
                                         <label for="input-patient-intake-stay-duration"
-                                            class="field-required">{% translate "Estimated nights to stay" %}</label>
-                                        <div style="display: flex; gap: 10px; align-items: center;">
+                                            class="field-required">{% translate "Estimated stay (nights/discharge date)" %}</label>
+                                        <div style="display: flex; gap: 1rem; align-items: center;">
                                             <input
                                                 type="number"
                                                 id="input-patient-intake-stay-duration"
@@ -136,9 +136,7 @@
                                         <p class="helptext">{% translate "estimated duration of hospital stay in nights" %}</p>
                                     </form>
                                 </div>
-                                <div>
-                                    <label for="{{ bed_form.discharge_date.id_for_label }}"
-                                           class="field-required">{{ bed_form.discharge_date.label }}</label>
+                                <div class="mt-4">
                                     {% render_field bed_form.discharge_date required="" %}
                                     <div class="help-text">{{ bed_form.discharge_date.help_text }}</div>
                                 </div>
@@ -161,11 +159,8 @@
     <script>
         // TODO: move these scripts to ycms/static/src/js/patient-select-or-create.ts
         document.addEventListener("DOMContentLoaded", function() {
-            const admissionDateLabel = document.querySelector("label[for='{{ bed_form.admission_date.id_for_label }}']");
-            const dischargeDateLabel = document.querySelector("label[for='{{ bed_form.discharge_date.id_for_label }}']");
-
-            const admissionDateInput = admissionDateLabel ? document.getElementById(admissionDateLabel.htmlFor) : null;
-            const dischargeDateInput = dischargeDateLabel ? document.getElementById(dischargeDateLabel.htmlFor) : null;
+            const admissionDateInput = document.getElementById("id_admission_date");
+            const dischargeDateInput = document.getElementById("id_discharge_date");
 
             const durationInput = document.getElementById("input-patient-intake-stay-duration");
 
