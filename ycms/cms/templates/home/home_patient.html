@@ -33,6 +33,7 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
+    const data = {{ statistics|safe }};
     const options = {
         chart: {
             height: '250px',  // Hier eine feste Höhe angeben
@@ -79,12 +80,12 @@
         series: [
             {
                 name: 'Patienten',
-                data: [0, 0, 3, 5, 7, 6],
+                data: data.map(item => item.patients),
                 color: '#1A56DB'
             }
         ],
         xaxis: {
-            categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
+            categories: data.map(item => item.category),
             labels: {
                 show: false
             },
