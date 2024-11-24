@@ -1,11 +1,23 @@
 {% extends "_base.html" %}
 
 {% load i18n %}
+{% load static %} 
 
 {% block title %}
     {% translate "Home View" %}
 {% endblock title %}
 
 {% block content %}
-    {% include "home/home_patient.html" %}
+    <div class="image-container">
+        <img src="{% static 'images/Uni_Klinik_Skizze.png' %}" alt="Uni Klinik Skizze" class="w-full h-auto" />
+    </div>
+
+    <div class="flex flex-row mt-6">
+        <div class="p-2">
+            {% include "home/home_patient.html" %}
+        </div>
+        <div class="p-2">
+            {% include "home/home_gender.html" %}
+        </div>
+    </div>    
 {% endblock content %}
