@@ -40,24 +40,28 @@ const gatherRoomData2 = (): string => {
 window.addEventListener("load", () => {
     const newRoomPrototype = document.querySelector(".new-room-prototype")?.cloneNode(true) as HTMLElement;
     const newBedPrototype = document.querySelector(".new-bed-prototype")?.cloneNode(true) as HTMLSelectElement;
-    const newRoomButton = document.querySelector("#new-edit-room-button") as HTMLElement;
     const wardForm = document.querySelector("#ward_form") as HTMLFormElement;
-
-    if (!newRoomPrototype || !newBedPrototype || !newRoomButton || !wardForm) {
-        return;
-    }
-
-    let counter = 1;
-    newRoomPrototype.classList.remove("hidden", "new-room-prototype");
-
-    newRoomButton.addEventListener("click", () => {
-        const newRoom = newRoomPrototype.cloneNode(true) as HTMLElement;
-        (newRoom.querySelector("input") as HTMLInputElement).value = `R-${counter}`;
-        counter += 1;
-
-        newRoomButton.parentNode?.insertBefore(newRoom, newRoomButton);
-        newBedListener2(newRoom, newBedPrototype);
-        addRemovalEventListeners2(newRoom);
+    const editRoomDivs = document.querySelectorAll<HTMLDivElement>("[data-ward-id]");
+    
+    editRoomDivs.forEach((div) => {
+        const id = div.getAttribute("data-ward-id") as string;
+        const newRoomButton = document.querySelector(`[data-ward-id='${id}']`) as HTMLButtonElement;
+        if (!newRoomPrototype || !newBedPrototype || !newRoomButton || !wardForm) {
+            return;
+        }
+        
+        let counter = 1;
+        newRoomPrototype.classList.remove("hidden", "new-room-prototype");
+    
+        newRoomButton.addEventListener("click", () => {
+            const newRoom = newRoomPrototype.cloneNode(true) as HTMLElement;
+            (newRoom.querySelector("input") as HTMLInputElement).value = `R-${counter}`;
+            counter += 1;
+    
+            newRoomButton.parentNode?.insertBefore(newRoom, newRoomButton);
+            newBedListener2(newRoom, newBedPrototype);
+            addRemovalEventListeners2(newRoom);
+        });
     });
 
     wardForm.addEventListener("submit", (event) => {
