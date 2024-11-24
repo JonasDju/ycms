@@ -22,7 +22,7 @@
                             <div>
                                 <label for="id_ward_number"
                                        class="{% if ward_form.fields.ward_number.required %}field-required{% endif %}">
-                                    Ward Number:
+                                    {% translate "Ward Number" %}
                                 </label>
                                 <input
                                     type="text"
@@ -35,7 +35,7 @@
                             <div>
                                 <label for="id_floor"
                                        class="{% if ward_form.fields.floor.required %}field-required{% endif %}">
-                                    Floor:
+                                    {% translate "Floor" %}
                                 </label>
                                 <input
                                     type="text"
@@ -48,7 +48,7 @@
                             <div>
                                 <label for="id_name"
                                        class="{% if ward_form.fields.name.required %}field-required{% endif %}">
-                                    Ward Name:
+                                    {% translate "Ward Name" %}
                                 </label>
                                 <input
                                     type="text"
