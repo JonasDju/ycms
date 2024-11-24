@@ -158,6 +158,67 @@ window.addEventListener("load", () => {
     // refresh initial value
     ageSlider.dispatchEvent(new Event("input"));
 
+    // Handle fetching ward's discharge policy on selection
+    const wardSelection = document.querySelector("#id_recommended_ward") as HTMLSelectElement;
+    const wardDischargeRoot = document.querySelector("#id_ward_discharge_policy") as HTMLDivElement;
+    const wardDischargeInfo = document.querySelector("#id_ward_discharge_policy_text") as HTMLDivElement;
+
+    const infoBoxBlue = ["text-blue-800", "bg-blue-50", "dark:text-blue-400"];
+    const infoBoxRed = ["text-red-800", "bg-red-50", "dark:text-red-400"];
+
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+    const setWardDischargeInfo = (json: any) => {
+        if (Object.keys(json).length === 0) {
+            wardDischargeRoot.classList.add("hidden");
+            return;
+        }
+
+        let res = json.info_text[0];
+        const numAllowedDays = json.allowed_weekdays_short.length;
+        if (numAllowedDays === 0) {
+            wardDischargeRoot.classList.remove(...infoBoxBlue);
+            wardDischargeRoot.classList.add(...infoBoxRed);
+        } else {
+            wardDischargeRoot.classList.remove(...infoBoxRed);
+            wardDischargeRoot.classList.add(...infoBoxBlue);
+
+            json.allowed_weekdays_short.forEach((day: string, index: number) => {
+                res += ` ${day}`;
+                if (index === numAllowedDays - 2) {
+                    // second to last day in list gets suffix "and"
+                    res += ` ${json.info_text[1]}`;
+                } else if (index === numAllowedDays - 1) {
+                    // last day gets suffix "."
+                    res += ".";
+                } else {
+                    res += ",";
+                }
+            });
+        }
+
+        wardDischargeRoot.classList.remove("hidden");
+        wardDischargeInfo.textContent = res;
+    };
+
+    wardSelection.addEventListener("change", () => {
+        if (!wardSelection.value) {
+            // hide info text field
+            wardDischargeRoot.classList.add("hidden");
+        } else {
+            // fetch ward's allowed discharge days, display in info text
+            const url = `/intake/allowed-discharge-days/?q=${encodeURIComponent(wardSelection.value)}`;
+
+            fetch(url)
+                .then((response) => response.json())
+                .then((json) => {
+                    setWardDischargeInfo(json);
+
+                    // TODO: store somewhere for form validation
+                    // json.mask and json.localized_weekdays
+                });
+        }
+    });
+
     // If a patient was passed to the intake form, use it
     const urlParams = new URLSearchParams(window.location.href);
     if (urlParams.get("patient") && existingPatientSelect) {
