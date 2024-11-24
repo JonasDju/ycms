@@ -1,4 +1,5 @@
 from django.apps import apps
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
@@ -31,6 +32,15 @@ class Ward(AbstractBaseModel):
         max_length=32,
         verbose_name=_("ward name"),
         help_text=_("Name this ward is commonly referred to by"),
+    )
+    allowed_discharge_days = models.SmallIntegerField(
+        default=127,  # binary mask
+        verbose_name=_("allowed discharge days"),
+        help_text=_("Days of the week where discharges are allowed in this ward"),
+        validators=[
+            MinValueValidator(0),  # 0b0000000
+            MaxValueValidator(127),  # 0b1111111
+        ],
     )
 
     @cached_property
