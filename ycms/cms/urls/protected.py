@@ -12,7 +12,8 @@ from ..views import (
     user_settings_view,
     ward,
 )
-from ..views.floor.floor_view import FloorView  # Importiere die FloorView hier
+from ..views.floor.floor_view import FloorView
+from ..views.floor.add_floor import add_floor
 from ..views.utility.autocomplete import autocomplete_icd10, autocomplete_patient
 from ..views.home.home_view import HomeView
 
@@ -138,4 +139,5 @@ urlpatterns = [
     path("settings/", user_settings_view.UserSettingsView.as_view(), name="settings"),
     path("home/", HomeView.as_view(), name="home"),
     path("floor/", FloorView.as_view(), name="floor"),
+    path("add_floor/", add_floor, name="add_floor")
 ]
