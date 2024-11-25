@@ -2,7 +2,7 @@
 Utility views for autocompleting various user inputs
 """
 from django.db.models import Q
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 
 from ...models import ICD10Entry, Patient
 
@@ -58,3 +58,31 @@ def autocomplete_patient(request):
             ]
         }
     )
+
+
+def fetch_patient(request):
+    """
+    Function to fetch the details about an existing patient
+
+    :param request: The current request submitting the form
+    :type request: ~django.http.HttpRequest
+
+    :return: JSON object containing the patient's details
+    :rtype: str
+    """
+    query = request.GET.get("q", "")
+
+    try:
+        patient = Patient.objects.get(pk=query)
+
+        return JsonResponse(
+            {
+                "first_name": patient.first_name,
+                "last_name": patient.last_name,
+                "gender": patient.gender,
+                "date_of_birth": patient.date_of_birth,
+                "insurance_type": patient.insurance_type,
+            }
+        )
+    except Patient.DoesNotExist:
+        return JsonResponse({})

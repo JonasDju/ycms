@@ -32,8 +32,8 @@ RUN chown -R 1000:1000 /bed-management/patient-to-room_assignment
 
 # Copy scripts
 WORKDIR /bed-management
-COPY docker/dev/entrypoint.sh docker/dev/install_dependencies.sh docker/dev/translate.sh .
-RUN chmod +x entrypoint.sh install_dependencies.sh translate.sh
+COPY docker/dev/entrypoint.sh docker/dev/install_dependencies.sh docker/dev/translate.sh docker/dev/test.sh .
+RUN chmod +x entrypoint.sh install_dependencies.sh translate.sh test.sh
 
 # Switch to a non-root user
 USER ubuntu
