@@ -1,5 +1,4 @@
 import json
-
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
@@ -7,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.http import HttpResponseRedirect
 
 from ...constants import bed_types, job_types
 from ...decorators import permission_required
@@ -126,7 +126,7 @@ class WardManagementView(TemplateView):
 @method_decorator(permission_required("cms.delete_ward"), name="dispatch")
 class WardDeleteView(DeleteView):
     """
-    View to delete a ward
+    View to delete a ward 
     """
 
     model = Ward

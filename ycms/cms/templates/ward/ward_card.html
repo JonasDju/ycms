@@ -13,7 +13,7 @@
             <div class="mb-2">
                 <form enctype="multipart/form-data"
                           method="post"
-                          id="ward_form"
+                          id="ward_form_{{ ward.id }}"
                           action="{% url "cms:protected:edit_ward" ward.id %}"
                           class="mb-8"
                           data-unsaved-warning>
@@ -26,33 +26,33 @@
                                 </label>
                                 <input
                                     type="text"
-                                    id="id_ward_number"
+                                    id="id_ward_number_{{ ward.id }}"
                                     name="ward_number"
                                     value="{{ ward.ward_number }}"
                                     class="form-control"
                                     {% if ward_form.fields.ward_number.required %}required{% endif %} />
                             </div>
                             <div>
-                                <label for="id_floor"
+                                <label for="id_floor_{{ ward.id }}"
                                        class="{% if ward_form.fields.floor.required %}field-required{% endif %}">
                                     {% translate "Floor" %}
                                 </label>
                                 <input
                                     type="text"
-                                    id="id_floor"
+                                    id="id_floor_{{ ward.id }}"
                                     name="floor"
                                     value="{{ ward.floor }}"
                                     class="form-control"
                                     {% if ward_form.fields.floor.required %}required{% endif %} />
                             </div>
                             <div>
-                                <label for="id_name"
+                                <label for="id_name_{{ ward.id }}"
                                        class="{% if ward_form.fields.name.required %}field-required{% endif %}">
                                     {% translate "Ward Name" %}
                                 </label>
                                 <input
                                     type="text"
-                                    id="id_name"
+                                    id="id_name_{{ ward.id }}"
                                     name="name"
                                     value="{{ ward.name }}"
                                     class="form-control"
@@ -61,7 +61,7 @@
                             <div class="mt-4">
                                 <h3 class="text-2xl font-semibold dark:text-white mb-4">{% translate "Rooms in this Ward" %}</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-                                    <input type="hidden" id="rooms" name="rooms" value="">
+                                    <input type="hidden" id="rooms_{{ ward.id }}" name="rooms" value="">
                                     <div class="grid grid-cols-2 gap-4">
                                         <div class="hidden new-room-prototype new-room flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
                                             <div class="!-mb-4 help-text">{% translate "Room number" %}</div>

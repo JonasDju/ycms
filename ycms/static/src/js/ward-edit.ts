@@ -28,10 +28,14 @@ const gatherRoomData2 = (): string => {
         const selectValues: string[] = [];
         const selectElements = newRoomDiv.querySelectorAll<HTMLSelectElement>("select");
         selectElements.forEach((selectElement: HTMLSelectElement) => {
-            selectValues.push(selectElement.value);
+            if (selectElement.value) {
+                selectValues.push(selectElement.value);
+            }
         });
 
-        newRooms[roomNumber] = selectValues;
+        if (selectValues.length > 0) {
+            newRooms[roomNumber] = selectValues;
+        }
     });
 
     return JSON.stringify(newRooms);
@@ -40,33 +44,36 @@ const gatherRoomData2 = (): string => {
 window.addEventListener("load", () => {
     const newRoomPrototype = document.querySelector(".new-room-prototype")?.cloneNode(true) as HTMLElement;
     const newBedPrototype = document.querySelector(".new-bed-prototype")?.cloneNode(true) as HTMLSelectElement;
-    const wardForm = document.querySelector("#ward_form") as HTMLFormElement;
     const editRoomDivs = document.querySelectorAll<HTMLDivElement>("[data-ward-id]");
-    
+
     editRoomDivs.forEach((div) => {
-        const id = div.getAttribute("data-ward-id") as string;
-        const newRoomButton = document.querySelector(`[data-ward-id='${id}']`) as HTMLButtonElement;
+        const wardId = div.getAttribute("data-ward-id")?.split("-").pop();
+        const wardForm = document.querySelector(`#ward_form_${wardId}`) as HTMLFormElement;
+        const newRoomButton = document.querySelector(`[data-ward-id='new-edit-room-button-${wardId}']`) as HTMLButtonElement;
+
         if (!newRoomPrototype || !newBedPrototype || !newRoomButton || !wardForm) {
             return;
         }
-        
+
         let counter = 1;
         newRoomPrototype.classList.remove("hidden", "new-room-prototype");
-    
+
         newRoomButton.addEventListener("click", () => {
             const newRoom = newRoomPrototype.cloneNode(true) as HTMLElement;
             (newRoom.querySelector("input") as HTMLInputElement).value = `R-${counter}`;
             counter += 1;
-    
+
             newRoomButton.parentNode?.insertBefore(newRoom, newRoomButton);
             newBedListener2(newRoom, newBedPrototype);
             addRemovalEventListeners2(newRoom);
         });
-    });
 
-    wardForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        (wardForm.querySelector("#rooms") as HTMLInputElement).value = gatherRoomData2();
-        wardForm.submit();
+        wardForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const roomData = gatherRoomData2();
+            const roomsInput = window.document.querySelector(`#rooms_${wardId}`) as HTMLInputElement;
+            roomsInput.value = roomData;
+            wardForm.submit();
+    });
     });
 });

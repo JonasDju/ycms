@@ -1,3 +1,4 @@
+import json
 from django.contrib import messages
 from django.db import models, transaction
 from django.http import HttpResponseRedirect
@@ -7,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView, UpdateView
 
-from ...constants import gender
+from ...constants import gender, bed_types
 from ...decorators import permission_required
 from ...forms import IntakeBedAssignmentForm, PatientForm, WardForm
 from ...models import Bed, BedAssignment, Room, User, Ward
@@ -121,6 +122,8 @@ class WardEditView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["rooms"] = self.object.rooms.all()
+        context["empty_rooms"] = self.object.rooms.filter(bedassignment__isnull=True)
+        context["bed_types"] = bed_types.CHOICES
         return context
 
     def form_invalid(self, form):
@@ -128,7 +131,33 @@ class WardEditView(UpdateView):
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
 
     def form_valid(self, form):
-        form.save()
+        ward = form.save()
+        
+        if room_dict := self.request.POST.get("rooms"):
+            # Add new rooms without deleting existing ones
+            room_counter = 0
+            bed_counter = 0
+            for room_number, beds in json.loads(room_dict).items():
+                # Check if room number already exists
+                if not ward.rooms.filter(room_number=room_number).exists():
+                    room = Room.objects.create(
+                        ward=ward,
+                        creator=self.request.user,
+                        room_number=room_number
+                    )
+                    room_counter += 1
+                    for bed_type in beds:
+                        bed_counter += 1
+                        Bed.objects.create(room=room, creator=self.request.user, bed_type=bed_type)
+            
+            if room_counter > 0:
+                messages.success(
+                    self.request,
+                    _('Added {} new rooms with {} new beds to the ward.').format(
+                        room_counter, bed_counter
+                    ),
+                )
+        
         messages.success(
             self.request, _("Ward information has been successfully updated!")
         )
