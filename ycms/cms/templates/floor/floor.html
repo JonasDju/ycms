@@ -87,19 +87,23 @@
 
     {% if user.is_staff %}
     <script>
-        const floorOrder = document.getElementById("floorOrder");
+        const predecessor = document.getElementById("predecessor");
+        const successor = document.getElementById("successor");
         function createFloorAtTop() {
             {% if floors|length > 0 %}
                 {% with floors|last as last %}
-                    floorOrder.value = {{ last.id }} + 1;
+                    predecessor.value = {{ last.id }};
+                    successor.value = null;
                 {% endwith %}
             {% else %}
-                floorOrder.value = 0;
+                    predecessor.value = null;
+                    successor.value = null;
             {% endif %}
         }
         function createFloorAtBottom() {
             {% with floors.0 as first %}
-                floorOrder.value = {{ first.id }} - 1;
+                predecessor.value = null;
+                successor.value = {{ first.id }};
             {% endwith %}
         }
 

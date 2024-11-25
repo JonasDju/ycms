@@ -51,6 +51,7 @@ class FloorCreateView(TemplateView):
                 },
             )
         floor = floor_form.save()
+        # TODO edit predecessor/successor accordingly
         messages.success(
             request, _('Addition of new floor "{}" successful!').format(floor.name)
         )
@@ -68,7 +69,8 @@ class FloorDeleteView(DeleteView):
     success_url = reverse_lazy("cms:protected:floor")
 
     def form_valid(self, form):
-        messages.success(self.request, _("Floor has been deleted."))
+        messages.success(self.request, _("Floor has been deleted.")
+        # TODO make sure references are deleted correctly
         return super().form_valid(form)
 
     def form_invalid(self, form):
