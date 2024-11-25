@@ -36,9 +36,19 @@
 <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2">
     <div class="rounded-lg bg-white border border-gray-200 p-4 shadow-md flex h-full justify-between  hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <div>
-            <div class="mt-2 mb-4 text-2xl font-semibold  dark:text-white">{% translate "Unassigned Patients" %}</div>
-            <div class="grid grid-cols-1">
-                <div class="text-3xl font-bold dark:text-white">{{ unassigned_bed_assignments|length }}</div>
+            <div class="mt-2 mb-4 text-2xl font-semibold {% if unassigned_bed_assignments|length > 0 %}text-red-600{% else %}dark:text-white{% endif %}">
+                {% translate "Unassigned Patients" %}
+            </div>
+            <div class="flex items-center">
+                <!-- Display exclamation mark and red color if unassigned patients > 0 -->
+                {% if unassigned_bed_assignments|length > 0 %}
+                    <div class="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center text-xl mr-2">
+                        !
+                    </div>
+                {% endif %}
+                <div class="text-3xl font-bold {% if unassigned_bed_assignments|length > 0 %}text-red-600{% else %}dark:text-white{% endif %}">
+                    {{ unassigned_bed_assignments|length }}
+                </div>
             </div>
         </div>
         <div class="flex flex-col items-stretch gap-2 self-center">
