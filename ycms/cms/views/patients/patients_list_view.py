@@ -128,7 +128,15 @@ class UploadDataView(FormView):
         return super().form_valid(form)
     
     def form_invalid(self, form):
-        messages.error(self.request, _("An error occured while uploading the file."))
+        # alternative approach, if original Django errors should not be presented to the user
+        """
+        if any("csv" in error for error in form.errors['file']):
+            messages.error(self.request, _("Only files with extension .csv are allowed."))
+        else:
+            messages.error(self.request, _("An error occured while uploading the file."))
+        """
+        for error in form.errors['file']:
+            messages.error(self.request, error)
         return redirect("cms:protected:patients")
 
 @method_decorator(permission_required("cms.add_patient"), name="dispatch")

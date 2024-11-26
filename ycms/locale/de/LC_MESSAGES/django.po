@@ -131,8 +131,8 @@ msgid "Best guess for the patient's approximate age"
 msgstr "Schätzung des ungefähren Alters des Patienten/der Patientin"
 
 #: cms/forms/upload_csv_form.py
-msgid "Select CSV file"
-msgstr "CSV-Datei auswählen"
+msgid "Import patient data"
+msgstr "Patientendaten importieren"
 
 #: cms/models/bed.py
 msgid "bed type"
@@ -1248,6 +1248,10 @@ msgstr "Patient*in {}, {} wurde bearbeitet."
 #: cms/views/patients/patients_list_view.py
 msgid "Patient has been deleted."
 msgstr "Patient*in wurde gelöscht."
+
+#: cms/views/patients/patients_list_view.py
+msgid "Only files with extension .csv are allowed."
+msgstr "Es sind nur Dateien mit Dateiendung .csv erlaubt."
 
 #: cms/views/patients/update_patient_stay_view.py
 msgid ""

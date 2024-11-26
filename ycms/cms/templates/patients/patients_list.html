@@ -13,15 +13,20 @@
         </div>
         <!--TODO: Integrate the upload functionality consistent to the theme of the website-->
         <!--Begin of upload form-->
-        <form
-            id="upload_data"
-            action="{% url "cms:protected:upload_data" %}"
-            enctype="multipart/form-data"
-            method="post">
-            {% csrf_token %}
-            {{upload_csv_form}}
-            <button type="submit">{% translate "Upload" %}</button>
-        </form>
+        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+            {% if perms.cms.add_user %}
+                <form
+                    id="upload_data"
+                    action="{% url "cms:protected:upload_data" %}"
+                    enctype="multipart/form-data"
+                    method="post">
+                    {% csrf_token %}
+                    {{upload_csv_form.file.field.label}} {{upload_csv_form.file}}
+                    <button type="submit" class="px-2 text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5 text-center w-full lg:w-auto">{% translate "Upload" %}</button>
+                </form>
+            {% endif %}
+        </div>
+        <br/>
         <!--End of upload form-->
         <input id="search-patient-input"
                type="text"
