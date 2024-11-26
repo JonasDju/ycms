@@ -13,7 +13,11 @@ from ..views import (
     ward,
 )
 from ..views.floor.floor_view import FloorView  # Importiere die FloorView hier
-from ..views.utility.autocomplete import autocomplete_icd10, autocomplete_patient
+from ..views.utility.autocomplete import (
+    autocomplete_icd10,
+    autocomplete_patient,
+    fetch_patient,
+)
 
 urlpatterns = [
     path("", index.UserBasedRedirectView.as_view(), name="index"),
@@ -101,6 +105,7 @@ urlpatterns = [
             [
                 path("icd10/", autocomplete_icd10, name="autocomplete_icd10"),
                 path("patient/", autocomplete_patient, name="autocomplete_patient"),
+                path("patient-details/", fetch_patient, name="fetch_patient"),
             ]
         ),
     ),
@@ -117,6 +122,7 @@ urlpatterns = [
                     "delete/<int:pk>", ward.WardDeleteView.as_view(), name="delete_ward"
                 ),
                 path("edit/<int:pk>", ward.WardEditView.as_view(), name="edit_ward"),
+
             ]
         ),
     ),

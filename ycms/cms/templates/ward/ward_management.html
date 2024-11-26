@@ -115,8 +115,8 @@
                     <div class="mb-4 text-2xl font-semibold dark:text-white">{% translate "Details about Wards" %}</div>
                     <table class="min-w-full dark:text-white">
                         <tr>
-                            <th align="left">{% translate "Ward Number" %}</th>
                             <th align="left">{% translate "Ward Name" %}</th>
+                            <th align="left">{% translate "Ward Nickname" %}</th>
                             <th align="left">{% translate "Floor" %}</th>
                             <th align="left">{% translate "Number of Beds" %}</th>
                             <th align="left">{% translate "Available" %}</th>
@@ -128,8 +128,8 @@
                         {% for ward in wards %}
 
                             <tr>
-                                <td>{{ ward.ward_number }}</td>
                                 <td>{{ ward.name }}</td>
+                                <td>{{ ward.nickname }}</td>
                                 <td>{{ ward.floor }}</td>
                                 <td>{{ ward.total_beds }}</td>
                                 <td>{{ ward.available_beds }}</td>

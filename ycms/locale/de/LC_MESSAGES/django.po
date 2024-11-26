@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2024-11-26 17:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -113,6 +113,18 @@ msgstr "Ein Account für die Email \"{}\" existiert bereits."
 #: cms/forms/custom_model_form.py
 msgid "Enter {} here"
 msgstr "{} hier eingeben"
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid "Admission date cannot be later than discharge date."
+msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid ""
+"The selected admission and discharge dates overlap with an existing hospital "
+"stay."
+msgstr ""
+"Der ausgewählte Zeitraum kollidiert mit einem existierenden "
+"Krankenhausaufenthalt."
 
 #: cms/forms/intake_record_form.py
 msgid "Search for existing patient"
@@ -403,8 +415,7 @@ msgstr "Vorname des Angestellten / der Angestellten"
 msgid "Last name of the employee"
 msgstr "Nachname des Angestellten / der Angestellten"
 
-#: cms/models/user.py cms/templates/_base.html
-#: cms/templates/ward/ward_selection_form.html
+#: cms/models/user.py cms/templates/ward/ward_selection_form.html
 msgid "Ward"
 msgstr "Station"
 
@@ -421,16 +432,6 @@ msgid "users"
 msgstr "Benutzer"
 
 #: cms/models/ward.py
-msgid "ward number"
-msgstr "Stationsnummer"
-
-#: cms/models/ward.py
-msgid "Number of the ward"
-msgstr "Nummer der Station"
-
-#: cms/models/ward.py
-#: cms/templates/ward/ward_management.html
-#: cms/templates/ward/ward_card.html
 msgid "floor"
 msgstr "Stockwerk"
 
@@ -445,6 +446,16 @@ msgstr "Stationsname"
 #: cms/models/ward.py
 msgid "Name this ward is commonly referred to by"
 msgstr "Name, der üblicherweise für diese Station verwendet wird"
+
+#: cms/models/ward.py
+msgid "ward nickname"
+msgstr "kurzer Stationsname"
+
+#: cms/models/ward.py
+#, fuzzy
+#| msgid "Number of the ward"
+msgid "Nickname of this ward"
+msgstr "Nummer der Station"
 
 #: cms/models/ward.py
 msgid "wards"
@@ -465,6 +476,14 @@ msgstr "Stationsverwaltung"
 #: cms/templates/_base.html
 msgid "Patient Data"
 msgstr "Patientendaten"
+
+#: cms/templates/_base.html
+msgid "Views"
+msgstr "Ansichten"
+
+#: cms/templates/_base.html cms/templates/floor/floor.html
+msgid "Floor View"
+msgstr "Stockwerke"
 
 #: cms/templates/_base.html
 msgid "Ward View"
@@ -593,7 +612,6 @@ msgstr "Zuweisung aufheben"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
 #: cms/templates/patients/patient_card.html
-#: cms\templates\ward\ward_card.html
 #: cms/templates/patients/patients_list.html
 #: cms/templates/timeline/timeline.html
 msgid "Cancel"
@@ -870,6 +888,16 @@ msgstr ""
 "der Krankenhausaufenthalt im Vorhinein abgesagt."
 
 #: cms/templates/patients/patient_intake_form.html
+msgid "Normal intake"
+msgstr ""
+
+#: cms/templates/patients/patient_intake_form.html
+#, fuzzy
+#| msgid "Or perform emergency intake"
+msgid "Emergency intake"
+msgstr "Oder Notaufnahme durchführen"
+
+#: cms/templates/patients/patient_intake_form.html
 msgid "Select existing patient"
 msgstr "Bestehende*n Patient*in auswählen"
 
@@ -878,12 +906,18 @@ msgid "reset form"
 msgstr "zurücksetzen"
 
 #: cms/templates/patients/patient_intake_form.html
-msgid "Or perform emergency intake"
-msgstr "Oder Notaufnahme durchführen"
-
-#: cms/templates/patients/patient_intake_form.html
 msgid "Or create new patient"
 msgstr "Oder Patient*in hinzufügen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Estimated nights to stay"
+msgstr ""
+
+#: cms/templates/patients/patient_intake_form.html
+#, fuzzy
+#| msgid "date the hospital stay begins"
+msgid "estimated duration of hospital stay in nights"
+msgstr "Datum zu dem der Krankenhausaufenthalt beginnt"
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Complete patient intake"
@@ -1058,14 +1092,16 @@ msgid "Details about Wards"
 msgstr "Details über Stationen"
 
 #: cms/templates/ward/ward_management.html
-#: cms/templates/ward/ward_card.html
-msgid "Ward Number"
-msgstr "Stationsnummer"
-
-#: cms/templates/ward/ward_management.html
-#: cms/templates/ward/ward_card.html
 msgid "Ward Name"
 msgstr "Stationsname"
+
+#: cms/templates/ward/ward_management.html
+msgid "Ward Nickname"
+msgstr "kurzer Stationsname"
+
+#: cms/templates/ward/ward_management.html
+msgid "Floor"
+msgstr "Stockwerk"
 
 #: cms/templates/ward/ward_management.html
 msgid "Number of Beds"
@@ -1078,26 +1114,6 @@ msgstr "Verfügbare Betten"
 #: cms/templates/ward/ward_management.html
 msgid "Occupied"
 msgstr "Belegten Betten"
-
-#: cms/templates/ward/ward_management.html
-msgid "Are you sure you want to delete this ward?"
-msgstr "Sind Sie sicher, dass Sie diese Station löschen wollen?"
-
-#: cms/templates/ward/ward_management.html
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: cms/templates/ward/ward_management.html
-msgid "Delete"
-msgstr "Löschen"
-
-#: cms/templates/ward/ward_card.html
-msgid "Ward Information"
-msgstr "Stationsinformationen"
-
-#: cms/templates/ward/ward_card.html
-msgid "Rooms in this Ward"
-msgstr "Zimmer in dieser Station"
 
 #: cms/templates/ward/ward_modal.html
 msgid "Are you sure you want to discharge this patient?"
@@ -1257,10 +1273,6 @@ msgstr "Hinzufügung der neuen Station \"{}\" erfolgreich!"
 msgid "Added {} rooms with {} beds to \"{}\"."
 msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
 
-#: cms/views/ward/ward_view.py
-msgid "Ward information has been successfully updated!"
-msgstr "Die Stationsinformationen wurden erfolgreich aktualisiert!"
-
 #: core/apps.py
 msgid "Core"
 msgstr "Core"
@@ -1272,6 +1284,15 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "ward number"
+#~ msgstr "Stationsnummer"
+
+#~ msgid "Number of the ward"
+#~ msgstr "Nummer der Station"
+
+#~ msgid "Ward Number"
+#~ msgstr "Stationsnummer"
 
 #~ msgid "Assign"
 #~ msgstr "Zuweisen"
