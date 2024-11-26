@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the CMS package.
 # YCMS <info@ycms-app.de>
 # https://github.com/charludo/
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-22 18:22+0100\n"
+"POT-Creation-Date: 2024-11-26 17:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -415,8 +415,7 @@ msgstr "Vorname des Angestellten / der Angestellten"
 msgid "Last name of the employee"
 msgstr "Nachname des Angestellten / der Angestellten"
 
-#: cms/models/user.py cms/templates/_base.html
-#: cms/templates/ward/ward_selection_form.html
+#: cms/models/user.py cms/templates/ward/ward_selection_form.html
 msgid "Ward"
 msgstr "Station"
 
@@ -477,6 +476,14 @@ msgstr "Stationsverwaltung"
 #: cms/templates/_base.html
 msgid "Patient Data"
 msgstr "Patientendaten"
+
+#: cms/templates/_base.html
+msgid "Views"
+msgstr "Ansichten"
+
+#: cms/templates/_base.html cms/templates/floor/floor.html
+msgid "Floor View"
+msgstr "Stockwerke"
 
 #: cms/templates/_base.html
 msgid "Ward View"
@@ -881,6 +888,16 @@ msgstr ""
 "der Krankenhausaufenthalt im Vorhinein abgesagt."
 
 #: cms/templates/patients/patient_intake_form.html
+msgid "Normal intake"
+msgstr ""
+
+#: cms/templates/patients/patient_intake_form.html
+#, fuzzy
+#| msgid "Or perform emergency intake"
+msgid "Emergency intake"
+msgstr "Oder Notaufnahme durchführen"
+
+#: cms/templates/patients/patient_intake_form.html
 msgid "Select existing patient"
 msgstr "Bestehende*n Patient*in auswählen"
 
@@ -889,12 +906,18 @@ msgid "reset form"
 msgstr "zurücksetzen"
 
 #: cms/templates/patients/patient_intake_form.html
-msgid "Or perform emergency intake"
-msgstr "Oder Notaufnahme durchführen"
-
-#: cms/templates/patients/patient_intake_form.html
 msgid "Or create new patient"
 msgstr "Oder Patient*in hinzufügen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Estimated nights to stay"
+msgstr ""
+
+#: cms/templates/patients/patient_intake_form.html
+#, fuzzy
+#| msgid "date the hospital stay begins"
+msgid "estimated duration of hospital stay in nights"
+msgstr "Datum zu dem der Krankenhausaufenthalt beginnt"
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Complete patient intake"
