@@ -20,17 +20,17 @@
                         {% csrf_token %}
                         <div class="grid gap-4">
                             <div>
-                                <label for="id_ward_number"
-                                       class="{% if ward_form.fields.ward_number.required %}field-required{% endif %}">
-                                    {% translate "Ward Number" %}
+                                <label for="id_ward_nickname"
+                                       class="{% if ward_form.fields.ward_nickname.required %}field-required{% endif %}">
+                                    {% translate "Ward Nickname" %}
                                 </label>
                                 <input
                                     type="text"
-                                    id="id_ward_number_{{ ward.id }}"
-                                    name="ward_number"
-                                    value="{{ ward.ward_number }}"
+                                    id="id_ward_nickname_{{ ward.id }}"
+                                    name="ward_nickname"
+                                    value="{{ ward.nickname }}"
                                     class="form-control"
-                                    {% if ward_form.fields.ward_number.required %}required{% endif %} />
+                                    {% if ward_form.fields.ward_nickname.required %}required{% endif %} />
                             </div>
                             <div>
                                 <label for="id_floor_{{ ward.id }}"

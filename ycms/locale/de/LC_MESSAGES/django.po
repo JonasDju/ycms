@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 17:00+0100\n"
+"POT-Creation-Date: 2024-11-26 21:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -415,7 +415,8 @@ msgstr "Vorname des Angestellten / der Angestellten"
 msgid "Last name of the employee"
 msgstr "Nachname des Angestellten / der Angestellten"
 
-#: cms/models/user.py cms/templates/ward/ward_selection_form.html
+#: cms/models/user.py cms/templates/ward/ward_edit_drawer.html
+#: cms/templates/ward/ward_selection_form.html
 msgid "Ward"
 msgstr "Station"
 
@@ -613,7 +614,8 @@ msgstr "Zuweisung aufheben"
 #: cms/templates/bed_assignment/assign_bed_assignment.html
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
-#: cms/templates/timeline/timeline.html
+#: cms/templates/timeline/timeline.html cms/templates/ward/ward_card.html
+#: cms/templates/ward/ward_management.html
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -665,7 +667,7 @@ msgid "Unassigned Patients"
 msgstr "Nicht zugewiesene Patienten"
 
 #: cms/templates/bed_assignment/bed_assignment_drawer.html
-#: cms/templates/ward/ward_drawer.html
+#: cms/templates/ward/ward_drawer.html cms/templates/ward/ward_edit_drawer.html
 msgid "Close menu"
 msgstr "Menü schließen"
 
@@ -729,6 +731,7 @@ msgstr "Organisatorische Details"
 #: cms/templates/patients/patient_details.html
 #: cms/templates/patients/patients_list.html
 #: cms/templates/timeline/timeline.html cms/templates/user_settings.html
+#: cms/templates/ward/ward_card.html
 msgid "Save"
 msgstr "Speichern"
 
@@ -1019,6 +1022,44 @@ msgstr "Entlassung in"
 msgid "Stay"
 msgstr "Aufenthalt"
 
+#: cms/templates/ward/ward_card.html
+#, fuzzy
+#| msgid "Patient Information"
+msgid "Ward Information"
+msgstr "Patienteninformationen"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Ward Nickname"
+msgstr "kurzer Stationsname"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Floor"
+msgstr "Stockwerk"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Ward Name"
+msgstr "Stationsname"
+
+#: cms/templates/ward/ward_card.html
+msgid "Rooms in this Ward"
+msgstr ""
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Room number"
+msgstr "Zimmernummer"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Beds"
+msgstr "Betten"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Add bed"
+msgstr "Bett hinzufügen"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Add room"
+msgstr "Zimmer hinzufügen"
+
 #: cms/templates/ward/ward_info.html
 msgid "Total"
 msgstr "Gesamt"
@@ -1068,40 +1109,12 @@ msgid "Add a New Ward"
 msgstr "Eine Neue Station Hinzufügen"
 
 #: cms/templates/ward/ward_management.html
-msgid "Room number"
-msgstr "Zimmernummer"
-
-#: cms/templates/ward/ward_management.html
-msgid "Beds"
-msgstr "Betten"
-
-#: cms/templates/ward/ward_management.html
-msgid "Add bed"
-msgstr "Bett hinzufügen"
-
-#: cms/templates/ward/ward_management.html
-msgid "Add room"
-msgstr "Zimmer hinzufügen"
-
-#: cms/templates/ward/ward_management.html
 msgid "Add New Ward"
 msgstr "Neue Station Hinzufügen"
 
 #: cms/templates/ward/ward_management.html
 msgid "Details about Wards"
 msgstr "Details über Stationen"
-
-#: cms/templates/ward/ward_management.html
-msgid "Ward Name"
-msgstr "Stationsname"
-
-#: cms/templates/ward/ward_management.html
-msgid "Ward Nickname"
-msgstr "kurzer Stationsname"
-
-#: cms/templates/ward/ward_management.html
-msgid "Floor"
-msgstr "Stockwerk"
 
 #: cms/templates/ward/ward_management.html
 msgid "Number of Beds"
@@ -1114,6 +1127,12 @@ msgstr "Verfügbare Betten"
 #: cms/templates/ward/ward_management.html
 msgid "Occupied"
 msgstr "Belegten Betten"
+
+#: cms/templates/ward/ward_management.html
+#, fuzzy
+#| msgid "Confirm password"
+msgid "Confirm"
+msgstr "Passwort bestätigen"
 
 #: cms/templates/ward/ward_modal.html
 msgid "Are you sure you want to discharge this patient?"
@@ -1273,6 +1292,24 @@ msgstr "Hinzufügung der neuen Station \"{}\" erfolgreich!"
 msgid "Added {} rooms with {} beds to \"{}\"."
 msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
 
+#: cms/views/ward/ward_management_view.py
+#, fuzzy
+#| msgid "Patient has been deleted."
+msgid "Ward has been deleted."
+msgstr "Patient*in wurde gelöscht."
+
+#: cms/views/ward/ward_view.py
+#, fuzzy
+#| msgid "Added {} rooms with {} beds to \"{}\"."
+msgid "Added {} new rooms with {} new beds to the ward."
+msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
+
+#: cms/views/ward/ward_view.py
+#, fuzzy
+#| msgid "Your settings were successfully updated!"
+msgid "Ward information has been successfully updated!"
+msgstr "Deine Einstellungen wurden erfolgreich geändert!"
+
 #: core/apps.py
 msgid "Core"
 msgstr "Core"
@@ -1360,9 +1397,6 @@ msgstr "Englisch"
 
 #~ msgid "Manager"
 #~ msgstr "Manager"
-
-#~ msgid "Confirm password"
-#~ msgstr "Passwort bestätigen"
 
 #~ msgid "Passwords do not match."
 #~ msgstr "Die Passwörter stimmen nicht überein."
