@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the CMS package.
 # YCMS <info@ycms-app.de>
 # https://github.com/charludo/
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
@@ -113,6 +113,18 @@ msgstr "Ein Account für die Email \"{}\" existiert bereits."
 #: cms/forms/custom_model_form.py
 msgid "Enter {} here"
 msgstr "{} hier eingeben"
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid "Admission date cannot be later than discharge date."
+msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid ""
+"The selected admission and discharge dates overlap with an existing hospital "
+"stay."
+msgstr ""
+"Der ausgewählte Zeitraum kollidiert mit einem existierenden "
+"Krankenhausaufenthalt."
 
 #: cms/forms/intake_record_form.py
 msgid "Search for existing patient"

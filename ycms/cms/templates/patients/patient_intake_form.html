@@ -7,16 +7,27 @@
 {% endblock title %}
 {% block content %}
     <div class="max-w-6xl mx-auto mt-6">
-        <form enctype="multipart/form-data"
-              method="post"
+        <!-- Intake forms -->
+            <form enctype="multipart/form-data"
+            method="post"
               id="patient_form"
               class="mb-12"
               data-unsaved-warning>
             {% csrf_token %}
             <div class="grid xl:grid-cols-2 gap-x-24">
                 {% with WIDGET_ERROR_CLASS="border-red-500" %}
+
                     <div class="flex flex-col gap-8">
-                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option">
+                        <!-- Intake model toggle switch -->
+                        <div class="flex items-center container mx-auto justify-center">
+                            <label for="intake-mode-switch" class="font-normal text-gray-700 my-3">{% translate "Normal intake" %}</label>
+                            <input type="checkbox"
+                            name="intake_emergency"
+                            id="intake-mode-switch"
+                            class="m-3 relative w-[3.25rem] h-7 p-px !bg-blue-600 border-transparent  !rounded-full cursor-pointer transition-colors ease-in-out duration-200 checked:bg-none checked:text-red-600 before:inline-block before:w-6 before:h-6 before:bg-white dark:before:bg-gray-300 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 peer-focus:ring-red-400">
+                            <label for="intake-mode-switch" class="font-bold text-blue-500 my-3">{% translate "Emergency intake" %}</label>
+                        </div>
+                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option" id="existing-patient">
                             <h1 class="heading">{% translate "Select existing patient" %}</h1>
                             <div class="mt-4">
                                 {% render_field record_form.patient %}
@@ -26,8 +37,8 @@
                                 {% translate "reset form" %}
                             </div>
                         </div>
-                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option">
-                            <h1 class="heading">{% translate "Or perform emergency intake" %}</h1>
+                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option" id="emergency-intake">
+                            <h1 class="heading">{% translate "Emergency intake" %}</h1>
                             <div class="mt-4">
                                 <div>
                                     <label for="{{ unknown_patient_form.gender.id_for_label }}"
@@ -51,7 +62,8 @@
                                 {% translate "reset form" %}
                             </div>
                         </div>
-                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option">
+                        {% comment %} class md:columns-3 {% endcomment %}
+                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option" id="new-patient">
                             <h1 class="heading">{% translate "Or create new patient" %}</h1>
                             {% for field in patient_form %}
                                 <div>
@@ -78,22 +90,40 @@
                             </div>
                             <div>
                                 <label for="{{ record_form.note.id_for_label }}">{{ record_form.note.label }}</label>
-                                {% render_field record_form.note %}
+                                {% render_field record_form.note style="height: 145px;" %}
                                 <div class="help-text">{{ record_form.note.help_text }}</div>
                             </div>
                         </div>
                         <div>
-                            <div>
-                                <label for="{{ bed_form.admission_date.id_for_label }}"
-                                       class="field-required">{{ bed_form.admission_date.label }}</label>
-                                {% render_field bed_form.admission_date %}
-                                <div class="help-text">{{ bed_form.admission_date.help_text }}</div>
-                            </div>
-                            <div>
-                                <label for="{{ bed_form.discharge_date.id_for_label }}"
-                                       class="field-required">{{ bed_form.discharge_date.label }}</label>
-                                {% render_field bed_form.discharge_date %}
-                                <div class="help-text">{{ bed_form.discharge_date.help_text }}</div>
+                            <div class="border-4 border-blue-500 rounded-lg p-4">
+                                <div>
+                                    <label for="{{ bed_form.admission_date.id_for_label }}"
+                                           class="field-required">{{ bed_form.admission_date.label }}</label>
+                                    {% render_field bed_form.admission_date %}
+                                    <div class="help-text">{{ bed_form.admission_date.help_text }}</div>
+                                </div>
+                                <div>
+                                    <form>
+                                        <label for="input-patient-intake-stay-duration"
+                                            class="field-required">{% translate "Estimated nights to stay" %}</label>
+                                        <input
+                                            type="number"
+                                            id="input-patient-intake-stay-duration"
+                                            class="form-input"
+                                            step="1"
+                                            value="7"
+                                            min="0"
+                                            required
+                                        />
+                                        <p class="helptext">{% translate "estimated duration of hospital stay in nights" %}</p>
+                                    </form>
+                                </div>
+                                <div>
+                                    <label for="{{ bed_form.discharge_date.id_for_label }}"
+                                           class="field-required">{{ bed_form.discharge_date.label }}</label>
+                                    {% render_field bed_form.discharge_date %}
+                                    <div class="help-text">{{ bed_form.discharge_date.help_text }}</div>
+                                </div>
                             </div>
                             <div>
                                 <label for="{{ bed_form.recommended_ward.id_for_label }}">{{ bed_form.recommended_ward.label }}</label>
@@ -114,4 +144,102 @@
             </div>
         </form>
     </div>
+    <!-- When changing the admission date, the estimated discharge date is modified to be one week after the changed admission date -->
+    <script>
+        // TODO: move these scripts to ycms/static/src/js/patient-select-or-create.ts
+        document.addEventListener("DOMContentLoaded", function() {
+            const admissionDateLabel = document.querySelector("label[for='{{ bed_form.admission_date.id_for_label }}']");
+            const dischargeDateLabel = document.querySelector("label[for='{{ bed_form.discharge_date.id_for_label }}']");
+
+            const admissionDateInput = admissionDateLabel ? document.getElementById(admissionDateLabel.htmlFor) : null;
+            const dischargeDateInput = dischargeDateLabel ? document.getElementById(dischargeDateLabel.htmlFor) : null;
+
+            const durationInput = document.getElementById("input-patient-intake-stay-duration");
+
+            function updateDischargeDate(daysAfterAdmission) {
+                const admissionDate = new Date(admissionDateInput.value);
+                const dischargeDate = new Date(admissionDate);
+                dischargeDate.setDate(admissionDate.getDate() + daysAfterAdmission);
+                // Format the discharge date as "YYYY-MM-DD HH:MM"
+                const year = dischargeDate.getFullYear();
+                const month = String(dischargeDate.getMonth() + 1).padStart(2, '0');
+                const day = String(dischargeDate.getDate()).padStart(2, '0');
+                const hours = String(dischargeDate.getHours()).padStart(2, '0');
+                const minutes = String(dischargeDate.getMinutes()).padStart(2, '0');
+                dischargeDateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+            }
+
+            function getNightsBetweenAdmissionAndDischarge() {
+                const admissionDate = new Date(admissionDateInput.value);
+                const dischargeDate = new Date(dischargeDateInput.value);
+                let timeDifference = dischargeDate.getTime() - admissionDate.getTime();
+                if(timeDifference < 0) {
+                    return -1;      //Invalid! admission lies before discharge!
+                }
+                //ensure that e.g. 12h over night count as one night
+                timeDifference = timeDifference + admissionDate.getHours() * 3600000 + admissionDate.getMinutes() * 60000;
+                return Math.floor(timeDifference / (1000 * 3600 * 24));
+            }
+
+        dischargeDateInput.addEventListener('input', function() {
+            // Mark whether the user has manually modified the discharge date
+            dischargeDateInput.setAttribute('data-manually-changed', 'true');
+            //Adjust duration of stay
+            const duration = getNightsBetweenAdmissionAndDischarge();
+            if(duration >= 0) {
+                durationInput.value = duration;
+            } else {
+                durationInput.value = 0;
+            }
+        });
+
+        admissionDateInput.addEventListener('input', function() {
+            // Check if the discharge date has been manually modified
+            const isDischargeManuallyChanged = dischargeDateInput.getAttribute('data-manually-changed') === 'true';
+            // Only when the discharge date is not manually modified, it is automatically set to one week after admission
+            if (!isDischargeManuallyChanged) {
+                updateDischargeDate(7);
+            }
+            //Adjust duration of stay
+            const duration = getNightsBetweenAdmissionAndDischarge();
+            if(duration >= 0) {
+                durationInput.value = duration;
+            } else {
+                durationInput.value = 0;
+            }
+        });
+
+        //Avoid an admission date that lies behind a discharge date
+        dischargeDateInput.addEventListener('focusout', function() {
+            if(getNightsBetweenAdmissionAndDischarge() < 0) {
+                dischargeDateInput.value = admissionDateInput.value;
+            }
+        });
+        admissionDateInput.addEventListener('focusout', function() {
+            if(getNightsBetweenAdmissionAndDischarge() < 0) {
+                dischargeDateInput.value = admissionDateInput.value;
+            }
+        });
+
+        //Handle duration in nights input
+        durationInput.addEventListener('keypress', function(event) {
+            if (!/^[0-9]$/.test(event.key)) {       //Avoid input that is no digit
+                event.preventDefault();
+            }
+        });
+        durationInput.addEventListener('input', function () {
+            // Remove leading zeros
+            if (this.value.startsWith('0') && this.value.length > 1) {
+                this.value = this.value.replace(/^0+/, '');
+            }
+            if(this.value.length === 0) {
+                this.value = '0';
+            }
+            //Adjust Discharge date according to the duration in nights
+            updateDischargeDate(parseInt(this.value));
+        });
+
+
+    });
+    </script>
 {% endblock content %}
