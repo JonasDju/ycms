@@ -1,17 +1,4 @@
-const addRemovalEventListeners2 = (room: HTMLElement) => {
-    room.querySelectorAll<HTMLElement>(".element-remover").forEach((remover) => {
-        remover.addEventListener("click", () => {
-            (remover.parentNode?.parentNode as HTMLElement)?.remove();
-        });
-    });
-};
-
-const newBedListener2 = (room: HTMLElement, newBedPrototype: HTMLElement) => {
-    const newBedButton = room.querySelector(".bed-adder") as HTMLElement;
-    newBedButton.addEventListener("click", () => {
-        newBedButton.parentNode?.insertBefore(newBedPrototype.cloneNode(true), newBedButton);
-    });
-};
+import { newBedListener, addRemovalEventListeners } from "./ward-management";
 
 const gatherRoomData2 = (): string => {
     const newRooms: Record<string, string[]> = {};
@@ -64,8 +51,8 @@ window.addEventListener("load", () => {
             counter += 1;
 
             newRoomButton.parentNode?.insertBefore(newRoom, newRoomButton);
-            newBedListener2(newRoom, newBedPrototype);
-            addRemovalEventListeners2(newRoom);
+            newBedListener(newRoom, newBedPrototype);
+            addRemovalEventListeners(newRoom);
         });
 
         wardForm.addEventListener("submit", (event) => {

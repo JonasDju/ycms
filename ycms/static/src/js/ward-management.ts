@@ -1,4 +1,4 @@
-const addRemovalEventListeners = (room: HTMLElement) => {
+export const addRemovalEventListeners = (room: HTMLElement) => {
     room.querySelectorAll<HTMLElement>(".element-remover").forEach((remover) => {
         remover.addEventListener("click", () => {
             (remover.parentNode?.parentNode as HTMLElement)?.remove();
@@ -6,7 +6,7 @@ const addRemovalEventListeners = (room: HTMLElement) => {
     });
 };
 
-const newBedListener = (room: HTMLElement, newBedPrototype: HTMLElement) => {
+export const newBedListener = (room: HTMLElement, newBedPrototype: HTMLElement) => {
     const newBedButton = room.querySelector(".bed-adder") as HTMLElement;
     newBedButton.addEventListener("click", () => {
         newBedButton.parentNode?.insertBefore(newBedPrototype.cloneNode(true), newBedButton);
