@@ -64,7 +64,7 @@ class WardView(TemplateView):
             )
             for room in ward.rooms.all()
         ]
-        wards = Ward.objects.all()
+        wards = Ward.objects.all().order_by('name')
         unassigned_bed_assignments = [
             (
                 unassigned,

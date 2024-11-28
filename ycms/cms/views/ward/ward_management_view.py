@@ -55,7 +55,7 @@ class WardManagementView(TemplateView):
 
     @staticmethod
     def _get_ward_info():
-        wards = Ward.objects.all()
+        wards = Ward.objects.all().order_by('id')
         return {
             "wards": wards,
             "wards_count": wards.count(),
