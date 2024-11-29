@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load widget_tweaks %}
 <div id="drawer-right-{{ room.room_number }}"
-     class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-900"
+     class="w-full sm:w-3/4 md:w-3/4 lg:w-2/3 xl:w-2/3 fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-900"
      tabindex="-1"
      aria-labelledby="drawer-right-label">
     <h5 id=" drawer-right-label"
@@ -19,7 +19,7 @@
     </button>
     {% include "ward/ward_beds.html" %}
     <p class="mb-6 text-sm text-gray-500 dark:text-gray-400"></p>
-    <div class="flex flex-col gap-4">
+    <div class="flex gap-4">
         {% for patient, patient_form, bed_assignment_form in patients %}
             {% with bed_assignment=patient.current_stay %}
                 {% include "patients/patient_card.html" %}
@@ -27,3 +27,4 @@
         {% endfor %}
     </div>
 </div>
+
