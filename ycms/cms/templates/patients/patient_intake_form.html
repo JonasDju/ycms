@@ -98,12 +98,12 @@
                                 {% render_field bed_form.recommended_ward %}
                                 <div class="help-text">{{ bed_form.recommended_ward.help_text }}</div>
                             </div>
-                            <div id="id_ward_discharge_policy" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" role="alert">
+                            <div id="ward-discharge-info" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" role="alert">
                                 <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                   <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                 </svg>
                                 <span class="sr-only">Info</span>
-                                <div id="id_ward_discharge_policy_text">
+                                <div id="ward-discharge-info-text">
                                   No ward set.
                                 </div>
                               </div>
@@ -181,117 +181,4 @@
             </div>
         </form>
     </div>
-    <!-- When changing the admission date, the estimated discharge date is modified to be one week after the changed admission date -->
-    <script>
-        // TODO: move these scripts to ycms/static/src/js/patient-select-or-create.ts
-        document.addEventListener("DOMContentLoaded", function() {
-            const admissionDateInput = document.getElementById("id_admission_date");
-            const dischargeDateInput = document.getElementById("id_discharge_date");
-
-            const durationInput = document.getElementById("input-patient-intake-stay-duration");
-
-            const buttonTwoNights = document.getElementById("button-patient-intake-2n");
-            const buttonSevenNights = document.getElementById("button-patient-intake-7n");
-            const buttonFourteenNights = document.getElementById("button-patient-intake-14n");
-
-            function updateDischargeDate(daysAfterAdmission) {
-                const admissionDate = new Date(admissionDateInput.value);
-                const dischargeDate = new Date(admissionDate);
-                dischargeDate.setDate(admissionDate.getDate() + daysAfterAdmission);
-                // Format the discharge date as "YYYY-MM-DD HH:MM"
-                const year = dischargeDate.getFullYear();
-                const month = String(dischargeDate.getMonth() + 1).padStart(2, '0');
-                const day = String(dischargeDate.getDate()).padStart(2, '0');
-                const hours = String(dischargeDate.getHours()).padStart(2, '0');
-                const minutes = String(dischargeDate.getMinutes()).padStart(2, '0');
-                dischargeDateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
-            }
-
-            function getNightsBetweenAdmissionAndDischarge() {
-                const admissionDate = new Date(admissionDateInput.value);
-                const dischargeDate = new Date(dischargeDateInput.value);
-                let timeDifference = dischargeDate.getTime() - admissionDate.getTime();
-                if(timeDifference < 0) {
-                    return -1;      //Invalid! admission lies before discharge!
-                }
-                //ensure that e.g. 12h over night count as one night
-                timeDifference = timeDifference + admissionDate.getHours() * 3600000 + admissionDate.getMinutes() * 60000;
-                return Math.floor(timeDifference / (1000 * 3600 * 24));
-            }
-
-        dischargeDateInput.addEventListener('input', function() {
-            // Mark whether the user has manually modified the discharge date
-            dischargeDateInput.setAttribute('data-manually-changed', 'true');
-            //Adjust duration of stay
-            const duration = getNightsBetweenAdmissionAndDischarge();
-            if(duration >= 0) {
-                durationInput.value = duration;
-            } else {
-                durationInput.value = 0;
-            }
-        });
-
-        admissionDateInput.addEventListener('input', function() {
-            // Check if the discharge date has been manually modified
-            const isDischargeManuallyChanged = dischargeDateInput.getAttribute('data-manually-changed') === 'true';
-            // Only when the discharge date is not manually modified, it is automatically set to one week after admission
-            if (!isDischargeManuallyChanged) {
-                updateDischargeDate(7);
-            }
-            //Adjust duration of stay
-            const duration = getNightsBetweenAdmissionAndDischarge();
-            if(duration >= 0) {
-                durationInput.value = duration;
-            } else {
-                durationInput.value = 0;
-            }
-        });
-
-        //Avoid an admission date that lies behind a discharge date
-        dischargeDateInput.addEventListener('focusout', function() {
-            if(getNightsBetweenAdmissionAndDischarge() < 0) {
-                dischargeDateInput.value = admissionDateInput.value;
-            }
-        });
-        admissionDateInput.addEventListener('focusout', function() {
-            if(getNightsBetweenAdmissionAndDischarge() < 0) {
-                dischargeDateInput.value = admissionDateInput.value;
-            }
-        });
-
-        //Handle duration in nights input
-        durationInput.addEventListener('keypress', function(event) {
-            if (!/^[0-9]$/.test(event.key)) {       //Avoid input that is no digit
-                event.preventDefault();
-            }
-        });
-        durationInput.addEventListener('input', function () {
-            // Remove leading zeros
-            if (this.value.startsWith('0') && this.value.length > 1) {
-                this.value = this.value.replace(/^0+/, '');
-            }
-            if(this.value.length === 0) {
-                this.value = '0';
-            }
-            //Adjust Discharge date according to the duration in nights
-            updateDischargeDate(parseInt(this.value));
-        });
-
-        //Common stay duration buttons
-        buttonTwoNights.addEventListener('click', function () {
-            durationInput.value = 2;
-            updateDischargeDate(2);
-        })
-        buttonSevenNights.addEventListener('click', function () {
-            durationInput.value = 7;
-            updateDischargeDate(7);
-        })
-        buttonFourteenNights.addEventListener('click', function () {
-            durationInput.value = 14;
-            updateDischargeDate(14);
-        })
-
-
-    });
-    </script>
 {% endblock content %}
