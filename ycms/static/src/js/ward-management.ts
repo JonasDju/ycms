@@ -1,7 +1,10 @@
-export const addRemovalEventListeners = (room: HTMLElement) => {
-    room.querySelectorAll<HTMLElement>(".element-remover").forEach((remover) => {
+export const addRemovalEventListeners = (container: HTMLElement) => {
+    container.querySelectorAll<HTMLElement>(".element-remover").forEach((remover) => {
         remover.addEventListener("click", () => {
-            (remover.parentNode?.parentNode as HTMLElement)?.remove();
+            const parent = remover.closest(".flex.items-center.gap-2");
+            if (parent) {
+                parent.remove();
+            }
         });
     });
 };
@@ -9,7 +12,10 @@ export const addRemovalEventListeners = (room: HTMLElement) => {
 export const newBedListener = (room: HTMLElement, newBedPrototype: HTMLElement) => {
     const newBedButton = room.querySelector(".bed-adder") as HTMLElement;
     newBedButton.addEventListener("click", () => {
-        newBedButton.parentNode?.insertBefore(newBedPrototype.cloneNode(true), newBedButton);
+        const newBed = newBedPrototype.cloneNode(true) as HTMLElement;
+        newBed.classList.remove("hidden");
+        newBedButton.parentNode?.insertBefore(newBed, newBedButton);
+        addRemovalEventListeners(room);
     });
 };
 
