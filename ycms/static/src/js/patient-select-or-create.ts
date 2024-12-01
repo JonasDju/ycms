@@ -166,12 +166,17 @@ window.addEventListener("load", () => {
     const infoBoxBlue = ["text-blue-800", "bg-blue-50", "dark:text-blue-400"];
     const infoBoxRed = ["text-red-800", "bg-red-50", "dark:text-red-400"];
 
+    let weekdayNamesLong = [];
+
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     const setWardDischargeInfo = (json: any) => {
         if (Object.keys(json).length === 0) {
             wardDischargeRoot.classList.add("hidden");
             return;
         }
+
+        // store localized weekday names to be used in info boxes below discharge date
+        weekdayNamesLong = json.weekdays_long;
 
         let res = json.info_text[0];
         const numAllowedDays = json.allowed_weekdays_short.length;
@@ -200,10 +205,78 @@ window.addEventListener("load", () => {
         wardDischargeInfo.textContent = res;
     };
 
+    const getNextValidDischargeDate = (date: Date, mask: number) => {
+        /* eslint-disable no-magic-numbers, no-bitwise */
+        const dayOfWeek = (((date.getDay() - 1) % 7) + 7) % 7;
+        for (let i = 1; i < 7; i++) {
+            if ((mask >> (dayOfWeek + i) % 7) & 0b1) {
+                const nextDate = new Date(date);
+                nextDate.setDate(date.getDate() + i);
+                return nextDate;
+            }
+        }
+        /* eslint-enable no-magic-numbers, no-bitwise */
+
+        return null;
+    };
+
+    const dischargeInvalidDiv = document.querySelector("#intake-info-discharge-invalid") as HTMLElement;
+    const dischargeInvalidText = document.querySelector("#intake-info-discharge-invalid-text") as HTMLElement;
+    const dischargeValidDiv = document.querySelector("#intake-info-discharge-valid") as HTMLElement;
+    const dischargeDateInput = document.querySelector("#id_discharge_date") as HTMLInputElement;
+    const moveDischargeDateBtn = document.querySelector("#intake-discharge-move-btn") as HTMLButtonElement;
+
+    // TODO: validation when changing discharge through number of nights input
+    const validateDate = () => {
+        const dateString = dischargeDateInput.value;
+        // no date entered, or no ward set
+        if (!dateString || !dischargeInvalidText.hasAttribute("mask") || weekdayNamesLong.length === 0) {
+            dischargeInvalidDiv.classList.add("hidden");
+            dischargeValidDiv.classList.add("hidden");
+            return;
+        }
+
+        // validate discharge date against mask
+        const date = new Date(dateString);
+        /* eslint-disable-next-line no-magic-numbers */
+        const dayOfWeek = (((date.getDay() - 1) % 7) + 7) % 7; // JS Date starts at Sunday=0, but need Monday=0
+        const mask = Number(dischargeInvalidText.getAttribute("mask"));
+        /* eslint-disable-next-line no-bitwise */
+        const dischargeValid = (mask >> dayOfWeek) & 0b1;
+
+        if (dischargeValid) {
+            dischargeInvalidDiv.classList.add("hidden");
+            dischargeValidDiv.classList.remove("hidden");
+        } else {
+            // TODO: translation
+            const selectedDay = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
+            const nextPossibleDischargeDate = getNextValidDischargeDate(date, mask);
+            if (nextPossibleDischargeDate) {
+                dischargeInvalidText.textContent = `Discharges not allowed on ${selectedDay}.\n
+                Next possible discharge date is ${nextPossibleDischargeDate.toDateString()}.`;
+                moveDischargeDateBtn.textContent = `Move discharge to ${nextPossibleDischargeDate.toDateString()}.`;
+                // TODO: store discharge date, so wont need to be recalculated on button press
+                // moveDischargeDateBtn.setAttribute("moveTo", nextPossibleDischargeDate);
+                moveDischargeDateBtn.classList.remove("hidden");
+            } else {
+                dischargeInvalidText.textContent = `Discharges not allowed on ${selectedDay}.\n
+                No next discharge date available in this ward.`;
+                moveDischargeDateBtn.classList.add("hidden");
+            }
+
+            dischargeInvalidDiv.classList.remove("hidden");
+            dischargeValidDiv.classList.add("hidden");
+        }
+    };
+
     wardSelection.addEventListener("change", () => {
         if (!wardSelection.value) {
             // hide info text field
             wardDischargeRoot.classList.add("hidden");
+            dischargeInvalidText.removeAttribute("mask");
+            // hide feedback for discharge validity
+            dischargeInvalidDiv.classList.add("hidden");
+            dischargeValidDiv.classList.add("hidden");
         } else {
             // fetch ward's allowed discharge days, display in info text
             const url = `/intake/allowed-discharge-days/?q=${encodeURIComponent(wardSelection.value)}`;
@@ -212,12 +285,32 @@ window.addEventListener("load", () => {
                 .then((response) => response.json())
                 .then((json) => {
                     setWardDischargeInfo(json);
-
-                    // TODO: store somewhere for form validation
-                    // json.mask and json.localized_weekdays
+                    // store mask for validation
+                    dischargeInvalidText.setAttribute("mask", json.mask);
+                    validateDate();
                 });
         }
     });
+
+    moveDischargeDateBtn.addEventListener("click", () => {
+        const currentDate = new Date(dischargeDateInput.value);
+        const mask = Number(dischargeInvalidText.getAttribute("mask"));
+
+        if (currentDate && mask) {
+            // TODO: update with formatted string since .valueAsDate sets UTC date
+            // TODO: fetch stored moveTo date
+            dischargeDateInput.valueAsDate = getNextValidDischargeDate(currentDate, mask);
+            // TODO: update number of nights field
+            // const durationInput = document.querySelector("#input-patient-intake-stay-duration") as HTMLInputElement;
+            // durationInput.value =
+            // TODO: if user changed discharge by offset (number of nights field), save this value so it will be used again when intake date changes
+            // TODO: revalidate or somehow give feedback for successful moving of discharge date
+            validateDate();
+        }
+    });
+
+    // when discharge date changes, recheck validity wrt ward's policy
+    document.querySelector("#id_discharge_date")?.addEventListener("change", validateDate);
 
     // If a patient was passed to the intake form, use it
     const urlParams = new URLSearchParams(window.location.href);
