@@ -98,15 +98,21 @@
                                 {% render_field bed_form.recommended_ward %}
                                 <div class="help-text">{{ bed_form.recommended_ward.help_text }}</div>
                             </div>
-                            <div id="ward-discharge-info" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" role="alert">
-                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <div id="ward-allowed-discharge-days-info" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" role="alert">
+                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                   <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                 </svg>
-                                <span class="sr-only">Info</span>
-                                <div id="ward-discharge-info-text">
-                                  No ward set.
-                                </div>
-                              </div>
+                                <span>{% translate "Discharges possible on" %}&nbsp;</span>
+                                <span id="ward-allowed-discharge-days-first">days</span>
+                                <span id="ward-allowed-discharge-days-and">&nbsp;{% translate "and" %}&nbsp;</span>
+                                <span id="ward-allowed-discharge-days-last">day</span>.
+                            </div>
+                            <div id="ward-no-allowed-discharge-alert" class="flex items-center p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden" role="alert">
+                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                </svg>
+                                {% translate "No days are currently configured for discharge on this ward." %}
+                            </div>
                         </div>
                         <div>
                             <div class="border-4 border-gray-500 rounded-lg p-4">

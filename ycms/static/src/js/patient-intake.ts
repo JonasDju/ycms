@@ -8,8 +8,14 @@ window.addEventListener("load", () => {
 
     // ward select and attached info box
     const wardSelectionInput = document.querySelector("#id_recommended_ward") as HTMLSelectElement;
-    const wardDischargeInfoDiv = document.querySelector("#ward-discharge-info") as HTMLDivElement;
-    const wardDischargeInfoText = document.querySelector("#ward-discharge-info-text") as HTMLDivElement;
+
+    const wardDischargeInfoDiv = document.querySelector("#ward-allowed-discharge-days-info") as HTMLDivElement;
+    const wardDischargeAlertDiv = document.querySelector("#ward-no-allowed-discharge-alert") as HTMLDivElement;
+    const wardDischargeAllowedDaysFirst = document.querySelector(
+        "#ward-allowed-discharge-days-first",
+    ) as HTMLDivElement;
+    const wardDischargeAllowedDaysAnd = document.querySelector("#ward-allowed-discharge-days-and") as HTMLDivElement;
+    const wardDischargeAllowedDaysLast = document.querySelector("#ward-allowed-discharge-days-last") as HTMLDivElement;
 
     // intake/discharge date inputs
     const admissionDateInput = document.querySelector("#id_admission_date") as HTMLInputElement;
@@ -38,11 +44,6 @@ window.addEventListener("load", () => {
         "#intake-alert-discharge-before-admission",
     ) as HTMLDivElement;
 
-    // TODO: move to html
-    // styling
-    const infoBoxBlue = ["text-blue-800", "bg-blue-50", "dark:text-blue-400"];
-    const infoBoxRed = ["text-red-800", "bg-red-50", "dark:text-red-400"];
-
     let weekdayNamesLong: string[] = [];
 
     // Handles the response to the fetch request for the ward's discharge policy
@@ -51,37 +52,43 @@ window.addEventListener("load", () => {
     const setWardDischargeInfo = (json: any) => {
         if (Object.keys(json).length === 0) {
             wardDischargeInfoDiv.classList.add("hidden");
+            wardDischargeAlertDiv.classList.add("hidden");
             return;
         }
 
         // store localized weekday names to be used in info boxes below discharge date
         weekdayNamesLong = json.weekdays_long;
 
-        let res = json.info_text[0];
         const numAllowedDays = json.allowed_weekdays_short.length;
         if (numAllowedDays === 0) {
-            wardDischargeInfoDiv.classList.remove(...infoBoxBlue);
-            wardDischargeInfoDiv.classList.add(...infoBoxRed);
-        } else {
-            wardDischargeInfoDiv.classList.remove(...infoBoxRed);
-            wardDischargeInfoDiv.classList.add(...infoBoxBlue);
-
-            json.allowed_weekdays_short.forEach((day: string, index: number) => {
-                res += ` ${day}`;
-                if (index === numAllowedDays - 2) {
-                    // second to last day in list gets suffix "and"
-                    res += ` ${json.info_text[1]}`;
-                } else if (index === numAllowedDays - 1) {
-                    // last day gets suffix "."
-                    res += ".";
-                } else {
-                    res += ",";
-                }
-            });
+            wardDischargeInfoDiv.classList.add("hidden");
+            wardDischargeAlertDiv.classList.remove("hidden");
+            return;
         }
 
         wardDischargeInfoDiv.classList.remove("hidden");
-        wardDischargeInfoText.textContent = res;
+        wardDischargeAlertDiv.classList.add("hidden");
+
+        let firstDays = "";
+        const lastDay = ` ${json.allowed_weekdays_short[numAllowedDays - 1]}`;
+
+        if (numAllowedDays > 1) {
+            json.allowed_weekdays_short.slice(0, numAllowedDays - 2).forEach((day: string) => {
+                firstDays += `${day}, `;
+            });
+            firstDays += json.allowed_weekdays_short[numAllowedDays - 2];
+        }
+
+        if (firstDays) {
+            wardDischargeAllowedDaysFirst.textContent = ` ${firstDays} `;
+            wardDischargeAllowedDaysFirst.classList.remove("hidden");
+            wardDischargeAllowedDaysAnd.classList.remove("hidden");
+        } else {
+            wardDischargeAllowedDaysFirst.classList.add("hidden");
+            wardDischargeAllowedDaysAnd.classList.add("hidden");
+        }
+
+        wardDischargeAllowedDaysLast.textContent = lastDay;
     };
 
     const clearDischargeBeforeAdmissionAlert = () => {

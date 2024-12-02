@@ -26,12 +26,8 @@ def fetch_ward_allowed_discharge_days(request):
 
         mask = ward.allowed_discharge_days
         if mask == 0:
-            info_strings = [
-                _("No days are currently configured for discharge on this ward.")
-            ]
             allowed_days = []
         else:
-            info_strings = [_("Discharges possible on"), _("and")]
             allowed_days = [
                 day
                 for mask_idx, day in enumerate(days_of_week.WEEKDAYS_SHORT)
@@ -41,7 +37,6 @@ def fetch_ward_allowed_discharge_days(request):
         return JsonResponse(
             {
                 "mask": mask,
-                "info_text": info_strings,
                 "allowed_weekdays_short": allowed_days,
                 "weekdays_long": days_of_week.WEEKDAYS_LONG,
             }
