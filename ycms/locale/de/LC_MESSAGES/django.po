@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2024-11-26 17:00+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -488,14 +488,6 @@ msgid "users"
 msgstr "Benutzer"
 
 #: cms/models/ward.py
-msgid "ward number"
-msgstr "Stationsnummer"
-
-#: cms/models/ward.py
-msgid "Number of the ward"
-msgstr "Nummer der Station"
-
-#: cms/models/ward.py
 msgid "floor"
 msgstr "Stockwerk"
 
@@ -510,6 +502,16 @@ msgstr "Stationsname"
 #: cms/models/ward.py
 msgid "Name this ward is commonly referred to by"
 msgstr "Name, der üblicherweise für diese Station verwendet wird"
+
+#: cms/models/ward.py
+msgid "ward nickname"
+msgstr "kurzer Stationsname"
+
+#: cms/models/ward.py
+#, fuzzy
+#| msgid "Number of the ward"
+msgid "Nickname of this ward"
+msgstr "Nummer der Station"
 
 #: cms/models/ward.py
 msgid "allowed discharge days"
@@ -538,6 +540,14 @@ msgstr "Stationsverwaltung"
 #: cms/templates/_base.html
 msgid "Patient Data"
 msgstr "Patientendaten"
+
+#: cms/templates/_base.html
+msgid "Views"
+msgstr "Ansichten"
+
+#: cms/templates/_base.html cms/templates/floor/floor.html
+msgid "Floor View"
+msgstr "Stockwerke"
 
 #: cms/templates/_base.html
 msgid "Views"
@@ -1024,6 +1034,16 @@ msgid "Discharges cannot be earlier than the admission."
 msgstr "Entlassungen können nicht vor der Aufnahme liegen."
 
 #: cms/templates/patients/patient_intake_form.html
+msgid "Estimated nights to stay"
+msgstr ""
+
+#: cms/templates/patients/patient_intake_form.html
+#, fuzzy
+#| msgid "date the hospital stay begins"
+msgid "estimated duration of hospital stay in nights"
+msgstr "Datum zu dem der Krankenhausaufenthalt beginnt"
+
+#: cms/templates/patients/patient_intake_form.html
 msgid "Complete patient intake"
 msgstr "Patientenaufnahme abschließen"
 
@@ -1196,12 +1216,16 @@ msgid "Details about Wards"
 msgstr "Details über Stationen"
 
 #: cms/templates/ward/ward_management.html
-msgid "Ward Number"
-msgstr "Stationsnummer"
-
-#: cms/templates/ward/ward_management.html
 msgid "Ward Name"
 msgstr "Stationsname"
+
+#: cms/templates/ward/ward_management.html
+msgid "Ward Nickname"
+msgstr "kurzer Stationsname"
+
+#: cms/templates/ward/ward_management.html
+msgid "Floor"
+msgstr "Stockwerk"
 
 #: cms/templates/ward/ward_management.html
 msgid "Number of Beds"
@@ -1388,6 +1412,15 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "ward number"
+#~ msgstr "Stationsnummer"
+
+#~ msgid "Number of the ward"
+#~ msgstr "Nummer der Station"
+
+#~ msgid "Ward Number"
+#~ msgstr "Stationsnummer"
 
 #~ msgid "Assign"
 #~ msgstr "Zuweisen"

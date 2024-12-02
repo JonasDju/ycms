@@ -18,12 +18,6 @@ class Ward(AbstractBaseModel):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=current_or_travelled_time, null=False)
     updated_at = models.DateTimeField(auto_now=True, null=False)
-    ward_number = models.CharField(
-        unique=True,
-        max_length=32,
-        verbose_name=_("ward number"),
-        help_text=_("Number of the ward"),
-    )
     floor = models.IntegerField(
         verbose_name=_("floor"),
         help_text=_("Floor on which the nurse station for this ward is located"),
@@ -32,6 +26,13 @@ class Ward(AbstractBaseModel):
         max_length=32,
         verbose_name=_("ward name"),
         help_text=_("Name this ward is commonly referred to by"),
+    )
+    nickname = models.CharField(
+        max_length=32,
+        verbose_name=_("ward nickname"),
+        help_text=_("Nickname of this ward"),
+        blank=True,
+        default="",
     )
     allowed_discharge_days = models.SmallIntegerField(
         default=127,  # binary mask, zero-indexed starting at Monday
@@ -104,7 +105,11 @@ class Ward(AbstractBaseModel):
         :return: A readable string representation of the ward
         :rtype: str
         """
-        return f"{self.name} (ward {self.ward_number})"
+
+        if self.nickname != None and self.nickname != "":
+            return f"{self.nickname}"
+        else:
+            return f"{self.name}"
 
     def get_repr(self):
         """
@@ -114,7 +119,7 @@ class Ward(AbstractBaseModel):
         :return: The canonical string representation of the ward
         :rtype: str
         """
-        return f"<Ward (number: {self.ward_number})>"
+        return f"<Ward (name: {self.name})>"
 
     class Meta:
         verbose_name = _("ward")

@@ -18,4 +18,4 @@ class WardForm(CustomModelForm):
         """
 
         model = Ward
-        fields = ["ward_number", "floor", "name"]
+        fields = ["name", "nickname", "floor"]
