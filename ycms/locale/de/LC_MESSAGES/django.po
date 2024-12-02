@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2024-12-02 21:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -836,8 +836,7 @@ msgid "Gender"
 msgstr "Geschlecht"
 
 #: cms/templates/patients/patient_card.html
-#: cms/templates/patients/patient_details.html
-#: cms/templates/ward/ward_beds.html
+#: cms/templates/patients/patient_details.html cms/templates/ward/ward_bed.html
 msgid "Accompanied"
 msgstr "Begleitet"
 
@@ -1124,7 +1123,6 @@ msgid "Stay"
 msgstr "Aufenthalt"
 
 #: cms/templates/ward/ward_drawer.html
-
 msgid "free beds"
 msgstr "freie Betten"
 
