@@ -9,6 +9,8 @@
         <i icon-name="info" class="mr-2"></i>
         {% translate "Room" %}
         {{ room.room_number }}
+        ({{ room.available_beds }}
+        {% translate "free beds" %})
     </h5>
     <button type="button"
             data-drawer-hide="drawer-right-{{ room.room_number }}"
@@ -17,13 +19,29 @@
         <i icon-name="x"></i>
         <span class="sr-only">{% translate "Close menu" %}</span>
     </button>
-    {% include "ward/ward_beds.html" %}
-    <p class="mb-6 text-sm text-gray-500 dark:text-gray-400"></p>
-    <div class="flex flex-col gap-4">
-        {% for patient, patient_form, bed_assignment_form in patients %}
-            {% with bed_assignment=patient.current_stay %}
-                {% include "patients/patient_card.html" %}
-            {% endwith %}
-        {% endfor %}
-    </div>
+    {% if patients %}
+        <div class="flex justify-center items-center mb-6">
+            <h1>{% translate "Bed assignment in the room" %}</h1>
+        </div>
+        <div class="grid grid-cols-[1fr,4fr] gap-4 items-start">
+            {% for patient, patient_form, bed_assignment_form in patients %}
+            <!-- Left Column (Bed) -->
+            <div class="flex justify-center items-center h-full">
+                {% include "ward/ward_bed.html" with gender=patient.gender current_stay=patient.current_stay %}
+            </div>
+            <!-- Right Column (Patient Card) -->
+            <div class="flex flex-col gap-4">
+                {% with bed_assignment=patient.current_stay %}
+                    {% include "patients/patient_card.html" %}
+                {% endwith %}    
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="flex justify-center items-center mb-6">
+            <h1>{% translate "No patients in this room..." %}</h1>
+        </div>
+    {% endif %}
+
 </div>
+
