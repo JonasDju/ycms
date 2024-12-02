@@ -18,6 +18,7 @@ from ..views.utility.autocomplete import (
     autocomplete_patient,
     fetch_patient,
 )
+from ..views.utility.patient_intake import fetch_ward_allowed_discharge_days
 
 urlpatterns = [
     path("", index.UserBasedRedirectView.as_view(), name="index"),
@@ -83,6 +84,11 @@ urlpatterns = [
                     "cancel/<int:pk>/",
                     patients.PlannedStayCancelView.as_view(),
                     name="cancel_stay",
+                ),
+                path(
+                    "allowed-discharge-days/",
+                    fetch_ward_allowed_discharge_days,
+                    name="fetch_ward_allowed_discharge_days",
                 ),
             ]
         ),
