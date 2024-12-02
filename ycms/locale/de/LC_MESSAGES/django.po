@@ -508,10 +508,8 @@ msgid "ward nickname"
 msgstr "kurzer Stationsname"
 
 #: cms/models/ward.py
-#, fuzzy
-#| msgid "Number of the ward"
 msgid "Nickname of this ward"
-msgstr "Nummer der Station"
+msgstr "Abkürzung für den Stationsnamen"
 
 #: cms/models/ward.py
 msgid "allowed discharge days"
@@ -550,10 +548,8 @@ msgid "Floor View"
 msgstr "Stockwerke"
 
 #: cms/templates/_base.html
-#, fuzzy
-#| msgid "Ward Name"
 msgid "Ward View"
-msgstr "Stationsname"
+msgstr "Stationsansicht"
 
 #: cms/templates/_base.html cms/templates/patients/patient_intake_form.html
 msgid "Patient Intake"
