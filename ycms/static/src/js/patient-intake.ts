@@ -72,6 +72,21 @@ window.addEventListener("load", () => {
         wardDischargeInfoText.textContent = res;
     };
 
+    const isValidDischargeDay = (date: Date) => {
+        // if no mask is set (no ward set), default to valid
+        if (!dischargeDateInput.hasAttribute("mask")) {
+            console.log("no mask set");
+            return true;
+        }
+
+        // JS Date starts at Sunday=0, but need Monday=0
+        /* eslint-disable-next-line no-magic-numbers */
+        const dayOfWeek = (((date.getDay() - 1) % 7) + 7) % 7;
+        const mask = Number(dischargeDateInput.getAttribute("mask"));
+        /* eslint-disable-next-line no-bitwise */
+        return (mask >> dayOfWeek) & 0b1;
+    };
+
     // Update the discharge date input to a set number of days after admission
     const setDischargeDateByOffset = (daysAfterAdmission: number) => {
         const admissionDate = new Date(admissionDateInput.value);
@@ -102,17 +117,16 @@ window.addEventListener("load", () => {
     };
 
     // Gets the next date on which discharge is possible in the currently selected ward and the discharge policy mask
-    const getNextValidDischargeDate = (date: Date, mask: number) => {
-        /* eslint-disable no-magic-numbers, no-bitwise */
-        const dayOfWeek = (((date.getDay() - 1) % 7) + 7) % 7;
+    const getNextValidDischargeDateOffset = (date: Date) => {
+        const nextDate = new Date(date);
+        /* eslint-disable no-magic-numbers */
         for (let i = 1; i < 7; i++) {
-            if ((mask >> (dayOfWeek + i) % 7) & 0b1) {
-                const nextDate = new Date(date);
-                nextDate.setDate(date.getDate() + i);
-                return nextDate;
+            nextDate.setDate(date.getDate() + i);
+            if (isValidDischargeDay(nextDate)) {
+                return i;
             }
         }
-        /* eslint-enable no-magic-numbers, no-bitwise */
+        /* eslint-enable no-magic-numbers */
 
         return null;
     };
@@ -122,31 +136,26 @@ window.addEventListener("load", () => {
     const validateDate = () => {
         const dateString = dischargeDateInput.value;
         // no date entered, or no ward set
-        if (!dateString || !dischargeInvalidText.hasAttribute("mask") || weekdayNamesLong.length === 0) {
+        if (!dateString || !dischargeDateInput.hasAttribute("mask") || weekdayNamesLong.length === 0) {
             dischargeInvalidDiv.classList.add("hidden");
             dischargeValidDiv.classList.add("hidden");
             return;
         }
 
-        // validate discharge date against mask
         const date = new Date(dateString);
-        /* eslint-disable-next-line no-magic-numbers */
-        const dayOfWeek = (((date.getDay() - 1) % 7) + 7) % 7; // JS Date starts at Sunday=0, but need Monday=0
-        const mask = Number(dischargeInvalidText.getAttribute("mask"));
-        /* eslint-disable-next-line no-bitwise */
-        const dischargeValid = (mask >> dayOfWeek) & 0b1;
 
-        if (dischargeValid) {
+        if (isValidDischargeDay(date)) {
             dischargeInvalidDiv.classList.add("hidden");
             dischargeValidDiv.classList.remove("hidden");
         } else {
             // TODO: translation
             const selectedDay = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
-            const nextPossibleDischargeDate = getNextValidDischargeDate(date, mask);
-            if (nextPossibleDischargeDate) {
+            const nextValidDateOffset = getNextValidDischargeDateOffset(date);
+            if (nextValidDateOffset) {
+                date.setDate(date.getDate() + nextValidDateOffset);
                 dischargeInvalidText.textContent = `Discharges not allowed on ${selectedDay}.\n
-                Next possible discharge date is ${nextPossibleDischargeDate.toDateString()}.`;
-                moveDischargeDateBtn.textContent = `Move discharge to ${nextPossibleDischargeDate.toDateString()}.`;
+                Next possible discharge date is ${date.toDateString()}.`;
+                moveDischargeDateBtn.textContent = `Move discharge to ${date.toDateString()}.`;
                 // TODO: store discharge date, so wont need to be recalculated on button press
                 // moveDischargeDateBtn.setAttribute("moveTo", nextPossibleDischargeDate);
                 moveDischargeDateBtn.classList.remove("hidden");
@@ -165,7 +174,7 @@ window.addEventListener("load", () => {
         if (!wardSelectionInput.value) {
             // hide info text field
             wardDischargeInfoDiv.classList.add("hidden");
-            dischargeInvalidText.removeAttribute("mask");
+            dischargeDateInput.removeAttribute("mask");
             // hide feedback for discharge validity
             dischargeInvalidDiv.classList.add("hidden");
             dischargeValidDiv.classList.add("hidden");
@@ -178,7 +187,7 @@ window.addEventListener("load", () => {
                 .then((json) => {
                     setWardDischargeInfo(json);
                     // store mask for validation
-                    dischargeInvalidText.setAttribute("mask", json.mask);
+                    dischargeDateInput.setAttribute("mask", json.mask);
                     validateDate();
                 });
         }
@@ -186,12 +195,16 @@ window.addEventListener("load", () => {
 
     moveDischargeDateBtn?.addEventListener("click", () => {
         const currentDate = new Date(dischargeDateInput.value);
-        const mask = Number(dischargeInvalidText.getAttribute("mask"));
+        const mask = Number(dischargeDateInput.getAttribute("mask"));
 
         if (currentDate && mask) {
             // TODO: update with formatted string since .valueAsDate sets UTC date
             // TODO: fetch stored moveTo date
-            dischargeDateInput.valueAsDate = getNextValidDischargeDate(currentDate, mask);
+            const currentOffset = getNightsBetweenAdmissionAndDischarge();
+            const offsetToValid = getNextValidDischargeDateOffset(currentDate);
+            if (offsetToValid) {
+                setDischargeDateByOffset(currentOffset + offsetToValid);
+            }
             // TODO: update number of nights field
             // const durationInput = document.querySelector("#input-patient-intake-stay-duration") as HTMLInputElement;
             // durationInput.value =
