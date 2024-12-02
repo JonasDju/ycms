@@ -36,63 +36,59 @@ msgstr "mit Beatmungsgerät"
 
 #: cms/constants/days_of_week.py
 msgid "Monday"
-msgstr ""
+msgstr "Montag"
 
 #: cms/constants/days_of_week.py
 msgid "Tuesday"
-msgstr ""
+msgstr "Dienstag"
 
 #: cms/constants/days_of_week.py
 msgid "Wednesday"
-msgstr ""
+msgstr "Mittwoch"
 
 #: cms/constants/days_of_week.py
 msgid "Thursday"
-msgstr ""
+msgstr "Donnerstag"
 
 #: cms/constants/days_of_week.py
 msgid "Friday"
-msgstr ""
+msgstr "Freitag"
 
 #: cms/constants/days_of_week.py
 msgid "Saturday"
-msgstr ""
+msgstr "Samstag"
 
 #: cms/constants/days_of_week.py
 msgid "Sunday"
-msgstr ""
+msgstr "Sonntag"
 
 #: cms/constants/days_of_week.py
 msgid "Mon"
-msgstr ""
+msgstr "Mo"
 
 #: cms/constants/days_of_week.py
 msgid "Tue"
-msgstr ""
+msgstr "Di"
 
 #: cms/constants/days_of_week.py
-#, fuzzy
-#| msgid "bed"
 msgid "Wed"
-msgstr "Bett"
+msgstr "Mi"
 
 #: cms/constants/days_of_week.py
 msgid "Thu"
-msgstr ""
+msgstr "Do"
 
 #: cms/constants/days_of_week.py
 msgid "Fri"
-msgstr ""
+msgstr "Fr"
 
 #: cms/constants/days_of_week.py
-#, fuzzy
-#| msgid "Status"
 msgid "Sat"
-msgstr "Status"
+msgstr "Sa"
 
 #: cms/constants/days_of_week.py
 msgid "Sun"
-msgstr ""
+msgstr "So"
 
 #: cms/constants/gender.py
 msgid "male"
