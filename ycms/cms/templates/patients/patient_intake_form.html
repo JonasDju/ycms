@@ -94,8 +94,9 @@
                                 <div class="help-text">{{ record_form.note.help_text }}</div>
                             </div>
                             <div>
-                                <label for="{{ bed_form.recommended_ward.id_for_label }}">{{ bed_form.recommended_ward.label }}</label>
-                                {% render_field bed_form.recommended_ward %}
+                                <label for="{{ bed_form.recommended_ward.id_for_label }}"
+                                    class="field-required">{{ bed_form.recommended_ward.label }}</label>
+                                {% render_field bed_form.recommended_ward required="" %}
                                 <div class="help-text">{{ bed_form.recommended_ward.help_text }}</div>
                             </div>
                             <div id="ward-allowed-discharge-days-info" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" role="alert">
