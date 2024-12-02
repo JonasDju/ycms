@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 21:38+0100\n"
+"POT-Creation-Date: 2024-12-02 23:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1023,10 +1023,8 @@ msgid "Stay"
 msgstr "Aufenthalt"
 
 #: cms/templates/ward/ward_card.html
-#, fuzzy
-#| msgid "Patient Information"
 msgid "Ward Information"
-msgstr "Patienteninformationen"
+msgstr "Stationsinformationen"
 
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
 msgid "Ward Nickname"
@@ -1042,7 +1040,7 @@ msgstr "Stationsname"
 
 #: cms/templates/ward/ward_card.html
 msgid "Rooms in this Ward"
-msgstr ""
+msgstr "Zimmer auf dieser Station"
 
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
 msgid "Room number"
@@ -1299,14 +1297,10 @@ msgid "Ward has been deleted."
 msgstr "Patient*in wurde gelöscht."
 
 #: cms/views/ward/ward_view.py
-#, fuzzy
-#| msgid "Added {} rooms with {} beds to \"{}\"."
 msgid "Added {} new rooms with {} new beds to the ward."
-msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
+msgstr "Der Station wurden {} neue Zimmer mit {} neuen Betten hinzugefügt."
 
 #: cms/views/ward/ward_view.py
-#, fuzzy
-#| msgid "Your settings were successfully updated!"
 msgid "Ward information has been successfully updated!"
 msgstr "Deine Einstellungen wurden erfolgreich geändert!"
 
@@ -1321,6 +1315,9 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "Are you sure you want to delete this ward?"
+#~ msgstr "Sind Sie sicher, dass Sie diese Station löschen wollen?"
 
 #~ msgid "ward number"
 #~ msgstr "Stationsnummer"
