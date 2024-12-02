@@ -34,7 +34,7 @@ class Ward(AbstractBaseModel):
         help_text=_("Name this ward is commonly referred to by"),
     )
     allowed_discharge_days = models.SmallIntegerField(
-        default=127,  # binary mask
+        default=127,  # binary mask, zero-indexed starting at Monday
         verbose_name=_("allowed discharge days"),
         help_text=_("Days of the week where discharges are allowed in this ward"),
         validators=[
