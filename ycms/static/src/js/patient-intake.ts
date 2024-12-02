@@ -21,17 +21,29 @@ window.addEventListener("load", () => {
     const buttonFourteenNights = document.querySelector("#button-patient-intake-14n") as HTMLButtonElement;
 
     // discharge validity feedback elements
-    const dischargeInvalidDiv = document.querySelector("#intake-info-discharge-invalid") as HTMLElement;
-    const dischargeInvalidText = document.querySelector("#intake-info-discharge-invalid-text") as HTMLElement;
-    const dischargeValidDiv = document.querySelector("#intake-info-discharge-valid") as HTMLElement;
+    const dischargeInvalidDiv = document.querySelector("#intake-alert-discharge-invalid") as HTMLDivElement;
+    const dischargeInvalidDayText = document.querySelector("#intake-alert-discharge-invalid-day") as HTMLSpanElement;
+    const dischargeInvalidWithNextDiv = document.querySelector(
+        "#intake-alert-discharge-with-next-day",
+    ) as HTMLDivElement;
+    const dischargeInvalidNextDayText = document.querySelector("#intake-alert-discharge-next-day") as HTMLSpanElement;
+    const dischargeInvalidNoNextDayDiv = document.querySelector(
+        "#intake-alert-discharge-no-next-day",
+    ) as HTMLDivElement;
+
     const moveDischargeDateBtn = document.querySelector("#intake-discharge-move-btn") as HTMLButtonElement;
+    const moveDischargeDateText = document.querySelector("#intake-discharge-move-day") as HTMLSpanElement;
+
+    const dischargeBeforeAdmissionDiv = document.querySelector(
+        "#intake-alert-discharge-before-admission",
+    ) as HTMLDivElement;
 
     // TODO: move to html
     // styling
     const infoBoxBlue = ["text-blue-800", "bg-blue-50", "dark:text-blue-400"];
     const infoBoxRed = ["text-red-800", "bg-red-50", "dark:text-red-400"];
 
-    let weekdayNamesLong = [];
+    let weekdayNamesLong: string[] = [];
 
     // Handles the response to the fetch request for the ward's discharge policy
     // Updates the info text and stores the policy mask and localized weekday names
@@ -44,6 +56,7 @@ window.addEventListener("load", () => {
 
         // store localized weekday names to be used in info boxes below discharge date
         weekdayNamesLong = json.weekdays_long;
+        console.log(weekdayNamesLong);
 
         let res = json.info_text[0];
         const numAllowedDays = json.allowed_weekdays_short.length;
@@ -72,6 +85,40 @@ window.addEventListener("load", () => {
         wardDischargeInfoText.textContent = res;
     };
 
+    const clearAlerts = () => {
+        dischargeInvalidDiv.classList.add("hidden");
+        dischargeBeforeAdmissionDiv.classList.add("hidden");
+    };
+
+    const alertDischargeBeforeAdmission = () => {
+        clearAlerts();
+        dischargeBeforeAdmissionDiv.classList.remove("hidden");
+    };
+
+    const alertInvalidWeekday = (invalidDay: string, nextValidDay: string) => {
+        clearAlerts();
+        dischargeInvalidDiv.classList.remove("hidden");
+        dischargeInvalidDayText.textContent = invalidDay;
+        if (nextValidDay) {
+            dischargeInvalidNoNextDayDiv.classList.add("hidden");
+
+            dischargeInvalidWithNextDiv.classList.remove("hidden");
+            dischargeInvalidNextDayText.textContent = nextValidDay;
+
+            moveDischargeDateBtn.classList.remove("hidden");
+            moveDischargeDateText.textContent = nextValidDay;
+        } else {
+            dischargeInvalidWithNextDiv.classList.add("hidden");
+            dischargeInvalidNoNextDayDiv.classList.remove("hidden");
+            moveDischargeDateBtn.classList.add("hidden");
+        }
+    };
+
+    const getDayOfWeek = (date: Date) =>
+        // JS Date starts at Sunday=0, but need Monday=0
+        /* eslint-disable-next-line no-magic-numbers */
+        (((date.getDay() - 1) % 7) + 7) % 7;
+
     const isValidDischargeDay = (date: Date) => {
         // if no mask is set (no ward set), default to valid
         if (!dischargeDateInput.hasAttribute("mask")) {
@@ -79,9 +126,7 @@ window.addEventListener("load", () => {
             return true;
         }
 
-        // JS Date starts at Sunday=0, but need Monday=0
-        /* eslint-disable-next-line no-magic-numbers */
-        const dayOfWeek = (((date.getDay() - 1) % 7) + 7) % 7;
+        const dayOfWeek = getDayOfWeek(date);
         const mask = Number(dischargeDateInput.getAttribute("mask"));
         /* eslint-disable-next-line no-bitwise */
         return (mask >> dayOfWeek) & 0b1;
@@ -118,11 +163,13 @@ window.addEventListener("load", () => {
 
     // Gets the next date on which discharge is possible in the currently selected ward and the discharge policy mask
     const getNextValidDischargeDateOffset = (date: Date) => {
+        console.log("getting next valid day from ", date);
         const nextDate = new Date(date);
         /* eslint-disable no-magic-numbers */
         for (let i = 1; i < 7; i++) {
             nextDate.setDate(date.getDate() + i);
             if (isValidDischargeDay(nextDate)) {
+                console.log("found offset ", i, nextDate);
                 return i;
             }
         }
@@ -131,42 +178,47 @@ window.addEventListener("load", () => {
         return null;
     };
 
+    const updateDurationField = () => {
+        if (admissionDateInput.value && dischargeDateInput.value) {
+            const duration = getNightsBetweenAdmissionAndDischarge();
+            if (duration >= 0) {
+                durationInput.value = duration.toString();
+            } else {
+                // TODO: clear??
+                // durationInput.value = "";
+            }
+        }
+    };
+
     // Validates the current value of the discharge date against the selected ward's policy
     // TODO: validation when changing discharge through number of nights input
-    const validateDate = () => {
+    const validateDischargePolicy = () => {
         const dateString = dischargeDateInput.value;
         // no date entered, or no ward set
         if (!dateString || !dischargeDateInput.hasAttribute("mask") || weekdayNamesLong.length === 0) {
-            dischargeInvalidDiv.classList.add("hidden");
-            dischargeValidDiv.classList.add("hidden");
+            // TODO: dont want to clear disch < adm alert!
+            console.log("early return validate policy");
+            clearAlerts();
             return;
         }
 
         const date = new Date(dateString);
 
-        if (isValidDischargeDay(date)) {
-            dischargeInvalidDiv.classList.add("hidden");
-            dischargeValidDiv.classList.remove("hidden");
-        } else {
+        if (!isValidDischargeDay(date)) {
+            console.log(date, "is invalid");
             // TODO: translation
-            const selectedDay = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(date);
+            const selectedWeekday = weekdayNamesLong[getDayOfWeek(date)];
             const nextValidDateOffset = getNextValidDischargeDateOffset(date);
             if (nextValidDateOffset) {
                 date.setDate(date.getDate() + nextValidDateOffset);
-                dischargeInvalidText.textContent = `Discharges not allowed on ${selectedDay}.\n
-                Next possible discharge date is ${date.toDateString()}.`;
-                moveDischargeDateBtn.textContent = `Move discharge to ${date.toDateString()}.`;
+                alertInvalidWeekday(selectedWeekday, date.toLocaleDateString());
                 // TODO: store discharge date, so wont need to be recalculated on button press
                 // moveDischargeDateBtn.setAttribute("moveTo", nextPossibleDischargeDate);
-                moveDischargeDateBtn.classList.remove("hidden");
             } else {
-                dischargeInvalidText.textContent = `Discharges not allowed on ${selectedDay}.\n
-                No next discharge date available in this ward.`;
-                moveDischargeDateBtn.classList.add("hidden");
+                alertInvalidWeekday(selectedWeekday, "");
             }
-
-            dischargeInvalidDiv.classList.remove("hidden");
-            dischargeValidDiv.classList.add("hidden");
+        } else {
+            console.log(date, " is valid");
         }
     };
 
@@ -175,9 +227,7 @@ window.addEventListener("load", () => {
             // hide info text field
             wardDischargeInfoDiv.classList.add("hidden");
             dischargeDateInput.removeAttribute("mask");
-            // hide feedback for discharge validity
-            dischargeInvalidDiv.classList.add("hidden");
-            dischargeValidDiv.classList.add("hidden");
+            // TODO: hide feedback for discharge validity
         } else {
             // fetch ward's allowed discharge days, display in info text
             const url = `/intake/allowed-discharge-days/?q=${encodeURIComponent(wardSelectionInput.value)}`;
@@ -188,7 +238,7 @@ window.addEventListener("load", () => {
                     setWardDischargeInfo(json);
                     // store mask for validation
                     dischargeDateInput.setAttribute("mask", json.mask);
-                    validateDate();
+                    validateDischargePolicy();
                 });
         }
     });
@@ -210,46 +260,58 @@ window.addEventListener("load", () => {
             // durationInput.value =
             // TODO: if user changed discharge by offset (number of nights field), save this value so it will be used again when intake date changes
             // TODO: revalidate or somehow give feedback for successful moving of discharge date
-            validateDate();
+            validateDischargePolicy();
         }
     });
 
-    // when discharge date changes, recheck validity wrt ward's policy
-    document.querySelector("#id_discharge_date")?.addEventListener("change", validateDate);
-
-    // TODO: update event listeners to validate discharge date
     dischargeDateInput?.addEventListener("input", () => {
         // Mark whether the user has manually modified the discharge date
         dischargeDateInput.setAttribute("data-manually-changed", "true");
-        // Adjust duration of stay
-        const duration = getNightsBetweenAdmissionAndDischarge();
 
-        durationInput.value = Math.max(duration, 0).toString();
+        if (!dischargeDateInput.value) {
+            clearAlerts();
+            return;
+        }
+        if (!admissionDateInput.value) {
+            // no need to check if admission is after discharge
+            validateDischargePolicy();
+        } else {
+            const duration = getNightsBetweenAdmissionAndDischarge();
+            if (duration < 0) {
+                alertDischargeBeforeAdmission();
+                dischargeDateInput.value = "";
+                durationInput.value = "";
+                return;
+            }
+        }
+
+        // Adjust duration of stay
+        updateDurationField();
+        validateDischargePolicy();
     });
 
     admissionDateInput?.addEventListener("input", () => {
-        // Check if the discharge date has been manually modified
-        const isDischargeManuallyChanged = dischargeDateInput.getAttribute("data-manually-changed") === "true";
-        // Only when the discharge date is not manually modified, it is automatically set to one week after admission
-        if (!isDischargeManuallyChanged) {
-            /* eslint-disable-next-line no-magic-numbers */
-            setDischargeDateByOffset(7);
+        if (!admissionDateInput.value) {
+            clearAlerts();
+        } else if (dischargeDateInput.getAttribute("data-manually-changed") === "true") {
+            // keep discharge at its current value if it was modified by the user
+            // but check if discharge is before admission
+            const duration = getNightsBetweenAdmissionAndDischarge();
+            if (dischargeDateInput.value && duration < 0) {
+                alertDischargeBeforeAdmission();
+                dischargeDateInput.value = "";
+                durationInput.value = "";
+                return;
+            }
+        } else {
+            // offset discharge with current duration input value or one week as fallback
+            setDischargeDateByOffset(Number(durationInput.value || "7"));
+            clearAlerts();
         }
-        // Adjust duration of stay
-        const duration = getNightsBetweenAdmissionAndDischarge();
-        durationInput.value = Math.max(duration, 0).toString();
-    });
 
-    // Avoid an admission date that lies behind a discharge date
-    dischargeDateInput?.addEventListener("focusout", () => {
-        if (getNightsBetweenAdmissionAndDischarge() < 0) {
-            dischargeDateInput.value = admissionDateInput.value;
-        }
-    });
-    admissionDateInput?.addEventListener("focusout", () => {
-        if (getNightsBetweenAdmissionAndDischarge() < 0) {
-            dischargeDateInput.value = admissionDateInput.value;
-        }
+        // Adjust duration of stay
+        updateDurationField();
+        validateDischargePolicy();
     });
 
     // Handle duration in nights input

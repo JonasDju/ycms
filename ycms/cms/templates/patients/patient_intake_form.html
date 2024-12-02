@@ -149,22 +149,33 @@
                                     {% render_field bed_form.discharge_date required="" %}
                                     <div class="help-text">{{ bed_form.discharge_date.help_text }}</div>
                                 </div>
-                                <div id="intake-info-discharge-invalid" class="p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden">
+                                <div id="intake-alert-discharge-invalid" class="p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden">
                                     <div class="flex items-center">
                                         <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                           <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                         </svg>
-                                        <span id="intake-info-discharge-invalid-text">No ward set.</span>
+                                        <div>
+                                            {% translate "Discharges not allowed on " %}
+                                            <span id="intake-alert-discharge-invalid-day">day</span>.
+                                            <div id="intake-alert-discharge-with-next-day">
+                                                {% translate "Next possible discharge date is " %}
+                                                <span id="intake-alert-discharge-next-day">day</span>.
+                                            </div>
+                                            <div id="intake-alert-discharge-no-next-day">
+                                                {% translate "No next discharge date available in this ward." %}
+                                            </div>
+                                        </div>
                                     </div>
                                     <button id="intake-discharge-move-btn" type="button" class="mt-2 w-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded px-4 py-3 dark:bg-red-600 dark:hover:bg-red-800 dark:focus:ring-red-900">
-                                        Move discharge to ...
+                                        {% translate "Move discharge to " %}
+                                        <span id="intake-discharge-move-day">day</span>.
                                     </button>
                                 </div>
-                                <div id="intake-info-discharge-valid" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden">
+                                <div id="intake-alert-discharge-before-admission" class="p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden">
                                     <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                     </svg>
-                                      Discharge is possible on the provided date.
+                                      {% translate "Discharges cannot be earlier than the admission." %}
                                 </div>
                             </div>
                             <div>
