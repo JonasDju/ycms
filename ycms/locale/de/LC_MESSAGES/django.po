@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the CMS package.
 # YCMS <info@ycms-app.de>
 # https://github.com/charludo/
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 17:00+0100\n"
+"POT-Creation-Date: 2024-12-02 17:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -774,8 +774,7 @@ msgid "Gender"
 msgstr "Geschlecht"
 
 #: cms/templates/patients/patient_card.html
-#: cms/templates/patients/patient_details.html
-#: cms/templates/ward/ward_beds.html
+#: cms/templates/patients/patient_details.html cms/templates/ward/ward_bed.html
 msgid "Accompanied"
 msgstr "Begleitet"
 
@@ -1011,13 +1010,26 @@ msgstr "Minute"
 msgid "Change password"
 msgstr "Passwort ändern"
 
-#: cms/templates/ward/ward_beds.html
+#: cms/templates/ward/ward_bed.html
 msgid "Discharge in"
 msgstr "Entlassung in"
 
-#: cms/templates/ward/ward_beds.html
+#: cms/templates/ward/ward_bed.html
 msgid "Stay"
 msgstr "Aufenthalt"
+
+#: cms/templates/ward/ward_drawer.html
+
+msgid "free beds"
+msgstr "freie Betten"
+
+#: cms/templates/ward/ward_drawer.html
+msgid "Bed assignment in the room"
+msgstr "Bettenzuweisung im Zimmer"
+
+#: cms/templates/ward/ward_drawer.html
+msgid "No patients in this room..."
+msgstr "Im Zimmer sind aktuell keine Betten belegt..."
 
 #: cms/templates/ward/ward_info.html
 msgid "Total"
