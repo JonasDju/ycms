@@ -15,23 +15,9 @@ class Floor(AbstractBaseModel):
 
     created_at = models.DateTimeField(default=current_or_travelled_time, null=False)
     updated_at = models.DateTimeField(auto_now=True, null=False)
-    predecessor = models.OneToOneField(
-        'self',
-        on_delete=models.SET_NULL,
-        related_name='successor',
-        null=True,
-        blank=True,
+    order = models.IntegerField(
+       verbose_name=_("floor order"), help_text=_("Order of the floor"), unique=True
     )
-    successor = models.OneToOneField(
-        'self',
-        on_delete=models.SET_NULL,
-        related_name='predecessor',
-        null=True,
-        blank=True,
-    )
-    # order = models.IntegerField(  # TODO(jan) unique remove later
-    #    verbose_name=_("floor order"), help_text=_("Order of the floor")
-    # )
     name = models.CharField(
         null=True,
         max_length=30,

@@ -18,4 +18,4 @@ class FloorForm(CustomModelForm):
         """
 
         model = Floor
-        fields = ["name", "code", "order", "predecessor", "successor"]
+        fields = ["name", "code", "order"]

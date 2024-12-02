@@ -70,10 +70,10 @@
 
                 {# Untere Etage #}
                 <div class="flex justify-center items-center w-full mt-auto">
-                    {% if prev_floor_order != None %}
+                    {% if prev_floor_name != None %}
                     <div onclick="location.href='?floor={{ current_floor.order|add:-1 }}'" class="hover:bg-gray-300 dark:hover:bg-gray-400 bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-700 rounded-2xl text-black dark:text-white text-lg md:text-xl flex items-center justify-center h-12 md:h-20 w-full cursor-pointer">
                         <h5 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
-                            {{ prev_floor_order }}
+                            {{ prev_floor_name }}
                         </h5>
                     </div>
                     {% endif %}
@@ -87,26 +87,25 @@
 
     {% if user.is_staff %}
     <script>
-        const predecessor = document.getElementById("predecessor");
-        const successor = document.getElementById("successor");
-        function createFloorAtTop() {
+        const floorOrder = document.getElementById("floorOrder");
+        function createFloorAtBottom() {
             {% if floors|length > 0 %}
                 {% with floors|last as last %}
-                    predecessor.value = {{ last.id }};
-                    successor.value = null;
+                    floorOrder.value = {{ last.order }} - 1;
                 {% endwith %}
             {% else %}
-                    predecessor.value = null;
-                    successor.value = null;
+                floorOrder.value = 0;
             {% endif %}
         }
-        function createFloorAtBottom() {
-            {% with floors.0 as first %}
-                predecessor.value = null;
-                successor.value = {{ first.id }};
-            {% endwith %}
+        function createFloorAtTop() {
+            {% if floors|length > 0 %}
+                {% with floors.0 as first %}
+                    floorOrder.value = {{ first.order }} + 1;
+                {% endwith %}
+            {% else %}
+                floorOrder.value = 0;
+            {% endif %}
         }
-
         const topButton = document.getElementById("addFloorButtonTop");
         if (topButton) {
             topButton.onclick = createFloorAtTop;

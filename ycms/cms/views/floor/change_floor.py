@@ -36,6 +36,7 @@ class FloorCreateView(TemplateView):
         :return: Redirect to floor view
         :rtype: ~django.http.HttpResponseRedirect
         """
+        # TODO(jan) what if name for floor already taken??
         floor_form = FloorForm(
             data=request.POST, additional_instance_attributes={"creator": request.user}
         )
@@ -51,7 +52,6 @@ class FloorCreateView(TemplateView):
                 },
             )
         floor = floor_form.save()
-        # TODO edit predecessor/successor accordingly
         messages.success(
             request, _('Addition of new floor "{}" successful!').format(floor.name)
         )
@@ -69,8 +69,7 @@ class FloorDeleteView(DeleteView):
     success_url = reverse_lazy("cms:protected:floor")
 
     def form_valid(self, form):
-        messages.success(self.request, _("Floor has been deleted.")
-        # TODO make sure references are deleted correctly
+        messages.success(self.request, _("Floor has been deleted."))
         return super().form_valid(form)
 
     def form_invalid(self, form):
