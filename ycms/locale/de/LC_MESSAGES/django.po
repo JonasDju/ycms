@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 17:00+0100\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -550,18 +550,10 @@ msgid "Floor View"
 msgstr "Stockwerke"
 
 #: cms/templates/_base.html
-msgid "Views"
-msgstr ""
-
-#: cms/templates/_base.html cms/templates/floor/floor.html
 #, fuzzy
-#| msgid "Ward View"
-msgid "Floor View"
-msgstr "Stationsansicht"
-
-#: cms/templates/_base.html
+#| msgid "Ward Name"
 msgid "Ward View"
-msgstr "Stationsansicht"
+msgstr "Stationsname"
 
 #: cms/templates/_base.html cms/templates/patients/patient_intake_form.html
 msgid "Patient Intake"
@@ -991,7 +983,9 @@ msgstr "und"
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "No days are currently configured for discharge on this ward."
-msgstr "Aktuell sind auf dieser Station keine Tage als zulässig zur Entlassung konfiguriert."
+msgstr ""
+"Aktuell sind auf dieser Station keine Tage als zulässig zur Entlassung "
+"konfiguriert."
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Estimated stay (nights/discharge date)"
@@ -1032,16 +1026,6 @@ msgstr "Entlassung verschieben zum "
 #: cms/templates/patients/patient_intake_form.html
 msgid "Discharges cannot be earlier than the admission."
 msgstr "Entlassungen können nicht vor der Aufnahme liegen."
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "Estimated nights to stay"
-msgstr ""
-
-#: cms/templates/patients/patient_intake_form.html
-#, fuzzy
-#| msgid "date the hospital stay begins"
-msgid "estimated duration of hospital stay in nights"
-msgstr "Datum zu dem der Krankenhausaufenthalt beginnt"
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Complete patient intake"
