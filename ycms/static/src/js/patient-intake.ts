@@ -202,15 +202,20 @@ window.addEventListener("load", () => {
         }
     };
 
-    // Update the discharge date through formatted string, circumventing annoying UTC behavior
-    const setDischargeDate = (date: Date) => {
+    const getDateString = (date: Date) => {
         // Format the discharge date as "YYYY-MM-DD HH:MM"
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, "0");
         const day = String(date.getDate()).padStart(2, "0");
         const hours = String(date.getHours()).padStart(2, "0");
         const minutes = String(date.getMinutes()).padStart(2, "0");
-        dischargeDateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    };
+
+    // Update the discharge date through formatted string, circumventing annoying UTC behavior
+    const setDischargeDate = (date: Date) => {
+        dischargeDateInput.value = getDateString(date);
 
         // admission alert takes precedence
         validateDischargePolicy();
@@ -310,6 +315,12 @@ window.addEventListener("load", () => {
             setDischargeDateByOffset(Number(durationInput.value || "7"));
         }
 
+        if (admissionDateInput.value) {
+            dischargeDateInput.min = getDateString(new Date(admissionDateInput.value));
+        } else {
+            dischargeDateInput.min = "";
+        }
+
         // Adjust duration of stay
         updateDurationField();
     });
@@ -351,4 +362,9 @@ window.addEventListener("load", () => {
         setDischargeDateByOffset(14);
     });
     /* eslint-enable no-magic-numbers */
+
+    // set initial min value for discharge (should be today)
+    if (admissionDateInput.value) {
+        dischargeDateInput.min = getDateString(new Date(admissionDateInput.value));
+    }
 });
