@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-26 17:00+0100\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -33,6 +33,62 @@ msgstr "kleines"
 #: cms/constants/bed_types.py
 msgid "with ventilator"
 msgstr "mit Beatmungsgerät"
+
+#: cms/constants/days_of_week.py
+msgid "Monday"
+msgstr "Montag"
+
+#: cms/constants/days_of_week.py
+msgid "Tuesday"
+msgstr "Dienstag"
+
+#: cms/constants/days_of_week.py
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+#: cms/constants/days_of_week.py
+msgid "Thursday"
+msgstr "Donnerstag"
+
+#: cms/constants/days_of_week.py
+msgid "Friday"
+msgstr "Freitag"
+
+#: cms/constants/days_of_week.py
+msgid "Saturday"
+msgstr "Samstag"
+
+#: cms/constants/days_of_week.py
+msgid "Sunday"
+msgstr "Sonntag"
+
+#: cms/constants/days_of_week.py
+msgid "Mon"
+msgstr "Mo"
+
+#: cms/constants/days_of_week.py
+msgid "Tue"
+msgstr "Di"
+
+#: cms/constants/days_of_week.py
+msgid "Wed"
+msgstr "Mi"
+
+#: cms/constants/days_of_week.py
+msgid "Thu"
+msgstr "Do"
+
+#: cms/constants/days_of_week.py
+msgid "Fri"
+msgstr "Fr"
+
+#: cms/constants/days_of_week.py
+msgid "Sat"
+msgstr "Sa"
+
+#: cms/constants/days_of_week.py
+msgid "Sun"
+msgstr "So"
 
 #: cms/constants/gender.py
 msgid "male"
@@ -452,10 +508,16 @@ msgid "ward nickname"
 msgstr "kurzer Stationsname"
 
 #: cms/models/ward.py
-#, fuzzy
-#| msgid "Number of the ward"
 msgid "Nickname of this ward"
-msgstr "Nummer der Station"
+msgstr "Abkürzung für den Stationsnamen"
+
+#: cms/models/ward.py
+msgid "allowed discharge days"
+msgstr "zulässige Entlassungstage"
+
+#: cms/models/ward.py
+msgid "Days of the week where discharges are allowed in this ward"
+msgstr "Tage an denen auf dieser Station Entlassungen zulässig sind"
 
 #: cms/models/ward.py
 msgid "wards"
@@ -889,13 +951,11 @@ msgstr ""
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Normal intake"
-msgstr ""
+msgstr "Normale Aufnahme"
 
 #: cms/templates/patients/patient_intake_form.html
-#, fuzzy
-#| msgid "Or perform emergency intake"
 msgid "Emergency intake"
-msgstr "Oder Notaufnahme durchführen"
+msgstr "Notaufnahme"
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Select existing patient"
@@ -907,17 +967,61 @@ msgstr "zurücksetzen"
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Or create new patient"
-msgstr "Oder Patient*in hinzufügen"
+msgstr "Oder neue Patient*in hinzufügen"
 
 #: cms/templates/patients/patient_intake_form.html
-msgid "Estimated nights to stay"
+msgid "Discharges possible on"
+msgstr "Entlassungen zulässig am"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "and"
+msgstr "und"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "No days are currently configured for discharge on this ward."
 msgstr ""
+"Aktuell sind auf dieser Station keine Tage als zulässig zur Entlassung "
+"konfiguriert."
 
 #: cms/templates/patients/patient_intake_form.html
-#, fuzzy
-#| msgid "date the hospital stay begins"
+msgid "Estimated stay (nights/discharge date)"
+msgstr "Voraussichtlicher Aufenthalt (Nächte/Entlassungsdatum)"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "two nights"
+msgstr "Zwei Nächte"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "one week"
+msgstr "Eine Woche"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "two weeks"
+msgstr "Zwei Wochen"
+
+#: cms/templates/patients/patient_intake_form.html
 msgid "estimated duration of hospital stay in nights"
-msgstr "Datum zu dem der Krankenhausaufenthalt beginnt"
+msgstr "voraussichtliche Aufenthaltsdauer in Nächten"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Discharges not allowed on "
+msgstr "Entlassungen nicht zulässig am "
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Next possible discharge date is "
+msgstr "Nächtes mögliches Entlassungsdatum ist "
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "No next discharge date available in this ward."
+msgstr "Kein nächstmögliches Entlassungdatum verfügbar auf dieser Station."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Move discharge to "
+msgstr "Entlassung verschieben zum "
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Discharges cannot be earlier than the admission."
+msgstr "Entlassungen können nicht vor der Aufnahme liegen."
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Complete patient intake"
@@ -1207,6 +1311,10 @@ msgstr "\"{}, {}\" erfolgreich nach {} verschoben."
 #: cms/views/patients/intake_form_view.py
 msgid "Patient \"{} {}\" has been saved."
 msgstr "Patient*in \"{} {}\" wurde gespeichert."
+
+#: cms/views/patients/intake_form_view.py
+msgid "Discharge in ward \"{}\" not possible on {}."
+msgstr "Entlassung in Station \"{}\" nicht möglich am {}."
 
 #: cms/views/patients/intake_form_view.py
 msgid "Intake for patient \"{} {}\" with diagnosis \"{}\" has been saved."
