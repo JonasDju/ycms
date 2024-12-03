@@ -1,4 +1,4 @@
-export const addRemovalEventListeners = (container: HTMLElement) => {
+const addRemovalEventListeners = (container: HTMLElement) => {
     container.querySelectorAll<HTMLElement>(".bed-remover").forEach((remover) => {
         remover.addEventListener("click", () => {
             const bed = remover.closest(".flex.items-center.gap-2");
@@ -18,7 +18,7 @@ export const addRemovalEventListeners = (container: HTMLElement) => {
     });
 };
 
-export const newBedListener = (room: HTMLElement, newBedPrototype: HTMLElement) => {
+const newBedListener = (room: HTMLElement, newBedPrototype: HTMLElement) => {
     const newBedButton = room.querySelector(".bed-adder") as HTMLElement;
     newBedButton.addEventListener("click", () => {
         const newBed = newBedPrototype.cloneNode(true) as HTMLElement;
