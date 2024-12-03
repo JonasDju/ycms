@@ -1,15 +1,24 @@
-export const addRemovalEventListeners = (container: HTMLElement) => {
-    container.querySelectorAll<HTMLElement>(".element-remover").forEach((remover) => {
+const addRemovalEventListeners = (container: HTMLElement) => {
+    container.querySelectorAll<HTMLElement>(".bed-remover").forEach((remover) => {
         remover.addEventListener("click", () => {
-            const parent = remover.closest(".flex.items-center.gap-2");
-            if (parent) {
-                parent.remove();
+            const bed = remover.closest(".flex.items-center.gap-2");
+            if (bed) {
+                bed.remove();
+            }
+        });
+    });
+
+    container.querySelectorAll<HTMLElement>(".room-remover").forEach((remover) => {
+        remover.addEventListener("click", () => {
+            const room = remover.closest(".new-room");
+            if (room) {
+                room.remove();
             }
         });
     });
 };
 
-export const newBedListener = (room: HTMLElement, newBedPrototype: HTMLElement) => {
+const newBedListener = (room: HTMLElement, newBedPrototype: HTMLElement) => {
     const newBedButton = room.querySelector(".bed-adder") as HTMLElement;
     newBedButton.addEventListener("click", () => {
         const newBed = newBedPrototype.cloneNode(true) as HTMLElement;
