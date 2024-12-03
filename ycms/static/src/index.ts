@@ -18,6 +18,7 @@ import { createIconsAt } from "./js/utils/create-icons";
 import "./js/patients-list";
 import "./js/utils/loader";
 import "./js/utils/set-language";
+import "./js/patient-intake";
 
 window.addEventListener("DOMContentLoaded", () => {
     createIconsAt(document.documentElement);
