@@ -133,7 +133,7 @@ class WardDeleteView(DeleteView):
     success_url = reverse_lazy("cms:protected:ward_management")
 
     def form_valid(self, form):
-        messages.success(self.request, _("Ward has been deleted."))
+        messages.success(self.request, _("The ward has been deleted."))
         return super().form_valid(form)
 
     def form_invalid(self, form):

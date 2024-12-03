@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2024-12-04 00:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -677,7 +677,6 @@ msgstr "Zuweisung aufheben"
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
 #: cms/templates/timeline/timeline.html cms/templates/ward/ward_card.html
-#: cms/templates/ward/ward_management.html
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -714,12 +713,12 @@ msgid "Close modal"
 msgstr "Modal schließen"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
-#: cms/templates/ward/ward_modal.html
+#: cms/templates/ward/ward_management.html cms/templates/ward/ward_modal.html
 msgid "Yes"
 msgstr "Ja"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
-#: cms/templates/ward/ward_modal.html
+#: cms/templates/ward/ward_management.html cms/templates/ward/ward_modal.html
 msgid "No"
 msgstr "Nein"
 
@@ -1130,16 +1129,16 @@ msgid "Ward Information"
 msgstr "Stationsinformationen"
 
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Ward Name"
+msgstr "Stationsname"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
 msgid "Ward Nickname"
 msgstr "Kurzer Stationsname"
 
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
 msgid "Floor"
 msgstr "Stockwerk"
-
-#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
-msgid "Ward Name"
-msgstr "Stationsname"
 
 #: cms/templates/ward/ward_card.html
 msgid "Rooms in this Ward"
@@ -1240,12 +1239,6 @@ msgstr "Verfügbare Betten"
 #: cms/templates/ward/ward_management.html
 msgid "Occupied"
 msgstr "Belegten Betten"
-
-#: cms/templates/ward/ward_management.html
-#, fuzzy
-#| msgid "Confirm password"
-msgid "Confirm"
-msgstr "Passwort bestätigen"
 
 #: cms/templates/ward/ward_modal.html
 msgid "Are you sure you want to discharge this patient?"
@@ -1410,14 +1403,12 @@ msgid "Added {} rooms with {} beds to \"{}\"."
 msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
 
 #: cms/views/ward/ward_management_view.py
-#, fuzzy
-#| msgid "Patient has been deleted."
-msgid "Ward has been deleted."
-msgstr "Patient*in wurde gelöscht."
+msgid "The ward has been deleted."
+msgstr "Die Station wurde gelöscht."
 
 #: cms/views/ward/ward_view.py
-msgid "Room numbers already exist: {}"
-msgstr ""
+msgid "The following room numbers already exist: {}"
+msgstr "Die folgenden Zimmernummern existieren bereits: {}"
 
 #: cms/views/ward/ward_view.py
 msgid "Added {} new rooms with {} new beds to the ward."
@@ -1439,8 +1430,8 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
-#~ msgid "Are you sure you want to delete this ward?"
-#~ msgstr "Sind Sie sicher, dass Sie diese Station löschen möchten?"
+#~ msgid "Confirm"
+#~ msgstr "Passwort bestätigen"
 
 #~ msgid "ward number"
 #~ msgstr "Stationsnummer"

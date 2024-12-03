@@ -147,7 +147,7 @@ class WardEditView(UpdateView):
                     if duplicate_rooms:
                         messages.error(
                             self.request,
-                            _('Room numbers already exist: {}').format(
+                            _('The following room numbers already exist: {}').format(
                                 ', '.join(str(num) for num in duplicate_rooms)
                             ),
                         )
