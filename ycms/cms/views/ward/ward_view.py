@@ -131,34 +131,59 @@ class WardEditView(UpdateView):
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
 
     def form_valid(self, form):
-        ward = form.save()
-        
         if room_dict := self.request.POST.get("rooms"):
-            # Add new rooms without deleting existing ones
-            room_counter = 0
-            bed_counter = 0
-            for room_number, beds in json.loads(room_dict).items():
-                # Check if room number already exists
-                if not ward.rooms.filter(room_number=room_number).exists():
-                    room = Room.objects.create(
-                        ward=ward,
-                        creator=self.request.user,
-                        room_number=room_number
+            try:
+                with transaction.atomic():
+                    ward = form.save()
+                    room_counter = 0
+                    bed_counter = 0
+                    duplicate_rooms = []
+                    
+                    for room_number, beds in json.loads(room_dict).items():
+                        # Check if room number already exists
+                        if ward.rooms.filter(room_number=room_number).exists():
+                            duplicate_rooms.append(room_number)
+                
+                    if duplicate_rooms:
+                        messages.error(
+                            self.request,
+                            _('Room numbers already exist: {}').format(
+                                ', '.join(str(num) for num in duplicate_rooms)
+                            ),
+                        )
+                        # Raise exception to rollback transaction
+                        raise ValueError("Duplicate room numbers found")
+                    
+                    for room_number, beds in json.loads(room_dict).items():
+                        room = Room.objects.create(
+                            ward=ward,
+                            creator=self.request.user,
+                            room_number=room_number
+                        )
+                        room_counter += 1
+                        for bed_type in beds:
+                            bed_counter += 1
+                            Bed.objects.create(room=room, creator=self.request.user, bed_type=bed_type)
+                    
+                    if room_counter > 0:
+                        messages.success(
+                            self.request,
+                            _('Added {} new rooms with {} new beds to the ward.').format(
+                                room_counter, bed_counter
+                            ),
+                        )
+                    messages.success(
+                        self.request, _("Ward information has been successfully updated!")
                     )
-                    room_counter += 1
-                    for bed_type in beds:
-                        bed_counter += 1
-                        Bed.objects.create(room=room, creator=self.request.user, bed_type=bed_type)
-            
-            if room_counter > 0:
-                messages.success(
-                    self.request,
-                    _('Added {} new rooms with {} new beds to the ward.').format(
-                        room_counter, bed_counter
-                    ),
-                )
+                    
+            except ValueError:
+                # Return to the same page without saving anything
+                return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
+        else:
+            # If no rooms to add, just save the ward information
+            ward = form.save()
+            messages.success(
+                self.request, _("Ward information has been successfully updated!")
+            )
         
-        messages.success(
-            self.request, _("Ward information has been successfully updated!")
-        )
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
