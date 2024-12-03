@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 23:27+0100\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1173,7 +1173,6 @@ msgstr "Bettenzuweisung im Zimmer"
 msgid "No patients in this room..."
 msgstr "Im Zimmer sind aktuell keine Betten belegt..."
 
-
 #: cms/templates/ward/ward_info.html
 msgid "Total"
 msgstr "Gesamt"
@@ -1415,6 +1414,10 @@ msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
 #| msgid "Patient has been deleted."
 msgid "Ward has been deleted."
 msgstr "Patient*in wurde gelöscht."
+
+#: cms/views/ward/ward_view.py
+msgid "Room numbers already exist: {}"
+msgstr ""
 
 #: cms/views/ward/ward_view.py
 msgid "Added {} new rooms with {} new beds to the ward."

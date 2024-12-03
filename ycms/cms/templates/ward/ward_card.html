@@ -20,17 +20,30 @@
                         {% csrf_token %}
                         <div class="grid gap-4">
                             <div>
-                                <label for="id_ward_nickname"
-                                       class="{% if ward_form.fields.ward_nickname.required %}field-required{% endif %}">
+                                <label for="id_name_{{ ward.id }}"
+                                       class="{% if ward_form.fields.name.required %}field-required{% endif %}">
+                                    {% translate "Ward Name" %}
+                                </label>
+                                <input
+                                    type="text"
+                                    id="id_name_{{ ward.id }}"
+                                    name="name"
+                                    value="{{ ward.name }}"
+                                    class="form-control"
+                                    {% if ward_form.fields.name.required %}required{% endif %} />
+                            </div>
+                            <div>
+                                <label for="id_nickname_{{ ward.id }}"
+                                       class="{% if ward_form.fields.nickname.required %}field-required{% endif %}">
                                     {% translate "Ward Nickname" %}
                                 </label>
                                 <input
                                     type="text"
-                                    id="id_ward_nickname_{{ ward.id }}"
-                                    name="ward_nickname"
+                                    id="id_nickname_{{ ward.id }}"
+                                    name="nickname"
                                     value="{{ ward.nickname }}"
                                     class="form-control"
-                                    {% if ward_form.fields.ward_nickname.required %}required{% endif %} />
+                                    {% if ward_form.fields.nickname.required %}required{% endif %} />
                             </div>
                             <div>
                                 <label for="id_floor_{{ ward.id }}"
@@ -44,19 +57,6 @@
                                     value="{{ ward.floor }}"
                                     class="form-control"
                                     {% if ward_form.fields.floor.required %}required{% endif %} />
-                            </div>
-                            <div>
-                                <label for="id_name_{{ ward.id }}"
-                                       class="{% if ward_form.fields.name.required %}field-required{% endif %}">
-                                    {% translate "Ward Name" %}
-                                </label>
-                                <input
-                                    type="text"
-                                    id="id_name_{{ ward.id }}"
-                                    name="name"
-                                    value="{{ ward.name }}"
-                                    class="form-control"
-                                    {% if ward_form.fields.name.required %}required{% endif %} />
                             </div>
                             <div class="mt-4">
                                 <h3 class="text-2xl font-semibold dark:text-white mb-4">{% translate "Rooms in this Ward" %}</h3>
