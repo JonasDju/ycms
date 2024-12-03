@@ -688,7 +688,7 @@ msgstr "Gemischtes Geschlecht"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
 msgid "Age gap is large"
-msgstr "Der Altersunterschied ist groß"
+msgstr "Großer Altersunterschied"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
 #: cms/templates/ward/ward_room_card.html
