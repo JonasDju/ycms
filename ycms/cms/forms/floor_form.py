@@ -19,3 +19,18 @@ class FloorForm(CustomModelForm):
 
         model = Floor
         fields = ["name", "code", "order"]
+
+
+class FloorUpdateForm(CustomModelForm):
+    """
+    Form for creating floors
+    """
+
+    class Meta:
+        """
+        This class contains additional meta configuration of the form class, see the :class:`django.forms.ModelForm`
+        for more information.
+        """
+
+        model = Floor
+        fields = ["id", "name", "code", "order"]

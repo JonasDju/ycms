@@ -139,7 +139,7 @@ urlpatterns = [
             [
                 path("", floor.FloorView.as_view(), name="floor"),
                 path("create/", floor.FloorCreateView.as_view(), name="create_floor"),
-                # path("update/<int:pk>/", floor.FloorUpdateView.as_view(), name="update_floor"),
+                path("update/", floor.FloorUpdateView.as_view(), name="update_floor"),
                 path("delete/<int:pk>", floor.FloorDeleteView.as_view(), name="delete_floor")
             ]
         ),
