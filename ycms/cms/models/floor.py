@@ -16,16 +16,16 @@ class Floor(AbstractBaseModel):
     created_at = models.DateTimeField(default=current_or_travelled_time, null=False)
     updated_at = models.DateTimeField(auto_now=True, null=False)
     order = models.IntegerField(
-        verbose_name=_("floor order"), help_text=_("Order of the floor")
+       verbose_name=_("floor order"), help_text=_("Order of the floor"), unique=True
     )
     name = models.CharField(
-        null=True,
+        unique=True,
         max_length=30,
         verbose_name=_("floor name"),
         help_text=_("Name of the floor"),
     )
     code = models.CharField(
-        null=True,
+        unique=True,
         max_length=10,
         verbose_name=_("floor code"),
         help_text=_("Shortname of the floor"),
