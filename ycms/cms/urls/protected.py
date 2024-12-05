@@ -162,5 +162,4 @@ urlpatterns = [
         ),
     ),
     path("settings/", user_settings_view.UserSettingsView.as_view(), name="settings"),
-    path("floor/", FloorView.as_view(), name="floor"),
 ]
