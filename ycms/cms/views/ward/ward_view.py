@@ -49,47 +49,57 @@ class WardView(TemplateView):
         :rtype: ~django.template.response.TemplateResponse
         """
         pk = kwargs.get("pk")
-        ward = Ward.objects.get(id=pk)
-        rooms = [
-            (
-                room,
-                [
-                    (
-                        patient,
-                        PatientForm(instance=patient),
-                        IntakeBedAssignmentForm(instance=patient.current_stay),
+        if Ward.objects.filter(id=pk).count() == 0 and Ward.objects.count() > 0:
+            pk = Ward.objects.first().id
+        try:
+            ward = Ward.objects.get(id=pk)
+            rooms = [
+                (
+                    room,
+                    [
+                        (
+                            patient,
+                            PatientForm(instance=patient),
+                            IntakeBedAssignmentForm(instance=patient.current_stay),
+                        )
+                        for patient in room.patients()
+                    ],
+                )
+                for room in ward.rooms.all()
+            ]
+            wards = Ward.objects.all().order_by('name')
+            unassigned_bed_assignments = [
+                (
+                    unassigned,
+                    PatientForm(instance=unassigned.medical_record.patient),
+                    IntakeBedAssignmentForm(instance=unassigned),
+                )
+                for unassigned in BedAssignment.objects.filter(
+                    models.Q(admission_date__lte=current_or_travelled_time())
+                    & models.Q(bed__isnull=True)
+                    & (
+                        models.Q(discharge_date__gt=current_or_travelled_time())
+                        | models.Q(discharge_date__isnull=True)
                     )
-                    for patient in room.patients()
-                ],
-            )
-            for room in ward.rooms.all()
-        ]
-        wards = Ward.objects.all().order_by('name')
-        unassigned_bed_assignments = [
-            (
-                unassigned,
-                PatientForm(instance=unassigned.medical_record.patient),
-                IntakeBedAssignmentForm(instance=unassigned),
-            )
-            for unassigned in BedAssignment.objects.filter(
-                models.Q(admission_date__lte=current_or_travelled_time())
-                & models.Q(bed__isnull=True)
-                & (
-                    models.Q(discharge_date__gt=current_or_travelled_time())
-                    | models.Q(discharge_date__isnull=True)
-                )
-                & (
-                    models.Q(recommended_ward__isnull=True)
-                    | models.Q(recommended_ward=ward)
-                )
-            ).order_by("-updated_at")
-        ]
+                    & (
+                        models.Q(recommended_ward__isnull=True)
+                        | models.Q(recommended_ward=ward)
+                    )
+                ).order_by("-updated_at")
+            ]
+            patient_info = self._get_patient_info(ward.patients)
+        except Ward.DoesNotExist:
+            rooms = []
+            ward = None
+            unassigned_bed_assignments = []
+            patient_info = {}
+            wards = []
 
         return {
             "rooms": rooms,
             "corridor_index": len(rooms) // 2,
             "ward": ward,
-            "patient_info": self._get_patient_info(ward.patients),
+            "patient_info": patient_info,
             "wards": wards,
             "selected_ward_id": pk,
             "unassigned_bed_assignments": unassigned_bed_assignments,
