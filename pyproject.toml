@@ -27,6 +27,7 @@ dependencies = [
     "django-debug-toolbar",
     "django-webpack-loader",
     "django-widget-tweaks",
+    "django-mathfilters",
     "pillow",
     "psycopg[binary]",
     "python-magic",

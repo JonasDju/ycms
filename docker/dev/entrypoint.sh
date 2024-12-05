@@ -1,6 +1,29 @@
 #!/bin/bash
 
+#Define cleanup procedure
+cleanup() {
+    # Execute the makemessages command update the .po files on exit
+    cd "ycms"
+    ycms-cli makemessages -l de --add-location file --verbosity 0
+}
+
+#Trap SIGTERM -> execute cleanup procedure
+trap 'cleanup' SIGTERM
+
+
+# Change into the ycms directory
 cd ycms
+
+# Temporary solution to migrate users from .packagestate to .dockercache
+if [ -d ".packagestate" ]; then
+    echo "Migrating from .packagestate to .dockercache"
+    mv .packagestate .dockercache
+    mkdir -p .dockercache/packages
+
+    # Move all files (package hashes) into the newly created packages folder
+    mv .dockercache/* .dockercache/packages/ 2>/dev/null
+fi
+
 
 # This function shows a success message once the YCMS development server is running
 function listen_for_devserver {
@@ -23,6 +46,9 @@ source .venv/bin/activate
 
 # Install python and js dependencies
 ../install_dependencies.sh
+
+# Update translation files and compile if required
+../translate.sh
 
 # Perform migration (if required)
 echo "Performing migrations if required..."
@@ -55,4 +81,6 @@ done
 
 # Show success message once dev server is up
 listen_for_devserver &
-ycms-cli runserver "0.0.0.0:${YCMS_PORT}"
+ycms-cli runserver "0.0.0.0:${YCMS_PORT}" &
+
+wait $!

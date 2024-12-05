@@ -1,7 +1,19 @@
-const addRemovalEventListeners = (room: HTMLElement) => {
-    room.querySelectorAll<HTMLElement>(".element-remover").forEach((remover) => {
+const addRemovalEventListeners = (container: HTMLElement) => {
+    container.querySelectorAll<HTMLElement>(".bed-remover").forEach((remover) => {
         remover.addEventListener("click", () => {
-            (remover.parentNode?.parentNode as HTMLElement)?.remove();
+            const bed = remover.closest(".flex.items-center.gap-2");
+            if (bed) {
+                bed.remove();
+            }
+        });
+    });
+
+    container.querySelectorAll<HTMLElement>(".room-remover").forEach((remover) => {
+        remover.addEventListener("click", () => {
+            const room = remover.closest(".new-room");
+            if (room) {
+                room.remove();
+            }
         });
     });
 };
@@ -9,7 +21,10 @@ const addRemovalEventListeners = (room: HTMLElement) => {
 const newBedListener = (room: HTMLElement, newBedPrototype: HTMLElement) => {
     const newBedButton = room.querySelector(".bed-adder") as HTMLElement;
     newBedButton.addEventListener("click", () => {
-        newBedButton.parentNode?.insertBefore(newBedPrototype.cloneNode(true), newBedButton);
+        const newBed = newBedPrototype.cloneNode(true) as HTMLElement;
+        newBed.classList.remove("hidden");
+        newBedButton.parentNode?.insertBefore(newBed, newBedButton);
+        addRemovalEventListeners(room);
     });
 };
 
@@ -64,5 +79,39 @@ window.addEventListener("load", () => {
         event.preventDefault();
         (wardForm.querySelector("#rooms") as HTMLInputElement).value = gatherRoomData();
         wardForm.submit();
+    });
+
+    document.querySelectorAll("[data-delete-ward]").forEach((deleteButton) => {
+        deleteButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            const occupiedBeds = parseInt(deleteButton.getAttribute("data-occupied-beds") || "0", 10);
+            const formId = deleteButton.getAttribute("data-form-id") || "";
+            const form = document.getElementById(formId) as HTMLFormElement;
+
+            const modal = document.getElementById("confirm-modal");
+            const modalMessage = document.getElementById("modal-message");
+            const confirmButton = document.getElementById("modal-confirm");
+            const cancelButton = document.getElementById("modal-cancel");
+
+            if (!modal || !modalMessage || !confirmButton || !cancelButton || !form) {
+                return;
+            }
+
+            modalMessage.innerText =
+                occupiedBeds > 0
+                    ? `This ward has ${occupiedBeds} occupied beds. Are you sure you want to delete it?`
+                    : "Are you sure you want to delete this ward?";
+
+            modal.style.display = "flex";
+
+            confirmButton.onclick = () => {
+                form.submit();
+                modal.style.display = "none";
+            };
+
+            cancelButton.onclick = () => {
+                modal.style.display = "none";
+            };
+        });
     });
 });
