@@ -19,12 +19,6 @@ class Ward(AbstractBaseModel):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=current_or_travelled_time, null=False)
     updated_at = models.DateTimeField(auto_now=True, null=False)
-    ward_number = models.CharField(  # TODO change to int
-        unique=True,
-        max_length=32,
-        verbose_name=_("ward number"),
-        help_text=_("Number of the ward"),
-    )
     floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
     name = models.CharField(
         max_length=32,
