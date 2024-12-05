@@ -1,4 +1,5 @@
 from django.apps import apps
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
@@ -29,6 +30,22 @@ class Ward(AbstractBaseModel):
         max_length=32,
         verbose_name=_("ward name"),
         help_text=_("Name this ward is commonly referred to by"),
+    )
+    nickname = models.CharField(
+        max_length=32,
+        verbose_name=_("ward nickname"),
+        help_text=_("Nickname of this ward"),
+        blank=True,
+        default="",
+    )
+    allowed_discharge_days = models.SmallIntegerField(
+        default=127,  # binary mask, zero-indexed starting at Monday
+        verbose_name=_("allowed discharge days"),
+        help_text=_("Days of the week where discharges are allowed in this ward"),
+        validators=[
+            MinValueValidator(0),  # 0b0000000
+            MaxValueValidator(127),  # 0b1111111
+        ],
     )
 
     @cached_property
@@ -150,7 +167,11 @@ class Ward(AbstractBaseModel):
         :return: A readable string representation of the ward
         :rtype: str
         """
-        return f"{self.name} (ward {self.ward_number})"
+
+        if self.nickname != None and self.nickname != "":
+            return f"{self.nickname}"
+        else:
+            return f"{self.name}"
 
     def get_repr(self):
         """
@@ -160,7 +181,7 @@ class Ward(AbstractBaseModel):
         :return: The canonical string representation of the ward
         :rtype: str
         """
-        return f"<Ward (number: {self.ward_number})>"
+        return f"<Ward (name: {self.name})>"
 
     class Meta:
         verbose_name = _("ward")
