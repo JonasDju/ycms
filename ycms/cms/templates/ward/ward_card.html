@@ -31,6 +31,7 @@
                                     value="{{ ward.name }}"
                                     class="form-control"
                                     {% if ward_form.fields.name.required %}required{% endif %} />
+                                <div class="help-text">{{ ward_form.fields.name.help_text }}</div>
                             </div>
                             <div>
                                 <label for="id_nickname_{{ ward.id }}"
@@ -44,19 +45,21 @@
                                     value="{{ ward.nickname }}"
                                     class="form-control"
                                     {% if ward_form.fields.nickname.required %}required{% endif %} />
+                                <div class="help-text">{{ ward_form.fields.nickname.help_text }}</div>
                             </div>
                             <div>
                                 <label for="id_floor_{{ ward.id }}"
                                        class="{% if ward_form.fields.floor.required %}field-required{% endif %}">
                                     {% translate "Floor" %}
                                 </label>
-                                <input
-                                    type="text"
-                                    id="id_floor_{{ ward.id }}"
-                                    name="floor"
-                                    value="{{ ward.floor }}"
-                                    class="form-control"
-                                    {% if ward_form.fields.floor.required %}required{% endif %} />
+                                <select name="floor" id="id_floor_{{ ward.id }}">
+                                    {% for floor in ward_form.fields.floor.queryset %}
+                                        <option value="{{ floor.id }}" {% if ward.floor.id == floor.id %}selected{% endif %}>
+                                            {{ floor.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                <div class="help-text">{{ ward_form.fields.floor.help_text }}</div>
                             </div>
                             <div class="mt-4">
                                 <h3 class="text-2xl font-semibold dark:text-white mb-4">{% translate "Rooms in this Ward" %}</h3>

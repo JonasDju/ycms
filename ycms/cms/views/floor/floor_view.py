@@ -24,8 +24,8 @@ class FloorView(TemplateView):
 
         # Berechne den nächsten Etagen-Order
         index = sorted_floors.index(current_floor) if current_floor is not None else None
-        next = sorted_floors[index - 1] if index is not None and index > 0 else None
-        prev = sorted_floors[index + 1] if index is not None and index < len(sorted_floors) - 1 else None
+        next = sorted_floors[index - 1].name if index is not None and index > 0 else None
+        prev = sorted_floors[index + 1].name if index is not None and index < len(sorted_floors) - 1 else None
         context["next_floor_name"] = next
         context["prev_floor_name"] = prev
 

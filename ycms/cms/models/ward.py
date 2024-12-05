@@ -19,7 +19,7 @@ class Ward(AbstractBaseModel):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(default=current_or_travelled_time, null=False)
     updated_at = models.DateTimeField(auto_now=True, null=False)
-    floor = models.ForeignKey(Floor, on_delete=models.CASCADE)
+    floor = models.ForeignKey(Floor, on_delete=models.CASCADE, help_text=_("Floor thcis ward is located on"))
     name = models.CharField(
         max_length=32,
         verbose_name=_("ward name"),

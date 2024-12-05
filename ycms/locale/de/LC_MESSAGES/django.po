@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 13:39+0100\n"
+"POT-Creation-Date: 2024-12-05 15:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -523,6 +523,10 @@ msgstr "Benutzer"
 #: cms/models/user.py
 msgid "users"
 msgstr "Benutzer"
+
+#: cms/models/ward.py
+msgid "Floor this ward is located on"
+msgstr "Stockwerk, auf dem sich diese Station befindet"
 
 #: cms/models/ward.py
 msgid "ward name"
@@ -1517,9 +1521,6 @@ msgstr "Englisch"
 
 #~ msgid "Number of the ward"
 #~ msgstr "Nummer der Station"
-
-#~ msgid "Floor on which the nurse station for this ward is located"
-#~ msgstr "Stockwerk, auf dem sich das Dienstzimmer dieser Station befindet"
 
 #~ msgid "Occupation rate"
 #~ msgstr "Belegungsrate"
