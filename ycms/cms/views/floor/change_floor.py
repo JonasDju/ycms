@@ -38,15 +38,7 @@ class FloorCreateView(TemplateView):
         )
         if not floor_form.is_valid():
             floor_form.add_error_messages(request)
-            return render(
-                request,
-                self.template_name,
-                {
-                    "floor_form": floor_form,
-                    "floors": Floor.objects.all(),
-                    **super().get_context_data(**kwargs),
-                },
-            )
+            return redirect("cms:protected:floor")
         floor = floor_form.save()
         messages.success(
             request, _('Addition of new floor "{}" successful!').format(floor.name)
@@ -62,7 +54,6 @@ class FloorUpdateView(TemplateView):
     """
 
     template_name = "floor/update_floor.html"
-    # TODO(jan) make view pages grey when no wards
     # TODO(jan) delete modal (https://flowbite.com/blocks/application/crud-delete-confirm/)
     # TODO(jan) patients view -> load patients table entries on demand to improve speed
 
