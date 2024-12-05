@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-04 00:53+0100\n"
+"POT-Creation-Date: 2024-12-05 13:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -178,7 +178,9 @@ msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
 msgid ""
 "The selected admission and discharge dates overlap with an existing hospital "
 "stay."
-msgstr "Der ausgewählte Zeitraum kollidiert mit einem existierenden Krankenhausaufenthalt."
+msgstr ""
+"Der ausgewählte Zeitraum kollidiert mit einem existierenden "
+"Krankenhausaufenthalt."
 
 #: cms/forms/intake_record_form.py
 msgid "Search for existing patient"
@@ -261,6 +263,10 @@ msgid "Recommendation for stay at this ward"
 msgstr "Empfehlung zur Unterbringung auf dieser Station"
 
 #: cms/models/bed_assignment.py
+msgid "assignments"
+msgstr "Bettzuweisungen"
+
+#: cms/models/bed_assignment.py
 msgid "The bed assigned to the patient"
 msgstr "Diesem Patienten / dieser Patientin zugewiesenes Bett"
 
@@ -287,6 +293,38 @@ msgstr "Bettzuweisung"
 #: cms/models/bed_assignment.py
 msgid "bed assignments"
 msgstr "Bettzuweisungen"
+
+#: cms/models/floor.py
+msgid "floor order"
+msgstr "Stockwerkreihenfolge"
+
+#: cms/models/floor.py
+msgid "Order of the floor"
+msgstr "Reihenfolge des Stockwerks"
+
+#: cms/models/floor.py
+msgid "floor name"
+msgstr "Stockwerkname"
+
+#: cms/models/floor.py
+msgid "Name of the floor"
+msgstr "Name des Stockwerks"
+
+#: cms/models/floor.py
+msgid "floor code"
+msgstr "Stockwerkabkürzung"
+
+#: cms/models/floor.py
+msgid "Nickname of the floor"
+msgstr "Abkürzung für das Stockwerk"
+
+#: cms/models/floor.py
+msgid "floor"
+msgstr "Stockwerk"
+
+#: cms/models/floor.py
+msgid "floors"
+msgstr "Stockwerke"
 
 #: cms/models/icd10_entry.py
 msgid "code"
@@ -469,8 +507,8 @@ msgstr "Vorname des Angestellten / der Angestellten"
 msgid "Last name of the employee"
 msgstr "Nachname des Angestellten / der Angestellten"
 
-#: cms/models/user.py cms/templates/ward/ward_selection_form.html
 #: cms/models/user.py cms/templates/ward/ward_edit_drawer.html
+#: cms/templates/ward/ward_selection_form.html
 msgid "Ward"
 msgstr "Station"
 
@@ -485,14 +523,6 @@ msgstr "Benutzer"
 #: cms/models/user.py
 msgid "users"
 msgstr "Benutzer"
-
-#: cms/models/ward.py
-msgid "floor"
-msgstr "Stockwerk"
-
-#: cms/models/ward.py
-msgid "Floor on which the nurse station for this ward is located"
-msgstr "Stockwerk, auf dem sich das Dienstzimmer dieser Station befindet"
 
 #: cms/models/ward.py
 msgid "ward name"
@@ -542,45 +572,9 @@ msgstr "Patientendaten"
 msgid "Views"
 msgstr "Ansichten"
 
-#: cms/templates/_base.html
+#: cms/templates/_base.html cms/templates/floor/floor.html
 msgid "Floor View"
 msgstr "Etagenansicht"
-
-#: cms/templates/floor/floor_ward_card.html
-msgid "Go to Ward"
-msgstr "Zur Station"
-
-#: cms/templates/floor/add_floor.html
-msgid "Add New Floor"
-msgstr "Neue Etage hinzufügen"
-
-#: cms/templates/floor/add_floor.html
-msgid "Full Name"
-msgstr "Vollständiger Name"
-
-#: cms/templates/floor/add_floor.html
-msgid "Short Name"
-msgstr "Abkürzung"
-
-#: cms/templates/floor/floor_ward_card.html
-msgid "Occupation rate"
-msgstr "Belegungsrate"
-
-#: cms/templates/floor/floor_ward_card.html
-msgid "Occupied beds"
-msgstr "Belegte Betten"
-
-#: cms/templates/floor/floor.html
-msgid "Admin detected"
-msgstr "Admin erkannt"
-
-#: cms/templates/floor/floor.html
-msgid "Delete floor"
-msgstr "Etage löschen"
-
-#: cms/templates/floor/floor.html
-msgid "Close"
-msgstr "Schließen"
 
 #: cms/templates/_base.html
 msgid "Ward View"
@@ -708,6 +702,7 @@ msgid "Unassign"
 msgstr "Zuweisung aufheben"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
+#: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
 #: cms/templates/timeline/timeline.html cms/templates/ward/ward_card.html
@@ -757,8 +752,7 @@ msgid "No"
 msgstr "Nein"
 
 #: cms/templates/bed_assignment/bed_assignment_drawer.html
-#: cms/templates/ward/ward_info.html
-#: cms/templates/floor/floor_ward_card.html
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_info.html
 msgid "Unassigned Patients"
 msgstr "Nicht zugewiesene Patienten"
 
@@ -814,14 +808,19 @@ msgstr ""
 msgid "Use the link below to set a new password."
 msgstr "Nutzen Sie den folgenden Link um ein neues Passwort festzulegen."
 
-#: cms/templates/patients/hospital_stay_form.html
-msgid "Medical details"
-msgstr "Medizinische Details"
+#: cms/templates/floor/create_floor.html
+msgid "Add New Floor"
+msgstr "Neue Etage hinzufügen"
 
-#: cms/templates/patients/hospital_stay_form.html
-msgid "Organizational details"
-msgstr "Organisatorische Details"
+#: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
+msgid "Full Name"
+msgstr "Vollständiger Name"
 
+#: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
+msgid "Short Name"
+msgstr "Abkürzung"
+
+#: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
 #: cms/templates/patients/hospital_stay_form.html
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patient_details.html
@@ -830,6 +829,46 @@ msgstr "Organisatorische Details"
 #: cms/templates/ward/ward_card.html
 msgid "Save"
 msgstr "Speichern"
+
+#: cms/templates/floor/floor.html
+msgid "Info"
+msgstr ""
+
+#: cms/templates/floor/floor.html
+msgid "Admin detected"
+msgstr "Admin erkannt"
+
+#: cms/templates/floor/floor.html
+msgid "Delete floor"
+msgstr "Etage löschen"
+
+#: cms/templates/floor/floor.html cms/templates/floor/update_floor.html
+msgid "Edit floor"
+msgstr "Etage bearbeiten"
+
+#: cms/templates/floor/floor.html
+msgid "Close"
+msgstr "Schließen"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Occupied beds"
+msgstr "Belegte Betten"
+
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_info.html
+msgid "Available Beds"
+msgstr "Verfügbare Betten"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Go to Ward"
+msgstr "Zur Station"
+
+#: cms/templates/patients/hospital_stay_form.html
+msgid "Medical details"
+msgstr "Medizinische Details"
+
+#: cms/templates/patients/hospital_stay_form.html
+msgid "Organizational details"
+msgstr "Organisatorische Details"
 
 #: cms/templates/patients/hospital_stay_form.html
 msgid "Discharge now"
@@ -869,7 +908,6 @@ msgstr "Alter"
 
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
-#: cms/templates/floor/floor_ward_card.html
 msgid "Gender"
 msgstr "Geschlecht"
 
@@ -1216,10 +1254,6 @@ msgstr "Gesamt"
 msgid "Bed Availability"
 msgstr "Bettenverfügbarkeit"
 
-#: cms/templates/ward/ward_info.html cms/templates/floor/floor_ward_card.html
-msgid "Available Beds"
-msgstr "Verfügbare Betten"
-
 #: cms/templates/ward/ward_info.html cms/templates/ward/ward_management.html
 msgid "Total Beds"
 msgstr "Gesamtzahl der Betten"
@@ -1353,6 +1387,18 @@ msgstr ""
 "Wir haben eine Bestätigungsmail an \"{}\" gesandt. Bitten nutzen Sie den "
 "Link in der E-Mail, um Ihren Account zu aktivieren."
 
+#: cms/views/floor/change_floor.py
+msgid "Floor \"{}\" was added successfully!"
+msgstr "Stockwerk \"{}\" wurde erfolgreich hinzugefügt!"
+
+#: cms/views/floor/change_floor.py
+msgid "Floor \"{}\" was edited successfully!"
+msgstr "Stockwerk \"{}\" wurde erfolgreich bearbeitet!"
+
+#: cms/views/floor/change_floor.py
+msgid "Floor has been deleted."
+msgstr "Das Stockwerk wurde gelöscht."
+
 #: cms/views/patients/assign_view.py
 msgid "Successfully assigned \"{}, {}\" to bed {} in room {}."
 msgstr "\"{}, {}\" erfolgreich zu Bett {} in Raum {} zugewiesen."
@@ -1466,14 +1512,20 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
-#~ msgid "Confirm"
-#~ msgstr "Passwort bestätigen"
-
 #~ msgid "ward number"
 #~ msgstr "Stationsnummer"
 
 #~ msgid "Number of the ward"
 #~ msgstr "Nummer der Station"
+
+#~ msgid "Floor on which the nurse station for this ward is located"
+#~ msgstr "Stockwerk, auf dem sich das Dienstzimmer dieser Station befindet"
+
+#~ msgid "Occupation rate"
+#~ msgstr "Belegungsrate"
+
+#~ msgid "Confirm"
+#~ msgstr "Passwort bestätigen"
 
 #~ msgid "Ward Number"
 #~ msgstr "Stationsnummer"

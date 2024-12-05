@@ -41,7 +41,7 @@ class FloorCreateView(TemplateView):
             return redirect("cms:protected:floor")
         floor = floor_form.save()
         messages.success(
-            request, _('Addition of new floor "{}" successful!').format(floor.name)
+            request, _('Floor \"{}\" was added successfully!').format(floor.name)
         )
 
         return redirect("cms:protected:floor")
@@ -82,7 +82,7 @@ class FloorUpdateView(TemplateView):
             return redirect("cms:protected:floor")
         floor_form.save()
         messages.success(
-            request, _('Update of floor "{}" successful!').format(floor_form.instance.name)
+            request, _('Floor \"{}\" was edited successfully!').format(floor_form.instance.name)
         )
 
         return redirect("cms:protected:floor")

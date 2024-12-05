@@ -28,7 +28,7 @@ class Floor(AbstractBaseModel):
         unique=True,
         max_length=10,
         verbose_name=_("floor code"),
-        help_text=_("Shortname of the floor"),
+        help_text=_("Nickname of the floor"),
     )
 
     @cached_property
