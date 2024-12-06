@@ -54,6 +54,7 @@ class FloorUpdateView(TemplateView):
     """
 
     template_name = "floor/update_floor.html"
+    # TODO(jan) add text like deleting floor will delete ... wards
     # TODO(jan) delete modal (https://flowbite.com/blocks/application/crud-delete-confirm/) for floors wards and patients
     # TODO(jan) patients view -> load patients table entries on demand to improve speed
 
