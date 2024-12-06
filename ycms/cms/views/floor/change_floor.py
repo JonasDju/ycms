@@ -41,7 +41,7 @@ class FloorCreateView(TemplateView):
             return redirect("cms:protected:floor")
         floor = floor_form.save()
         messages.success(
-            request, _('Floor \"{}\" was added successfully!').format(floor.name)
+            request, _('Floor "{}" was added successfully!').format(floor.name)
         )
 
         return redirect("cms:protected:floor")
@@ -54,6 +54,10 @@ class FloorUpdateView(TemplateView):
     """
 
     template_name = "floor/update_floor.html"
+    # TODO(jan) add button for wards on floor view
+    # TODO(jan) fix timeline issue no wards
+    # TODO(jan) check delete modal for patients
+    # TODO(jan) floor sidebar scrolling vertikal und scrolling für wards in floor view
     # TODO(jan) delete modal (https://flowbite.com/blocks/application/crud-delete-confirm/)
     # TODO(jan) patients view -> load patients table entries on demand to improve speed
 
@@ -75,17 +79,21 @@ class FloorUpdateView(TemplateView):
         instance = Floor.objects.get(id=request.POST.get("id", None))
 
         floor_form = FloorUpdateForm(
-            data=request.POST, additional_instance_attributes={"creator": request.user}, instance=instance
+            data=request.POST,
+            additional_instance_attributes={"creator": request.user},
+            instance=instance,
         )
         if not floor_form.is_valid():
             floor_form.add_error_messages(request)
             return redirect("cms:protected:floor")
         floor_form.save()
         messages.success(
-            request, _('Floor \"{}\" was edited successfully!').format(floor_form.instance.name)
+            request,
+            _('Floor "{}" was edited successfully!').format(floor_form.instance.name),
         )
 
         return redirect("cms:protected:floor")
+
 
 @method_decorator(permission_required("cms.change_floor"), name="dispatch")
 class FloorDeleteView(DeleteView):
