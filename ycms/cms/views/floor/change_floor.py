@@ -1,9 +1,9 @@
 from django.contrib import messages
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
-from django.views.generic import DeleteView, TemplateView, UpdateView
+from django.views.generic import DeleteView, TemplateView
 
 from ...decorators import permission_required
 from ...forms import FloorForm, FloorUpdateForm
@@ -54,11 +54,7 @@ class FloorUpdateView(TemplateView):
     """
 
     template_name = "floor/update_floor.html"
-    # TODO(jan) add button for wards on floor view
-    # TODO(jan) fix timeline issue no wards
-    # TODO(jan) check delete modal for patients
-    # TODO(jan) floor sidebar scrolling vertikal und scrolling für wards in floor view
-    # TODO(jan) delete modal (https://flowbite.com/blocks/application/crud-delete-confirm/)
+    # TODO(jan) delete modal (https://flowbite.com/blocks/application/crud-delete-confirm/) for floors wards and patients
     # TODO(jan) patients view -> load patients table entries on demand to improve speed
 
     def post(self, request, *args, **kwargs):

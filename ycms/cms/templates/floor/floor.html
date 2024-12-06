@@ -80,13 +80,10 @@
                         {% endfor %}
                         {% if user.is_staff and current_floor is not None %}
                             <div class="min-w-[200px] md:min-w-[250px] bg-gray-50 rounded-lg border border-green-300 bg-green-50 dark:bg-green-500">
-                                <button id="addWard"
+                                <button id="addWardButton"
                                         type="button"
-                                        class="max-w-sm p-6 h-full text-black dark:text-white hover:bg-green-200 dark:hover:bg-green-200 rounded-lg w-full text-center items-center justify-center transition-all duration-300 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 hover:shadow-md dark:hover:shadow-md"
-                                        action="">
-                                    <svg class="h-5 w-5 text-green-600 dark:text-green-800" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                    </svg> {% trans "Add ward" %}
+                                        class="max-w-sm p-6 h-full text-black dark:text-white hover:bg-green-200 dark:hover:bg-green-200 rounded-lg w-full text-center items-center justify-center transition-all duration-300 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 hover:shadow-md dark:hover:shadow-md">
+                                    <span>&plus;</span> <span>{% trans "Add ward" %}</span>
                                 </button>
                             </div>
                         {% endif %}
@@ -151,6 +148,10 @@
         if (updateButton) {
             updateButton.onclick = updateFloor;
         }
+
+        document.getElementById("addWardButton").onclick = function () {
+            location.href = "{% url 'cms:protected:ward_management' %}";
+        };
     </script>
     {% endif %}
 
