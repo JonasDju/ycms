@@ -21,14 +21,12 @@
                 <span class="sr-only">{% trans "Info" %}</span>
                 <h3 class="text-lg font-medium">{% trans "Admin detected" %}</h3>
                 <div class="flex flex-wrap ml-3 space-y-2 md:space-y-0">
-                    <button class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                            form="delete-floor-{{ current_floor.id }}">
-                        <form hidden
-                              id="delete-floor-{{ current_floor.id }}"
-                              method="post"
-                              action="{% url "cms:protected:delete_floor" current_floor.id %}">
-                            {% csrf_token %}
-                        </form>
+                    <button id="updateFloorButton"
+                        type="button"
+                        class="text-white bg-green-800 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        data-modal-target="deleteModal"
+                        data-modal-show="deleteModal"
+                        aria-controls="deleteModal">
                         <svg class="me-2 h-4 w-4"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="3 6 5 6 21 6" />  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />  <line x1="10" y1="11" x2="10" y2="17" />  <line x1="14" y1="11" x2="14" y2="17" /></svg>
                         {% trans "Delete floor" %}
                     </button>
@@ -103,6 +101,7 @@
             </div>
         </div>
     </div>
+    {% include "floor/delete_modal.html" %}
     {% include "floor/create_floor.html" %}
     {% if floor_count > 0 %}
     {% include "floor/update_floor.html" %}
@@ -152,6 +151,11 @@
         document.getElementById("addWardButton").onclick = function () {
             location.href = "{% url 'cms:protected:ward_management' %}";
         };
+
+        {% if floors|length > 0 %}
+            document.getElementById("deleteFloorFrom").action = "{% url "cms:protected:delete_floor" current_floor.id %}";
+            document.getElementById("deleteModalText").innerText = "{% trans "Are you sure you want to delete floor" %} {{ current_floor.name }}? {% trans "This will delete all" %} {{ floor_wards|length }} {% trans "wards on this floor." %}";
+        {% endif %}
     </script>
     {% endif %}
 
