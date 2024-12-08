@@ -101,7 +101,7 @@
             </div>
         </div>
     </div>
-    {% include "floor/delete_modal.html" %}
+    {% include "delete_modal.html" %}
     {% include "floor/create_floor.html" %}
     {% if floor_count > 0 %}
     {% include "floor/update_floor.html" %}
@@ -153,7 +153,7 @@
         };
 
         {% if floors|length > 0 %}
-            document.getElementById("deleteFloorFrom").action = "{% url "cms:protected:delete_floor" current_floor.id %}";
+            document.getElementById("deleteModalFrom").action = "{% url "cms:protected:delete_floor" current_floor.id %}";
             document.getElementById("deleteModalText").innerText = "{% trans "Are you sure you want to delete floor" %} {{ current_floor.name }}? {% trans "This will delete all" %} {{ floor_wards|length }} {% trans "wards on this floor." %}";
         {% endif %}
     </script>

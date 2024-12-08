@@ -103,8 +103,7 @@
                             <td class="px-6 py-3 text-center">
                                 <span>
                                     {% if patient.current_room %}
-                                        {% translate "Stays in:" %} <a class="text-blue-500"
-    href="{% url "cms:protected:ward_detail" pk=patient.current_ward.id %}?drawer=drawer-right-{{ patient.current_room.room_number }}">{{ patient.current_ward.name }}, {% translate "Room" %} {{ patient.current_room.room_number }}</a>
+                                        {% translate "Stays in:" %} <a class="text-blue-500" href="{% url "cms:protected:ward_detail" pk=patient.current_ward.id %}?drawer=drawer-right-{{ patient.current_room.room_number }}">{{ patient.current_ward.name }}, {% translate "Room" %} {{ patient.current_room.room_number }}</a>
                                     {% elif patient.current_stay %}
                                         <b class="text-red-500">
                                             {% if patient.current_stay.recommended_ward %}
@@ -155,6 +154,13 @@
                                         {% translate "Save" %}
                                     </button>
                                     <button class="grow text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                        data-modal-target="deleteModal"
+                                        data-modal-show="deleteModal"
+                                        aria-controls="deleteModal"
+                                        onclick="setDeleteModalValues({{ patient.id }}, '{{ patient.last_name }}', '{{ patient.first_name }}', {% if patient.current_room %}{{ patient.current_room }}{% else %}null{% endif %})">
+                                        {% translate "Delete" %}
+                                    </button>
+                                    <button class="grow text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                                             form="delete-patient-{{ patient.id }}">
                                         <form hidden
                                               id="delete-patient-{{ patient.id }}"
@@ -171,5 +177,13 @@
                 </tbody>
             </table>
         </div>
+    {% include "delete_modal.html" %}
+    <script>
+        function setDeleteModalValues(patientId, lastName, firstName, currentRoom) {
+            console.log(currentRoom);
+            document.getElementById("deleteModalFrom").action = "{% url "cms:protected:delete_patient" 0 %}";
+            document.getElementById("deleteModalText").innerText = "{% trans "Are you sure you want to delete patient" %} " + lastName + ", " + firstName + "?";
+        }
+    </script>
     {% endif %}
 {% endblock content %}
