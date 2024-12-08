@@ -157,17 +157,7 @@
                                         data-modal-target="deleteModal"
                                         data-modal-show="deleteModal"
                                         aria-controls="deleteModal"
-                                        onclick="setDeleteModalValues({{ patient.id }}, '{{ patient.last_name }}', '{{ patient.first_name }}', {% if patient.current_room %}{{ patient.current_room }}{% else %}null{% endif %})">
-                                        {% translate "Delete" %}
-                                    </button>
-                                    <button class="grow text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                            form="delete-patient-{{ patient.id }}">
-                                        <form hidden
-                                              id="delete-patient-{{ patient.id }}"
-                                              method="post"
-                                              action="{% url "cms:protected:delete_patient" patient.id %}">
-                                            {% csrf_token %}
-                                        </form>
+                                        onclick="setDeleteModalValues({{ patient.id }}, '{{ patient.last_name }}', '{{ patient.first_name }}', {% if patient.current_room %}'{{ patient.current_room.room_number }}', '{{ patient.current_ward.name }}'{% else %}null, null{% endif %})">
                                         {% translate "Delete" %}
                                     </button>
                                 </div>
@@ -179,10 +169,12 @@
         </div>
     {% include "delete_modal.html" %}
     <script>
-        function setDeleteModalValues(patientId, lastName, firstName, currentRoom) {
-            console.log(currentRoom);
+        function setDeleteModalValues(patientId, lastName, firstName, currentRoomNumber, currentWardName) {
             document.getElementById("deleteModalFrom").action = "{% url "cms:protected:delete_patient" 0 %}";
             document.getElementById("deleteModalText").innerText = "{% trans "Are you sure you want to delete patient" %} " + lastName + ", " + firstName + "?";
+            if (currentRoomNumber) {
+                document.getElementById("deleteModalText").innerText += " {% trans "The patient stays in room" %} " + currentRoomNumber + " {% trans "in ward" %} " + currentWardName + ".";
+            }
         }
     </script>
     {% endif %}

@@ -54,8 +54,6 @@ class FloorUpdateView(TemplateView):
     """
 
     template_name = "floor/update_floor.html"
-    # TODO(jan) do modal like id="assign-modal"
-    # TODO(jan) delete modal (https://flowbite.com/blocks/application/crud-delete-confirm/) for floors wards and patients
     # TODO(jan) patients view -> load patients table entries on demand to improve speed
 
     def post(self, request, *args, **kwargs):
