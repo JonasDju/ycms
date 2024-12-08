@@ -82,15 +82,15 @@ VIEWS = [
             (
                 "cms:protected:ward_management",
                 [ROOT, ZBM],
-                {"ward_number": 11, "floor": 2, "name": "Testward"},
+                {"floor": 2, "name": "Testward", "nickname": "TW"},
             ),
             (
                 "cms:protected:ward_management",
                 [ROOT, ZBM],
                 {
-                    "ward_number": 11,
                     "floor": 2,
                     "name": "Testward",
+                    "nickname": "TW",
                     "rooms": json.dumps(
                         {
                             "room_1": ["normal", "small"],

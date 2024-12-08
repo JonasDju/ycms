@@ -353,6 +353,14 @@ input[type="submit"] {
     width: var(--progress-width, 0%);
 }
 
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
+
+   @apply pl-6 text-gray-800 bg-gray-100 border-blue-500;
+   @apply dark:bg-gray-500 dark:text-white;
+}
+
 /***********
 * TIMELINE *
 ***********/

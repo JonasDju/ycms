@@ -1,0 +1,131 @@
+{% load i18n %}
+{% load widget_tweaks %}
+<div class="bg-white rounded-lg shadow-lg p-4 w-full dark:bg-gray-800">
+    <!-- Display Mode -->
+    <div>
+        <!-- Ward Information Header -->
+        <div class="text-center mb-6">
+            <h2 class="text-2xl font-semibold dark:text-white">{% translate "Ward Information" %}</h2>
+        </div>
+        <!-- Ward Details -->
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+            <!-- Ward Information -->
+            <div class="mb-2">
+                <form enctype="multipart/form-data"
+                          method="post"
+                          id="ward_form_{{ ward.id }}"
+                          action="{% url "cms:protected:edit_ward" ward.id %}"
+                          class="mb-8"
+                          data-unsaved-warning>
+                        {% csrf_token %}
+                        <div class="grid gap-4">
+                            <div>
+                                <label for="id_name_{{ ward.id }}"
+                                       class="{% if ward_form.fields.name.required %}field-required{% endif %}">
+                                    {% translate "Ward Name" %}
+                                </label>
+                                <input
+                                    type="text"
+                                    id="id_name_{{ ward.id }}"
+                                    name="name"
+                                    value="{{ ward.name }}"
+                                    class="form-control"
+                                    {% if ward_form.fields.name.required %}required{% endif %} />
+                                <div class="help-text">{{ ward_form.fields.name.help_text }}</div>
+                            </div>
+                            <div>
+                                <label for="id_nickname_{{ ward.id }}"
+                                       class="{% if ward_form.fields.nickname.required %}field-required{% endif %}">
+                                    {% translate "Ward Nickname" %}
+                                </label>
+                                <input
+                                    type="text"
+                                    id="id_nickname_{{ ward.id }}"
+                                    name="nickname"
+                                    value="{{ ward.nickname }}"
+                                    class="form-control"
+                                    {% if ward_form.fields.nickname.required %}required{% endif %} />
+                                <div class="help-text">{{ ward_form.fields.nickname.help_text }}</div>
+                            </div>
+                            <div>
+                                <label for="id_floor_{{ ward.id }}"
+                                       class="{% if ward_form.fields.floor.required %}field-required{% endif %}">
+                                    {% translate "Floor" %}
+                                </label>
+                                <select name="floor" id="id_floor_{{ ward.id }}">
+                                    {% for floor in ward_form.fields.floor.queryset %}
+                                        <option value="{{ floor.id }}" {% if ward.floor.id == floor.id %}selected{% endif %}>
+                                            {{ floor.name }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                <div class="help-text">{{ ward_form.fields.floor.help_text }}</div>
+                            </div>
+                            <div class="mt-4">
+                                <h3 class="text-2xl font-semibold dark:text-white mb-4">{% translate "Rooms in this Ward" %}</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+                                    <input type="hidden" id="rooms_{{ ward.id }}" name="rooms" value="">
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="hidden edit-room-prototype edit-room flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                            <div class="!-mb-4 help-text">{% translate "Room number" %}</div>
+                                            <div class="flex items-center gap-2">
+                                                <input class="w-full"
+                                                       type="text"
+                                                       placeholder="{% translate "Room number" %}" />
+                                                <i icon-name="minus-circle"
+                                                   class="edit-room-remover text-red-600 cursor-pointer"></i>
+                                            </div>
+                                            <div class="!-mb-4 help-text">{% translate "Beds" %}</div>
+                                            <div class="edit-bed-prototype flex items-center gap-2">
+                                                <select>
+                                                    {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                                                </select>
+                                                <div>
+                                                    <i icon-name="minus-circle"
+                                                       class="edit-bed-remover text-red-600 cursor-pointer"></i>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <select>
+                                                    {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                                                </select>
+                                                <div>
+                                                    <i icon-name="minus-circle"
+                                                       class="edit-bed-remover text-red-600 cursor-pointer"></i>
+                                                </div>
+                                            </div>
+                                            <div class="edit-bed-adder flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                                <p class="hover:text-blue-600">
+                                                    {% translate "Add bed" %} <i icon-name="plus-circle"></i>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div data-ward-id="new-edit-room-button-{{ ward.id }}"
+                                             class="flex justify-center items-center cursor-pointer col-span-2 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                            <h2 class="hover:text-blue-600">
+                                                {% translate "Add room" %} <i icon-name="plus-circle"></i>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-end border-t pt-4 border-gray-200 rounded-b dark:border-gray-600">
+                                <div class="flex gap-4">
+                                    <button type="submit"
+                                            class="text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                                        {% translate "Save" %}
+                                    </button>
+                                    <button type="button"
+                                        data-drawer-hide="drawer-right-{{ ward.id }}"
+                                        aria-controls="drawer-right-{{ ward.id }}"
+                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                                        {% translate "Cancel" %}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

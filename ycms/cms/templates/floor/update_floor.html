@@ -1,0 +1,51 @@
+{% load i18n %}
+{% load widget_tweaks %}
+
+<div id="updateFloorModal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center" style="z-index: 9999;">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 w-full max-w-md">
+        <h2 class="text-lg font-bold text-black dark:text-white mb-4">
+            {% trans "Edit floor" %}
+        </h2>
+        <form enctype="multipart/form-data"
+              method="post"
+              id="floor_form"
+              class="mb-8"
+              action="{% url "cms:protected:update_floor" %}"
+              data-unsaved-warning>
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="floorNameUpdate" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {% trans "Full Name" %}
+                </label>
+                <input id="floorNameUpdate" name="name" type="text"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+            </div>
+            <div class="mb-4">
+                <label for="floorCodeUpdate" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {% trans "Short Name" %}
+                </label>
+                <input id="floorCodeUpdate" name="code" type="text"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+            </div>
+            <div class="mb-4">
+                <input id="floorOrderUpdate" name="order" type="hidden"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+            </div>
+            <div class="mb-4">
+                <input id="floorIdUpdate" name="id" type="hidden"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-green-500 focus:border-green-500 sm:text-sm" required>
+            </div>
+            <div class="flex justify-end">
+                <button type="button"
+                        class="mr-2 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                        data-modal-hide="updateFloorModal">
+                    {% trans "Cancel" %}
+                </button>
+                <button type="submit"
+                        class="inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    {% trans "Save" %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -18,6 +18,7 @@ from ..views.utility.autocomplete import (
     autocomplete_patient,
     fetch_patient,
 )
+from ..views.utility.patient_intake import fetch_ward_allowed_discharge_days
 
 urlpatterns = [
     path("", index.UserBasedRedirectView.as_view(), name="index"),
@@ -89,6 +90,11 @@ urlpatterns = [
                     patients.PlannedStayCancelView.as_view(),
                     name="cancel_stay",
                 ),
+                path(
+                    "allowed-discharge-days/",
+                    fetch_ward_allowed_discharge_days,
+                    name="fetch_ward_allowed_discharge_days",
+                ),
             ]
         ),
     ),
@@ -123,6 +129,11 @@ urlpatterns = [
                 path(
                     "manage/", ward.WardManagementView.as_view(), name="ward_management"
                 ),
+                path(
+                    "delete/<int:pk>", ward.WardDeleteView.as_view(), name="delete_ward"
+                ),
+                path("edit/<int:pk>", ward.WardEditView.as_view(), name="edit_ward"),
+
             ]
         ),
     ),
@@ -144,6 +155,16 @@ urlpatterns = [
             ]
         ),
     ),
+    path(
+        "floor/",
+        include(
+            [
+                path("", floor.FloorView.as_view(), name="floor"),
+                path("create/", floor.FloorCreateView.as_view(), name="create_floor"),
+                path("update/", floor.FloorUpdateView.as_view(), name="update_floor"),
+                path("delete/<int:pk>", floor.FloorDeleteView.as_view(), name="delete_floor")
+            ]
+        ),
+    ),
     path("settings/", user_settings_view.UserSettingsView.as_view(), name="settings"),
-    path("floor/", FloorView.as_view(), name="floor"),
 ]

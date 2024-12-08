@@ -6,9 +6,9 @@
       "creator": 2,
       "created_at": "2024-01-16T06:15:18.398Z",
       "updated_at": "2024-01-16T06:15:18.398Z",
-      "ward_number": "intensivmedizin",
-      "floor": 1,
-      "name": "Intensivmedizin"
+      "floor": 3,
+      "name": "Intensivmedizin",
+      "nickname": "INT"
     }
   },
   {

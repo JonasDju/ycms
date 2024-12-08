@@ -55,7 +55,7 @@ limitations under the License.
                         <li>
                             {% url 'cms:protected:ward_management' as url %}
                             <a href="{{ url }}"
-                               class="{% if request.path == url %}selected{% endif %}">
+                               class="{% if floor_count is not None and floor_count == 0 %}inactiveLink{% endif %} {% if request.path == url %}selected{% endif %}">
                                 <i icon-name="activity"></i> {% translate "Ward Management" %}
                             </a>
                         </li>
@@ -81,14 +81,14 @@ limitations under the License.
                             {% url 'cms:protected:ward_detail_default' as url %}
                             {% url 'cms:protected:ward_management' as ward_management_url %}
                             <a href="{{ url }}"
-                               class="{% if request.path != ward_management_url %}{% if '/ward/' in request.path or '/timeline/' in request.path %}selected{% endif %}{% endif %}">
+                               class="{% if ward_count is not None and ward_count == 0 %}inactiveLink{% endif %} {% if request.path != ward_management_url %}{% if '/ward/' in request.path or '/timeline/' in request.path %}selected{% endif %}{% endif %}">
                                 <i icon-name="bed"></i> {% translate "Ward View" %}
                             </a>
                         </li>
                         <li>
                             {% url 'cms:protected:intake' as url %}
                             <a href="{{ url }}"
-                               class="{% if request.path == url %}selected{% endif %}">
+                               class="{% if floor_count is not None and floor_count == 0 %}inactiveLink{% endif %} {% if request.path == url %}selected{% endif %}">
                                 <i icon-name="user-plus"></i> {% translate "Patient Intake" %}
                             </a>
                         </li>
@@ -190,7 +190,7 @@ limitations under the License.
                         data-tooltip-placement="right">
                     <i id="leftIcon"
                        class="flex justify-center items-center h-6 w-6 transition-all ease-in-out duration-300">
-                        <span class="text-gray-400">|</span>
+                        <span class="text-gray-400"></span>
                     </i>
                 </button>
             </div>

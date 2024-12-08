@@ -83,8 +83,8 @@
                     <div class="flex flex-col gap-8">
                         <div>
                             <div>
-                                <label for="{{ record_form.diagnosis_code.id_for_label }}"
-                                       class="field-required">{{ record_form.diagnosis_code.label }}</label>
+                                <label for="{{ record_form.diagnosis_code.id_for_label }}">
+                                       {{ record_form.diagnosis_code.label }}</label>
                                 {% render_field record_form.diagnosis_code %}
                                 <div class="help-text">{{ record_form.diagnosis_code.help_text }}</div>
                             </div>
@@ -93,42 +93,97 @@
                                 {% render_field record_form.note style="height: 145px;" %}
                                 <div class="help-text">{{ record_form.note.help_text }}</div>
                             </div>
+                            <div>
+                                <label for="{{ bed_form.recommended_ward.id_for_label }}"
+                                    class="field-required">{{ bed_form.recommended_ward.label }}</label>
+                                {% render_field bed_form.recommended_ward required="" %}
+                                <div class="help-text">{{ bed_form.recommended_ward.help_text }}</div>
+                            </div>
+                            <div id="ward-allowed-discharge-days-info" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" role="alert">
+                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                </svg>
+                                <span>{% translate "Discharges possible on" %}&nbsp;</span>
+                                <span id="ward-allowed-discharge-days-first">days</span>
+                                <span id="ward-allowed-discharge-days-and">&nbsp;{% translate "and" %}&nbsp;</span>
+                                <span id="ward-allowed-discharge-days-last">day</span>.
+                            </div>
+                            <div id="ward-no-allowed-discharge-alert" class="flex items-center p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden" role="alert">
+                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                </svg>
+                                {% translate "No days are currently configured for discharge on this ward." %}
+                            </div>
                         </div>
                         <div>
-                            <div class="border-4 border-blue-500 rounded-lg p-4">
+                            <div class="border-4 border-gray-500 rounded-lg p-4">
                                 <div>
                                     <label for="{{ bed_form.admission_date.id_for_label }}"
                                            class="field-required">{{ bed_form.admission_date.label }}</label>
-                                    {% render_field bed_form.admission_date %}
+                                    {% render_field bed_form.admission_date required="" %}
                                     <div class="help-text">{{ bed_form.admission_date.help_text }}</div>
                                 </div>
                                 <div>
                                     <form>
                                         <label for="input-patient-intake-stay-duration"
-                                            class="field-required">{% translate "Estimated nights to stay" %}</label>
-                                        <input
-                                            type="number"
-                                            id="input-patient-intake-stay-duration"
-                                            class="form-input"
-                                            step="1"
-                                            value="7"
-                                            min="0"
-                                            required
-                                        />
+                                            class="field-required">{% translate "Estimated stay (nights/discharge date)" %}</label>
+                                        <div class="flex gap-4 items-center">
+                                            <input
+                                                type="number"
+                                                id="input-patient-intake-stay-duration"
+                                                class="form-input"
+                                                step="1"
+                                                value="7"
+                                                min="0"
+                                                required
+                                            />
+                                            <div class="inline-flex">
+                                              <button type="button" id="button-patient-intake-2n" class="bg-gray-200 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-l outline outline-1 outline-gray-500 whitespace-nowrap">
+                                                {% translate "two nights" %}
+                                              </button>
+                                              <button type="button" id="button-patient-intake-7n" class="bg-gray-200 hover:bg-gray-400 text-gray-800 py-2 px-4 outline outline-1 outline-gray-500 whitespace-nowrap">
+                                                {% translate "one week" %}
+                                              </button>
+                                              <button type="button" id="button-patient-intake-14n" class="bg-gray-200 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-r outline outline-1 outline-gray-500 whitespace-nowrap">
+                                                {% translate "two weeks" %}
+                                              </button>
+                                            </div>
+                                        </div>
                                         <p class="helptext">{% translate "estimated duration of hospital stay in nights" %}</p>
                                     </form>
                                 </div>
-                                <div>
-                                    <label for="{{ bed_form.discharge_date.id_for_label }}"
-                                           class="field-required">{{ bed_form.discharge_date.label }}</label>
-                                    {% render_field bed_form.discharge_date %}
+                                <div class="mt-4">
+                                    {% render_field bed_form.discharge_date required="" %}
                                     <div class="help-text">{{ bed_form.discharge_date.help_text }}</div>
                                 </div>
-                            </div>
-                            <div>
-                                <label for="{{ bed_form.recommended_ward.id_for_label }}">{{ bed_form.recommended_ward.label }}</label>
-                                {% render_field bed_form.recommended_ward %}
-                                <div class="help-text">{{ bed_form.recommended_ward.help_text }}</div>
+                                <div id="intake-alert-discharge-invalid" class="p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden">
+                                    <div class="flex items-center">
+                                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                        </svg>
+                                        <div>
+                                            {% translate "Discharges not allowed on " %}
+                                            <span id="intake-alert-discharge-invalid-day">day</span>.
+                                            <div id="intake-alert-discharge-with-next-day">
+                                                {% translate "Next possible discharge date is " %}
+                                                <span id="intake-alert-discharge-next-day">day</span>.
+                                            </div>
+                                            <div id="intake-alert-discharge-no-next-day">
+                                                {% translate "No next discharge date available in this ward." %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button id="intake-discharge-move-btn" type="button" class="mt-2 w-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded px-4 py-3 dark:bg-red-600 dark:hover:bg-red-800 dark:focus:ring-red-900">
+                                        {% translate "Move discharge to " %}
+                                        <span id="intake-discharge-move-day">day</span>.
+                                    </button>
+                                </div>
+                                <div id="intake-alert-discharge-before-admission" class="p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden">
+                                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                    </svg>
+                                      {% translate "Discharges cannot be earlier than the admission." %}
+                                </div>
                             </div>
                             <div>
                                 <label class="flex items-center"
@@ -144,102 +199,4 @@
             </div>
         </form>
     </div>
-    <!-- When changing the admission date, the estimated discharge date is modified to be one week after the changed admission date -->
-    <script>
-        // TODO: move these scripts to ycms/static/src/js/patient-select-or-create.ts
-        document.addEventListener("DOMContentLoaded", function() {
-            const admissionDateLabel = document.querySelector("label[for='{{ bed_form.admission_date.id_for_label }}']");
-            const dischargeDateLabel = document.querySelector("label[for='{{ bed_form.discharge_date.id_for_label }}']");
-
-            const admissionDateInput = admissionDateLabel ? document.getElementById(admissionDateLabel.htmlFor) : null;
-            const dischargeDateInput = dischargeDateLabel ? document.getElementById(dischargeDateLabel.htmlFor) : null;
-
-            const durationInput = document.getElementById("input-patient-intake-stay-duration");
-
-            function updateDischargeDate(daysAfterAdmission) {
-                const admissionDate = new Date(admissionDateInput.value);
-                const dischargeDate = new Date(admissionDate);
-                dischargeDate.setDate(admissionDate.getDate() + daysAfterAdmission);
-                // Format the discharge date as "YYYY-MM-DD HH:MM"
-                const year = dischargeDate.getFullYear();
-                const month = String(dischargeDate.getMonth() + 1).padStart(2, '0');
-                const day = String(dischargeDate.getDate()).padStart(2, '0');
-                const hours = String(dischargeDate.getHours()).padStart(2, '0');
-                const minutes = String(dischargeDate.getMinutes()).padStart(2, '0');
-                dischargeDateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
-            }
-
-            function getNightsBetweenAdmissionAndDischarge() {
-                const admissionDate = new Date(admissionDateInput.value);
-                const dischargeDate = new Date(dischargeDateInput.value);
-                let timeDifference = dischargeDate.getTime() - admissionDate.getTime();
-                if(timeDifference < 0) {
-                    return -1;      //Invalid! admission lies before discharge!
-                }
-                //ensure that e.g. 12h over night count as one night
-                timeDifference = timeDifference + admissionDate.getHours() * 3600000 + admissionDate.getMinutes() * 60000;
-                return Math.floor(timeDifference / (1000 * 3600 * 24));
-            }
-
-        dischargeDateInput.addEventListener('input', function() {
-            // Mark whether the user has manually modified the discharge date
-            dischargeDateInput.setAttribute('data-manually-changed', 'true');
-            //Adjust duration of stay
-            const duration = getNightsBetweenAdmissionAndDischarge();
-            if(duration >= 0) {
-                durationInput.value = duration;
-            } else {
-                durationInput.value = 0;
-            }
-        });
-
-        admissionDateInput.addEventListener('input', function() {
-            // Check if the discharge date has been manually modified
-            const isDischargeManuallyChanged = dischargeDateInput.getAttribute('data-manually-changed') === 'true';
-            // Only when the discharge date is not manually modified, it is automatically set to one week after admission
-            if (!isDischargeManuallyChanged) {
-                updateDischargeDate(7);
-            }
-            //Adjust duration of stay
-            const duration = getNightsBetweenAdmissionAndDischarge();
-            if(duration >= 0) {
-                durationInput.value = duration;
-            } else {
-                durationInput.value = 0;
-            }
-        });
-
-        //Avoid an admission date that lies behind a discharge date
-        dischargeDateInput.addEventListener('focusout', function() {
-            if(getNightsBetweenAdmissionAndDischarge() < 0) {
-                dischargeDateInput.value = admissionDateInput.value;
-            }
-        });
-        admissionDateInput.addEventListener('focusout', function() {
-            if(getNightsBetweenAdmissionAndDischarge() < 0) {
-                dischargeDateInput.value = admissionDateInput.value;
-            }
-        });
-
-        //Handle duration in nights input
-        durationInput.addEventListener('keypress', function(event) {
-            if (!/^[0-9]$/.test(event.key)) {       //Avoid input that is no digit
-                event.preventDefault();
-            }
-        });
-        durationInput.addEventListener('input', function () {
-            // Remove leading zeros
-            if (this.value.startsWith('0') && this.value.length > 1) {
-                this.value = this.value.replace(/^0+/, '');
-            }
-            if(this.value.length === 0) {
-                this.value = '0';
-            }
-            //Adjust Discharge date according to the duration in nights
-            updateDischargeDate(parseInt(this.value));
-        });
-
-
-    });
-    </script>
 {% endblock content %}
