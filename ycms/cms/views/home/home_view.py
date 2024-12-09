@@ -17,11 +17,21 @@ class HomeView(TemplateView):
         :return: A dictionary with the total count of each gender across all wards.
         :rtype: dict[str, int]
         """
-        return {
-            "female_patients": Patient.objects.filter(gender=gender.FEMALE).count(),
-            "male_patients": Patient.objects.filter(gender=gender.MALE).count(),
-            "divers_patients": Patient.objects.filter(gender=gender.DIVERSE).count(),
+        total_gender_distribution = {
+            "female_patients": 0,
+            "male_patients": 0,
+            "divers_patients": 0,
         }
+
+        # Iteriere durch alle Wards
+        for ward in Ward.objects.all():
+            ward_genders = ward.patient_genders  # Dictionary mit den Geschlechtern
+            total_gender_distribution["female_patients"] += ward_genders.get("f", 0)
+            total_gender_distribution["male_patients"] += ward_genders.get("m", 0)
+            total_gender_distribution["divers_patients"] += ward_genders.get("d", 0)
+
+        return total_gender_distribution
+
 
     def get_patient_statistics(self, num_days):
         target_date = make_aware(datetime.now())

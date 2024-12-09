@@ -51,6 +51,13 @@ limitations under the License.
                 </a>
                 <ul>
                     <span class="block mt-2 px-5 text-gray-500 tracking-wide dark:text-gray-300">{% translate "General" %}</span>
+                    <li>
+                        {% url 'cms:protected:home' as url %}
+                        <a href="{{ url }}"
+                            class="{% if request.path == url %}selected{% endif %}">
+                            <i class="fa fa-chart-bar"></i> &nbsp;{% translate "Dashboard" %}
+                        </a>
+                    </li>
                     {% if perms.cms.add_ward %}
                         <li>
                             {% url 'cms:protected:ward_management' as url %}
