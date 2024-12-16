@@ -55,7 +55,7 @@ limitations under the License.
                         {% url 'cms:protected:home' as url %}
                         <a href="{{ url }}"
                             class="{% if request.path == url %}selected{% endif %}">
-                            <i class="fa fa-chart-bar"></i> &nbsp;{% translate "Dashboard" %}
+                            <i class="fa fa-chart-bar"></i> &nbsp;{% translate "Home" %}
                         </a>
                     </li>
                     {% if perms.cms.add_ward %}
