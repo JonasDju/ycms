@@ -1,0 +1,97 @@
+<style>
+    /* Standard-Lichtmodus */
+    .apexcharts-datalabel-label,
+    .apexcharts-datalabel-value,
+    .apexcharts-datalabel-total {
+        fill: #000000 !important; /* Schwarz für Lichtmodus */
+    }
+  
+    .apexcharts-legend-text,
+    .apexcharts-xaxis text,
+    .apexcharts-yaxis text {
+        fill: #000000 !important; /* Achsenbeschriftungen und Legende schwarz */
+    }
+  
+    .apexcharts-grid line {
+        stroke: #E0E0E0 !important; /* Grid-Linien hellgrau */
+    }
+  
+    /* Dark Mode */
+    :root.dark .apexcharts-datalabel-label,
+    :root.dark .apexcharts-datalabel-value,
+    :root.dark .apexcharts-datalabel-total {
+        fill: #FFFFFF !important; /* Weiß für Dunkelmodus */
+    }
+  
+    :root.dark .apexcharts-legend-text,
+    :root.dark .apexcharts-xaxis text,
+    :root.dark .apexcharts-yaxis text {
+        fill: #FFFFFF !important; /* Achsenbeschriftungen und Legende weiß */
+    }
+  
+    :root.dark .apexcharts-grid line {
+        stroke: #374151 !important; /* Grid-Linien dunkler */
+    }
+  </style>
+  
+  <div class=" h-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-6 md:p-8">
+      <div class="flex justify-between">
+          <div>
+              <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-4">Bed Infos</h5>
+          </div>
+      </div>
+      <div id="bar-chart" class="w-full h-64"></div>
+  </div>
+  
+  <script>
+  var wardInfo = {
+      beds_count: {{ infos.beds_count }},
+      occupied_beds: {{ infos.occupied_beds }},
+      available_beds: {{ infos.available_beds }},
+  };
+  
+  var barChartOptions = {
+      chart: {
+          type: 'bar',
+          height: 350,
+          background: 'transparent', // Kein Hintergrund, passt sich dem Theme an
+      },
+      series: [{
+          name: 'Count',
+          data: [
+              { x: 'Total', y: wardInfo.beds_count, fillColor: '#4CAF50' }, 
+              { x: 'Available', y: wardInfo.available_beds, fillColor: '#FF9800' }, 
+              { x: 'Occupied', y: wardInfo.occupied_beds, fillColor: '#F44336' } 
+          ],
+      }],
+      plotOptions: {
+          bar: {
+              horizontal: false,
+              endingShape: 'rounded',
+              columnWidth: '50%',
+          },
+      },
+      dataLabels: {
+          enabled: false,
+          style: {
+              colors: ['#000000'], // Standard schwarz für Labels
+          },
+      },
+      xaxis: {
+          categories: ['Total', 'Available', 'Occupied'],
+          labels: {
+              style: {
+                  colors: '#000000', // Standardfarbe für Achsenbeschriftung
+              },
+          },
+      },
+      grid: {
+          borderColor: '#E0E0E0', // Standard grid Linien
+      },
+  };
+  
+  // Diagramm erstellen
+  var chart = new ApexCharts(document.querySelector("#bar-chart"), barChartOptions);
+  chart.render();
+  </script>
+

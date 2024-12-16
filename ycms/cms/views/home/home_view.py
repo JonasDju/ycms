@@ -1,10 +1,10 @@
 from django.views.generic import TemplateView
 from ...models import Ward
-from ...constants import gender
-from ...models import Patient
+from ...models import User
 from ...models import BedAssignment
 from django.utils.timezone import make_aware
 from datetime import datetime, timedelta
+from ...constants import job_types
 
 
 class HomeView(TemplateView):
@@ -45,6 +45,17 @@ class HomeView(TemplateView):
             ).count()
             results.append({'category': f"{day:%d.%m.%Y}", 'patients': count})
         return results
+    
+    def get_ward_info(self):
+        wards = Ward.objects.all()
+        return {
+            "wards_count": wards.count(),
+            "beds_count": sum(ward.total_beds for ward in wards),
+            "occupied_beds": sum(ward.occupied_beds for ward in wards),
+            "available_beds": sum(ward.available_beds for ward in wards),
+            "doctors_count": User.objects.filter(job_type=job_types.DOCTOR).count(),
+            "nurses_count": User.objects.filter(job_type=job_types.NURSE).count(),
+        }
 
     def get_context_data(self, **kwargs):
         """
@@ -53,4 +64,5 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["total_patient_genders"] = self.get_all_patient_genders()
         context["statistics"] = self.get_patient_statistics(7)
+        context["infos"] = self.get_ward_info()
         return context
