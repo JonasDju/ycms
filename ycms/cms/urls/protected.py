@@ -127,8 +127,9 @@ urlpatterns = [
                 path(
                     "delete/<int:pk>", ward.WardDeleteView.as_view(), name="delete_ward"
                 ),
-                path("edit/<int:pk>", ward.WardEditView.as_view(), name="edit_ward"),
-
+                path(
+                    "edit/<int:pk>", ward.WardEditView.as_view(), name="edit_ward"
+                ),
             ]
         ),
     ),
