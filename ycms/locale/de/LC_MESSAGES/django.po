@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the CMS package.
 # YCMS <info@ycms-app.de>
 # https://github.com/charludo/
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 15:02+0100\n"
+"POT-Creation-Date: 2025-01-05 18:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -199,8 +199,44 @@ msgid "Best guess for the patient's approximate age"
 msgstr "Schätzung des ungefähren Alters des Patienten/der Patientin"
 
 #: cms/forms/upload_csv_form.py
+msgid "Patient only"
+msgstr "Nur Patient"
+
+#: cms/forms/upload_csv_form.py
+msgid "Patient + medical record"
+msgstr "Patient + medizinische Unterlage"
+
+#: cms/forms/upload_csv_form.py
+msgid "Patient + stay"
+msgstr "Patient + Aufenthalt"
+
+#: cms/forms/upload_csv_form.py
+msgid "Patient + ward"
+msgstr "Patient + Station"
+
+#: cms/forms/upload_csv_form.py
+msgid "Patient + bed"
+msgstr "Patient + Bett"
+
+#: cms/forms/upload_csv_form.py
 msgid "Import patient data"
 msgstr "Patientendaten importieren"
+
+#: cms/forms/upload_csv_form.py
+msgid "Choose categories to import"
+msgstr "Wähle zu importende Kategorien"
+
+#: cms/import_data.py
+msgid "The CSV file could not be read."
+msgstr "Die CSV-Datei konnte nicht gelesen werden."
+
+#: cms/import_data.py
+msgid "Missing columns: "
+msgstr "Fehlende Spalten: "
+
+#: cms/import_data.py
+msgid "An error occured when importing entry no. {}."
+msgstr "Beim Importieren von Eintrag Nr. {} trat ein Fehler auf."
 
 #: cms/models/bed.py
 msgid "bed type"
@@ -1452,46 +1488,20 @@ msgid "Data was successfully imported."
 msgstr "Daten wurden erfolgreich importiert."
 
 #: cms/views/patients/patients_list_view.py
-msgid "New patients: {}"
-msgstr "Neue Patienten: {}"
+msgid "New patients added: {}"
+msgstr "Neue Patienten hinzugefügt: {}"
 
 #: cms/views/patients/patients_list_view.py
-msgid "New diagnosis codes: {}"
-msgstr "Neue Diagnosecodes: {}"
+msgid "Duplicated entries found: {}"
+msgstr "Doppelte Einträge gefunden: {}"
 
 #: cms/views/patients/patients_list_view.py
-msgid "New medical records: {}"
-msgstr "Neue medizinische Unterlagen: {}"
+msgid "Entries updated: {}"
+msgstr "Einträge aktualisiert: {}"
 
 #: cms/views/patients/patients_list_view.py
-msgid "New bed assignments: {}"
-msgstr "Neue Bettzuweisungen: {}"
-
-#: cms/views/patients/patients_list_view.py
-msgid "No new entries were found in CSV file."
-msgstr "In der CSV-Datei wurden keine neuen Einträge gefunden."
-
-#: cms/views/patients/patients_list_view.py
-#, fuzzy
-#| msgid "New record has been created."
-msgid "No new entries were created."
-msgstr "Neue medizinische Unterlage wurde erstellt."
-
-#: cms/views/patients/patients_list_view.py
-msgid "The CSV file could not be read."
-msgstr "Die CSV-Datei konnte nicht gelesen werden."
-
-#: cms/views/patients/patients_list_view.py
-msgid "The CSV file does not contain all required column labels."
-msgstr "Die CSV-Datei beinhaltet nicht alle notwendigen Spaltenbezeichnungen."
-
-#: cms/views/patients/patients_list_view.py
-msgid "An error occured when importing entry no. {}."
-msgstr "Beim Importieren von Eintrag Nr. {} trat ein Fehler auf."
-
-#: cms/views/patients/patients_list_view.py
-msgid "An error occured while uploading the file."
-msgstr "Beim Hochladen der Datei trat ein Fehler auf."
+msgid "No entries were added or updated."
+msgstr "Es wurden keine Einträge hinzugefügt oder aktualisiert."
 
 #: cms/views/patients/patients_list_view.py
 msgid "Patient {}, {} has been created."
@@ -1504,10 +1514,6 @@ msgstr "Patient*in {}, {} wurde bearbeitet."
 #: cms/views/patients/patients_list_view.py
 msgid "Patient has been deleted."
 msgstr "Patient*in wurde gelöscht."
-
-#: cms/views/patients/patients_list_view.py
-msgid "Only files with extension .csv are allowed."
-msgstr "Es sind nur Dateien mit Dateiendung .csv erlaubt."
 
 #: cms/views/patients/update_patient_stay_view.py
 msgid ""
@@ -1573,6 +1579,12 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "An error occured while uploading the file."
+#~ msgstr "Beim Hochladen der Datei trat ein Fehler auf."
+
+#~ msgid "Only files with extension .csv are allowed."
+#~ msgstr "Es sind nur Dateien mit Dateiendung .csv erlaubt."
 
 #~ msgid "ward number"
 #~ msgstr "Stationsnummer"

@@ -59,70 +59,44 @@ class UploadDataView(FormView):
     
     def form_valid(self, form):
         csv_file = form.cleaned_data['file']
-        import_result = import_data(csv_file=csv_file, user=self.request.user, val_sep=",")
-        import_error = import_result["error"]
-        p_count, dc_count = import_result["patient_count"], import_result["diagnosis_code_count"]
-        mr_count, ba_count = import_result["medical_record_count"], import_result["bed_assignment_count"]
+        data_to_import = form.cleaned_data['selected_categories']
+        import_result = import_data(
+            csv_file=csv_file,
+            user=self.request.user,
+            data_to_import=data_to_import,
+            val_sep=","
+        )
+        error_code = import_result["error_code"]
+        error_msg = import_result["error_msg"]
+        new_entries = import_result["new_entry_count"]
+        duplicate_entries = import_result["duplicate_entry_count"]
+        updated_entries = import_result["updated_entry_count"]
 
-        if import_error == None:
-            if sum ([p_count, dc_count, mr_count, ba_count]) > 0:
-                messages.success(
-                    self.request,
-                    _("Data was successfully imported."),
-                )
-                messages.info(
-                    self.request,
-                    _("New patients: {}").format(p_count),
-                )
-                messages.info(
-                    self.request,
-                    _("New diagnosis codes: {}").format(dc_count),
-                )
-                messages.info(
-                    self.request,
-                    _("New medical records: {}").format(mr_count),
-                )
-                messages.info(
-                    self.request,
-                    _("New bed assignments: {}").format(ba_count),
-                )
-            else:
-                messages.info(
-                    self.request,
-                    _("No new entries were found in CSV file.")
-                )
-                messages.info(
-                    self.request,
-                    _("No new entries were created."),
-                )
-        elif import_error == -1:
-            messages.error(
+        if error_code == None:
+            messages.success(
                 self.request,
-                _("The CSV file could not be read."),
+                _("Data was successfully imported."),
             )
             messages.info(
                 self.request,
-                _("No new entries were created."),
-            )
-        elif import_error == -2:
-            messages.error(
-                self.request,
-                _("The CSV file does not contain all required column labels."),
+                _("New patients added: {}").format(new_entries),
             )
             messages.info(
                 self.request,
-                _("No new entries were created."),
+                _("Duplicated entries found: {}").format(duplicate_entries)
+            )
+            messages.info(
+                self.request,
+                _("Entries updated: {}").format(updated_entries)
             )
         else:
             messages.error(
                 self.request,
-                _("An error occured when importing entry no. {}.").format(
-                    import_error
-                ),
+                error_msg,
             )
             messages.info(
                 self.request,
-                _("No new entries were created."),
+                _("No entries were added or updated."),
             )
         
         return super().form_valid(form)
@@ -135,8 +109,9 @@ class UploadDataView(FormView):
         else:
             messages.error(self.request, _("An error occured while uploading the file."))
         """
-        for error in form.errors['file']:
-            messages.error(self.request, error)
+        for field in form.errors:
+            for error in field:
+                messages.error(self.request, error)
         return redirect("cms:protected:patients")
 
 @method_decorator(permission_required("cms.add_patient"), name="dispatch")

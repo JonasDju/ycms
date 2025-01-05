@@ -22,6 +22,7 @@
                     method="post">
                     {% csrf_token %}
                     {{upload_csv_form.file.field.label}} {{upload_csv_form.file}}
+                    {{upload_csv_form.selected_categories.field.label}} {{upload_csv_form.selected_categories}}
                     <button type="submit" class="px-2 text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5 text-center w-full lg:w-auto">{% translate "Upload" %}</button>
                 </form>
             {% endif %}

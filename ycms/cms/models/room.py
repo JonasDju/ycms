@@ -182,3 +182,4 @@ class Room(AbstractBaseModel):
     class Meta:
         verbose_name = _("room")
         verbose_name_plural = _("rooms")
+        unique_together = ('room_number', 'ward')

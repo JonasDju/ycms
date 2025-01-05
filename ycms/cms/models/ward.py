@@ -180,3 +180,4 @@ class Ward(AbstractBaseModel):
     class Meta:
         verbose_name = _("ward")
         verbose_name_plural = _("wards")
+        unique_together = ('floor', 'name')
