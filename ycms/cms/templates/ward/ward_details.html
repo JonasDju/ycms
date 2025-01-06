@@ -1,0 +1,112 @@
+{% extends "_base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+{% load render_bundle from webpack_loader %}
+{% block title %}
+    {{ ward.nickname }}
+{% endblock title %}
+
+{% block content %}
+<div class="w-full flex flex-col flex-wrap mb-6">
+    <h1 class="heading">{{ ward.nickname }} ({{ ward.name }})</h1>
+</div>
+<div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+    <form method="post" class="md:columns-3" 
+        enctype="multipart/form-data"
+        method="post"
+        action="{% url "cms:protected:edit_ward" ward.pk %}"
+        data-unsaved-warning>
+        {% csrf_token %}
+        {% for field in ward_form %}
+            <div class="break-inside-avoid radio-row">
+                <label class="mt-0" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% render_field field %}
+                <div class="help-text">{{ field.help_text }}</div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn mt-8 w-full">{% translate "Save" %}</button>
+    </form>
+</div>
+<div class="w-full flex flex-col flex-wrap my-6">
+    <h1 class="heading">{% translate "create new rooms" %}</h1>
+</div>
+    {% if perms.cms.add_rooms %}
+        <form class="rounded-lg border border-gray-300 bg-white p-4 shadow-md relative mb-4 md:flex dark:bg-gray-800 dark:border-gray-700 items-start gap-4"
+            enctype="multipart/form-data"
+            method="post"
+            action="{% url "cms:protected:edit_ward" ward.pk %}"
+            data-unsaved-warning>
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+                <input type="hidden" id="rooms_{{ ward.id }}" name="rooms" value="">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="edit-room-prototype edit-room flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                        <div class="!-mb-4 help-text">{% translate "Room number" %}</div>
+                        <div class="flex items-center gap-2">
+                            <input class="w-full"
+                                   type="text"
+                                   placeholder="{% translate "Room number" %}" />
+                            <i icon-name="minus-circle"
+                               class="edit-room-remover text-red-600 cursor-pointer"></i>
+                        </div>
+                        <div class="!-mb-4 help-text">{% translate "Beds" %}</div>
+                        <div class="edit-bed-prototype flex items-center gap-2">
+                            <select>
+                                {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                            </select>
+                            <div>
+                                <i icon-name="minus-circle"
+                                   class="edit-bed-remover text-red-600 cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <select>
+                                {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                            </select>
+                            <div>
+                                <i icon-name="minus-circle"
+                                   class="edit-bed-remover text-red-600 cursor-pointer"></i>
+                            </div>
+                        </div>
+                        <div class="edit-bed-adder flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                            <p class="hover:text-blue-600">
+                                {% translate "Add bed" %} <i icon-name="plus-circle"></i>
+                            </p>
+                        </div>
+                    </div>
+                    <div data-ward-id="new-edit-room-button-{{ ward.id }}"
+                         class="flex justify-center items-center cursor-pointer col-span-2 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                        <h2 class="hover:text-blue-600">
+                            {% translate "Add room" %} <i icon-name="plus-circle"></i>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn mt-8 w-full flex-1">{% translate "Create" %}</button>
+        </form>
+    {% endif %}
+<div class="w-full flex flex-col flex-wrap my-6">
+    <h1 class="heading">{% translate "existing room" %}</h1>
+</div>
+{% for room in ward.rooms.all %}
+    <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+        <form method="post" class="md:columns-3"
+            enctype="multipart/form-data"
+            method="post"
+            action="{% url "cms:protected:update_room" room.id %}"
+            data-unsaved-warning>
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="mt-0" for="room_number">{% translate "Room number" %}
+                    <input class="w-full mt-2"
+                           type="text"
+                           name="room_number"
+                           value="{{ room.room_number }}"/>
+                </label>
+            </div>
+            <button type="submit" class="btn mt-8 w-full">{% translate "Save" %}</button>
+        </form>
+    </div>
+{% endfor %}
+{% endblock %}

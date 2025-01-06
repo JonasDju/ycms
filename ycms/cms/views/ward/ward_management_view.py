@@ -144,17 +144,18 @@ class WardDeleteView(DeleteView):
 
 @method_decorator(permission_required("cms.edit_ward"), name="dispatch")
 class WardEditView(UpdateView):
+    """
+    View to edit ward information
+    """
+
     model = Ward
     form_class = WardForm
-    template_name = "ward/ward_card.html"
-    success_url = reverse_lazy("cms:protected:ward_management")
+    # success_url = reverse_lazy("cms:protected:ward_management")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["rooms"] = self.object.rooms.all()
-        context["empty_rooms"] = self.object.rooms.filter(bedassignment__isnull=True)
-        context["bed_types"] = bed_types.CHOICES
-        return context
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({"prefix": self.kwargs["pk"]})
+        return kwargs
 
     def form_invalid(self, form):
         form.add_error_messages(self.request)

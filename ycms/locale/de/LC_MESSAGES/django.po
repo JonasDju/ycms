@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the CMS package.
 # YCMS <info@ycms-app.de>
 # https://github.com/charludo/
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-17 20:19+0100\n"
+"POT-Creation-Date: 2024-12-27 23:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1219,7 +1219,9 @@ msgid "Floor"
 msgstr "Stockwerk"
 
 #: cms/templates/ward/ward_card.html
-msgid "Rooms in this Ward"
+#, fuzzy
+#| msgid "Rooms in this Ward"
+msgid "Existing Rooms in this Ward"
 msgstr "Zimmer auf dieser Station"
 
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
@@ -1233,6 +1235,12 @@ msgstr "Betten"
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
 msgid "Add bed"
 msgstr "Bett hinzufügen"
+
+#: cms/templates/ward/ward_card.html
+#, fuzzy
+#| msgid "Rooms in this Ward"
+msgid "add Rooms in this Ward"
+msgstr "Zimmer auf dieser Station"
 
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
 msgid "Add room"
@@ -1492,15 +1500,15 @@ msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
 msgid "The ward has been deleted."
 msgstr "Die Station wurde gelöscht."
 
-#: cms/views/ward/ward_view.py
+#: cms/views/ward/ward_management_view.py
 msgid "The following room numbers already exist: {}"
 msgstr "Die folgenden Zimmernummern existieren bereits: {}"
 
-#: cms/views/ward/ward_view.py
+#: cms/views/ward/ward_management_view.py
 msgid "Added {} new rooms with {} new beds to the ward."
 msgstr "Der Station wurden {} neue Zimmer mit {} neuen Betten hinzugefügt."
 
-#: cms/views/ward/ward_view.py
+#: cms/views/ward/ward_management_view.py
 msgid "Ward information has been successfully updated!"
 msgstr "Deine Einstellungen wurden erfolgreich geändert!"
 

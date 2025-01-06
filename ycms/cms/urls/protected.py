@@ -130,6 +130,16 @@ urlpatterns = [
                 path(
                     "edit/<int:pk>", ward.WardEditView.as_view(), name="edit_ward"
                 ),
+                path(
+                    "details/<int:pk>/",
+                    ward.WardDetailsView.as_view(),
+                    name="ward_details",
+                ),
+                path(
+                    "room/<int:pk>/",
+                    ward.RoomUpdateView.as_view(),
+                    name="update_room",
+                )
             ]
         ),
     ),
