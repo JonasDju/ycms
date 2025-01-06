@@ -139,6 +139,26 @@ urlpatterns = [
                     "room/<int:pk>/",
                     ward.RoomUpdateView.as_view(),
                     name="update_room",
+                ),
+                path(
+                    "room/delete/<int:pk>",
+                    ward.RoomDeleteView.as_view(),
+                    name="delete_room",
+                ),
+                path(
+                    "room/bed/delete/<int:pk>",
+                    ward.BedDeleteView.as_view(),
+                    name="delete_bed",
+                ),
+                path(
+                    "room/bed/<int:pk>/",
+                    ward.BedUpdateView.as_view(),
+                    name="update_bed",
+                ),
+                path(
+                    "room/<int:pk>/bed/create/",
+                    ward.BedCreateView.as_view(),
+                    name="create_bed",
                 )
             ]
         ),

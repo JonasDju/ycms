@@ -89,7 +89,7 @@
 <div class="w-full flex flex-col flex-wrap my-6">
     <h1 class="heading">{% translate "existing room" %}</h1>
 </div>
-{% for room in ward.rooms.all %}
+{% for room, patients in rooms %}
     <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
         <form method="post" class="md:columns-3"
             enctype="multipart/form-data"
@@ -107,6 +107,74 @@
             </div>
             <button type="submit" class="btn mt-8 w-full">{% translate "Save" %}</button>
         </form>
+        <button class="grow text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+        form="delete-room-{{ room.id }}">
+            <form hidden
+                id="delete-room-{{ room.id }}"
+                method="post"
+                action="{% url "cms:protected:delete_room" room.id %}">
+                {% csrf_token %}
+            </form>
+            {% translate "Delete" %}
+        </button>
+            <!-- edit beds in this room -->
+            <div class="w-full flex flex-col flex-wrap my-6">
+                <h1 class="heading">{% translate "Beds in this room" %}</h1>
+            </div>
+            {% for bed in room.beds.all %}
+                <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+                    <i icon-name="bed-single"
+           class="w-10 h-10 rounded-lg {% if not bed.is_available %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100{% else %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100{% endif %}"></i>
+
+                    <form method="post" class="md:columns-3"
+                        enctype="multipart/form-data"
+                        method="post"
+                        action="{% url "cms:protected:update_bed" bed.id %}"
+                        data-unsaved-warning>
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <div class="edit-bed-prototype flex items-center gap-2">
+                                <select name="bed_type">
+                                    {% for value, name in bed_types %}
+                                    <option value="{{ value }}" {% if bed.bed_type == value %}selected{% endif %}>{{ name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn mt-8 w-full">{% translate "Save" %}</button>
+                    </form>
+                    <button class="grow text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    form="delete-bed-{{ bed.id }}">
+                        <form hidden
+                            id="delete-bed-{{ bed.id }}"
+                            method="post"
+                            action="{% url "cms:protected:delete_bed" bed.id %}">
+                            {% csrf_token %}
+                        </form>
+                        {% translate "Delete" %}
+                    </button>
+                </div>
+            {% endfor %}
+            <div class="w-full flex flex-col flex-wrap my-6">
+                <h1 class="heading">{% translate "create new Beds" %}</h1>
+            </div>
+            <form method="post" class="md:columns-3"
+                enctype="multipart/form-data"
+                method="post"
+                action="{% url 'cms:protected:create_bed' room.id %}"
+                data-unsaved-warning>
+                {% csrf_token %}
+                <div class="mb-4">
+                    <div class="edit-bed-prototype flex items-center gap-2">
+                        <select name="bed_type">
+                            {% for value, name in bed_types %}
+                            <option value="{{ value }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn mt-8 w-full">{% translate "create" %}</button>
+            </form>
     </div>
 {% endfor %}
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-27 23:38+0100\n"
+"POT-Creation-Date: 2025-01-06 19:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -638,6 +638,7 @@ msgstr "Neuen Benutzer anlegen"
 
 #: cms/templates/authentication/create_user.html
 #: cms/templates/patients/patient_details.html
+#: cms/templates/ward/ward_details.html
 msgid "Create"
 msgstr "Anlegen"
 
@@ -830,7 +831,7 @@ msgstr "Abkürzung"
 #: cms/templates/patients/patient_details.html
 #: cms/templates/patients/patients_list.html
 #: cms/templates/timeline/timeline.html cms/templates/user_settings.html
-#: cms/templates/ward/ward_card.html
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
 msgid "Save"
 msgstr "Speichern"
 
@@ -954,6 +955,7 @@ msgstr "Bearbeiten"
 
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
+#: cms/templates/ward/ward_management.html
 msgid "Details"
 msgstr "Details"
 
@@ -1171,6 +1173,7 @@ msgid "Waits for assignment to ward"
 msgstr "Wartet auf Stationszuweisung"
 
 #: cms/templates/patients/patients_list.html
+#: cms/templates/ward/ward_details.html
 msgid "Delete"
 msgstr "Löschen"
 
@@ -1224,15 +1227,18 @@ msgstr "Stockwerk"
 msgid "Existing Rooms in this Ward"
 msgstr "Zimmer auf dieser Station"
 
-#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
+#: cms/templates/ward/ward_management.html
 msgid "Room number"
 msgstr "Zimmernummer"
 
-#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
+#: cms/templates/ward/ward_management.html
 msgid "Beds"
 msgstr "Betten"
 
-#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
+#: cms/templates/ward/ward_management.html
 msgid "Add bed"
 msgstr "Bett hinzufügen"
 
@@ -1242,9 +1248,38 @@ msgstr "Bett hinzufügen"
 msgid "add Rooms in this Ward"
 msgstr "Zimmer auf dieser Station"
 
-#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
+#: cms/templates/ward/ward_management.html
 msgid "Add room"
 msgstr "Zimmer hinzufügen"
+
+#: cms/templates/ward/ward_details.html
+#, fuzzy
+#| msgid "Create a new user"
+msgid "create new rooms"
+msgstr "Neuen Benutzer anlegen"
+
+#: cms/templates/ward/ward_details.html
+msgid "existing room"
+msgstr ""
+
+#: cms/templates/ward/ward_details.html
+#, fuzzy
+#| msgid "Bed assignment in the room"
+msgid "Beds in this room"
+msgstr "Bettenzuweisung im Zimmer"
+
+#: cms/templates/ward/ward_details.html
+#, fuzzy
+#| msgid "Create a new user"
+msgid "create new Beds"
+msgstr "Neuen Benutzer anlegen"
+
+#: cms/templates/ward/ward_details.html
+#, fuzzy
+#| msgid "Create"
+msgid "create"
+msgstr "Anlegen"
 
 #: cms/templates/ward/ward_drawer.html
 msgid "free beds"
@@ -1487,6 +1522,50 @@ msgstr "Deine Einstellungen wurden erfolgreich geändert!"
 #: cms/views/user_settings_view.py
 msgid "Your password was successfully updated!"
 msgstr "Dein Passwort wurde erfolgreich geändert!"
+
+#: cms/views/ward/ward_details.py
+#, fuzzy
+#| msgid "The following room numbers already exist: {}"
+msgid "This room number already exists in this ward"
+msgstr "Die folgenden Zimmernummern existieren bereits: {}"
+
+#: cms/views/ward/ward_details.py
+#, fuzzy
+#| msgid "Floor \"{}\" was edited successfully!"
+msgid "Room updated successfully"
+msgstr "Stockwerk \"{}\" wurde erfolgreich bearbeitet!"
+
+#: cms/views/ward/ward_details.py
+msgid "The room cannot be deleted because it contains unavailable beds."
+msgstr ""
+
+#: cms/views/ward/ward_details.py
+#, fuzzy
+#| msgid "The ward has been deleted."
+msgid "The room has beed deleted."
+msgstr "Die Station wurde gelöscht."
+
+#: cms/views/ward/ward_details.py
+#, fuzzy
+#| msgid "Floor \"{}\" was edited successfully!"
+msgid "Bed updated successfully"
+msgstr "Stockwerk \"{}\" wurde erfolgreich bearbeitet!"
+
+#: cms/views/ward/ward_details.py
+msgid "The bed cannot be deleted because it is not available."
+msgstr ""
+
+#: cms/views/ward/ward_details.py
+#, fuzzy
+#| msgid "The ward has been deleted."
+msgid "The bed has beed deleted."
+msgstr "Die Station wurde gelöscht."
+
+#: cms/views/ward/ward_details.py
+#, fuzzy
+#| msgid "Floor \"{}\" was edited successfully!"
+msgid "Bed created successfully"
+msgstr "Stockwerk \"{}\" wurde erfolgreich bearbeitet!"
 
 #: cms/views/ward/ward_management_view.py
 msgid "Addition of new ward \"{}\" successful!"
