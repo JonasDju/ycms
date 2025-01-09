@@ -12,9 +12,8 @@
     <h1 class="heading">{{ ward.nickname }} ({{ ward.name }})</h1>
 </div>
 <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
-    <form method="post" class="md:columns-3" 
+    <form method="post" class="md:columns-3"
         enctype="multipart/form-data"
-        method="post"
         action="{% url "cms:protected:edit_ward" ward.pk %}"
         data-unsaved-warning>
         {% csrf_token %}
@@ -25,20 +24,24 @@
                 <div class="help-text">{{ field.help_text }}</div>
             </div>
         {% endfor %}
-        <button type="submit" class="btn mt-8 w-full">{% translate "Save" %}</button>
+        <div class="flex justify-end mt-4">
+            <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                {% translate "Save" %}
+            </button>
+        </div>
     </form>
 </div>
 <div class="w-full flex flex-col flex-wrap my-6">
     <h1 class="heading">{% translate "create new rooms" %}</h1>
 </div>
     {% if perms.cms.add_rooms %}
-        <form class="rounded-lg border border-gray-300 bg-white p-4 shadow-md relative mb-4 md:flex dark:bg-gray-800 dark:border-gray-700 items-start gap-4"
+        <form class="rounded-lg border border-gray-300 bg-white p-4 shadow-md relative mb-4 dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4"
             enctype="multipart/form-data"
             method="post"
             action="{% url "cms:protected:edit_ward" ward.pk %}"
             data-unsaved-warning>
             {% csrf_token %}
-            <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
                 <input type="hidden" id="rooms_{{ ward.id }}" name="rooms" value="">
                 <div class="grid grid-cols-2 gap-4">
                     <div class="edit-room-prototype edit-room flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
@@ -76,105 +79,134 @@
                         </div>
                     </div>
                     <div data-ward-id="new-edit-room-button-{{ ward.id }}"
-                         class="flex justify-center items-center cursor-pointer col-span-2 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                         class="edit-room-prototype edit-room flex flex-col justify-center items-center gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
                         <h2 class="hover:text-blue-600">
                             {% translate "Add room" %} <i icon-name="plus-circle"></i>
                         </h2>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn mt-8 w-full flex-1">{% translate "Create" %}</button>
+            <div class="mt-4 flex justify-end">
+                <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                    {% translate "Create" %}
+                </button>
+            </div>
         </form>
     {% endif %}
+
 <div class="w-full flex flex-col flex-wrap my-6">
     <h1 class="heading">{% translate "existing room" %}</h1>
 </div>
+<div class="room-navigation flex flex-wrap gap-4 mb-6">
+    {% for room, patients in rooms %}
+        <a href="#room-{{ room.id }}" class="flex flex-col items-center p-4 bg-gray-200 hover:bg-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:hover:bg-gray-700">
+            <i icon-name="building" class="w-10 h-10 text-gray-600 dark:text-gray-300"></i>
+            <span class="mt-2 text-gray-800 dark:text-gray-200">
+                {{ room.room_number|default:"No Room Number" }}
+            </span>
+        </a>
+    {% endfor %}
+</div>
+
 {% for room, patients in rooms %}
-    <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
-        <form method="post" class="md:columns-3"
+    <div id="room-{{ room.id }}" class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+        <form method="post" class="md:columns-3 flex flex-col justify-between h-full"
             enctype="multipart/form-data"
-            method="post"
             action="{% url "cms:protected:update_room" room.id %}"
             data-unsaved-warning>
             {% csrf_token %}
             <div class="mb-4">
                 <label class="mt-0" for="room_number">{% translate "Room number" %}
-                    <input class="w-full mt-2"
+                    <input class="w-1/4 max-w-xs mt-2"
                            type="text"
                            name="room_number"
                            value="{{ room.room_number }}"/>
                 </label>
+                <small class="text-gray-500 mt-1 block">
+                    {% translate "Room number can be changed here" %}
+                </small>
             </div>
-            <button type="submit" class="btn mt-8 w-full">{% translate "Save" %}</button>
+            <div class="mt-4 flex justify-end gap-4">
+                <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                    {% translate "Save " %}
+                </button>
+                <button type="submit" formaction="{% url "cms:protected:delete_room" room.id %}" formmethod="post" class="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                    {% translate "Delete" %}
+                </button>
+            </div>
         </form>
-        <button class="grow text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-        form="delete-room-{{ room.id }}">
-            <form hidden
-                id="delete-room-{{ room.id }}"
-                method="post"
-                action="{% url "cms:protected:delete_room" room.id %}">
-                {% csrf_token %}
-            </form>
-            {% translate "Delete" %}
-        </button>
             <!-- edit beds in this room -->
             <div class="w-full flex flex-col flex-wrap my-6">
                 <h1 class="heading">{% translate "Beds in this room" %}</h1>
             </div>
-            {% for bed in room.beds.all %}
-                <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
-                    <i icon-name="bed-single"
-           class="w-10 h-10 rounded-lg {% if not bed.is_available %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100{% else %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100{% endif %}"></i>
+            <div class="grid grid-cols-3 md:grid-cols-3 gap-4">
+                {% for bed in room.beds.all %}
+                    <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+                        <div class="flex justify-center items-center mb-4">
+                            <i icon-name="bed-single"
+                            class="w-10 h-10 rounded-lg {% if not bed.is_available %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100{% else %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100{% endif %}"></i>
+                        </div>
 
-                    <form method="post" class="md:columns-3"
+                        <form method="post" class="md:columns-3 flex flex-col justify-between h-full"
+                            enctype="multipart/form-data"
+                            action="{% url "cms:protected:update_bed" bed.id %}"
+                            data-unsaved-warning>
+                            {% csrf_token %}
+                            <div class="mb-4">
+                                <div class="edit-bed-prototype flex items-center gap-2">
+                                    <select name="bed_type">
+                                        {% for value, name in bed_types %}
+                                        <option value="{{ value }}" {% if bed.bed_type == value %}selected{% endif %}>{{ name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end gap-4">
+                                <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                                    {% translate "Save" %}
+                                </button>
+                                <button type="submit" formaction="{% url "cms:protected:delete_bed" bed.id %}" formmethod="post" class="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                                    {% translate "Delete" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="w-full flex flex-col flex-wrap my-6">
+                <h1 class="heading">{% translate "create new Beds" %}</h1>
+            </div>
+            <div class="grid grid-cols-3 md:grid-cols-3 gap-4">
+                <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex justify-center items-center mb-4">
+                        <i icon-name="plus-circle"
+                        class="w-7 h-7 rounded-lg bg-grey-100 text-grey-800 dark:bg-grey-300 dark:text-grey-100"></i>
+                        <i icon-name="bed-single"
+                        class="w-10 h-10 rounded-lg bg-grey-100 text-grey-800 dark:bg-grey-300 dark:text-grey-100"></i>
+                    </div>
+
+                    <form method="post" class="flex flex-col justify-between h-full"
                         enctype="multipart/form-data"
-                        method="post"
-                        action="{% url "cms:protected:update_bed" bed.id %}"
+                        action="{% url 'cms:protected:create_bed' room.id %}"
                         data-unsaved-warning>
                         {% csrf_token %}
                         <div class="mb-4">
                             <div class="edit-bed-prototype flex items-center gap-2">
                                 <select name="bed_type">
                                     {% for value, name in bed_types %}
-                                    <option value="{{ value }}" {% if bed.bed_type == value %}selected{% endif %}>{{ name }}</option>
+                                    <option value="{{ value }}">{{ name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" class="btn mt-8 w-full">{% translate "Save" %}</button>
+                        <div class="mt-4 flex justify-center">
+                            <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded inline-flex items-center px-5 py-2.5 text-center">
+                                {% translate "Create" %}
+                            </button>
+                        </div>
                     </form>
-                    <button class="grow text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                    form="delete-bed-{{ bed.id }}">
-                        <form hidden
-                            id="delete-bed-{{ bed.id }}"
-                            method="post"
-                            action="{% url "cms:protected:delete_bed" bed.id %}">
-                            {% csrf_token %}
-                        </form>
-                        {% translate "Delete" %}
-                    </button>
                 </div>
-            {% endfor %}
-            <div class="w-full flex flex-col flex-wrap my-6">
-                <h1 class="heading">{% translate "create new Beds" %}</h1>
             </div>
-            <form method="post" class="md:columns-3"
-                enctype="multipart/form-data"
-                method="post"
-                action="{% url 'cms:protected:create_bed' room.id %}"
-                data-unsaved-warning>
-                {% csrf_token %}
-                <div class="mb-4">
-                    <div class="edit-bed-prototype flex items-center gap-2">
-                        <select name="bed_type">
-                            {% for value, name in bed_types %}
-                            <option value="{{ value }}">{{ name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <button type="submit" class="btn mt-8 w-full">{% translate "create" %}</button>
-            </form>
     </div>
 {% endfor %}
-{% endblock %}
+{% endblock content %}
