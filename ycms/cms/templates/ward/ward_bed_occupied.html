@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<div class="m-4 flex items-center space-x-4">
+    <!-- Bed Icon and Color Based on Gender -->
+    <div class="flex flex-col items-center">
+        <i icon-name="bed-single"
+           class="w-10 h-10 rounded-lg {% if gender == 'm' %}bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100{% else %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100{% endif %}"></i>
+    </div>
+
+    <div>
+        <p>{{ first_name }}, {{ last_name }}</p>
+    </div>
+</div>

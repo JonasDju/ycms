@@ -1,11 +1,11 @@
 {% load i18n %}
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
+<div class="">
     {% for patient in room.patients %}
-        {% include "ward/ward_bed.html" with gender=patient.gender current_stay=patient.current_stay %}
+        {% include "ward/ward_bed_occupied.html" with gender=patient.gender last_name=patient.last_name first_name=patient.first_name current_stay=patient.current_stay %}
     {% endfor %}
     {% with ""|center:room.available_beds as range %}
         {% for _ in range %}
-            <div class="flex flex-col items-center gap-1 w-full">
+            <div class="m-4">
                 <i icon-name="bed-single" class="w-10 h-10 rounded-lg text-green-200"></i>
             </div>
         {% endfor %}
