@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="m-4 flex items-center space-x-4">
+<div class="m-3 flex items-center space-x-4">
     <!-- Bed Icon and Color Based on Gender -->
     <div class="flex flex-col items-center">
         <i icon-name="bed-single"
@@ -10,4 +10,11 @@
     <div>
         <p>{{ first_name }}, {{ last_name }}</p>
     </div>
+    
+    {% if current_stay.days_til_discharge == 0 %}
+        <div>
+            <i icon-name="calendar-x"></i>
+        </div>
+    {% endif %}
+
 </div>
