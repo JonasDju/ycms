@@ -29,7 +29,7 @@ class MedicalSpecialization(AbstractBaseModel):
         :rtype: str
         """
         if self.abbreviation != None and self.abbreviation != "":
-            return f"{self.abbreviation}"
+            return f"{self.name} ({self.abbreviation})"
         else:
             return f"{self.name}"
 
