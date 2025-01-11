@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 15:02+0100\n"
+"POT-Creation-Date: 2025-01-11 18:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -366,6 +366,14 @@ msgstr "Diagnosecode"
 msgid "Diagnosis code according to ICD-10"
 msgstr "Diagnosecode nach ICD-10"
 
+#: cms/models/medical_record.py cms/models/medical_specialization.py
+msgid "medical specialization"
+msgstr "Fachrichtung"
+
+#: cms/models/medical_record.py
+msgid "Medical specialization of the patient's treatment."
+msgstr "Fachrichtung der Behandlung"
+
 #: cms/models/medical_record.py
 msgid "record type"
 msgstr "Unterlagenart"
@@ -381,6 +389,26 @@ msgstr "Zusätzliche Notizen zu dieser medizinischen Unterlage"
 #: cms/models/medical_record.py
 msgid "medical records"
 msgstr "medizinische Unterlagen"
+
+#: cms/models/medical_specialization.py
+msgid "specialization name"
+msgstr "Fachrichtung"
+
+#: cms/models/medical_specialization.py
+msgid "Name of this medical specialization."
+msgstr "Name der Fachrichtung."
+
+#: cms/models/medical_specialization.py
+msgid "abbreviation"
+msgstr "Abkürzung"
+
+#: cms/models/medical_specialization.py
+msgid "Abbreviation of this medical specialization."
+msgstr "Abkürzung dieser Fachrichtung."
+
+#: cms/models/medical_specialization.py
+msgid "medical specializations"
+msgstr "Fachrichtungen"
 
 #: cms/models/patient.py
 msgid "insurance type"
