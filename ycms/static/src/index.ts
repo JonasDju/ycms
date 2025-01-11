@@ -11,6 +11,7 @@ import "./js/ward/discharge";
 import "./js/ward/assign";
 import "./js/ward-management";
 import "./js/ward-edit";
+import "./js/ward-details";
 import "./js/ward/timeline";
 import "./js/ward/toggle-edit-mode";
 import "./js/ward/progress";

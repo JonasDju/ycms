@@ -34,65 +34,64 @@
 <div class="w-full flex flex-col flex-wrap my-6">
     <h1 class="heading">{% translate "create new rooms" %}</h1>
 </div>
-    {% if perms.cms.add_rooms %}
-        <form class="rounded-lg border border-gray-300 bg-white p-4 shadow-md relative mb-4 dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4"
-            enctype="multipart/form-data"
-            method="post"
-            action="{% url "cms:protected:edit_ward" ward.pk %}"
-            data-unsaved-warning>
-            {% csrf_token %}
-            <div class="grid grid-cols-2 md:grid-cols-2 gap-4">
-                <input type="hidden" id="rooms_{{ ward.id }}" name="rooms" value="">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="edit-room-prototype edit-room flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <div class="!-mb-4 help-text">{% translate "Room number" %}</div>
-                        <div class="flex items-center gap-2">
-                            <input class="w-full"
-                                   type="text"
-                                   placeholder="{% translate "Room number" %}" />
-                            <i icon-name="minus-circle"
-                               class="edit-room-remover text-red-600 cursor-pointer"></i>
-                        </div>
-                        <div class="!-mb-4 help-text">{% translate "Beds" %}</div>
-                        <div class="edit-bed-prototype flex items-center gap-2">
-                            <select>
-                                {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
-                            </select>
-                            <div>
-                                <i icon-name="minus-circle"
-                                   class="edit-bed-remover text-red-600 cursor-pointer"></i>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <select>
-                                {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
-                            </select>
-                            <div>
-                                <i icon-name="minus-circle"
-                                   class="edit-bed-remover text-red-600 cursor-pointer"></i>
-                            </div>
-                        </div>
-                        <div class="edit-bed-adder flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                            <p class="hover:text-blue-600">
-                                {% translate "Add bed" %} <i icon-name="plus-circle"></i>
-                            </p>
-                        </div>
-                    </div>
-                    <div data-ward-id="new-edit-room-button-{{ ward.id }}"
-                         class="edit-room-prototype edit-room flex flex-col justify-center items-center gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                        <h2 class="hover:text-blue-600">
-                            {% translate "Add room" %} <i icon-name="plus-circle"></i>
-                        </h2>
-                    </div>
+
+{% if perms.cms.add_rooms %}
+<form class="rounded-lg border border-gray-300 bg-white p-4 shadow-md relative mb-4 dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4 w-full"
+      enctype="multipart/form-data"
+      method="post"
+      action="{% url "cms:protected:edit_ward" ward.pk %}"
+      data-unsaved-warning id="ward_form" data-ward-id="{{ ward.id }}">
+    {% csrf_token %}
+    <div class="grid grid-cols-4 gap-4 w-full"> <!-- 将列数调整为4 -->
+        <input type="hidden" id="rooms_{{ ward.id }}" name="rooms" value="">
+        <div class="edit-room-prototype2 edit-room2 flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div class="!-mb-4 help-text">{% translate "Room number" %}</div>
+            <div class="flex items-center gap-2">
+                <input class="w-full"
+                       type="text"
+                       placeholder="{% translate "Room number" %}" />
+                <i icon-name="minus-circle"
+                   class="remover-room text-red-600 cursor-pointer"></i>
+            </div>
+            <div class="!-mb-4 help-text">{% translate "Beds" %}</div>
+            <div class="edit-bed-prototype2 flex items-center gap-2">
+                <select>
+                    {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                </select>
+                <div>
+                    <i icon-name="minus-circle"
+                       class="remove-bed text-red-600 cursor-pointer"></i>
                 </div>
             </div>
-            <div class="mt-4 flex justify-end">
-                <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
-                    {% translate "Create" %}
-                </button>
+            <div class="edit-bed-prototype2 flex items-center gap-2">
+                <select>
+                    {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                </select>
+                <div>
+                    <i icon-name="minus-circle"
+                       class="remove-bed text-red-600 cursor-pointer"></i>
+                </div>
             </div>
-        </form>
-    {% endif %}
+            <div class="add-bed-btn flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <p class="hover:text-blue-600">
+                    {% translate "Add bed" %} <i icon-name="plus-circle"></i>
+                </p>
+            </div>
+        </div>
+        <div id="newroom-button"
+             class="edit-room-prototype2 edit-room2 flex flex-col justify-center items-center gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <h2 class="hover:text-blue-600">
+                {% translate "Add room" %} <i icon-name="plus-circle"></i>
+            </h2>
+        </div>
+    </div>
+    <div class="mt-4 flex justify-end">
+        <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+            {% translate "Create" %}
+        </button>
+    </div>
+</form>
+{% endif %}
 
 <div class="w-full flex flex-col flex-wrap my-6">
     <h1 class="heading">{% translate "existing room" %}</h1>
@@ -123,7 +122,7 @@
                            value="{{ room.room_number }}"/>
                 </label>
                 <small class="text-gray-500 mt-1 block">
-                    {% translate "Room number can be changed here" %}
+                    {% translate "Here can change the room number" %}
                 </small>
             </div>
             <div class="mt-4 flex justify-end gap-4">
@@ -139,6 +138,9 @@
             <div class="w-full flex flex-col flex-wrap my-6">
                 <h1 class="heading">{% translate "Beds in this room" %}</h1>
             </div>
+            <small class="text-gray-500 mt-1 block">
+                {% translate "Here can modify the existing bed type / create a new bed " %}
+            </small>
             <div class="grid grid-cols-3 md:grid-cols-3 gap-4 mb-12">
                 {% for bed in room.beds.all %}
                     <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
@@ -153,7 +155,7 @@
                             </p>
                             {% endif %}
                             {% if bed.is_available %}
-                            <p class="text-sm text-green-600 dark:text-green-400">
+                            <p class="text-sm text-white-600 dark:text-white-400">
                                 {% translate "- " %}
                             </p>
                             {% endif %}
@@ -184,9 +186,6 @@
                     </div>
                 {% endfor %}
             </div>
-            <div class="w-full flex flex-col flex-wrap my-12">
-                <h1 class="heading">{% translate "create new Beds" %}</h1>
-            </div>
             <div class="grid grid-cols-3 md:grid-cols-3 gap-4 mb-12">
                 <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
                     <div class="flex justify-center items-center mb-4">
@@ -211,7 +210,7 @@
                             </div>
                         </div>
                         <div class="mt-4 flex justify-center">
-                            <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded inline-flex items-center px-5 py-2.5 text-center">
+                            <button type="submit" class="text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-gr-700 rounded inline-flex items-center px-5 py-2.5 text-center">
                                 {% translate "Create" %}
                             </button>
                         </div>
