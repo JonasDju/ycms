@@ -77,21 +77,47 @@ class CreateMultipleRoomsView(CreateView):
         ward = get_object_or_404(Ward, pk=pk)
         rooms_data = json.loads(request.POST.get('rooms', '{}'))
         
-        with transaction.atomic():
-            for room_number, bed_types in rooms_data.items():
-                room = Room.objects.create(
-                    ward=ward,
-                    room_number=room_number,
-                    creator=request.user
-                )
-                for bed_type in bed_types:
-                    Bed.objects.create(
-                        room=room,
-                        bed_type=bed_type,
+        # Track errors for duplicate rooms
+        duplicate_rooms = []
+        created_rooms = []
+
+        try:
+            with transaction.atomic():
+                for room_number, bed_types in rooms_data.items():
+                    # Check if room number already exists in this ward
+                    if Room.objects.filter(ward=ward, room_number=room_number).exists():
+                        duplicate_rooms.append(room_number)
+                        continue
+
+                    room = Room.objects.create(
+                        ward=ward,
+                        room_number=room_number,
                         creator=request.user
                     )
+                    created_rooms.append(room_number)
                     
-        messages.success(request, _("Rooms and beds created successfully"))
+                    for bed_type in bed_types:
+                        Bed.objects.create(
+                            room=room,
+                            bed_type=bed_type,
+                            creator=request.user
+                        )
+
+                if duplicate_rooms:
+                    # If any duplicates were found, raise an error to trigger rollback
+                    raise ValueError("Duplicate room numbers found")
+
+        except ValueError:
+            if duplicate_rooms:
+                messages.error(
+                    request,
+                    _("Following room numbers already exist: {}").format(
+                        ", ".join(duplicate_rooms)
+                    )
+                )
+            return redirect('cms:protected:ward_details', pk=pk)
+
+        messages.success(request, _("Successfully created {} rooms").format(len(created_rooms)))
         return redirect('cms:protected:ward_details', pk=pk)
 
 
