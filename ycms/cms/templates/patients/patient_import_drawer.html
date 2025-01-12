@@ -1,0 +1,97 @@
+{% load i18n %}
+{% load widget_tweaks %}
+<div id="drawer-right"
+     class="w-full sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/2 fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform translate-x-full bg-white dark:bg-gray-900"
+     tabindex="-1"
+     aria-labelledby="drawer-right-label">
+     <h1>{% translate "Import patient data" %}</h1>
+    <button type="button"
+            data-drawer-hide="drawer-right"
+            aria-controls="drawer-right"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <i icon-name="x"></i>
+        <span class="sr-only">{% translate "Close menu" %}</span>
+    </button>
+    <div class="flex justify-center items-center mb-6">
+        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700 dark:text-white">
+            <p class="mb-5">
+                {% translate "For each entry in the uploaded file, the import feature searches for the corresponding patient in the database. If a matching entry already exists, it is updated with potentially new medical records or hospital stays. If there is no matching entry, a new patient is created in the database. When there is an error during the import (e.g. due to a date with wrong format or non-existing wards), the import is canceled and all changes from the import are reverted." %}
+            </p>
+            <form
+                id="upload_data"
+                action="{% url "cms:protected:upload_data" %}"
+                enctype="multipart/form-data"
+                method="post">
+                {% csrf_token %}
+                {{upload_csv_form.file}}
+                <!-- <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-100 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file"> -->
+                <br/>
+                {{upload_csv_form.selected_categories.field.label}}
+                {{upload_csv_form.selected_categories}}
+                <p>
+                    <table class="min-w-full text-sm dark:text-white mt-2">
+                        <thead class="text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-100">
+                            <tr>
+                                <th class="px-6 py-3">{% translate "Category" %}</th>
+                                <th class="px-6 py-3">{% translate "Required Fields" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody class="overflow-y-auto">
+                            <tr class="odd:bg-white even:bg-gray-100 border-b dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:border-gray-700 w-full">
+                                <td class="px-6 py-3">{% translate "Patient only" %}</td>
+                                <td class="px-6 py-3">
+                                    Nachname<br/>
+                                    Vorname<br/>
+                                    Privatpatient {% translate "(\"P\" or empty)" %}<br/>
+                                    Geschlecht {% translate "(\"M\", \"F\" or \"W\", \"D\")" %}<br/>
+                                    Alter_bei_Aufnahme<br/>
+                                    Erstellungsdatum*
+                                </td>
+                            </tr>
+                            <tr class="odd:bg-white even:bg-gray-100 border-b dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:border-gray-700 w-full">
+                                <td class="px-6 py-3">{% translate "Patient + medical record" %}</td>
+                                <td class="px-6 py-3">
+                                    Diagnosekatalog<br/>
+                                    Diagnosecode
+                                </td>
+                            </tr>
+                            <tr class="odd:bg-white even:bg-gray-100 border-b dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:border-gray-700 w-full">
+                                <td class="px-6 py-3">{% translate "Patient + stay" %}</td>
+                                <td class="px-6 py-3">
+                                    Aufnahmedatum*<br/>
+                                    Entlassdatum*<br/>
+                                    mit_Begleitperson** {% translate "(\"0\" - no or \"1\" - yes)" %}
+                                </td>
+                            </tr>
+                            <tr class="odd:bg-white even:bg-gray-100 border-b dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:border-gray-700 w-full">
+                                <td class="px-6 py-3">{% translate "Patient + ward" %}***</td>
+                                <td class="px-6 py-3">
+                                    Station<br/>
+                                    Stockwerk
+                                </td>
+                            </tr>
+                            <tr class="odd:bg-white even:bg-gray-100 border-b dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:border-gray-700 w-full">
+                                <td class="px-6 py-3">{% translate "Patient + bed" %}***</td>
+                                <td class="px-6 py-3">
+                                    Betttyp ("normal", "small", "ventilator")<br/>
+                                    Raumnummer
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    {% translate "*Dates have to be provided in the format \"DD.MM.YYYY HH:MM\" ." %}
+                    <br/>
+                    {% translate "**Caution: Currently, neither already assigned nor imported accompanied patients are handled correctly and thus rooms can be overfilled!" %}
+                    <br/>
+                    {% translate "***For the options \"ward\" and \"bed\", the provided data for the required fields have to exist in the hospital, otherwise the import fails." %}
+                </p>
+                <button type="submit" class="px-2 text-white bg-blue-500 hover:bg-blue-700 mt-2 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5 text-center w-full lg:w-auto">
+                    {% translate "Upload" %}
+                </button>        
+            </form>
+        </div>
+    </div>
+
+</div>
+

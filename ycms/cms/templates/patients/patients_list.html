@@ -11,22 +11,20 @@
         <div class="w-full flex flex-col flex-wrap mb-6">
             <h1 class="heading">{% translate "Patients list" %}</h1>
         </div>
-        <!--TODO: Integrate the upload functionality consistent to the theme of the website-->
         <!--Begin of upload form-->
-        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-row h-full dark:bg-gray-800 dark:border-gray-700 dark:text-white">
             {% if perms.cms.add_user %}
-                <form
-                    id="upload_data"
-                    action="{% url "cms:protected:upload_data" %}"
-                    enctype="multipart/form-data"
-                    method="post">
-                    {% csrf_token %}
-                    {{upload_csv_form.file.field.label}} {{upload_csv_form.file}}
-                    {{upload_csv_form.selected_categories.field.label}} {{upload_csv_form.selected_categories}}
-                    <button type="submit" class="px-2 text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5 text-center w-full lg:w-auto">{% translate "Upload" %}</button>
-                </form>
+                <button class="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1 flex px-2"
+                    data-drawer-target="drawer-right"
+                    data-drawer-show="drawer-right"
+                    data-drawer-placement="right"
+                    aria-controls="drawer-right">
+                    <i icon-name="upload" class="text-blue-600 cursor-pointer"></i>
+                </button>
+                {% translate "Import patient data from CSV file" %}
+                {% include "patients/patient_import_drawer.html" %} 
             {% endif %}
-        </div>
+        </div> 
         <br/>
         <!--End of upload form-->
         <input id="search-patient-input"

@@ -73,7 +73,7 @@ def import_data(csv_file, user, data_to_import, val_sep=","):
         "age_at_arrival": "Alter_bei_Aufnahme",
         "diagnosis_catalog": "Diagnosekatalog",
         "diagnosis_code": "Diagnosecode",
-        "recommended_ward": "Station(Empfehlung)",
+        "recommended_ward": "Station",
         "floor": "Stockwerk",
         "bed_type": "Betttyp",
         "room_number": "Raumnummer"
@@ -125,7 +125,7 @@ def import_data(csv_file, user, data_to_import, val_sep=","):
         newly_created_medical_record = newly_created_bed_assignment = updated_bed_assignment = False
         try:
             # attribute "insurance_type" has to be infered from non-Bool value
-            insurance_type = patient_entry[column_name["insurance_type"]] == "P"            
+            insurance_type = patient_entry[column_name["insurance_type"]] in ["P", "p"]            
 
             # by default, set date_of_birth to January 1st as only the age at arrival is provided (same as in )
             year_of_birth = datetime.now().year - patient_entry[column_name["age_at_arrival"]]
