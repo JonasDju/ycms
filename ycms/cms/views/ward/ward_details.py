@@ -1,4 +1,5 @@
 import logging
+import json
 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponseRedirect
@@ -69,6 +70,30 @@ class WardDetailsView(TemplateView):
             **super().get_context_data(**kwargs),
         }
     
+
+@method_decorator(permission_required("cms.add_rooms"), name="dispatch")
+class CreateMultipleRoomsView(CreateView):
+    def post(self, request, pk):
+        ward = get_object_or_404(Ward, pk=pk)
+        rooms_data = json.loads(request.POST.get('rooms', '{}'))
+        
+        with transaction.atomic():
+            for room_number, bed_types in rooms_data.items():
+                room = Room.objects.create(
+                    ward=ward,
+                    room_number=room_number,
+                    creator=request.user
+                )
+                for bed_type in bed_types:
+                    Bed.objects.create(
+                        room=room,
+                        bed_type=bed_type,
+                        creator=request.user
+                    )
+                    
+        messages.success(request, _("Rooms and beds created successfully"))
+        return redirect('cms:protected:ward_details', pk=pk)
+
 
 @method_decorator(permission_required("cms.add_ward"), name="dispatch")
 class RoomUpdateView(UpdateView):

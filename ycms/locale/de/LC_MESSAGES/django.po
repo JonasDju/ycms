@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the CMS package.
 # YCMS <info@ycms-app.de>
 # https://github.com/charludo/
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2025-01-12 20:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1260,8 +1260,22 @@ msgid "create new rooms"
 msgstr "Neuen Benutzer anlegen"
 
 #: cms/templates/ward/ward_details.html
+msgid "-"
+msgstr ""
+
+#: cms/templates/ward/ward_details.html
 msgid "existing room"
 msgstr ""
+
+#: cms/templates/ward/ward_details.html
+msgid "Here can change the room number"
+msgstr ""
+
+#: cms/templates/ward/ward_details.html
+#, fuzzy
+#| msgid "Save"
+msgid "Save "
+msgstr "Speichern"
 
 #: cms/templates/ward/ward_details.html
 #, fuzzy
@@ -1270,16 +1284,16 @@ msgid "Beds in this room"
 msgstr "Bettenzuweisung im Zimmer"
 
 #: cms/templates/ward/ward_details.html
-#, fuzzy
-#| msgid "Create a new user"
-msgid "create new Beds"
-msgstr "Neuen Benutzer anlegen"
+msgid "Here can modify the existing bed type / create a new bed "
+msgstr ""
 
 #: cms/templates/ward/ward_details.html
-#, fuzzy
-#| msgid "Create"
-msgid "create"
-msgstr "Anlegen"
+msgid "This bed is currently occupied"
+msgstr ""
+
+#: cms/templates/ward/ward_details.html
+msgid "- "
+msgstr ""
 
 #: cms/templates/ward/ward_drawer.html
 msgid "free beds"
@@ -1602,6 +1616,16 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#, fuzzy
+#~| msgid "Create a new user"
+#~ msgid "create new Beds"
+#~ msgstr "Neuen Benutzer anlegen"
+
+#, fuzzy
+#~| msgid "Create"
+#~ msgid "create"
+#~ msgstr "Anlegen"
 
 #~ msgid "ward number"
 #~ msgstr "Stationsnummer"

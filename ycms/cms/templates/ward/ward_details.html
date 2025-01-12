@@ -39,7 +39,7 @@
 <form class="rounded-lg border border-gray-300 bg-white p-4 shadow-md relative mb-4 dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4 w-full"
       enctype="multipart/form-data"
       method="post"
-      action="{% url "cms:protected:edit_ward" ward.pk %}"
+      action="{% url "cms:protected:create_multiple_rooms" ward.pk %}"
       data-unsaved-warning id="ward_form" data-ward-id="{{ ward.id }}">
     {% csrf_token %}
     <div class="grid grid-cols-4 gap-4 w-full">
