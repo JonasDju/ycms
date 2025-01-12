@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-12 02:03+0100\n"
+"POT-Creation-Date: 2025-01-12 14:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -971,6 +971,11 @@ msgstr "Details zum Krankenhausaufenthalt"
 #: cms/templates/patients/patient_details.html
 msgid "Diagnosis"
 msgstr "Diagnose"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patient_details.html
+msgid "Specialization"
+msgstr "Fachrichtung"
 
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patient_details.html
