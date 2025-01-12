@@ -30,13 +30,9 @@ class MedicalSpecializationForm(CustomModelForm):
         :return: The cleaned data
         """
         cleaned_data = super().clean()
-        abbr = cleaned_data.get("abbreviation").lower()
-        print(abbr)
+        abbr = cleaned_data.get("abbreviation")
 
-        q = MedicalSpecialization.objects.filter(abbreviation__iexact=abbr)
-        print("Exists: " + str(q.exists()))
-
-        if q.exists():
+        if MedicalSpecialization.objects.filter(abbreviation__iexact=abbr).exists():
             raise ValidationError(
                 _("The abbreviation {} conflicts with an existing one.".format(abbr))
             )
