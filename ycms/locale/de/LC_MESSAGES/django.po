@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-11 18:58+0100\n"
+"POT-Creation-Date: 2025-01-12 02:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -189,6 +189,10 @@ msgstr "Bestandspatient*innen durchsuchen"
 #: cms/forms/intake_record_form.py cms/forms/patients/record_form.py
 msgid "Search for diagnosis code"
 msgstr "Diagnosecodes durchsuchen"
+
+#: cms/forms/medical_specialization_form.py
+msgid "The abbreviation {} conflicts with an existing one."
+msgstr "Die Abkürzung {} steht mit einer anderen im Konflikt."
 
 #: cms/forms/unknown_patient_form.py
 msgid "Approximate age"
@@ -625,6 +629,10 @@ msgid "Create User"
 msgstr "Nutzer anlegen"
 
 #: cms/templates/_base.html
+msgid "Specializations"
+msgstr "Fachrichtungen"
+
+#: cms/templates/_base.html
 msgid "Documentation"
 msgstr "Dokumentation"
 
@@ -737,7 +745,8 @@ msgstr "Zuweisung aufheben"
 #: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
-#: cms/templates/timeline/timeline.html cms/templates/ward/ward_card.html
+#: cms/templates/specializations_list.html cms/templates/timeline/timeline.html
+#: cms/templates/ward/ward_card.html
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -857,8 +866,8 @@ msgstr "Abkürzung"
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patient_details.html
 #: cms/templates/patients/patients_list.html
-#: cms/templates/timeline/timeline.html cms/templates/user_settings.html
-#: cms/templates/ward/ward_card.html
+#: cms/templates/specializations_list.html cms/templates/timeline/timeline.html
+#: cms/templates/user_settings.html cms/templates/ward/ward_card.html
 msgid "Save"
 msgstr "Speichern"
 
@@ -931,6 +940,7 @@ msgid "Personal Details"
 msgstr "Persönliche Daten"
 
 #: cms/templates/patients/patient_card.html
+#: cms/templates/specializations_list.html
 msgid "Name"
 msgstr "Name"
 
@@ -977,6 +987,7 @@ msgstr "Entlassungsdatum"
 
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
+#: cms/templates/specializations_list.html
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -1167,6 +1178,7 @@ msgid "Add patient"
 msgstr "Patient*in hinzufügen"
 
 #: cms/templates/patients/patients_list.html
+#: cms/templates/specializations_list.html
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -1199,8 +1211,25 @@ msgid "Waits for assignment to ward"
 msgstr "Wartet auf Stationszuweisung"
 
 #: cms/templates/patients/patients_list.html
+#: cms/templates/specializations_list.html
 msgid "Delete"
 msgstr "Löschen"
+
+#: cms/templates/specializations_list.html
+msgid "Manage Specializations"
+msgstr "Fachrichtungen bearbeiten"
+
+#: cms/templates/specializations_list.html
+msgid "Edit medical specialization"
+msgstr "Fachrichtungen bearbeiten"
+
+#: cms/templates/specializations_list.html
+msgid "Add new medical specialization"
+msgstr "Neue Fachrichtung hinzufügen"
+
+#: cms/templates/specializations_list.html
+msgid "Abbr."
+msgstr "Abk."
 
 #: cms/templates/timeline/timeline.html
 msgid "unsaved bed assignment changes"
@@ -1485,6 +1514,18 @@ msgid ""
 msgstr ""
 "Patient*in \"{} {}\"  und aktueller Krankenhausaufenthalt von {} bis {} "
 "wurden gespeichert."
+
+#: cms/views/specializations.py
+msgid "Specialization {} ({}) has been created."
+msgstr "Fachrichtung {} ({}) wurde erstellt."
+
+#: cms/views/specializations.py
+msgid "Specialization {} ({}) has been updated."
+msgstr "Fachrichtung {} ({}) wurde aktualisiert."
+
+#: cms/views/specializations.py
+msgid "Specialization {} ({}) has been deleted."
+msgstr "Fachrichtung {} ({}) wurde gelöscht."
 
 #: cms/views/timeline/timeline_view.py
 msgid "unassigned"
