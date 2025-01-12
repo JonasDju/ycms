@@ -88,12 +88,14 @@
                                 {% render_field record_form.medical_specialization required="" %}
                                 <div class="help-text">{{ record_form.medical_specialization.help_text }}</div>
                             </div>
-                            <div>
-                                <label for="{{ record_form.diagnosis_code.id_for_label }}">
-                                       {{ record_form.diagnosis_code.label }}</label>
-                                {% render_field record_form.diagnosis_code %}
-                                <div class="help-text">{{ record_form.diagnosis_code.help_text }}</div>
-                            </div>
+                            {% if request.user.is_superuser or request.user.job_type == "DOCTOR" %}
+                                <div>
+                                    <label for="{{ record_form.diagnosis_code.id_for_label }}">
+                                        {{ record_form.diagnosis_code.label }}</label>
+                                        {% render_field record_form.diagnosis_code %}
+                                        <div class="help-text">{{ record_form.diagnosis_code.help_text }}</div>
+                                </div>
+                            {% endif %}
                             <div>
                                 <label for="{{ record_form.note.id_for_label }}">{{ record_form.note.label }}</label>
                                 {% render_field record_form.note style="height: 145px;" %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-12 14:35+0100\n"
+"POT-Creation-Date: 2025-01-12 18:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1487,7 +1487,11 @@ msgstr "Entlassung in Station \"{}\" nicht möglich am {}."
 
 #: cms/views/patients/intake_form_view.py
 msgid "Intake for patient \"{} {}\" with diagnosis \"{}\" has been saved."
-msgstr "Patient*in \"{} {}\" mit Diagnose \"{}\" wurde gespeichert."
+msgstr "Aufnahme für Patient*in \"{} {}\" mit Diagnose \"{}\" wurde gespeichert."
+
+#: cms/views/patients/intake_form_view.py
+msgid "Intake for patient \"{} {}\" has been saved."
+msgstr "Aufnahme für Patient*in \"{} {}\" wurde gespeichert."
 
 #: cms/views/patients/patient_details_view.py
 msgid "New record has been created."
