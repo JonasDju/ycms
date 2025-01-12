@@ -42,14 +42,16 @@
       action="{% url "cms:protected:edit_ward" ward.pk %}"
       data-unsaved-warning id="ward_form" data-ward-id="{{ ward.id }}">
     {% csrf_token %}
-    <div class="grid grid-cols-4 gap-4 w-full"> <!-- 将列数调整为4 -->
+    <div class="grid grid-cols-4 gap-4 w-full">
         <input type="hidden" id="rooms_{{ ward.id }}" name="rooms" value="">
-        <div class="edit-room-prototype2 edit-room2 flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div class="edit-room-prototype2 edit-room2 hidden flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div class="!-mb-4 help-text">{% translate "Room number" %}</div>
             <div class="flex items-center gap-2">
                 <input class="w-full"
                        type="text"
                        placeholder="{% translate "Room number" %}" />
+                       <h2 class="remover-room text-red-600 cursor-pointer">
+                        {% translate "-" %} <i icon-name="plus-circle"></i></h2>
                 <i icon-name="minus-circle"
                    class="remover-room text-red-600 cursor-pointer"></i>
             </div>
@@ -59,15 +61,19 @@
                     {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
                 </select>
                 <div>
+                    <h2 class="remove-bed text-red-600 cursor-pointer">
+                        {% translate "-" %} <i icon-name="plus-circle"></i></h2>
                     <i icon-name="minus-circle"
                        class="remove-bed text-red-600 cursor-pointer"></i>
                 </div>
             </div>
-            <div class="edit-bed-prototype2 flex items-center gap-2">
+            <div class="flex items-center gap-2">
                 <select>
                     {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
                 </select>
                 <div>
+                    <h2 class="remove-bed text-red-600 cursor-pointer">
+                        {% translate "-" %} <i icon-name="plus-circle"></i></h2>
                     <i icon-name="minus-circle"
                        class="remove-bed text-red-600 cursor-pointer"></i>
                 </div>
@@ -79,14 +85,14 @@
             </div>
         </div>
         <div id="newroom-button"
-             class="edit-room-prototype2 edit-room2 flex flex-col justify-center items-center gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+             class="flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <h2 class="hover:text-blue-600">
                 {% translate "Add room" %} <i icon-name="plus-circle"></i>
             </h2>
         </div>
     </div>
     <div class="mt-4 flex justify-end">
-        <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+        <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded inline-flex items-center px-5 py-2.5 text-center">
             {% translate "Create" %}
         </button>
     </div>
