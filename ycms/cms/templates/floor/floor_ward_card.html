@@ -58,10 +58,11 @@
         .diverse-icon { color: #2ecc71; }
     </style>
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-        <span>
-            {% trans "Occupied beds" %}: <strong> {{ ward.occupied_beds }} </strong></span>
+        <span>{% trans "Total Beds" %}: <strong>{{ ward.total_beds }}</strong></span>
         <br>
-        <span >{% trans "Available Beds" %}: <strong>{{ ward.available_beds }}</strong></span>
+        <span>{% trans "Occupied beds" %}: <strong> {{ ward.occupied_beds }} </strong></span>
+        <br>
+        <span>{% trans "Available Beds" %}: <strong>{{ ward.available_beds }}</strong></span>
         <br>
         <span>
             {% trans "Unassigned Patients" %}
@@ -84,6 +85,14 @@
         <a href="{% url 'cms:protected:ward_detail' ward.id %}"
            class="block py-4 border border-gray-200 dark:bg-gray-600 dark:border-gray-700 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-gray-400 rounded w-full text-center min-w-[50px] transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
             {% trans "Go to Ward" %}
+            <i icon-name="bed" class="ms-2"></i>
+        </a>
+    </div>
+
+    <div class="flex justify-center pt-4">
+        <a href="{% url 'cms:protected:edit_ward' ward.id %}"
+           class="block py-4 border border-gray-200 dark:bg-gray-600 dark:border-gray-700 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-gray-400 rounded w-full text-center min-w-[50px] transition-all duration-300 transform hover:-translate-y-2 hover:shadow-xl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            {% trans "Edit Ward" %}
             <i icon-name="bed" class="ms-2"></i>
         </a>
     </div>
