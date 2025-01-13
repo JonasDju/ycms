@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 01:38+0100\n"
+"POT-Creation-Date: 2025-01-13 14:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1071,7 +1071,61 @@ msgstr ""
 "der Krankenhausaufenthalt im Vorhinein abgesagt."
 
 #: cms/templates/patients/patient_import_drawer.html
-#: cms/templates/patients/patients_list.html
+msgid "Import patient data"
+msgstr "Patientendaten importieren"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid ""
+"For each entry in the uploaded file, the import feature searches for the "
+"corresponding patient in the database. If a matching entry already exists, "
+"it is updated with potentially new medical records or hospital stays. If "
+"there is no matching entry, a new patient is created in the database. When "
+"there is an error during the import (e.g. due to a date with wrong format or "
+"non-existing wards), the import is canceled and all changes from the import "
+"are reverted."
+msgstr ""
+"Für jeden Eintrag in der hochgeladenen Datei sucht das Import Feature in der "
+"Datenbank nach dem entsprechenden Patienten. Wenn ein passender Eintrag "
+"bereits existiert, wird dieser mit ggf. neuen medizinischen Unteralgen oder "
+"Krankenhausaufenthalten aktualisiert. Wenn kein passender Eintrag existiert, "
+"wird ein neuer Patient in der Datenbank erstellt. Wenn beim Import ein "
+"Fehler auftritt (z.B. wegen eines Datums mit falschem Format oder nicht-"
+"existierender Stationen), wird der Import abgebrochen und alle bisherigen "
+"Änderungen des Imports rückgängig gemacht."
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Category"
+msgstr "Kategorie"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Required Fields"
+msgstr "Benötigte Felder"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "(\\"
+msgstr ""
+
+#: cms/templates/patients/patient_import_drawer.html
+#, fuzzy
+#| msgid "*Dates have to be provided in the format \"DD.MM.YYYY HH:MM\" ."
+msgid "*Dates have to be provided in the format \\"
+msgstr ""
+"*Daten müssen in folgendem Format angegeben werden: \"DD.MM.YYYY HH:MM\""
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid ""
+"**Caution: Currently, neither already assigned nor imported accompanied "
+"patients are handled correctly and thus rooms can be overfilled!"
+msgstr ""
+"**Achtung: Aktuell werden weder bereits zugewiesene noch importierte "
+"begleitete Patienten korrekt verarbeitet, weshalb Räume überfüllt werden "
+"können!"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "***For the options \\"
+msgstr ""
+
+#: cms/templates/patients/patient_import_drawer.html
 msgid "Upload"
 msgstr "Hochladen"
 
@@ -1162,6 +1216,12 @@ msgid "Patients list"
 msgstr "Patientenliste"
 
 #: cms/templates/patients/patients_list.html
+#, fuzzy
+#| msgid "Import patient data"
+msgid "Import patient data from CSV file"
+msgstr "Patientendaten importieren"
+
+#: cms/templates/patients/patients_list.html
 msgid "Search for name..."
 msgstr "Nach Name suchen..."
 
@@ -1220,46 +1280,6 @@ msgstr "Wartet auf Stationszuweisung"
 #: cms/templates/patients/patients_list.html
 msgid "Delete"
 msgstr "Löschen"
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "Import patient data"
-msgstr "Patientendaten importieren"
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "For each entry in the uploaded file, the import feature searches for the corresponding patient in the database. If a matching entry already exists, it is updated with potentially new medical records or hospital stays. If there is no matching entry, a new patient is created in the database. When there is an error during the import (e.g. due to a date with wrong format or non-existing wards), the import is canceled and all changes from the import are reverted."
-msgstr "Für jeden Eintrag in der hochgeladenen Datei sucht das Import Feature in der Datenbank nach dem entsprechenden Patienten. Wenn ein passender Eintrag bereits existiert, wird dieser mit ggf. neuen medizinischen Unteralgen oder Krankenhausaufenthalten aktualisiert. Wenn kein passender Eintrag existiert, wird ein neuer Patient in der Datenbank erstellt. Wenn beim Import ein Fehler auftritt (z.B. wegen eines Datums mit falschem Format oder nicht-existierender Stationen), wird der Import abgebrochen und alle bisherigen Änderungen des Imports rückgängig gemacht."
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "Category"
-msgstr "Kategorie"
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "Required Fields"
-msgstr "Benötigte Felder"
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "(\"P\" or empty)"
-msgstr "(\"P\" oder leer)"
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "(\"M\", \"F\" or \"W\", \"D\")"
-msgstr "(\"M\", \"F\" oder \"W\", \"D\")"
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "(\"0\" - no or \"1\" - yes)"
-msgstr "(\"0\" - nein oder \"1\" - ja)"
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "*Dates have to be provided in the format \"DD.MM.YYYY HH:MM\" ."
-msgstr "*Daten müssen in folgendem Format angegeben werden: \"DD.MM.YYYY HH:MM\""
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "**Caution: Currently, neither already assigned nor imported accompanied patients are handled correctly and thus rooms can be overfilled!"
-msgstr "**Achtung: Aktuell werden weder bereits zugewiesene noch importierte begleitete Patienten korrekt verarbeitet, weshalb Räume überfüllt werden können!"
-
-#: cms/templates/patients/patient_import_drawer.html
-msgid "***For the options \"ward\" and \"bed\", the provided data for the required fields have to exist in the hospital, otherwise the import fails."
-msgstr "***Für die Optionen \"Station\" und \"Bett\" müssen die für die benötigten Felder übergebenen Daten im Krankenhaus existieren, andernfalls schlägt der Import fehl."
 
 #: cms/templates/timeline/timeline.html
 msgid "unsaved bed assignment changes"
@@ -1622,6 +1642,23 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "(\"P\" or empty)"
+#~ msgstr "(\"P\" oder leer)"
+
+#~ msgid "(\"M\", \"F\" or \"W\", \"D\")"
+#~ msgstr "(\"M\", \"F\" oder \"W\", \"D\")"
+
+#~ msgid "(\"0\" - no or \"1\" - yes)"
+#~ msgstr "(\"0\" - nein oder \"1\" - ja)"
+
+#~ msgid ""
+#~ "***For the options \"ward\" and \"bed\", the provided data for the "
+#~ "required fields have to exist in the hospital, otherwise the import fails."
+#~ msgstr ""
+#~ "***Für die Optionen \"Station\" und \"Bett\" müssen die für die "
+#~ "benötigten Felder übergebenen Daten im Krankenhaus existieren, "
+#~ "andernfalls schlägt der Import fehl."
 
 #~ msgid "An error occured while uploading the file."
 #~ msgstr "Beim Hochladen der Datei trat ein Fehler auf."
