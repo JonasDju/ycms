@@ -10,6 +10,7 @@ class ICD10Entry(AbstractBaseModel):
     """
 
     code = models.CharField(
+        unique=True,
         max_length=21,
         verbose_name=_("code"),
         help_text=_("ICD-10-GM classification code"),

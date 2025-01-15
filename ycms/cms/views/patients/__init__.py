@@ -15,5 +15,6 @@ from .patients_list_view import (
     PatientDeleteView,
     PatientsListView,
     PatientUpdateView,
+    UploadDataView,
 )
 from .update_patient_stay_view import UpdatePatientStayView
