@@ -19,6 +19,7 @@ import "./js/patients-list";
 import "./js/utils/loader";
 import "./js/utils/set-language";
 import "./js/patient-intake";
+import "./js/specializations-list";
 
 window.addEventListener("DOMContentLoaded", () => {
     createIconsAt(document.documentElement);

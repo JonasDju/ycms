@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-13 14:52+0100\n"
+"POT-Creation-Date: 2025-01-15 12:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -189,6 +189,10 @@ msgstr "Bestandspatient*innen durchsuchen"
 #: cms/forms/intake_record_form.py cms/forms/patients/record_form.py
 msgid "Search for diagnosis code"
 msgstr "Diagnosecodes durchsuchen"
+
+#: cms/forms/medical_specialization_form.py
+msgid "The abbreviation {} conflicts with an existing one."
+msgstr "Die Abkürzung {} steht mit einer anderen im Konflikt."
 
 #: cms/forms/unknown_patient_form.py
 msgid "Approximate age"
@@ -407,6 +411,14 @@ msgstr "Diagnosecode"
 msgid "Diagnosis code according to ICD-10"
 msgstr "Diagnosecode nach ICD-10"
 
+#: cms/models/medical_record.py cms/models/medical_specialization.py
+msgid "medical specialization"
+msgstr "Fachrichtung"
+
+#: cms/models/medical_record.py
+msgid "Medical specialization of the patient's treatment."
+msgstr "Fachrichtung der Behandlung"
+
 #: cms/models/medical_record.py
 msgid "record type"
 msgstr "Unterlagenart"
@@ -422,6 +434,26 @@ msgstr "Zusätzliche Notizen zu dieser medizinischen Unterlage"
 #: cms/models/medical_record.py
 msgid "medical records"
 msgstr "medizinische Unterlagen"
+
+#: cms/models/medical_specialization.py
+msgid "specialization name"
+msgstr "Fachrichtung"
+
+#: cms/models/medical_specialization.py
+msgid "Name of this medical specialization."
+msgstr "Name der Fachrichtung."
+
+#: cms/models/medical_specialization.py
+msgid "abbreviation"
+msgstr "Abkürzung"
+
+#: cms/models/medical_specialization.py
+msgid "Abbreviation of this medical specialization."
+msgstr "Abkürzung dieser Fachrichtung."
+
+#: cms/models/medical_specialization.py
+msgid "medical specializations"
+msgstr "Fachrichtungen"
 
 #: cms/models/patient.py
 msgid "insurance type"
@@ -638,6 +670,10 @@ msgid "Create User"
 msgstr "Nutzer anlegen"
 
 #: cms/templates/_base.html
+msgid "Specializations"
+msgstr "Fachrichtungen"
+
+#: cms/templates/_base.html
 msgid "Documentation"
 msgstr "Dokumentation"
 
@@ -750,7 +786,8 @@ msgstr "Zuweisung aufheben"
 #: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
-#: cms/templates/timeline/timeline.html cms/templates/ward/ward_card.html
+#: cms/templates/specializations_list.html cms/templates/timeline/timeline.html
+#: cms/templates/ward/ward_card.html
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -871,8 +908,8 @@ msgstr "Abkürzung"
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patient_details.html
 #: cms/templates/patients/patients_list.html
-#: cms/templates/timeline/timeline.html cms/templates/user_settings.html
-#: cms/templates/ward/ward_card.html
+#: cms/templates/specializations_list.html cms/templates/timeline/timeline.html
+#: cms/templates/user_settings.html cms/templates/ward/ward_card.html
 msgid "Save"
 msgstr "Speichern"
 
@@ -945,6 +982,7 @@ msgid "Personal Details"
 msgstr "Persönliche Daten"
 
 #: cms/templates/patients/patient_card.html
+#: cms/templates/specializations_list.html
 msgid "Name"
 msgstr "Name"
 
@@ -978,6 +1016,11 @@ msgstr "Diagnose"
 
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patient_details.html
+msgid "Specialization"
+msgstr "Fachrichtung"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patient_details.html
 msgid "Note"
 msgstr "Notiz"
 
@@ -991,6 +1034,7 @@ msgstr "Entlassungsdatum"
 
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
+#: cms/templates/specializations_list.html
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -1216,10 +1260,9 @@ msgid "Patients list"
 msgstr "Patientenliste"
 
 #: cms/templates/patients/patients_list.html
-#, fuzzy
 #| msgid "Import patient data"
 msgid "Import patient data from CSV file"
-msgstr "Patientendaten importieren"
+msgstr "Patientendaten aus CSV-Datei importieren"
 
 #: cms/templates/patients/patients_list.html
 msgid "Search for name..."
@@ -1246,6 +1289,7 @@ msgid "Add patient"
 msgstr "Patient*in hinzufügen"
 
 #: cms/templates/patients/patients_list.html
+#: cms/templates/specializations_list.html
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -1278,8 +1322,25 @@ msgid "Waits for assignment to ward"
 msgstr "Wartet auf Stationszuweisung"
 
 #: cms/templates/patients/patients_list.html
+#: cms/templates/specializations_list.html
 msgid "Delete"
 msgstr "Löschen"
+
+#: cms/templates/specializations_list.html
+msgid "Manage Specializations"
+msgstr "Fachrichtungen bearbeiten"
+
+#: cms/templates/specializations_list.html
+msgid "Edit medical specialization"
+msgstr "Fachrichtungen bearbeiten"
+
+#: cms/templates/specializations_list.html
+msgid "Abbr."
+msgstr "Abk."
+
+#: cms/templates/specializations_list.html
+msgid "Add new medical specialization"
+msgstr "Neue Fachrichtung hinzufügen"
 
 #: cms/templates/timeline/timeline.html
 msgid "unsaved bed assignment changes"
@@ -1584,6 +1645,18 @@ msgid ""
 msgstr ""
 "Patient*in \"{} {}\"  und aktueller Krankenhausaufenthalt von {} bis {} "
 "wurden gespeichert."
+
+#: cms/views/specializations.py
+msgid "Specialization {} ({}) has been created."
+msgstr "Fachrichtung {} ({}) wurde erstellt."
+
+#: cms/views/specializations.py
+msgid "Specialization {} ({}) has been updated."
+msgstr "Fachrichtung {} ({}) wurde aktualisiert."
+
+#: cms/views/specializations.py
+msgid "Specialization {} ({}) has been deleted."
+msgstr "Fachrichtung {} ({}) wurde gelöscht."
 
 #: cms/views/timeline/timeline_view.py
 msgid "unassigned"
