@@ -25,9 +25,11 @@ class Command(BaseCommand):
         return gender_map[g]
 
     def _discretize(self, date):
-        day = max(0, (date.date() - self.zero).days)
-        self.max_day = max(self.max_day, day)
-        return day
+        timedelta = date - self.now
+        hours = max(0, timedelta.seconds // 3600 + timedelta.days * 24)
+
+        self.max_hour = max(self.max_hour, hours)
+        return hours
 
     @staticmethod
     def _call_solver(last_day):
@@ -51,8 +53,7 @@ class Command(BaseCommand):
 
     def __init__(self, *args, **kwargs):
         self.now = current_or_travelled_time()
-        self.zero = self.now.date()
-        self.max_day = 0
+        self.max_hour = 0
         super().__init__(*args, **kwargs)
 
     # pylint: disable=arguments-differ
@@ -103,7 +104,7 @@ class Command(BaseCommand):
         with open(settings.PRA_INPUT_PATH, "w", encoding="utf-8") as file:
             file.write(json.dumps(instance))
 
-        self._call_solver(self.max_day)
+        self._call_solver(self.max_hour)
 
         with open(settings.PRA_OUTPUT_PATH, "r", encoding="utf-8") as file:
             patient_assignments = json.loads(file.read())["patient_assignments"]
