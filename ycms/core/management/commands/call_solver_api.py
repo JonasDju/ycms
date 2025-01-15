@@ -86,7 +86,7 @@ class Command(BaseCommand):
                     "companion": obj.accompanied,
                     "registration": 0,
                     "admission": self._discretize(obj.admission_date),
-                    "discharge": self._discretize(obj.discharge_date),
+                    "discharge": self._discretize(obj.discharge_date) + 1,
                 }
                 for obj in objects
             ],
@@ -104,7 +104,7 @@ class Command(BaseCommand):
         with open(settings.PRA_INPUT_PATH, "w", encoding="utf-8") as file:
             file.write(json.dumps(instance))
 
-        self._call_solver(self.max_hour)
+        self._call_solver(self.max_hour + 1)
 
         with open(settings.PRA_OUTPUT_PATH, "r", encoding="utf-8") as file:
             patient_assignments = json.loads(file.read())["patient_assignments"]
