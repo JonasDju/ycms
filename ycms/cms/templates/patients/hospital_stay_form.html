@@ -14,20 +14,7 @@
                 {% for field in forms.0.visible_fields %}
                     <div class="break-inside-avoid">
                         <label class="mt-0" for="{{ field.id_for_label }}">{{ field.label }}</label>
-                            {% comment %} Only allow doctors (or superuser) to change diagnosis {% endcomment %}
-                            {% if field.name != "diagnosis_code" or request.user.is_superuser or request.user.job_type == "DOCTOR" %} 
-                                {% render_field field %}
-                            {% else %}
-                                {% if field.value == None %}
-                                    <select name="diagnosis_code" class="" id="{{ field.id_for_label }}" value="" disabled="">
-                                        <option value="" selected="">-</option>
-                                    </select>
-                                {% else %}
-                                    {% render_field field class="" disabled="" %}
-                                    {% comment "Hidden dummy field for resending the same diagnosis code again" %}{% endcomment %}
-                                    {% render_field field class="!hidden" %}
-                                {% endif %}
-                            {% endif %}
+                        {% render_field field %}
                         <div class="help-text">{{ field.help_text }}</div>
                     </div>
                 {% endfor %}
