@@ -1,0 +1,157 @@
+[
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 1, 
+        "fields": {"name": "Augen", "abbreviation": "AU"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 2, 
+        "fields": {"name": "Chirurgie", "abbreviation": "CH"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 3, 
+        "fields": {"name": "Dermatologie", "abbreviation": "DE"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 4, 
+        "fields": {"name": "Gefäßchirurgie", "abbreviation": "GC"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 5, 
+        "fields": {"name": "Gynäkologie", "abbreviation": "GG"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 6, 
+        "fields": {"name": "Hals Nasen Ohren", "abbreviation": "HN"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 7, 
+        "fields": {"name": "Herzchirurgie", "abbreviation": "HG"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 8, 
+        "fields": {"name": "Innere I (Kardiologie)", "abbreviation": "I1"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 9, 
+        "fields": {"name": "Innere II (Nephrologie)", "abbreviation": "I2"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 10, 
+        "fields": {"name": "Innere III (Gastro- Enterologie)", "abbreviation": "I3"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 11, 
+        "fields": {"name": "Innere IV (Onkologie)", "abbreviation": "I4"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 12, 
+        "fields": {"name": "Innere V (Pulmonologie)", "abbreviation": "I5"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 13, 
+        "fields": {"name": "Kinderklinik", "abbreviation": "KI"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 14, 
+        "fields": {"name": "Kinder Jugend Psychiatrie", "abbreviation": "KJP"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 15, 
+        "fields": {"name": "Notaufnahme", "abbreviation": "NOTA"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 16, 
+        "fields": {"name": "Notaufnahmestation", "abbreviation": "NAST"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 17, 
+        "fields": {"name": "Neurochirurgie", "abbreviation": "NC"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 18, 
+        "fields": {"name": "Neurologie", "abbreviation": "NE"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 19, 
+        "fields": {"name": "Nuklearmedizin", "abbreviation": "NU"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 20, 
+        "fields": {"name": "Operative Intensivmedizin", "abbreviation": "OIM"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 21, 
+        "fields": {"name": "Plastische Chirurgie", "abbreviation": "PC"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 22, 
+        "fields": {"name": "Palliativmedizin", "abbreviation": "PM"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 23, 
+        "fields": {"name": "Psychiatrie", "abbreviation": "PS"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 24, 
+        "fields": {"name": "Schwerpunkt Geriatrie", "abbreviation": "SG"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 25, 
+        "fields": {"name": "Strahlentheraphie", "abbreviation": "ST"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 26, 
+        "fields": {"name": "Stammzellentranplantation", "abbreviation": "SZT"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 27, 
+        "fields": {"name": "Thoraxchirurgie", "abbreviation": "TC"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 28, 
+        "fields": {"name": "Unfallchirurgie", "abbreviation": "UC"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 29, 
+        "fields": {"name": "Urologie", "abbreviation": "UR"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 30, 
+        "fields": {"name": "Weaning", "abbreviation": "WEA"}
+    },
+    {
+        "model": "cms.medicalspecialization", 
+        "pk": 31, 
+        "fields": {"name": "Wahlleistungsflur (nur Privatpatienten)", "abbreviation": "WL"
+        }}
+]
