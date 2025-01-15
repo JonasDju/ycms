@@ -25,6 +25,25 @@ class TimelineView(TemplateView):
 
     template_name = "timeline/timeline.html"
 
+    # Intercept the GET request for the suggest path to execute the algorithm.
+    # If the algorithm fails, redirect to normal timeline view.
+    # If it succeeds, save the result in kwargs and proceed as normal.
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == "GET" and "/suggest/" in request.path:
+
+            pk = kwargs.get("pk")
+            out = StringIO()
+            call_command("call_solver_api", pk, stdout=out)
+
+            if not out.getvalue():
+                messages.error(self.request, _("Algorithm failed to generate assignment."))
+                return redirect("cms:protected:timeline", pk=kwargs.get("pk"))
+
+            kwargs["algorithm_result"] = json.loads(out.getvalue())
+
+        return super().dispatch(request, *args, **kwargs)
+
+
     def get_context_data(self, **kwargs):
         """
         This function returns a list of all bed future or current bed assignments
@@ -42,9 +61,7 @@ class TimelineView(TemplateView):
 
         suggestions = {}
         if "/suggest/" in self.request.path:
-            out = StringIO()
-            call_command("call_solver_api", pk, stdout=out)
-            suggestions = json.loads(out.getvalue())
+            suggestions = kwargs.get("algorithm_result")
 
         return {
             "ward": ward,

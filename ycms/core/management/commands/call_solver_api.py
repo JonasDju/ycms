@@ -106,8 +106,17 @@ class Command(BaseCommand):
 
         self._call_solver(self.max_hour + 1)
 
+        # If the output file does not exist, the algorithm failed to execute or
+        # did not find a feasible solution
+        if not os.path.exists(settings.PRA_OUTPUT_PATH):
+            return ""
+
         with open(settings.PRA_OUTPUT_PATH, "r", encoding="utf-8") as file:
             patient_assignments = json.loads(file.read())["patient_assignments"]
+
+        # Remove the file once it is parsed to make sure that it is not read again
+        # the next time the algorithm fails
+        os.remove(settings.PRA_OUTPUT_PATH)
 
         # The solver does not indicate if an assignment has remained unchanged,
         # and python dicts are a unhashable type, so we have to do this manually

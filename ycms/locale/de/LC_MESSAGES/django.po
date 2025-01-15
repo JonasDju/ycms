@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 15:02+0100\n"
+"POT-Creation-Date: 2025-01-15 16:01+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1457,6 +1457,10 @@ msgid ""
 msgstr ""
 "Patient*in \"{} {}\"  und aktueller Krankenhausaufenthalt von {} bis {} "
 "wurden gespeichert."
+
+#: cms/views/timeline/timeline_view.py
+msgid "Algorithm failed to generate assignment."
+msgstr "Der Algorithmus konnte keine Zuweisung generieren."
 
 #: cms/views/timeline/timeline_view.py
 msgid "unassigned"
