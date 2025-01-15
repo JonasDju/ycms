@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-15 12:33+0100\n"
+"POT-Creation-Date: 2025-01-15 20:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1150,11 +1150,8 @@ msgid "(\\"
 msgstr ""
 
 #: cms/templates/patients/patient_import_drawer.html
-#, fuzzy
-#| msgid "*Dates have to be provided in the format \"DD.MM.YYYY HH:MM\" ."
 msgid "*Dates have to be provided in the format \\"
-msgstr ""
-"*Daten müssen in folgendem Format angegeben werden: \"DD.MM.YYYY HH:MM\""
+msgstr "*Daten müssen in folgendem Format angegeben werden: \"DD.MM.YYYY HH:MM\""
 
 #: cms/templates/patients/patient_import_drawer.html
 msgid ""
@@ -1260,7 +1257,6 @@ msgid "Patients list"
 msgstr "Patientenliste"
 
 #: cms/templates/patients/patients_list.html
-#| msgid "Import patient data"
 msgid "Import patient data from CSV file"
 msgstr "Patientendaten aus CSV-Datei importieren"
 
