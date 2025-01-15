@@ -1,7 +1,7 @@
 {% load i18n %}
 <div class="">
     {% for patient in room.patients %}
-        {% include "ward/ward_bed_occupied.html" with gender=patient.gender last_name=patient.last_name first_name=patient.first_name current_stay=patient.current_stay %}
+        {% include "ward/ward_bed_occupied.html" with gender=patient.gender last_name=patient.last_name first_name=patient.first_name current_stay=patient.current_stay patient_id=patient.id%}
     {% endfor %}
     {% with ""|center:room.available_beds as range %}
         {% for _ in range %}
