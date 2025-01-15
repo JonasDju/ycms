@@ -38,4 +38,7 @@ deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/final_test_
 # Patient data
 deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/final_test_data.json" --verbosity "${SCRIPT_VERBOSITY}"
 
+# Medical specialization (Fachrichtungen) data
+deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/specializations_data.json" --verbosity "${SCRIPT_VERBOSITY}"
+
 echo "✔ Imported test data" | print_success

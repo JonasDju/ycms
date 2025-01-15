@@ -21,7 +21,7 @@ class IntakeRecordForm(CustomModelForm):
         """
 
         model = MedicalRecord
-        fields = ["patient", "diagnosis_code", "note"]
+        fields = ["patient", "diagnosis_code", "note", "medical_specialization"]
 
     def __init__(self, *args, **kwargs):
         r"""
@@ -66,5 +66,6 @@ class IntakeRecordForm(CustomModelForm):
             record_type=record_types.INTAKE,
             diagnosis_code=cleaned_data["diagnosis_code"],
             note=cleaned_data["note"],
+            medical_specialization=cleaned_data["medical_specialization"],
         )
         return new_record
