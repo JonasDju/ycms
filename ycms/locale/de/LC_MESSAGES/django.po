@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-12 14:35+0100\n"
+"POT-Creation-Date: 2025-01-15 12:33+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1229,12 +1229,12 @@ msgid "Edit medical specialization"
 msgstr "Fachrichtungen bearbeiten"
 
 #: cms/templates/specializations_list.html
-msgid "Add new medical specialization"
-msgstr "Neue Fachrichtung hinzufügen"
-
-#: cms/templates/specializations_list.html
 msgid "Abbr."
 msgstr "Abk."
+
+#: cms/templates/specializations_list.html
+msgid "Add new medical specialization"
+msgstr "Neue Fachrichtung hinzufügen"
 
 #: cms/templates/timeline/timeline.html
 msgid "unsaved bed assignment changes"
