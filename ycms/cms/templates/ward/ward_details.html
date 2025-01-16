@@ -50,10 +50,12 @@
                 <input class="w-full"
                        type="text"
                        placeholder="{% translate "Room number" %}" />
-                       <h2 class="remover-room text-red-600 cursor-pointer">
-                        {% translate "-" %} <i icon-name="plus-circle"></i></h2>
-                <i icon-name="minus-circle"
-                   class="remover-room text-red-600 cursor-pointer"></i>
+                        <svg class="lucide lucide-minus-circle remover-room text-red-600 cursor-pointer" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
             </div>
             <div class="!-mb-4 help-text">{% translate "Beds" %}</div>
             <div class="edit-bed-prototype2 flex items-center gap-2">
@@ -61,10 +63,12 @@
                     {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
                 </select>
                 <div>
-                    <h2 class="remove-bed text-red-600 cursor-pointer">
-                        {% translate "-" %} <i icon-name="plus-circle"></i></h2>
-                    <i icon-name="minus-circle"
-                       class="remove-bed text-red-600 cursor-pointer"></i>
+                    <svg class="lucide lucide-minus-circle remove-bed text-red-600 cursor-pointer" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
                 </div>
             </div>
             <div class="flex items-center gap-2">
@@ -72,15 +76,23 @@
                     {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
                 </select>
                 <div>
-                    <h2 class="remove-bed text-red-600 cursor-pointer">
-                        {% translate "-" %} <i icon-name="plus-circle"></i></h2>
-                    <i icon-name="minus-circle"
-                       class="remove-bed text-red-600 cursor-pointer"></i>
+                    <svg class="lucide lucide-minus-circle remove-bed text-red-600 cursor-pointer" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
                 </div>
             </div>
             <div class="add-bed-btn flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <p class="hover:text-blue-600">
-                    {% translate "Add bed" %} <i icon-name="plus-circle"></i>
+                <p class="flex items-center gap-2 hover:text-grey-400">
+                    {% translate "Add bed" %} <svg class="plus-circle text-grey-400 cursor-pointer" width="24" height="24"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                     <circle cx="12" cy="12" r="10"></circle>
+                     <line x1="12" y1="8" x2="12" y2="16"></line>
+                     <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
                 </p>
             </div>
         </div>

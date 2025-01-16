@@ -3,12 +3,12 @@
 # This file is distributed under the same license as the CMS package.
 # YCMS <info@ycms-app.de>
 # https://github.com/charludo/
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-12 20:43+0100\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1224,7 +1224,7 @@ msgstr "Stockwerk"
 #: cms/templates/ward/ward_card.html
 #, fuzzy
 #| msgid "Rooms in this Ward"
-msgid "Existing Rooms in this Ward"
+msgid "add Rooms in this Ward"
 msgstr "Zimmer auf dieser Station"
 
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
@@ -1241,12 +1241,6 @@ msgstr "Betten"
 #: cms/templates/ward/ward_management.html
 msgid "Add bed"
 msgstr "Bett hinzufügen"
-
-#: cms/templates/ward/ward_card.html
-#, fuzzy
-#| msgid "Rooms in this Ward"
-msgid "add Rooms in this Ward"
-msgstr "Zimmer auf dieser Station"
 
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
 #: cms/templates/ward/ward_management.html
@@ -1540,6 +1534,18 @@ msgstr "Dein Passwort wurde erfolgreich geändert!"
 #: cms/views/ward/ward_details.py
 #, fuzzy
 #| msgid "The following room numbers already exist: {}"
+msgid "Following room numbers already exist: {}"
+msgstr "Die folgenden Zimmernummern existieren bereits: {}"
+
+#: cms/views/ward/ward_details.py
+#, fuzzy
+#| msgid "Successfully unassigned \"{}, {}\"."
+msgid "Successfully created {} rooms"
+msgstr "Zuewisung für \"{}, {}\" erfolgreich aufgehoben."
+
+#: cms/views/ward/ward_details.py
+#, fuzzy
+#| msgid "The following room numbers already exist: {}"
 msgid "This room number already exists in this ward"
 msgstr "Die folgenden Zimmernummern existieren bereits: {}"
 
@@ -1616,6 +1622,11 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#, fuzzy
+#~| msgid "Rooms in this Ward"
+#~ msgid "Existing Rooms in this Ward"
+#~ msgstr "Zimmer auf dieser Station"
 
 #, fuzzy
 #~| msgid "Create a new user"
