@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-15 12:33+0100\n"
+"POT-Creation-Date: 2025-01-17 11:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -869,8 +869,7 @@ msgstr "Abkürzung"
 #: cms/templates/patients/patients_list.html
 #: cms/templates/specializations_list.html cms/templates/timeline/timeline.html
 #: cms/templates/user_settings.html cms/templates/ward/ward_card.html
-#: cms/templates/timeline/timeline.html cms/templates/user_settings.html
-#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
+#: cms/templates/ward/ward_details.html
 msgid "Save"
 msgstr "Speichern"
 
@@ -1187,7 +1186,7 @@ msgid "Add patient"
 msgstr "Patient*in hinzufügen"
 
 #: cms/templates/patients/patients_list.html
-#: cms/templates/specializations_list.html
+#: cms/templates/specializations_list.html cms/templates/ward/ward_details.html
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -1220,8 +1219,7 @@ msgid "Waits for assignment to ward"
 msgstr "Wartet auf Stationszuweisung"
 
 #: cms/templates/patients/patients_list.html
-#: cms/templates/ward/ward_details.html
-#: cms/templates/specializations_list.html
+#: cms/templates/specializations_list.html cms/templates/ward/ward_details.html
 msgid "Delete"
 msgstr "Löschen"
 
@@ -1286,7 +1284,7 @@ msgid "Floor"
 msgstr "Stockwerk"
 
 #: cms/templates/ward/ward_card.html
-msgid "add Rooms in this Ward"
+msgid "Add rooms to this ward"
 msgstr "Zimmer auf dieser Station hinzufügen"
 
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
@@ -1310,24 +1308,20 @@ msgid "Add room"
 msgstr "Zimmer hinzufügen"
 
 #: cms/templates/ward/ward_details.html
-msgid "create new rooms"
-msgstr "neue Zimmer erstellen"
+msgid "Create new rooms"
+msgstr "Neue Zimmer erstellen"
 
 #: cms/templates/ward/ward_details.html
-msgid "existing room"
-msgstr "bestehendes Zimmer"
+msgid "Edit existing rooms"
+msgstr "Bestehende Zimmer bearbeiten"
 
 #: cms/templates/ward/ward_details.html
 msgid "Here can change the room number"
 msgstr "Hier kann die Zimmernummer geändert werden"
 
 #: cms/templates/ward/ward_details.html
-msgid "Save "
-msgstr "Speichern"
-
-#: cms/templates/ward/ward_details.html
 msgid "Beds in this room"
-msgstr "Bettenzuweisung im Zimmer"
+msgstr "Betten in diesem Zimmer"
 
 #: cms/templates/ward/ward_details.html
 msgid "Here can modify the existing bed type / create a new bed "
@@ -1601,22 +1595,16 @@ msgid "Following room numbers already exist: {}"
 msgstr "Die folgenden Zimmernummern existieren bereits: {}"
 
 #: cms/views/ward/ward_details.py
-#, fuzzy
-#| msgid "Successfully unassigned \"{}, {}\"."
 msgid "Successfully created {} rooms"
-msgstr "Zuewisung für \"{}, {}\" erfolgreich aufgehoben."
+msgstr "Räume erfolgeich erstell: {}"
 
 #: cms/views/ward/ward_details.py
-#, fuzzy
-#| msgid "The following room numbers already exist: {}"
 msgid "This room number already exists in this ward"
-msgstr "Die folgenden Zimmernummern existieren bereits: {}"
+msgstr "Diese Raumnummer existiert bereits auf dieser Station"
 
 #: cms/views/ward/ward_details.py
-#, fuzzy
-#| msgid "Floor \"{}\" was edited successfully!"
 msgid "Room updated successfully"
-msgstr "Stockwerk \"{}\" wurde erfolgreich bearbeitet!"
+msgstr "Der Raum wurde erfolgreich bearbeitet!"
 
 #: cms/views/ward/ward_details.py
 msgid "The room cannot be deleted because it contains unavailable beds."
@@ -1624,10 +1612,8 @@ msgstr ""
 "Das Zimmer kann nicht gelöscht werden, da es nicht verfügbare Betten enthält."
 
 #: cms/views/ward/ward_details.py
-#, fuzzy
-#| msgid "The ward has been deleted."
-msgid "The room has beed deleted."
-msgstr "Die Station wurde gelöscht."
+msgid "The room has been deleted."
+msgstr "Der Raum wurde gelöscht."
 
 #: cms/views/ward/ward_details.py
 msgid "Bed updated successfully"
@@ -1680,21 +1666,6 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
-
-#, fuzzy
-#~| msgid "Rooms in this Ward"
-#~ msgid "Existing Rooms in this Ward"
-#~ msgstr "Zimmer auf dieser Station"
-
-#, fuzzy
-#~| msgid "Create a new user"
-#~ msgid "create new Beds"
-#~ msgstr "Neuen Benutzer anlegen"
-
-#, fuzzy
-#~| msgid "Create"
-#~ msgid "create"
-#~ msgstr "Anlegen"
 
 #~ msgid "ward number"
 #~ msgstr "Stationsnummer"

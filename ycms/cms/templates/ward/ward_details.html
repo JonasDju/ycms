@@ -32,7 +32,7 @@
     </form>
 </div>
 <div class="w-full flex flex-col flex-wrap my-6">
-    <h1 class="heading">{% translate "create new rooms" %}</h1>
+    <h1 class="heading">{% translate "Create new rooms" %}</h1>
 </div>
 
 {% if perms.cms.add_rooms %}
@@ -112,7 +112,7 @@
 {% endif %}
 
 <div class="w-full flex flex-col flex-wrap my-6">
-    <h1 class="heading">{% translate "existing room" %}</h1>
+    <h1 class="heading">{% translate "Edit existing rooms" %}</h1>
 </div>
 <div class="room-navigation flex flex-wrap gap-4 mb-6">
     {% for room, patients in rooms %}
@@ -145,7 +145,7 @@
             </div>
             <div class="mt-4 flex justify-end gap-4">
                 <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
-                    {% translate "Save " %}
+                    {% translate "Save" %}
                 </button>
                 <button type="submit" formaction="{% url "cms:protected:delete_room" room.id %}" formmethod="post" class="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-700  rounded inline-flex items-center px-5 py-2.5 text-center">
                     {% translate "Delete" %}
@@ -229,7 +229,7 @@
                         </div>
                         <div class="mt-4 flex justify-center">
                             <button type="submit" class="text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-gr-700 rounded inline-flex items-center px-5 py-2.5 text-center">
-                                {% translate "Create" %}
+                                {% translate "Add" %}
                             </button>
                         </div>
                     </form>

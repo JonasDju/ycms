@@ -161,7 +161,7 @@ class RoomDeleteView(DeleteView):
             messages.error(self.request, _("The room cannot be deleted because it contains unavailable beds."))
         else:
             self.object.delete()
-            messages.success(self.request, _("The room has beed deleted."))
+            messages.success(self.request, _("The room has been deleted."))
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
 
 
