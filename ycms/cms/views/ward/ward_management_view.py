@@ -129,17 +129,31 @@ class WardDeleteView(DeleteView):
     """
     View to delete a ward 
     """
-
     model = Ward
-    success_url = reverse_lazy("cms:protected:ward_management")
+    
+    def get_success_url(self):
+        # Get the referer URL or default to ward management
+        referer = self.request.META.get('HTTP_REFERER', '')
+        if 'floor' in referer:
+            return reverse_lazy("cms:protected:floor")
+        return reverse_lazy("cms:protected:ward_management")
 
     def form_valid(self, form):
-        messages.success(self.request, _("The ward has been deleted."))
-        return super().form_valid(form)
+        try:
+            # Check if ward has occupied beds
+            if self.object.occupied_beds > 0:
+                messages.error(self.request, _("Cannot delete ward with occupied beds."))
+                return HttpResponseRedirect(self.get_success_url())
+            response = super().form_valid(form)
+            messages.success(self.request, _("The ward has been deleted."))
+            return response
+        except Exception as e:
+            messages.error(self.request, str(e))
+            return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
         form.add_error_messages(self.request)
-        return redirect("cms:protected:ward_management")
+        return HttpResponseRedirect(self.get_success_url())
 
 
 @method_decorator(permission_required("cms.edit_ward"), name="dispatch")
