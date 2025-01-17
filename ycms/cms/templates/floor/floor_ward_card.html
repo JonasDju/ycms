@@ -11,16 +11,40 @@
         {% if user.is_staff %}
         <div class="flex space-x-2">
             {# Edit Icon #}
-            <a href="{% url 'cms:protected:ward_details' ward.id %}" 
+            <a href="{% url 'cms:protected:ward_details' ward.id %}"
                class="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors duration-200">
                <i icon-name="pencil" class="text-blue-600 cursor-pointer"></i>
             </a>
             {# Delete Icon #}
-            <button type="submit" form="delete-ward-{{ ward.id }}"
-                    class="text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors duration-200">
+            <button class="text-gray-500 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-500 transition-colors duration-200"
+                    data-delete-ward
+                    data-occupied-beds="{{ ward.occupied_beds }}"
+                    data-ward-id="{{ ward.id }}"
+                    data-form-id="delete-ward-{{ ward.id }}"
+                    form="delete-ward-{{ ward.id }}">
                     <i icon-name="trash-2" class="element-remover text-red-600 cursor-pointer"></i>
             </button>
-            <form id="delete-ward-{{ ward.id }}" method="post" action="{% url 'cms:protected:delete_ward' ward.id %}" class="hidden">
+            <div id="confirm-modal-{{ ward.id }}" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+                <div class="w-full lg:w-1/3 rounded-lg border border-gray-300 bg-white p-8 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex flex-col items-center justify-center">
+                        <p id="modal-message-{{ ward.id }}" class="mb-4 text-gray-700 text-center"></p>
+                        <div class="flex justify-center gap-4">
+                            <button class="modal-confirm px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                                    data-ward-id="{{ ward.id }}">
+                                {% translate "Yes" %}
+                            </button>
+                            <button class="modal-cancel px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                                    data-ward-id="{{ ward.id }}">
+                                {% translate "No" %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form hidden
+                id="delete-ward-{{ ward.id }}"
+                method="post"
+                action="{% url "cms:protected:delete_ward" ward.id %}">
                 {% csrf_token %}
             </form>
         </div>
@@ -28,6 +52,11 @@
     </div>
 
     {# Ward Info #}
+    <style>
+        .male-icon { color: #18aff5; }
+        .female-icon { color: #de1ee8; }
+        .diverse-icon { color: #2ecc71; }
+    </style>
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
         <span>
             {% trans "Occupied beds" %}: <strong> {{ ward.occupied_beds }} </strong></span>
@@ -41,9 +70,9 @@
             {{ ward.unassigned_patients|length }}
         </strong>
         <br>
-        <span style="color: #18aff5;">&#9794;</span><span style="color: #18aff5;">{{ ward.patient_genders.m|default:0 }}</span> /
-        <span style="color: #de1ee8;">&#9792;</span><span style="color: #de1ee8;">{{ ward.patient_genders.f|default:0 }}</span> /
-        <span style="color: #2ecc71;">&#9895;</span><span style="color: #2ecc71;">{{ ward.patient_genders.d|default:0 }}</span>
+        <span class="male-icon">♂</span> <span class="male-icon">{{ ward.patient_genders.m|default:0 }}</span> /
+        <span class="female-icon">♀</span> <span class="female-icon">{{ ward.patient_genders.f|default:0 }}</span> /
+        <span class="diverse-icon">⚥</span> <span class="diverse-icon">{{ ward.patient_genders.d|default:0 }}</span>
         <br>
     </p>
 

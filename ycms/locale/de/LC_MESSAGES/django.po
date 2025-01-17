@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-17 11:42+0100\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -784,12 +784,12 @@ msgid "Close modal"
 msgstr "Modal schließen"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
-#: cms/templates/ward/ward_management.html cms/templates/ward/ward_modal.html
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_modal.html
 msgid "Yes"
 msgstr "Ja"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
-#: cms/templates/ward/ward_management.html cms/templates/ward/ward_modal.html
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_modal.html
 msgid "No"
 msgstr "Nein"
 
@@ -1638,6 +1638,10 @@ msgstr "Hinzufügung der neuen Station \"{}\" erfolgreich!"
 #: cms/views/ward/ward_management_view.py
 msgid "Added {} rooms with {} beds to \"{}\"."
 msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
+
+#: cms/views/ward/ward_management_view.py
+msgid "Cannot delete ward with occupied beds."
+msgstr ""
 
 #: cms/views/ward/ward_management_view.py
 msgid "The ward has been deleted."
