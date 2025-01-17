@@ -59,6 +59,14 @@
                         {% endif %}
                     </p>
                     <p>
+                        <span class="font-semibold dark:text-white">{% translate "Specialization" %}:</span> 
+                        {% if bed_assignment.medical_record.medical_specialization %}
+                            {{ bed_assignment.medical_record.medical_specialization.name }} ({{ bed_assignment.medical_record.medical_specialization.abbreviation }})
+                        {% else %}
+                            -
+                        {% endif %}
+                    </p>
+                    <p>
                         <span class="font-semibold dark:text-white">{% translate "Note" %}:</span> {{ bed_assignment.medical_record.note }}
                     </p>
                     <p>

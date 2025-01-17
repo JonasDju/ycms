@@ -64,6 +64,7 @@ ycms-cli loaddata "ycms/cms/fixtures/test_data_icd10.json"
 ycms-cli loaddata "ycms/cms/fixtures/test_data.json"
 ycms-cli loaddata "ycms/cms/fixtures/final_test_data_icd10.json"
 ycms-cli loaddata "ycms/cms/fixtures/final_test_data.json"
+ycms-cli loaddata "ycms/cms/fixtures/specializations_data.json"
 echo "✔ Loaded test data"
 
 # Check if compiled webpack output exists
