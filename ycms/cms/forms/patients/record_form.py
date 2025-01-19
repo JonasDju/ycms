@@ -23,7 +23,7 @@ class RecordForm(CustomModelForm):
         """
 
         model = MedicalRecord
-        fields = ["record_type", "diagnosis_code", "note"]
+        fields = ["record_type", "medical_specialization", "diagnosis_code", "note"]
 
     def __init__(self, *args, **kwargs):
         r"""

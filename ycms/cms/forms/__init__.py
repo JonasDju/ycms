@@ -13,3 +13,4 @@ from .unknown_patient_form import UnknownPatientForm
 from .user_form import UserForm
 from .ward_form import WardForm
 from .upload_csv_form import UploadCSVForm
+from .medical_specialization_form import MedicalSpecializationForm
