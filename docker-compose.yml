@@ -23,6 +23,7 @@ services:
       - "8086:8086"
     volumes:
       - ./:/bed-management/ycms
+      - ./gurobi:/opt/gurobi
     profiles: [dev]
     depends_on:
       db:

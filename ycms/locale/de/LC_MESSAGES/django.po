@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-15 16:01+0100\n"
+"POT-Creation-Date: 2025-01-19 18:39+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1457,6 +1457,18 @@ msgid ""
 msgstr ""
 "Patient*in \"{} {}\"  und aktueller Krankenhausaufenthalt von {} bis {} "
 "wurden gespeichert."
+
+#: cms/views/timeline/timeline_view.py
+msgid "The PRA algorithm is not installed."
+msgstr "Der Bettzuweisungsalgorithmus ist nicht installiert."
+
+#: cms/views/timeline/timeline_view.py
+msgid "The Gurobi license is missing. Please install it and try again."
+msgstr "Die Gurobi-Lizenz fehlt. Bitte installiere diese und versuche es erneut."
+
+#: cms/views/timeline/timeline_view.py
+msgid "The Gurobi license is invalid. Please update it and try again."
+msgstr "Die Gurobi-Lizenz is ungültig. Bitte aktualisiere diese und versuche es erneut."
 
 #: cms/views/timeline/timeline_view.py
 msgid "Algorithm failed to generate assignment."

@@ -22,8 +22,8 @@ RUN apt-get update && apt-get install -y \
     pcregrep \
     && rm -rf /var/lib/apt/lists/*
 
-# Create directory
-RUN mkdir -p /bed-management/ycms
+# Create directories
+RUN mkdir -p /bed-management/ycms /opt/gurobi
 
 # Clone git repository (patient-to-room_assignment)
 ADD https://api.github.com/repos/$USER/$REPO/git/refs/heads/$BRANCH version.json
@@ -35,8 +35,8 @@ RUN python3 -m venv .venv && \
     . .venv/bin/activate && \
     pip install gurobipy
 
-# Change ownership of patient-to-room-assignment repository
-RUN chown -R 1000:1000 /bed-management/patient-to-room_assignment
+# Change ownership of patient-to-room-assignment repository and gurobi folder
+RUN chown -R 1000:1000 /bed-management/patient-to-room_assignment /opt/gurobi
 
 # Copy scripts
 WORKDIR /bed-management

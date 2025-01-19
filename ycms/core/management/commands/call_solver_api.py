@@ -4,6 +4,7 @@ import os
 import subprocess
 
 from django.conf import settings
+from django.core.cache import cache
 from django.core.management.base import BaseCommand, CommandParser
 
 from ....cms.models import BedAssignment, Ward
@@ -32,13 +33,13 @@ class Command(BaseCommand):
         return hours
 
     @staticmethod
-    def _call_solver(last_day):
+    def _call_solver(last_hour):
         script = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "call_solver.sh"
         )
         with open(os.devnull, "wb") as devnull:
             subprocess.call(
-                [script, settings.PRA_BASE, "generated", str(last_day)], stdout=devnull
+                [script, settings.PRA_BASE, "generated", str(last_hour)], stdout=devnull
             )
 
     def add_arguments(self, parser: CommandParser) -> None:

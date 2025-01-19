@@ -9,6 +9,7 @@ from django.shortcuts import redirect
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
+from django.core.cache import cache
 
 from ...decorators import permission_required
 from ...models import BedAssignment, Room, Ward
@@ -31,13 +32,31 @@ class TimelineView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         if request.method == "GET" and "/suggest/" in request.path:
 
+            # Redirect to return in case of errors
+            error_redirect = redirect("cms:protected:timeline", pk=kwargs.get("pk"))
+
+            # Check PRA installation / gurobi license status before executing the algorithm
+            pra_algorithm_installed = cache.get("pra_algorithm_installed")
+            gurobi_license = cache.get("gurobi_license")
+
+            if not pra_algorithm_installed:
+                messages.error(self.request, _("The PRA algorithm is not installed."))
+                return error_redirect
+            if gurobi_license == "missing":
+                messages.error(self.request, _("The Gurobi license is missing. Please install it and try again."))
+                return error_redirect
+            if gurobi_license == "invalid":
+                messages.error(self.request, _("The Gurobi license is invalid. Please update it and try again."))
+                return error_redirect
+
+            # PRA installed and gurobi license valid
             pk = kwargs.get("pk")
             out = StringIO()
             call_command("call_solver_api", pk, stdout=out)
 
             if not out.getvalue():
                 messages.error(self.request, _("Algorithm failed to generate assignment."))
-                return redirect("cms:protected:timeline", pk=kwargs.get("pk"))
+                return error_redirect
 
             kwargs["algorithm_result"] = json.loads(out.getvalue())
 
