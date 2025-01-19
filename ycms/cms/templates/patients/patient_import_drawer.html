@@ -42,8 +42,8 @@
                                 <td class="px-6 py-3">
                                     Nachname<br/>
                                     Vorname<br/>
-                                    Privatpatient {% translate "(\"P\" or empty)" %}<br/>
-                                    Geschlecht {% translate "(\"M\", \"F\" or \"W\", \"D\")" %}<br/>
+                                    Privatpatient ("P" {% translate "or empty" %})<br/>
+                                    Geschlecht ("M", "F" {% translate "or" %} "W", "D")<br/>
                                     Alter_bei_Aufnahme<br/>
                                     Erstellungsdatum*
                                 </td>
@@ -60,7 +60,7 @@
                                 <td class="px-6 py-3">
                                     Aufnahmedatum*<br/>
                                     Entlassdatum*<br/>
-                                    mit_Begleitperson** {% translate "(\"0\" - no or \"1\" - yes)" %}
+                                    mit_Begleitperson** ("0" - {% translate "no or" %} "1" - {% translate "yes" %})
                                 </td>
                             </tr>
                             <tr class="odd:bg-white even:bg-gray-100 border-b dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:border-gray-700 w-full">
@@ -73,18 +73,18 @@
                             <tr class="odd:bg-white even:bg-gray-100 border-b dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:border-gray-700 w-full">
                                 <td class="px-6 py-3">{% translate "Patient + bed" %}***</td>
                                 <td class="px-6 py-3">
-                                    Betttyp ("normal", "small", "ventilator")<br/>
+                                    Betttyp ("normal", "small" {% translate "or" %} "ventilator")<br/>
                                     Raumnummer
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <br/>
-                    {% translate "*Dates have to be provided in the format \"DD.MM.YYYY HH:MM\" ." %}
+                    {% translate "*Dates have to be provided in the following format: DD.MM.YYYY HH:MM" %}
                     <br/>
                     {% translate "**Caution: Currently, neither already assigned nor imported accompanied patients are handled correctly and thus rooms can be overfilled!" %}
                     <br/>
-                    {% translate "***For the options \"ward\" and \"bed\", the provided data for the required fields have to exist in the hospital, otherwise the import fails." %}
+                    {% translate "***For the options ward and bed, the provided data for the required fields have to exist in the hospital, otherwise the import fails." %}
                 </p>
                 <button type="submit" class="px-2 text-white bg-blue-500 hover:bg-blue-700 mt-2 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5 text-center w-full lg:w-auto">
                     {% translate "Upload" %}

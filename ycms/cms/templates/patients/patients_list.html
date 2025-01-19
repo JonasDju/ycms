@@ -19,9 +19,9 @@
                     data-drawer-show="drawer-right"
                     data-drawer-placement="right"
                     aria-controls="drawer-right">
-                    <i icon-name="upload" class="text-blue-600 cursor-pointer"></i>
+                    <i icon-name="upload" class="text-blue-600 cursor-pointer mr-2"></i>
+                    <span>  {% translate "Import patient data from CSV file" %}</span>
                 </button>
-                {% translate "Import patient data from CSV file" %}
                 {% include "patients/patient_import_drawer.html" %} 
             {% endif %}
         </div> 

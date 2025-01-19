@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-13 14:52+0100\n"
+"POT-Creation-Date: 2025-01-19 21:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1102,15 +1102,24 @@ msgid "Required Fields"
 msgstr "Benötigte Felder"
 
 #: cms/templates/patients/patient_import_drawer.html
-msgid "(\\"
-msgstr ""
+msgid "or empty"
+msgstr "oder leer"
 
 #: cms/templates/patients/patient_import_drawer.html
-#, fuzzy
-#| msgid "*Dates have to be provided in the format \"DD.MM.YYYY HH:MM\" ."
-msgid "*Dates have to be provided in the format \\"
-msgstr ""
-"*Daten müssen in folgendem Format angegeben werden: \"DD.MM.YYYY HH:MM\""
+msgid "or"
+msgstr "oder"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "no or"
+msgstr "nein oder"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "yes"
+msgstr "ja"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "*Dates have to be provided in the following format: DD.MM.YYYY HH:MM"
+msgstr "*Daten müssen in folgendem Format angegeben werden: DD.MM.YYYY HH:MM"
 
 #: cms/templates/patients/patient_import_drawer.html
 msgid ""
@@ -1122,8 +1131,13 @@ msgstr ""
 "können!"
 
 #: cms/templates/patients/patient_import_drawer.html
-msgid "***For the options \\"
+msgid ""
+"***For the options ward and bed, the provided data for the required fields "
+"have to exist in the hospital, otherwise the import fails."
 msgstr ""
+"***Für die Optionen Station und Bett müssen die für die benötigten Felder "
+"übergebenen Daten im Krankenhaus existieren, andernfalls schlägt der Import "
+"fehl."
 
 #: cms/templates/patients/patient_import_drawer.html
 msgid "Upload"
@@ -1216,10 +1230,8 @@ msgid "Patients list"
 msgstr "Patientenliste"
 
 #: cms/templates/patients/patients_list.html
-#, fuzzy
-#| msgid "Import patient data"
 msgid "Import patient data from CSV file"
-msgstr "Patientendaten importieren"
+msgstr "Patientendaten aus CSV-Datei importieren"
 
 #: cms/templates/patients/patients_list.html
 msgid "Search for name..."
@@ -1642,23 +1654,6 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
-
-#~ msgid "(\"P\" or empty)"
-#~ msgstr "(\"P\" oder leer)"
-
-#~ msgid "(\"M\", \"F\" or \"W\", \"D\")"
-#~ msgstr "(\"M\", \"F\" oder \"W\", \"D\")"
-
-#~ msgid "(\"0\" - no or \"1\" - yes)"
-#~ msgstr "(\"0\" - nein oder \"1\" - ja)"
-
-#~ msgid ""
-#~ "***For the options \"ward\" and \"bed\", the provided data for the "
-#~ "required fields have to exist in the hospital, otherwise the import fails."
-#~ msgstr ""
-#~ "***Für die Optionen \"Station\" und \"Bett\" müssen die für die "
-#~ "benötigten Felder übergebenen Daten im Krankenhaus existieren, "
-#~ "andernfalls schlägt der Import fehl."
 
 #~ msgid "An error occured while uploading the file."
 #~ msgstr "Beim Hochladen der Datei trat ein Fehler auf."
