@@ -1,25 +1,30 @@
 
+{% load i18n %}
+{% load static %} 
 <div class="h-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-6 md:p-8">
     <div class="flex justify-between">
-        <div>
-            <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-4">Infos</h5>
+        <div class="flex items-center space-x-2 mb-6">
+            <!-- Informationssymbol von Google Fonts rechts vom Titel -->
+            <span class="material-icons-outlined text-gray-800 cursor-pointer">info</span>
+            <h5 class="leading-none text-xl font-bold text-gray-900 dark:text-white"> {% translate "Information" %}</h5>
         </div>
     </div>
 
     <!-- Infos List -->
     <div class="space-y-6">
-        <div class="flex justify-between">
-            <p class="text-lg font-medium text-gray-700 dark:text-gray-300">Total Wards:</p>
+        <div class="flex justify-between border-t border-b pb-3 pt-3">
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300"> {% translate "Total Wards" %}:</p>
             <p class="text-xl font-bold text-gray-900 dark:text-white">{{ infos.wards_count }}</p>
         </div>
-        <div class="flex justify-between">
-            <p class="text-lg font-medium text-gray-700 dark:text-gray-300">Total Doctors:</p>
+        <div class="flex justify-between border-b pb-3">
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300"> {% translate "Total Doctors" %}:</p>
             <p class="text-xl font-bold text-gray-900 dark:text-white">{{ infos.doctors_count }}</p>
         </div>
-        <div class="flex justify-between">
-            <p class="text-lg font-medium text-gray-700 dark:text-gray-300">Total Nurses:</p>
+        <div class="flex justify-between border-b pb-3">
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300"> {% translate "Total Nurses" %}:</p>
             <p class="text-xl font-bold text-gray-900 dark:text-white">{{ infos.nurses_count }}</p>
         </div>
     </div>
 </div>
+
 

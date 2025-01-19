@@ -12,17 +12,17 @@
         <img src="{% static 'images/Uni_Klinik_Skizze.png' %}" alt="Uni Klinik Skizze" class="w-full h-auto" />
     </div>
 
-    <div class="flex flex-row mt-6 h-full w-full m-6">
-        <div class="p-2 h-full">
+    <div class="flex flex-row flex-wrap mt-6 h-[500px] w-full m-6">
+        <div class="p-2 h-full max-w-[300px] min-w-[300px]">
             {% include "home/home_patient.html" %}
         </div>
-        <div class="p-2 h-full">
+        <div class="p-2 h-full max-w-[300px] min-w-[300px]">
             {% include "home/home_gender.html" %}
         </div>
-        <div class="p-2 h-full">
+        <div class="p-2 h-full max-w-[300px] min-w-[300px]">
             {% include "home/home_beds.html" %}
         </div>
-        <div class="p-2 h-full min-w-[500px]">
+        <div class="p-2 h-full max-w-[300px] min-w-[300px]">
             {% include "home/home_infos.html" %}
         </div>
     </div>    

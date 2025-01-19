@@ -1,3 +1,5 @@
+{% load i18n %}
+{% load static %} 
 <style>
     /* Standard-Lichtmodus */
     .apexcharts-datalabel-label,
@@ -37,7 +39,7 @@
   <div class=" h-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-6 md:p-8">
       <div class="flex justify-between">
           <div>
-              <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-4">Bed Infos</h5>
+              <h5 class="leading-none text-xl font-bold text-gray-900 dark:text-white pb-4"> {% translate "Bed Infos" %}</h5>
           </div>
       </div>
       <div id="bar-chart" class="w-full h-64"></div>
@@ -54,14 +56,17 @@
       chart: {
           type: 'bar',
           height: 350,
-          background: 'transparent', // Kein Hintergrund, passt sich dem Theme an
+          background: 'transparent', 
+          toolbar: {
+            show: false 
+        },
       },
       series: [{
           name: 'Count',
           data: [
-              { x: 'Total', y: wardInfo.beds_count, fillColor: '#4CAF50' }, 
-              { x: 'Available', y: wardInfo.available_beds, fillColor: '#FF9800' }, 
-              { x: 'Occupied', y: wardInfo.occupied_beds, fillColor: '#F44336' } 
+              { x: 'Total', y: wardInfo.beds_count, fillColor: '#69A9FF' }, 
+              { x: 'Available', y: wardInfo.available_beds, fillColor: '#FFB3D9' }, 
+              { x: 'Occupied', y: wardInfo.occupied_beds, fillColor: '#AEE6C7' } 
           ],
       }],
       plotOptions: {
@@ -74,19 +79,21 @@
       dataLabels: {
           enabled: false,
           style: {
-              colors: ['#000000'], // Standard schwarz für Labels
+              colors: ['#000000'],
           },
       },
       xaxis: {
           categories: ['Total', 'Available', 'Occupied'],
           labels: {
               style: {
-                  colors: '#000000', // Standardfarbe für Achsenbeschriftung
+                  colors: '#000000', 
               },
+              rotate: -45,  
+            rotateAlways: true,
           },
       },
       grid: {
-          borderColor: '#E0E0E0', // Standard grid Linien
+          borderColor: '#E0E0E0', 
       },
   };
   

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-11-07 18:21+0100\n"
+"POT-Creation-Date: 2025-01-19 12:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -114,16 +114,6 @@ msgstr "Ein Account für die Email \"{}\" existiert bereits."
 msgid "Enter {} here"
 msgstr "{} hier eingeben"
 
-#: cms/forms/intake_bed_assignment_form.py
-msgid "Admission date cannot be later than discharge date."
-msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
-
-#: cms/forms/intake_bed_assignment_form.py
-msgid ""
-"The selected admission and discharge dates overlap with an existing hospital "
-"stay."
-msgstr "Der ausgewählte Zeitraum kollidiert mit einem existierenden Krankenhausaufenthalt."
-
 #: cms/forms/intake_record_form.py
 msgid "Search for existing patient"
 msgstr "Bestandspatient*innen durchsuchen"
@@ -205,6 +195,12 @@ msgid "Recommendation for stay at this ward"
 msgstr "Empfehlung zur Unterbringung auf dieser Station"
 
 #: cms/models/bed_assignment.py
+#, fuzzy
+#| msgid "bed assignments"
+msgid "assignments"
+msgstr "Bettzuweisungen"
+
+#: cms/models/bed_assignment.py
 msgid "The bed assigned to the patient"
 msgstr "Diesem Patienten / dieser Patientin zugewiesenes Bett"
 
@@ -231,6 +227,52 @@ msgstr "Bettzuweisung"
 #: cms/models/bed_assignment.py
 msgid "bed assignments"
 msgstr "Bettzuweisungen"
+
+#: cms/models/floor.py
+#, fuzzy
+#| msgid "floor"
+msgid "floor order"
+msgstr "Stockwerk"
+
+#: cms/models/floor.py
+#, fuzzy
+#| msgid "Number of the ward"
+msgid "Order of the floor"
+msgstr "Nummer der Station"
+
+#: cms/models/floor.py
+#, fuzzy
+#| msgid "first name"
+msgid "floor name"
+msgstr "Vorname"
+
+#: cms/models/floor.py
+#, fuzzy
+#| msgid "Number of the ward"
+msgid "Name of the floor"
+msgstr "Nummer der Station"
+
+#: cms/models/floor.py
+#, fuzzy
+#| msgid "floor"
+msgid "floor code"
+msgstr "Stockwerk"
+
+#: cms/models/floor.py
+#, fuzzy
+#| msgid "First name of the employee"
+msgid "Shortname of the floor"
+msgstr "Vorname des Angestellten / der Angestellten"
+
+#: cms/models/floor.py
+msgid "floor"
+msgstr "Stockwerk"
+
+#: cms/models/floor.py
+#, fuzzy
+#| msgid "floor"
+msgid "floors"
+msgstr "Stockwerk"
 
 #: cms/models/icd10_entry.py
 msgid "code"
@@ -438,14 +480,6 @@ msgid "Number of the ward"
 msgstr "Nummer der Station"
 
 #: cms/models/ward.py
-msgid "floor"
-msgstr "Stockwerk"
-
-#: cms/models/ward.py
-msgid "Floor on which the nurse station for this ward is located"
-msgstr "Stockwerk, auf dem dich das Pflegendenzimer dieser Station befindet"
-
-#: cms/models/ward.py
 msgid "ward name"
 msgstr "Stationsname"
 
@@ -465,6 +499,10 @@ msgstr " Logo"
 msgid "General"
 msgstr "Allgemein"
 
+#: cms/templates/_base.html
+msgid "Home"
+msgstr "Start"
+
 #: cms/templates/_base.html cms/templates/ward/ward_management.html
 msgid "Ward Management"
 msgstr "Stationsverwaltung"
@@ -477,45 +515,9 @@ msgstr "Patientendaten"
 msgid "Views"
 msgstr "Ansichten"
 
-#: cms/templates/_base.html
+#: cms/templates/_base.html cms/templates/floor/floor.html
 msgid "Floor View"
 msgstr "Etagenansicht"
-
-#: cms/templates/floor/floor_ward_card.html
-msgid "Go to Ward"
-msgstr "Zur Station"
-
-#: cms/templates/floor/add_floor.html
-msgid "Add New Floor"
-msgstr "Neue Etage hinzufügen"
-
-#: cms/templates/floor/add_floor.html
-msgid "Full Name"
-msgstr "Vollständiger Name"
-
-#: cms/templates/floor/add_floor.html
-msgid "Short Name"
-msgstr "Abkürzung"
-
-#: cms/templates/floor/floor_ward_card.html
-msgid "Occupation rate"
-msgstr "Belegungsrate"
-
-#: cms/templates/floor/floor_ward_card.html
-msgid "Occupied beds"
-msgstr "Belegte Betten"
-
-#: cms/templates/floor/floor.html
-msgid "Admin detected"
-msgstr "Admin erkannt"
-
-#: cms/templates/floor/floor.html
-msgid "Delete floor"
-msgstr "Etage löschen"
-
-#: cms/templates/floor/floor.html
-msgid "Close"
-msgstr "Schließen"
 
 #: cms/templates/_base.html
 msgid "Ward View"
@@ -643,7 +645,7 @@ msgid "Unassign"
 msgstr "Zuweisung aufheben"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
-#: cms/templates/patients/patient_card.html
+#: cms/templates/floor/add_floor.html cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
 #: cms/templates/timeline/timeline.html
 msgid "Cancel"
@@ -692,8 +694,7 @@ msgid "No"
 msgstr "Nein"
 
 #: cms/templates/bed_assignment/bed_assignment_drawer.html
-#: cms/templates/ward/ward_info.html
-#: cms/templates/floor/floor_ward_card.html
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_info.html
 msgid "Unassigned Patients"
 msgstr "Nicht zugewiesene Patienten"
 
@@ -749,14 +750,23 @@ msgstr ""
 msgid "Use the link below to set a new password."
 msgstr "Nutzen Sie den folgenden Link um ein neues Passwort festzulegen."
 
-#: cms/templates/patients/hospital_stay_form.html
-msgid "Medical details"
-msgstr "Medizinische Details"
+#: cms/templates/floor/add_floor.html
+msgid "Add New Floor"
+msgstr "Neue Etage hinzufügen"
 
-#: cms/templates/patients/hospital_stay_form.html
-msgid "Organizational details"
-msgstr "Organisatorische Details"
+#: cms/templates/floor/add_floor.html
+msgid "Full Name"
+msgstr "Vollständiger Name"
 
+#: cms/templates/floor/add_floor.html
+msgid "Short Name"
+msgstr "Abkürzung"
+
+#: cms/templates/floor/add_floor.html
+msgid "Order"
+msgstr ""
+
+#: cms/templates/floor/add_floor.html
 #: cms/templates/patients/hospital_stay_form.html
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patient_details.html
@@ -764,6 +774,88 @@ msgstr "Organisatorische Details"
 #: cms/templates/timeline/timeline.html cms/templates/user_settings.html
 msgid "Save"
 msgstr "Speichern"
+
+#: cms/templates/floor/floor.html
+#, fuzzy
+#| msgid "Bed Infos"
+msgid "Info"
+msgstr "Bett Infos"
+
+#: cms/templates/floor/floor.html
+msgid "Admin detected"
+msgstr "Admin erkannt"
+
+#: cms/templates/floor/floor.html
+msgid "Delete floor"
+msgstr "Etage löschen"
+
+#: cms/templates/floor/floor.html
+msgid "Close"
+msgstr "Schließen"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Occupied beds"
+msgstr "Belegte Betten"
+
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_info.html
+msgid "Available Beds"
+msgstr "Verfügbare Betten"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Go to Ward"
+msgstr "Zur Station"
+
+#: cms/templates/home/home.html
+#, fuzzy
+#| msgid "Floor View"
+msgid "Home View"
+msgstr "Etagenansicht"
+
+#: cms/templates/home/home_beds.html
+msgid "Bed Infos"
+msgstr "Bett Infos"
+
+#: cms/templates/home/home_gender.html
+msgid "Gender Distribution"
+msgstr "Geschlechterverteilung"
+
+#: cms/templates/home/home_infos.html
+#, fuzzy
+#| msgid "Patient Information"
+msgid "Information"
+msgstr "Patienteninformationen"
+
+#: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
+msgid "Total Wards"
+msgstr "Gesamtzahl der Stationen"
+
+#: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
+msgid "Total Doctors"
+msgstr "Gesamtzahl der Ärzte"
+
+#: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
+msgid "Total Nurses"
+msgstr "Gesamtzahl der Krankenpflegenden"
+
+#: cms/templates/home/home_patient.html
+msgid "Patients"
+msgstr "Patienten"
+
+#: cms/templates/home/home_patient.html
+msgid "Anzahl"
+msgstr ""
+
+#: cms/templates/home/home_patient.html
+msgid "Last 7 days"
+msgstr "Letzten 7 Tage"
+
+#: cms/templates/patients/hospital_stay_form.html
+msgid "Medical details"
+msgstr "Medizinische Details"
+
+#: cms/templates/patients/hospital_stay_form.html
+msgid "Organizational details"
+msgstr "Organisatorische Details"
 
 #: cms/templates/patients/hospital_stay_form.html
 msgid "Discharge now"
@@ -803,7 +895,6 @@ msgstr "Alter"
 
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
-#: cms/templates/floor/floor_ward_card.html
 msgid "Gender"
 msgstr "Geschlecht"
 
@@ -1045,10 +1136,6 @@ msgstr "Gesamt"
 msgid "Bed Availability"
 msgstr "Bettenverfügbarkeit"
 
-#: cms/templates/ward/ward_info.html cms/templates/floor/floor_ward_card.html
-msgid "Available Beds"
-msgstr "Verfügbare Betten"
-
 #: cms/templates/ward/ward_info.html cms/templates/ward/ward_management.html
 msgid "Total Beds"
 msgstr "Gesamtzahl der Betten"
@@ -1060,18 +1147,6 @@ msgstr "Manuell zuweisen"
 #: cms/templates/ward/ward_management.html
 msgid "YCMS at a glance"
 msgstr "YCMS im Überblick"
-
-#: cms/templates/ward/ward_management.html
-msgid "Total Wards"
-msgstr "Gesamtzahl der Stationen"
-
-#: cms/templates/ward/ward_management.html
-msgid "Total Doctors"
-msgstr "Gesamtzahl der Ärzte"
-
-#: cms/templates/ward/ward_management.html
-msgid "Total Nurses"
-msgstr "Gesamtzahl der Krankenpflegenden"
 
 #: cms/templates/ward/ward_management.html
 msgid "Total Available Beds"
@@ -1299,6 +1374,22 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
+#~ msgid "Admission date cannot be later than discharge date."
+#~ msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
+
+#~ msgid ""
+#~ "The selected admission and discharge dates overlap with an existing "
+#~ "hospital stay."
+#~ msgstr ""
+#~ "Der ausgewählte Zeitraum kollidiert mit einem existierenden "
+#~ "Krankenhausaufenthalt."
+
+#~ msgid "Floor on which the nurse station for this ward is located"
+#~ msgstr "Stockwerk, auf dem dich das Pflegendenzimer dieser Station befindet"
+
+#~ msgid "Occupation rate"
+#~ msgstr "Belegungsrate"
+
 #~ msgid "Assign"
 #~ msgstr "Zuweisen"
 
@@ -1340,9 +1431,6 @@ msgstr "Englisch"
 
 #~ msgid "Create a new bed assignment"
 #~ msgstr "Erstellen Sie eine neue Bettenzuweisung"
-
-#~ msgid "Home"
-#~ msgstr "Start"
 
 #~ msgid "is available"
 #~ msgstr "ist verfügbar"
@@ -1402,3 +1490,6 @@ msgstr "Englisch"
 
 #~ msgid "Register"
 #~ msgstr "Registrieren"
+
+#~ msgid "Count"
+#~ msgstr "Anzahl"

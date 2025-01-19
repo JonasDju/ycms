@@ -1,8 +1,12 @@
+
+{% load i18n %}
+{% load static %} 
+
 <div class="h-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
     <div class="flex justify-between">
         <div>
-            <h5 class="leading-none text-xl font-bold text-gray-900 dark:text-white pb-2">Patients</h5>
-            <p class="text-base font-normal dark:text-white text-gray-900">Count</p>
+            <h5 class="leading-none text-xl font-bold text-gray-900 dark:text-white pb-2">{% translate "Patients" %}</h5>
+            <p class="text-base font-normal dark:text-white text-gray-900">{% translate "Anzahl" %}</p>
         </div>
     </div>
     <div id="area-chart" class="w-full h-64 mt-12"></div> <!-- Bereich für den Graphen -->
@@ -11,19 +15,9 @@
             <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom"
                 class="text-sm font-medium dark:text-white text-gray-900 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
                 type="button">
-                Last 7 days
-                <svg class="w-2.5 m-2.5 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                </svg>
+                {% translate "Last 7 days" %}
             </button>
             <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                   <!--  <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Yesterday</a></li> -->
-                   <!-- <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Today</a></li> -->
-                    <li><a href="" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-grey">Last 7 days</a></li>
-                   <!-- <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 30 days</a></li> -->
-                  <!-- <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Last 90 days</a></li> -->
-                </ul>
             </div>
         </div>
     </div>
@@ -79,7 +73,7 @@
         },
         series: [
             {
-                name: 'Patienten',
+                name: 'Patients',
                 data: data.map(item => item.patients),
                 color: '#1A56DB'
             }
