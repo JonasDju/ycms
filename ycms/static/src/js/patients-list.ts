@@ -10,21 +10,8 @@ const editPatient = (id: string) => {
 };
 
 const searchPatients = (name: string) => {
-    const filter = name.toUpperCase();
-    const table = document.getElementById("patients") as HTMLTableElement;
-    const tr = table.getElementsByTagName("tr");
-
-    for (let i = 2; i < tr.length; i++) {
-        const td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            const txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
+    const form = document.getElementById("search-patient-form") as HTMLFormElement;
+    form.submit();
 };
 
 window.addEventListener("load", () => {
@@ -40,7 +27,7 @@ window.addEventListener("load", () => {
     if (!searchPatientInput) {
         return;
     }
-    searchPatientInput.addEventListener("keyup", () => {
+    searchPatientInput.addEventListener("change", () => {
         const name = searchPatientInput.value;
         searchPatients(name);
     });
