@@ -142,7 +142,7 @@ class WardDeleteView(DeleteView):
         try:
             # Check if ward has occupied beds
             if self.object.occupied_beds > 0:
-                messages.error(self.request, _("Cannot delete ward with occupied beds."))
+                messages.error(self.request, _("Wards with occupied beds cannot be deleted."))
                 return HttpResponseRedirect(self.get_success_url())
             response = super().form_valid(form)
             messages.success(self.request, _("The ward has been deleted."))
