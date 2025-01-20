@@ -104,6 +104,21 @@ class BedAssignment(AbstractBaseModel):
         )
 
     @cached_property
+    def days_til_discharge(self):
+        """
+        Helper property for accessing the information when a patient is discharged in days (int)
+
+        :return: the current bed assignment until discharge
+        :rtype: int
+        """
+        if self.duration is None or self.discharge_date is None:
+            return None
+
+        return int(
+            (self.discharge_date.date() - current_or_travelled_time().date()).days
+        )
+
+    @cached_property
     def progress(self):
         """
         Helper property for accessing the patient's current hospital stay progress

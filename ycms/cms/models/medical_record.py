@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from ..constants import record_types
 from .abstract_base_model import AbstractBaseModel
 from .icd10_entry import ICD10Entry
+from .medical_specialization import MedicalSpecialization
 from .patient import Patient
 from .timetravel_manager import current_or_travelled_time, TimetravelManager
 from .user import User
@@ -30,6 +31,14 @@ class MedicalRecord(AbstractBaseModel):
         on_delete=models.PROTECT,
         verbose_name=_("diagnosis code"),
         help_text=_("Diagnosis code according to ICD-10"),
+        blank=True,
+        null=True,
+    )
+    medical_specialization = models.ForeignKey(
+        MedicalSpecialization,
+        on_delete=models.PROTECT,
+        verbose_name=_("medical specialization"),
+        help_text=_("Medical specialization of the patient's treatment."),
         blank=True,
         null=True,
     )
