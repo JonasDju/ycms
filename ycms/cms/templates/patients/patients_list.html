@@ -166,7 +166,7 @@
               <div>
                 <p class="text-sm text-gray-700">
                     <span class="current">
-                        Page {{ patients.number }} of {{ patients.paginator.num_pages }}.
+                        {% blocktranslate with cur_num=patients.number max_num=patients.paginator.num_pages %}Page {{ cur_num }} of {{ max_num }}{% endblocktranslate %}
                     </span>
                 </p>
               </div>
