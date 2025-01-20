@@ -29,6 +29,11 @@ urlpatterns = [
             [
                 path("", patients.PatientsListView.as_view(), name="patients"),
                 path(
+                    "upload/",
+                    patients.UploadDataView.as_view(),
+                    name="upload_data",
+                ),
+                path(
                     "<int:pk>/",
                     patients.PatientDetailsView.as_view(),
                     name="patient_details",
@@ -128,8 +133,44 @@ urlpatterns = [
                 path(
                     "delete/<int:pk>", ward.WardDeleteView.as_view(), name="delete_ward"
                 ),
-                path("edit/<int:pk>", ward.WardEditView.as_view(), name="edit_ward"),
-
+                path(
+                    "edit/<int:pk>", ward.WardEditView.as_view(), name="edit_ward"
+                ),
+                path(
+                    "details/<int:pk>/",
+                    ward.WardDetailsView.as_view(),
+                    name="ward_details",
+                ),
+                path(
+                    "room/create-multiple/<int:pk>/",
+                    ward.CreateMultipleRoomsView.as_view(),
+                    name="create_multiple_rooms",
+                ),
+                path(
+                    "room/<int:pk>/",
+                    ward.RoomUpdateView.as_view(),
+                    name="update_room",
+                ),
+                path(
+                    "room/delete/<int:pk>",
+                    ward.RoomDeleteView.as_view(),
+                    name="delete_room",
+                ),
+                path(
+                    "room/bed/delete/<int:pk>",
+                    ward.BedDeleteView.as_view(),
+                    name="delete_bed",
+                ),
+                path(
+                    "room/bed/<int:pk>/",
+                    ward.BedUpdateView.as_view(),
+                    name="update_bed",
+                ),
+                path(
+                    "room/<int:pk>/bed/create/",
+                    ward.BedCreateView.as_view(),
+                    name="create_bed",
+                )
             ]
         ),
     ),

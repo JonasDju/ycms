@@ -7,14 +7,16 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.core.paginator import Paginator
 from django.db.models import Value
 from django.db.models.functions import Concat
 
 from ...decorators import permission_required
-from ...forms import PatientForm
+from ...forms import PatientForm, UploadCSVForm
 from ...models import Patient
+
+from ...import_data import import_data
 
 logger = logging.getLogger(__name__)
 
@@ -54,9 +56,75 @@ class PatientsListView(TemplateView):
         context.update({
             "patients": page_obj,  # The paginated patients
             "new_patient_form": PatientForm(),
+            "upload_csv_form": UploadCSVForm(),
         })
         return context
 
+@method_decorator(permission_required("cms.add_patient"), name="dispatch")
+class UploadDataView(FormView):
+    """
+    View to upload data of patients and their stays
+    """
+
+    success_url = reverse_lazy("cms:protected:patients")
+    form_class = UploadCSVForm
+
+    def form_valid(self, form):
+        csv_file = form.cleaned_data['file']
+        data_to_import = form.cleaned_data['selected_categories']
+        import_result = import_data(
+            csv_file=csv_file,
+            user=self.request.user,
+            data_to_import=data_to_import,
+            val_sep=","
+        )
+        error_code = import_result["error_code"]
+        error_msg = import_result["error_msg"]
+        new_entries = import_result["new_entry_count"]
+        duplicate_entries = import_result["duplicate_entry_count"]
+        updated_entries = import_result["updated_entry_count"]
+
+        if error_code == None:
+            messages.success(
+                self.request,
+                _("Data was successfully imported."),
+            )
+            messages.info(
+                self.request,
+                _("New patients added: {}").format(new_entries),
+            )
+            messages.info(
+                self.request,
+                _("Duplicated entries found: {}").format(duplicate_entries)
+            )
+            messages.info(
+                self.request,
+                _("Entries updated: {}").format(updated_entries)
+            )
+        else:
+            messages.error(
+                self.request,
+                error_msg,
+            )
+            messages.info(
+                self.request,
+                _("No entries were added or updated."),
+            )
+
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        # alternative approach, if original Django errors should not be presented to the user
+        """
+        if any("csv" in error for error in form.errors['file']):
+            messages.error(self.request, _("Only files with extension .csv are allowed."))
+        else:
+            messages.error(self.request, _("An error occured while uploading the file."))
+        """
+        for field in form.errors:
+            for error in field:
+                messages.error(self.request, error)
+        return redirect("cms:protected:patients")
 
 @method_decorator(permission_required("cms.add_patient"), name="dispatch")
 class PatientCreateView(CreateView):
