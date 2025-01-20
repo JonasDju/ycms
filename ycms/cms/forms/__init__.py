@@ -12,3 +12,6 @@ from .patients.record_form import RecordForm
 from .unknown_patient_form import UnknownPatientForm
 from .user_form import UserForm
 from .ward_form import WardForm
+from .medical_specialization_form import MedicalSpecializationForm
+from .room_form import RoomForm
+from .bed_form import BedForm

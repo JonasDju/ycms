@@ -1,4 +1,5 @@
 import json
+from django.db import transaction
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
@@ -128,14 +129,106 @@ class WardDeleteView(DeleteView):
     """
     View to delete a ward 
     """
-
     model = Ward
-    success_url = reverse_lazy("cms:protected:ward_management")
+    
+    def get_success_url(self):
+        # Get the referer URL or default to ward management
+        referer = self.request.META.get('HTTP_REFERER', '')
+        if 'floor' in referer:
+            return reverse_lazy("cms:protected:floor")
+        return reverse_lazy("cms:protected:ward_management")
 
     def form_valid(self, form):
-        messages.success(self.request, _("The ward has been deleted."))
-        return super().form_valid(form)
+        try:
+            # Check if ward has occupied beds
+            if self.object.occupied_beds > 0:
+                messages.error(self.request, _("Cannot delete ward with occupied beds."))
+                return HttpResponseRedirect(self.get_success_url())
+            response = super().form_valid(form)
+            messages.success(self.request, _("The ward has been deleted."))
+            return response
+        except Exception as e:
+            messages.error(self.request, str(e))
+            return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
         form.add_error_messages(self.request)
-        return redirect("cms:protected:ward_management")
+        return HttpResponseRedirect(self.get_success_url())
+
+
+@method_decorator(permission_required("cms.edit_ward"), name="dispatch")
+class WardEditView(UpdateView):
+    """
+    View to edit ward information
+    """
+
+    model = Ward
+    form_class = WardForm
+    # success_url = reverse_lazy("cms:protected:ward_management")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({"prefix": self.kwargs["pk"]})
+        return kwargs
+
+    def form_invalid(self, form):
+        form.add_error_messages(self.request)
+        return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
+
+    def form_valid(self, form):
+        if room_dict := self.request.POST.get("rooms"):
+            try:
+                with transaction.atomic():
+                    ward = form.save()
+                    room_counter = 0
+                    bed_counter = 0
+                    duplicate_rooms = []
+                    
+                    for room_number, beds in json.loads(room_dict).items():
+                        # Check if room number already exists
+                        if ward.rooms.filter(room_number=room_number).exists():
+                            duplicate_rooms.append(room_number)
+                
+                    if duplicate_rooms:
+                        messages.error(
+                            self.request,
+                            _('The following room numbers already exist: {}').format(
+                                ', '.join(str(num) for num in duplicate_rooms)
+                            ),
+                        )
+                        # Raise exception to rollback transaction
+                        raise ValueError("Duplicate room numbers found")
+                    
+                    for room_number, beds in json.loads(room_dict).items():
+                        room = Room.objects.create(
+                            ward=ward,
+                            creator=self.request.user,
+                            room_number=room_number
+                        )
+                        room_counter += 1
+                        for bed_type in beds:
+                            bed_counter += 1
+                            Bed.objects.create(room=room, creator=self.request.user, bed_type=bed_type)
+                    
+                    if room_counter > 0:
+                        messages.success(
+                            self.request,
+                            _('Added {} new rooms with {} new beds to the ward.').format(
+                                room_counter, bed_counter
+                            ),
+                        )
+                    messages.success(
+                        self.request, _("Ward information has been successfully updated!")
+                    )
+                    
+            except ValueError:
+                # Return to the same page without saving anything
+                return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
+        else:
+            # If no rooms to add, just save the ward information
+            ward = form.save()
+            messages.success(
+                self.request, _("Ward information has been successfully updated!")
+            )
+        
+        return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))

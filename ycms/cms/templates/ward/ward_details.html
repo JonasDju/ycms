@@ -1,0 +1,240 @@
+{% extends "_base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+{% load render_bundle from webpack_loader %}
+{% block title %}
+    {{ ward.nickname }}
+{% endblock title %}
+
+{% block content %}
+<div class="w-full flex flex-col flex-wrap mb-6">
+    <h1 class="heading">{{ ward.nickname }} ({{ ward.name }})</h1>
+</div>
+<div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+    <form method="post" class="md:columns-3"
+        enctype="multipart/form-data"
+        action="{% url "cms:protected:edit_ward" ward.pk %}"
+        data-unsaved-warning>
+        {% csrf_token %}
+        {% for field in ward_form %}
+            <div class="break-inside-avoid radio-row">
+                <label class="mt-0" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {% render_field field %}
+                <div class="help-text">{{ field.help_text }}</div>
+            </div>
+        {% endfor %}
+        <div class="flex justify-end mt-4">
+            <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                {% translate "Save" %}
+            </button>
+        </div>
+    </form>
+</div>
+<div class="w-full flex flex-col flex-wrap my-6">
+    <h1 class="heading">{% translate "Create new rooms" %}</h1>
+</div>
+
+{% if perms.cms.add_rooms %}
+<form class="rounded-lg border border-gray-300 bg-white p-4 shadow-md relative mb-4 dark:bg-gray-800 dark:border-gray-700 flex flex-col gap-4 w-full"
+      enctype="multipart/form-data"
+      method="post"
+      action="{% url "cms:protected:create_multiple_rooms" ward.pk %}"
+      data-unsaved-warning id="ward_form" data-ward-id="{{ ward.id }}">
+    {% csrf_token %}
+    <div class="grid grid-cols-4 gap-4 w-full">
+        <input type="hidden" id="rooms_{{ ward.id }}" name="rooms" value="">
+        <div class="edit-room-prototype2 edit-room2 hidden flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <div class="!-mb-4 help-text">{% translate "Room number" %}</div>
+            <div class="flex items-center gap-2">
+                <input class="w-full"
+                       type="text"
+                       placeholder="{% translate "Room number" %}" />
+                        <svg class="lucide lucide-minus-circle remover-room text-red-600 cursor-pointer" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
+            </div>
+            <div class="!-mb-4 help-text">{% translate "Beds" %}</div>
+            <div class="edit-bed-prototype2 flex items-center gap-2">
+                <select>
+                    {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                </select>
+                <div>
+                    <svg class="lucide lucide-minus-circle remove-bed text-red-600 cursor-pointer" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <select>
+                    {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                </select>
+                <div>
+                    <svg class="lucide lucide-minus-circle remove-bed text-red-600 cursor-pointer" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="8" y1="12" x2="16" y2="12"></line>
+                        </svg>
+                </div>
+            </div>
+            <div class="add-bed-btn flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                <p class="flex items-center gap-2 hover:text-grey-400">
+                    {% translate "Add bed" %} <svg class="plus-circle text-grey-400 cursor-pointer" width="24" height="24"
+                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round">
+                     <circle cx="12" cy="12" r="10"></circle>
+                     <line x1="12" y1="8" x2="12" y2="16"></line>
+                     <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                </p>
+            </div>
+        </div>
+        <div id="newroom-button"
+             class="flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <h2 class="hover:text-blue-600">
+                {% translate "Add room" %} <i icon-name="plus-circle"></i>
+            </h2>
+        </div>
+    </div>
+    <div class="mt-4 flex justify-end">
+        <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded inline-flex items-center px-5 py-2.5 text-center">
+            {% translate "Create" %}
+        </button>
+    </div>
+</form>
+{% endif %}
+
+<div class="w-full flex flex-col flex-wrap my-6">
+    <h1 class="heading">{% translate "Edit existing rooms" %}</h1>
+</div>
+<div class="room-navigation flex flex-wrap gap-4 mb-6">
+    {% for room, patients in rooms %}
+        <a href="#room-{{ room.id }}" class="flex flex-col items-center p-4 bg-gray-200 hover:bg-gray-300 rounded-lg shadow-md dark:bg-gray-800 dark:hover:bg-gray-700">
+            <i icon-name="building" class="w-10 h-10 text-gray-600 dark:text-gray-300"></i>
+            <span class="mt-2 text-gray-800 dark:text-gray-200">
+                {{ room.room_number|default:"No Room Number" }}
+            </span>
+        </a>
+    {% endfor %}
+</div>
+
+{% for room, patients in rooms %}
+    <div id="room-{{ room.id }}" class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700 mb-4">
+        <form method="post" class="md:columns-3 flex flex-col justify-between h-full"
+            enctype="multipart/form-data"
+            action="{% url "cms:protected:update_room" room.id %}"
+            data-unsaved-warning>
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="mt-0" for="room_number">{% translate "Room number" %}
+                    <input class="w-1/4 max-w-xs mt-2"
+                           type="text"
+                           name="room_number"
+                           value="{{ room.room_number }}"/>
+                </label>
+                <small class="text-gray-500 mt-1 block">
+                    {% translate "Here can change the room number" %}
+                </small>
+            </div>
+            <div class="mt-4 flex justify-end gap-4">
+                <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                    {% translate "Save" %}
+                </button>
+                <button type="submit" formaction="{% url "cms:protected:delete_room" room.id %}" formmethod="post" class="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                    {% translate "Delete" %}
+                </button>
+            </div>
+        </form>
+            <!-- edit beds in this room -->
+            <div class="w-full flex flex-col flex-wrap my-6">
+                <h1 class="heading">{% translate "Beds in this room" %}</h1>
+            </div>
+            <small class="text-gray-500 mt-1 block">
+                {% translate "Here can modify the existing bed type / create a new bed " %}
+            </small>
+            <div class="grid grid-cols-3 md:grid-cols-3 gap-4 mb-12">
+                {% for bed in room.beds.all %}
+                    <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+                        <div class="flex justify-center items-center mb-4">
+                            <i icon-name="bed-single"
+                            class="w-10 h-10 rounded-lg {% if not bed.is_available %}bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100{% else %}bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100{% endif %}"></i>
+                        </div>
+                        <div class="text-center min-h-[20px]">
+                            {% if not bed.is_available %}
+                            <p class="text-sm text-red-600 dark:text-red-400">
+                                {% translate "This bed is currently occupied" %}
+                            </p>
+                            {% endif %}
+                            {% if bed.is_available %}
+                            <p class="text-sm text-white-600 dark:text-white-400">
+                                {% translate "- " %}
+                            </p>
+                            {% endif %}
+                        </div>
+                        <form method="post" class="md:columns-3 flex flex-col justify-between h-full"
+                            enctype="multipart/form-data"
+                            action="{% url "cms:protected:update_bed" bed.id %}"
+                            data-unsaved-warning>
+                            {% csrf_token %}
+                            <div class="mb-4">
+                                <div class="edit-bed-prototype flex items-center gap-2">
+                                    <select name="bed_type">
+                                        {% for value, name in bed_types %}
+                                        <option value="{{ value }}" {% if bed.bed_type == value %}selected{% endif %}>{{ name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex justify-end gap-4">
+                                <button type="submit" class="text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                                    {% translate "Save" %}
+                                </button>
+                                <button type="submit" formaction="{% url "cms:protected:delete_bed" bed.id %}" formmethod="post" class="text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-700  rounded inline-flex items-center px-5 py-2.5 text-center">
+                                    {% translate "Delete" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="grid grid-cols-3 md:grid-cols-3 gap-4 mb-12">
+                <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+                    <div class="flex justify-center items-center mb-4">
+                        <i icon-name="plus-circle"
+                        class="w-7 h-7 rounded-lg bg-grey-100 text-grey-800 dark:bg-grey-300 dark:text-grey-100"></i>
+                        <i icon-name="bed-single"
+                        class="w-10 h-10 rounded-lg bg-grey-100 text-grey-800 dark:bg-grey-300 dark:text-grey-100"></i>
+                    </div>
+
+                    <form method="post" class="flex flex-col justify-between h-full"
+                        enctype="multipart/form-data"
+                        action="{% url 'cms:protected:create_bed' room.id %}"
+                        data-unsaved-warning>
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <div class="edit-bed-prototype flex items-center gap-2">
+                                <select name="bed_type">
+                                    {% for value, name in bed_types %}
+                                    <option value="{{ value }}">{{ name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-center">
+                            <button type="submit" class="text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-gr-700 rounded inline-flex items-center px-5 py-2.5 text-center">
+                                {% translate "Add" %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+{% endfor %}
+{% endblock content %}

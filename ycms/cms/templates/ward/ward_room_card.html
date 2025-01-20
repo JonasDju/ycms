@@ -1,8 +1,16 @@
 {% load i18n %}
-<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-    {% translate "Room" %}
-    {{ room.room_number }}
-</h5>
+<div class="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1 flex"
+     data-drawer-target="drawer-right-{{ room.room_number }}"
+     data-drawer-show="drawer-right-{{ room.room_number }}"
+     data-drawer-placement="right"
+     aria-controls="drawer-right-{{ room.room_number }}">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white cursor-pointer hover:text-blue-600 dark:hover:text-blue-400">
+        {% translate "Room" %}
+        {{ room.room_number }}
+    </h5>
+
+</div>
+
 <div class="flex flex-col gap-1">
     {% include "ward/ward_beds.html" %}
     {% if room.age_difference_between_patients > 20 %}
