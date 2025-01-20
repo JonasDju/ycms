@@ -94,24 +94,17 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
             const wardId = deleteButton.getAttribute("data-ward-id") || "";
-            const occupiedBeds = parseInt(deleteButton.getAttribute("data-occupied-beds") || "0", 10);
             const formId = deleteButton.getAttribute("data-form-id") || "";
             const form = document.getElementById(formId) as HTMLFormElement;
 
             const modal = document.getElementById(`confirm-modal-${wardId}`);
-            const modalMessage = document.getElementById(`modal-message-${wardId}`);
             const confirmButton = document.querySelector(`.modal-confirm[data-ward-id='${wardId}']`);
             const cancelButton = document.querySelector(`.modal-cancel[data-ward-id='${wardId}']`);
 
-            if (!modal || !modalMessage || !confirmButton || !cancelButton || !form) {
-                console.error("can't found", { modal, modalMessage, confirmButton, cancelButton, form });
+            if (!modal || !confirmButton || !cancelButton || !form) {
+                console.error("can't found", { modal, confirmButton, cancelButton, form });
                 return;
             }
-
-            modalMessage.innerText =
-                occupiedBeds > 0
-                    ? `This ward has ${occupiedBeds} occupied beds. Are you sure you want to delete it?`
-                    : "Are you sure you want to delete this ward?";
 
             modal.classList.remove("hidden");
 
