@@ -61,8 +61,9 @@
                                 </select>
                                 <div class="help-text">{{ ward_form.fields.floor.help_text }}</div>
                             </div>
+
                             <div class="mt-4">
-                                <h3 class="text-2xl font-semibold dark:text-white mb-4">{% translate "Rooms in this Ward" %}</h3>
+                                <h3 class="text-2xl font-semibold dark:text-white mb-4">{% translate "Add rooms to this ward" %}</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
                                     <input type="hidden" id="rooms_{{ ward.id }}" name="rooms" value="">
                                     <div class="grid grid-cols-2 gap-4">

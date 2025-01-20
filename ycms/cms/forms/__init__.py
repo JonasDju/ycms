@@ -14,3 +14,5 @@ from .user_form import UserForm
 from .ward_form import WardForm
 from .upload_csv_form import UploadCSVForm
 from .medical_specialization_form import MedicalSpecializationForm
+from .room_form import RoomForm
+from .bed_form import BedForm
