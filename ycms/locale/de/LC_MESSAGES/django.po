@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-20 17:01+0100\n"
+"POT-Creation-Date: 2025-01-20 17:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -940,6 +940,7 @@ msgid "Are you sure you want to delete this ward?"
 msgstr "Sind Sie sicher, dass diese Station gelöscht werden soll?"
 
 #: cms/templates/floor/floor_ward_card.html
+#: cms/views/ward/ward_management_view.py
 msgid "Wards with occupied beds cannot be deleted."
 msgstr "Stationen mit belegten Betten können nicht gelöscht werden."
 
@@ -1789,10 +1790,6 @@ msgstr "Hinzufügung der neuen Station \"{}\" erfolgreich!"
 #: cms/views/ward/ward_management_view.py
 msgid "Added {} rooms with {} beds to \"{}\"."
 msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
-
-#: cms/views/ward/ward_management_view.py
-msgid "Cannot delete ward with occupied beds."
-msgstr ""
 
 #: cms/views/ward/ward_management_view.py
 msgid "The ward has been deleted."
