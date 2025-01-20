@@ -80,38 +80,4 @@ window.addEventListener("load", () => {
         (wardForm.querySelector("#rooms") as HTMLInputElement).value = gatherRoomData();
         wardForm.submit();
     });
-
-    document.querySelectorAll("[data-delete-ward]").forEach((deleteButton) => {
-        deleteButton.addEventListener("click", (event) => {
-            event.preventDefault();
-            const occupiedBeds = parseInt(deleteButton.getAttribute("data-occupied-beds") || "0", 10);
-            const formId = deleteButton.getAttribute("data-form-id") || "";
-            const form = document.getElementById(formId) as HTMLFormElement;
-
-            const modal = document.getElementById("confirm-modal");
-            const modalMessage = document.getElementById("modal-message");
-            const confirmButton = document.getElementById("modal-confirm");
-            const cancelButton = document.getElementById("modal-cancel");
-
-            if (!modal || !modalMessage || !confirmButton || !cancelButton || !form) {
-                return;
-            }
-
-            modalMessage.innerText =
-                occupiedBeds > 0
-                    ? `This ward has ${occupiedBeds} occupied beds. Are you sure you want to delete it?`
-                    : "Are you sure you want to delete this ward?";
-
-            modal.style.display = "flex";
-
-            confirmButton.onclick = () => {
-                form.submit();
-                modal.style.display = "none";
-            };
-
-            cancelButton.onclick = () => {
-                modal.style.display = "none";
-            };
-        });
-    });
 });
