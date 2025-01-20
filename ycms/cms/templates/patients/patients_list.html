@@ -11,10 +11,14 @@
         <div class="w-full flex flex-col flex-wrap mb-6">
             <h1 class="heading">{% translate "Patients list" %}</h1>
         </div>
+        <form id="search-patient-form" method="GET">
         <input id="search-patient-input"
                type="text"
+               name="search"
                placeholder="{% translate "Search for name..." %}"
+               value="{{ request.GET.search|default:'' }}"
                class="mb-2" />
+        </form>
         <div class="shadow-lg overflow-x-auto">
             <table id="patients" class="min-w-full text-sm text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-100">
@@ -56,17 +60,13 @@
                         </tr>
                     {% endif %}
                     <tr class="h-3 w-full"></tr>
-                    {% for patient, patient_form in patients %}
+                    {% for patient in patients %}
                         <tr data-patient-id="{{ patient.id }}"
                             class="py-2 lg:py-0 odd:bg-white even:bg-gray-100 border-b dark:odd:bg-gray-800 dark:even:bg-gray-700 dark:border-gray-700">
                             <td class="px-6 py-3">
                                 <p class="py-2 lg:px-3 text-base border border-transparent text-xl lg:text-base ">
                                     {{ patient.last_name }}, {{ patient.first_name }}
                                 </p>
-                                <div class="!hidden flex flex-nowrap gap-4 flex-col lg:flex-row">
-                                    {% render_field patient_form.last_name form=patient.id %}
-                                    {% render_field patient_form.first_name form=patient.id %}
-                                </div>
                             </td>
                             <td class="px-6 lg:py-3">
                                 <span class="lg:hidden help-text">{% translate "Gender" %}:</span>
@@ -83,13 +83,11 @@
                                         {% translate "Diverse" %}
                                     </p>
                                 {% endif %}
-                                <div class="radio-row !hidden">{% render_field patient_form.gender form=patient.id %}</div>
                             </td>
                             <td class="px-6 lg:py-3">
                                 <p class="lg:py-2 lg:px-3 text-base">
                                     <span class="lg:hidden help-text">{% translate "Date of birth" %}:</span> {{ patient.date_of_birth|date:'d.m.Y' }}
                                 </p>
-                                {% render_field patient_form.date_of_birth form=patient.id class+="!hidden" %}
                             </td>
                             <td class="px-6 lg:py-3 lg:text-center">
                                 <span class="lg:hidden help-text">{% translate "Privately insured" %}:</span>
@@ -98,7 +96,6 @@
                                 {% else %}
                                     <i icon-name="x" class="w-4 h-4 text-red-700 dark:text-red-400"></i>
                                 {% endif %}
-                                <div class="radio-row !hidden">{% render_field patient_form.insurance_type form=patient.id %}</div>
                             </td>
                             <td class="px-6 py-3 text-center">
                                 <span>
@@ -132,38 +129,10 @@
                                             {% endif %}
                                         {% endif %}
                                     </a>
-                                    <a class="edit-patient-button border-2 border-blue-500 hover:border-blue-700 text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5">
-                                        {% translate "Edit" %}
-                                    </a>
                                     <a href="{% url "cms:protected:patient_details" patient.id %}"
                                        class="text-blue-500 border-2 border-blue-500 hover:border-blue-700 hover:text-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5">
                                         {% translate "Details" %}
                                     </a>
-                                </div>
-                                <div class="!hidden flex flex-col lg:flex-row flex-wrap gap-1">
-                                    <button class="grow edit-patient-button text-white bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5">
-                                        {% translate "Cancel" %}
-                                    </button>
-                                    <button class="grow text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-700 rounded px-5 py-2.5"
-                                            form="{{ patient.id }}">
-                                        <form hidden
-                                              id="{{ patient.id }}"
-                                              method="post"
-                                              action="{% url "cms:protected:update_patient" patient.id %}">
-                                            {% csrf_token %}
-                                        </form>
-                                        {% translate "Save" %}
-                                    </button>
-                                    <button class="grow text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                            form="delete-patient-{{ patient.id }}">
-                                        <form hidden
-                                              id="delete-patient-{{ patient.id }}"
-                                              method="post"
-                                              action="{% url "cms:protected:delete_patient" patient.id %}">
-                                            {% csrf_token %}
-                                        </form>
-                                        {% translate "Delete" %}
-                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -171,5 +140,56 @@
                 </tbody>
             </table>
         </div>
+        
+        <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+            <div class="flex flex-1 justify-between sm:hidden">
+              <a href="#" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
+              <a href="#" class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+            </div>
+            <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+              <div>
+                <p class="text-sm text-gray-700">
+                    <span class="current">
+                        Page {{ patients.number }} of {{ patients.paginator.num_pages }}.
+                    </span>
+                </p>
+              </div>
+              <div>
+                <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                    <a href="?page=1" class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                        <span class="sr-only">Page 1</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+                        </svg>
+                    </a>
+                    {% if patients.has_previous %}
+                    <a href="?page={{ patients.previous_page_number }}" class="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                        <span class="sr-only">Previous</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                        </svg>                      
+                    </a>
+                    {% endif %}
+
+                    <a href="#" aria-current="page" class="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">{{ patients.number }}</a>
+
+                    {% if patients.has_next %}
+                    <a href="?page={{ patients.next_page_number }}" class="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                    <span class="sr-only">Next</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                      </svg>                      
+                  </a>
+                  {% endif %}
+                  <a href="?page={{ patients.paginator.num_pages }}" class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                    <span class="sr-only">Next</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                      </svg>
+                </a>
+                </nav>
+              </div>
+            </div>
+          </div>
     {% endif %}
 {% endblock content %}

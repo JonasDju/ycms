@@ -8,6 +8,9 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.core.paginator import Paginator
+from django.db.models import Value
+from django.db.models.functions import Concat
 
 from ...decorators import permission_required
 from ...forms import PatientForm
@@ -34,16 +37,25 @@ class PatientsListView(TemplateView):
         :return: Response for filtered offers
         :rtype: ~django.template.response.TemplateResponse
         """
-        return {
-            "patients": [
-                (patient, PatientForm(instance=patient, prefix=patient.id))
-                for patient in Patient.objects.prefetch_related("medical_records")
-                .all()
-                .order_by("-updated_at")
-            ],
+
+        context = super().get_context_data(**kwargs)
+
+        search = self.request.GET.get("search")
+        if search:
+            patients_list = Patient.objects.prefetch_related("medical_records").annotate(full_name=Concat('last_name', Value(', '), 'first_name')).filter(full_name__icontains=search).order_by("-updated_at")
+        else:
+            patients_list = Patient.objects.prefetch_related("medical_records").all().order_by("-updated_at")
+
+        paginator = Paginator(patients_list, 10)  # Show 10 patients per page
+
+        page_number = self.request.GET.get("page")  # Get the current page number from the query string
+        page_obj = paginator.get_page(page_number)  # Get the patients for the current page
+
+        context.update({
+            "patients": page_obj,  # The paginated patients
             "new_patient_form": PatientForm(),
-            **super().get_context_data(**kwargs),
-        }
+        })
+        return context
 
 
 @method_decorator(permission_required("cms.add_patient"), name="dispatch")

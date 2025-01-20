@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-05 15:02+0100\n"
+"POT-Creation-Date: 2025-01-20 09:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -708,7 +708,6 @@ msgstr "Zuweisung aufheben"
 #: cms/templates/bed_assignment/assign_bed_assignment.html
 #: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
 #: cms/templates/patients/patient_card.html
-#: cms/templates/patients/patients_list.html
 #: cms/templates/timeline/timeline.html cms/templates/ward/ward_card.html
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -828,7 +827,6 @@ msgstr "Abkürzung"
 #: cms/templates/patients/hospital_stay_form.html
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patient_details.html
-#: cms/templates/patients/patients_list.html
 #: cms/templates/timeline/timeline.html cms/templates/user_settings.html
 #: cms/templates/ward/ward_card.html
 msgid "Save"
@@ -948,7 +946,6 @@ msgid "Discharge date"
 msgstr "Entlassungsdatum"
 
 #: cms/templates/patients/patient_card.html
-#: cms/templates/patients/patients_list.html
 msgid "Edit"
 msgstr "Bearbeiten"
 
@@ -1169,10 +1166,6 @@ msgstr "Wartet auf Bettenzuweisung in Station"
 #: cms/templates/patients/patients_list.html
 msgid "Waits for assignment to ward"
 msgstr "Wartet auf Stationszuweisung"
-
-#: cms/templates/patients/patients_list.html
-msgid "Delete"
-msgstr "Löschen"
 
 #: cms/templates/timeline/timeline.html
 msgid "unsaved bed assignment changes"
@@ -1515,6 +1508,9 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
 
 #~ msgid "ward number"
 #~ msgstr "Stationsnummer"
