@@ -382,27 +382,15 @@ window.addEventListener("load", () => {
         }
     };
 
-    const intakeModeLabels = document.querySelectorAll(`label[for="intake-mode-switch"]`);
-    const classLabelNormal = "font-normal text-gray-700 my-3 mx-2";
-    const classLabelHighlighted = "font-normal text-blue-600 my-3 mx-2";
+    intakeModeSwitch?.addEventListener("change", () => {
+        // show/hide respective forms and enable/disable input fields
+        updateInputsEnabledState();
 
-    if (intakeModeSwitch) {
-        intakeModeSwitch.addEventListener("change", () => {
-            const inEmergencyMode = intakeModeSwitch.checked;
-            // TODO: refactor style definitions into DOM
-            intakeModeLabels[0].className = inEmergencyMode ? classLabelNormal : classLabelHighlighted;
-            intakeModeLabels[1].className = inEmergencyMode ? classLabelHighlighted : classLabelNormal;
-            
-            // show/hide respective forms and enable/disable input fields
-            updateInputsEnabledState();
-
-            // update text of submission button
-            updateSubmitButton();
-        });
-
-        // update dom according to current state of mode switch
-        intakeModeSwitch.dispatchEvent(new Event("change"));
-    }
+        // update text of submission button
+        updateSubmitButton();
+    });
+    // update DOM according to initial state of mode switch
+    intakeModeSwitch?.dispatchEvent(new Event("change"));
 
     // Handle displaying and updating the selected approximate age of emergency patients
     const updateAgeDisplay = () => {
