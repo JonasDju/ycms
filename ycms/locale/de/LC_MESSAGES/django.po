@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-20 18:51+0100\n"
+"POT-Creation-Date: 2025-01-21 02:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -181,10 +181,6 @@ msgid ""
 msgstr ""
 "Der ausgewählte Zeitraum kollidiert mit einem existierenden "
 "Krankenhausaufenthalt."
-
-#: cms/forms/intake_record_form.py
-msgid "Search for existing patient"
-msgstr "Bestandspatient*innen durchsuchen"
 
 #: cms/forms/intake_record_form.py cms/forms/patients/record_form.py
 msgid "Search for diagnosis code"
@@ -1209,16 +1205,40 @@ msgid "Emergency intake"
 msgstr "Notaufnahme"
 
 #: cms/templates/patients/patient_intake_form.html
-msgid "Select existing patient"
-msgstr "Bestehende*n Patient*in auswählen"
+msgid "Existing patients"
+msgstr "Bestandspatient*innen"
 
 #: cms/templates/patients/patient_intake_form.html
-msgid "reset form"
-msgstr "zurücksetzen"
+msgid "Cancel selection"
+msgstr "Auswahl aufheben"
 
 #: cms/templates/patients/patient_intake_form.html
-msgid "Or create new patient"
-msgstr "Oder neue Patient*in hinzufügen"
+msgid "Start typing to search for existing patients."
+msgstr "Patientendaten eingeben um die Bestandspatient*innen zu durchsuchen."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Enter at least 3 characters to search."
+msgstr "Geben Sie mindestens 3 Buchstaben ein, um zu suchen."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Found {} matches."
+msgstr "{} Patient*innen gefunden."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "No matching patients found."
+msgstr "Keine übereinstimmenden Bestandspatient*innen gefunden."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Select patient"
+msgstr "Patient*in auswählen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Clear inputs"
+msgstr "Eingaben löschen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Patient details"
+msgstr "Patientendaten"
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Discharges possible on"
@@ -1273,6 +1293,18 @@ msgstr "Entlassung verschieben zum "
 #: cms/templates/patients/patient_intake_form.html
 msgid "Discharges cannot be earlier than the admission."
 msgstr "Entlassungen können nicht vor der Aufnahme liegen."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Complete emergency intake"
+msgstr "Notaufnahme abschließen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Complete intake for new patient"
+msgstr "Aufnahme für neue*n Patient*in abschließen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Complete intake for existing patient"
+msgstr "Aufnahme für Bestandspatient*in abschließen"
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Complete patient intake"
@@ -1656,7 +1688,12 @@ msgstr "Entlassung in Station \"{}\" nicht möglich am {}."
 
 #: cms/views/patients/intake_form_view.py
 msgid "Intake for patient \"{} {}\" with diagnosis \"{}\" has been saved."
-msgstr "Patient*in \"{} {}\" mit Diagnose \"{}\" wurde gespeichert."
+msgstr ""
+"Aufnahme für Patient*in \"{} {}\" mit Diagnose \"{}\" wurde gespeichert."
+
+#: cms/views/patients/intake_form_view.py
+msgid "Intake for patient \"{} {}\" has been saved."
+msgstr "Aufnahme für Patient*in \"{} {}\" wurde gespeichert."
 
 #: cms/views/patients/patient_details_view.py
 msgid "New record has been created."
@@ -1841,6 +1878,12 @@ msgstr "Englisch"
 
 #~ msgid "Only files with extension .csv are allowed."
 #~ msgstr "Es sind nur Dateien mit Dateiendung .csv erlaubt."
+
+#~ msgid "reset form"
+#~ msgstr "zurücksetzen"
+
+#~ msgid "Or create new patient"
+#~ msgstr "Oder neue Patient*in hinzufügen"
 
 #~ msgid "ward number"
 #~ msgstr "Stationsnummer"
