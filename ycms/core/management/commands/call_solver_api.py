@@ -26,7 +26,7 @@ class Command(BaseCommand):
         return gender_map[g]
 
     def _discretize(self, date):
-        timedelta = date - self.now
+        timedelta = date - self.now.replace(minute=0, second=0, microsecond=0)
         hours = max(0, timedelta.seconds // 3600 + timedelta.days * 24)
 
         self.max_hour = max(self.max_hour, hours)
