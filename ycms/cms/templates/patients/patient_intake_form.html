@@ -6,7 +6,7 @@
     {% translate "Patient Intake" %}
 {% endblock title %}
 {% block content %}
-    <div class="mx-auto mt-6 max-w-[100rem]">
+    <div class="mx-auto mt-6 max-w-[1664px]">
         <form enctype="multipart/form-data"
             method="post"
             id="patient_form"
@@ -27,29 +27,35 @@
                 </div>  
                 {% comment %} Existing patients list {% endcomment %}
                 <div class="flex flex-col col-span-1 row-start-2">
-                <div id="existing-patients" class="p-4 bg-gray-200 dark:bg-gray-800 rounded-xl relative">
-                    <h3 class="text-xl font-bold dark:text-white">Existing patients</h3>
+                <div id="existing-patients" class="p-4 pt-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative">
+                    <h3 class="text-xl font-bold dark:text-white">{% translate "Existing patients" %}</h3>
                     <input id="selected-patient-id" name="patient" type="text" class="!hidden" value="{{ record_form.fields.patient.id }}">
                     <button id="cancel-selection-button"
-                        class="absolute top-3 right-3 p-2 hidden rounded hover:bg-gray-300 dark:hover:bg-gray-700"
-                        title="Cancel selection">  {% comment  %} TODO: translation {% endcomment %}
+                        class="absolute top-2 right-2 p-2 hidden rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700"
+                        title="{% translate "Cancel selection" %}">
                         <i icon-name="x" class="text-red-700 cursor-pointer"></i>
                     </button>
                     <div id="patient-search-status" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-100 dark:bg-blue-900 dark:text-blue-400 my-3">
                         <svg class="flex-shrink-0 inline w-4 h-4 me-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                         </svg>
-                        <span>
-                            Start typing to find existing patients.
+                        {% translate "Start typing to search for existing patients." as status_initial %}
+                        <span 
+                            data-status-no-input="{{ status_initial }}"
+                            data-status-too-short="{% translate "Enter at least 3 characters to search." %}"
+                            data-status-results="{% translate "Found {} matches." %}"
+                            data-status-no-results="{% translate "No matching patients found." %}">
+                            {{ status_initial }}
                         </span>
                     </div>
                     <div id="existing-patients-list" class="space-y-2">
                         <div id="patient-select-prototype" 
-                            class="flex justify-between rounded p-2 cursor-pointer bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-700 data-[selected]:border-gray-700 dark:data-[selected]:border-gray-300 data-[selected]:bg-gray-400 dark:data-[selected]:bg-gray-600 group/patient hidden">
-                            <span class="text-sm dark:text-gray-200">
+                            class="flex justify-between rounded p-2 cursor-pointer bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-700 data-[selected]:border-gray-700 dark:data-[selected]:border-gray-300 data-[selected]:bg-gray-400 dark:data-[selected]:bg-gray-600 group/patient hidden"
+                            title="{% translate "Select patient" %}">
+                            <span class="text-sm dark:text-gray-200 select-none">
                                 Lastname, Firstname, DateOfBirth
                             </span>
-                            <svg class="mt-px h-5 w-5 text-gray-500 group-hover/patient:visible invisible flex-none fill-gray-500 self-center" viewBox="0 0 20 20">
+                            <svg class="mt-px h-5 w-5 group-hover/patient:visible invisible flex-none fill-gray-500 self-center" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"></path>
                             </svg>
                         </div>
@@ -81,8 +87,8 @@
                             <div class="help-text">{{ unknown_patient_form.approximate_age.help_text }}</div>
                         </div>
                     </div>
-                    <button class="absolute top-3 right-3 p-2 rounded hover:bg-gray-300 dark:hover:bg-gray-700 clear-patient-button" 
-                        title="Clear inputs"> <!-- TODO: translation -->
+                    <button class="absolute top-2 right-2 p-2 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 clear-patient-button" 
+                        title="{% translate "Clear inputs" %}">
                         <i icon-name="eraser" class="text-red-700 cursor-pointer"></i>
                     </button>
                 </div>
@@ -100,8 +106,8 @@
                     {% endfor %}
                     <div>
                     </div>
-                    <button class="absolute top-3 right-3 p-2 rounded hover:bg-gray-300 dark:hover:bg-gray-700 clear-patient-button" 
-                        title="Clear inputs"> <!-- TODO: translation -->
+                    <button class="absolute top-2 right-2 p-2 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 clear-patient-button" 
+                        title="{% translate "Clear inputs" %}">
                         <i icon-name="eraser" class="text-red-700 cursor-pointer"></i>
                     </button>
                 </div>
@@ -229,11 +235,10 @@
                             <div class="help-text">{{ bed_form.accompanied.help_text }}</div>
                         </div>
                     </div>
-                    <!-- TODO: translations -->
                     <button id="submit-button" type="submit" class="btn mt-4"
-                        data-message-emergency="Complete emergency intake"
-                        data-message-new-patient="Complete intake for new patient"
-                        data-message-existing-patient="Complete intake for existing patient">
+                        data-message-emergency="{% translate "Complete emergency intake" %}"
+                        data-message-new-patient="{% translate "Complete intake for new patient" %}"
+                        data-message-existing-patient="{% translate "Complete intake for existing patient" %}">
                         {% translate "Complete patient intake" %}
                     </button>
                 </div>

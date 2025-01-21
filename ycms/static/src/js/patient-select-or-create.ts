@@ -206,8 +206,7 @@ window.addEventListener("load", () => {
         
         // limit search to not execute with few characters so backend query doesn't take too long
         if (lastNameQuery.length + firstNameQuery.length < 3) {
-            // TODO: translate
-            patientSearchStatus.textContent = "Enter at least 3 characters to search.";
+            patientSearchStatus.textContent = patientSearchStatus.dataset.statusTooShort || "error";
             return;
         }
 
@@ -230,13 +229,11 @@ window.addEventListener("load", () => {
             })
             .then(data => {
                 createExistingPatientsList(data.results);
+
                 if (data.num_results > 0) {
-                    // TODO: show text informing that there are more matches than displayed
-                    // TODO translation
-                    patientSearchStatus.textContent = `Found ${data.num_results} matches.`;
+                    patientSearchStatus.textContent = formatString(patientSearchStatus.dataset.statusResults || "error", [data.num_results]);
                 } else {
-                    // TODO translation
-                    patientSearchStatus.textContent = "No matches found";
+                    patientSearchStatus.textContent = patientSearchStatus.dataset.statusNoResults || "error";
                 }
             })
             .catch(error => {
