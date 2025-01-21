@@ -12,8 +12,8 @@
             <h1 class="heading">{% translate "Patients list" %}</h1>
         </div>
         <!--Begin of upload form-->
-        <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-row h-full dark:bg-gray-800 dark:border-gray-700 dark:text-white">
-            {% if perms.cms.add_user %}
+        {% if perms.cms.add_user %}
+            <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-row h-full dark:bg-gray-800 dark:border-gray-700 dark:text-white">
                 <button class="col-span-1 sm:col-span-1 md:col-span-1 lg:col-span-1 xl:col-span-1 flex px-2"
                     data-drawer-target="drawer-right"
                     data-drawer-show="drawer-right"
@@ -23,8 +23,8 @@
                     <span>  {% translate "Import patient data from CSV file" %}</span>
                 </button>
                 {% include "patients/patient_import_drawer.html" %}
-            {% endif %}
-        </div>
+            </div>
+        {% endif %}
         <br/>
         <!--End of upload form-->
         <form id="search-patient-form" method="GET">
