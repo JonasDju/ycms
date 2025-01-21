@@ -1404,22 +1404,6 @@ msgstr "Neue Fachrichtung hinzufügen"
 msgid "Delete"
 msgstr "Löschen"
 
-#: cms/templates/specializations_list.html
-msgid "Manage Specializations"
-msgstr "Fachrichtungen bearbeiten"
-
-#: cms/templates/specializations_list.html
-msgid "Edit medical specialization"
-msgstr "Fachrichtungen bearbeiten"
-
-#: cms/templates/specializations_list.html
-msgid "Add new medical specialization"
-msgstr "Neue Fachrichtung hinzufügen"
-
-#: cms/templates/specializations_list.html
-msgid "Abbr."
-msgstr "Abk."
-
 #: cms/templates/timeline/timeline.html
 msgid "unsaved bed assignment changes"
 msgstr "ungespeicherte Bettzuweisungsänderungen"
