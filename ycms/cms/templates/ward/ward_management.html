@@ -149,29 +149,10 @@
                                             form="delete-ward-{{ ward.id }}"
                                     >       <i icon-name="minus-circle" class="element-remover text-red-600 cursor-pointer"></i>
                                     </button>
-                                    <div id="confirm-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
-                                        <div class="w-full lg:w-1/3 rounded-lg border border-gray-300 bg-white p-8 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                                            <div class="flex flex-col items-center justify-center">
-                                                <p id="modal-message" class="mb-4 text-gray-700 text-center"></p>
-                                                <div class="flex justify-center gap-4">
-                                                    <button id="modal-confirm"
-                                                            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                                                        {% translate "Yes" %}
-                                                    </button>
-                                                    <button id="modal-cancel"
-                                                            class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">
-                                                        {% translate "No" %}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <form hidden
-                                            id="delete-ward-{{ ward.id }}"
-                                            method="post"
-                                            action="{% url "cms:protected:delete_ward" ward.id %}">
-                                            {% csrf_token %}
-                                    </form>
+                                    <a href="{% url "cms:protected:ward_details" ward.id %}"
+                                        class="text-blue-500 border-2 border-blue-500 hover:border-blue-700 hover:text-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5">
+                                        {% translate "Details" %}
+                                    </a>
                                 </td>
                             </tr>
                            {% include "ward/ward_edit_drawer.html" %}

@@ -124,6 +124,12 @@
                         </div>
                         {% if request.user.is_superuser or request.user.job_type == "DOCTOR" %}
                             <div>
+                                <label for="{{ record_form.medical_specialization.id_for_label }}"
+                                    class="field-required">{{ record_form.medical_specialization.label }}</label>
+                                {% render_field record_form.medical_specialization required="" %}
+                                <div class="help-text">{{ record_form.medical_specialization.help_text }}</div>
+                            </div>
+                            <div>
                                 <label for="{{ record_form.diagnosis_code.id_for_label }}">
                                     {{ record_form.diagnosis_code.label }}</label>
                                     {% render_field record_form.diagnosis_code %}
