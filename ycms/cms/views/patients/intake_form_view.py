@@ -78,11 +78,9 @@ class IntakeFormView(TemplateView):
         """
         # Get the existing patient or create a new one
         if patient_id := request.POST.get("patient"):
-            print(f"Found existing patient in post with id {patient_id}")
             patient = Patient.objects.get(id=patient_id)
             patient_form = PatientForm()
         else:
-            print(f"No patient found")
             form_type = (
                 UnknownPatientForm
                 if "unknown-approximate_age" in request.POST

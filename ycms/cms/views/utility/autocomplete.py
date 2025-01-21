@@ -43,8 +43,6 @@ def autocomplete_patient(request):
     :return: JSON object containing search results
     :rtype: str
     """
-    print(list(request.GET.items()))
-
     if query := request.GET.get("q", ""):
         results = Patient.objects.filter(
             Q(last_name__icontains=query)
