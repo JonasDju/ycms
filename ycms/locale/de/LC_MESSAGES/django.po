@@ -1759,6 +1759,22 @@ msgid "Specialization {} ({}) has been deleted."
 msgstr "Fachrichtung {} ({}) wurde gelöscht."
 
 #: cms/views/timeline/timeline_view.py
+msgid "The PRA algorithm is not installed."
+msgstr "Der Bettzuweisungsalgorithmus ist nicht installiert."
+
+#: cms/views/timeline/timeline_view.py
+msgid "The Gurobi license is missing. Please install it and try again."
+msgstr "Die Gurobi-Lizenz fehlt. Bitte installiere diese und versuche es erneut."
+
+#: cms/views/timeline/timeline_view.py
+msgid "The Gurobi license is invalid. Please update it and try again."
+msgstr "Die Gurobi-Lizenz is ungültig. Bitte aktualisiere diese und versuche es erneut."
+
+#: cms/views/timeline/timeline_view.py
+msgid "Algorithm failed to generate assignment."
+msgstr "Der Algorithmus konnte keine Zuweisung generieren."
+
+#: cms/views/timeline/timeline_view.py
 msgid "unassigned"
 msgstr "nicht zugewiesen"
 

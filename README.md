@@ -81,6 +81,13 @@ After changing or adding any translation strings inside .py or .html files, you 
 After implementing some new features, you should add corresponding test cases. Tests are located in the `tests/` directory.
 To run existing tests, open a new terminal and execute `./tools/test.sh`. If you wish to only execute tests affected by recent changes, append the `--changed` flag to the former command.
 
+## Patient-to-Room Assignment Algorithm
+If you want to run the patient-to-room assignment (PRA) algorithm, you need to download a gurobi license file (`gurobi.lic`) 
+and place it inside the `gurobi` folder. An academic or commercial license is needed.
+See this [article](https://support.gurobi.com/hc/en-us/articles/13232844297489-How-do-I-set-up-a-Web-License-Service-WLS-license)
+on how to create and download the license file.
+
+
 ## Using the WebUI
 
 * Install and run the server using one of the options above
