@@ -52,7 +52,7 @@
             <h1 class="heading">{% translate "Medical history (by date descending)" %}</h1>
         </div>
         <div class="border-l-8 border-gray-300 dark:border-gray-700 pl-8">
-            {% if perms.cms.add_user %}
+            {% if perms.cms.add_medicalrecord %}
                 <span class="text-sm text-gray-500 ml-2">{% now "d.m.Y H:i" %}, {{ user.title }} {{ user.first_name }} {{ user.last_name }}</span>
                 <form class="rounded-lg border border-gray-300 bg-white p-4 shadow-md relative mb-4 md:flex dark:bg-gray-800 dark:border-gray-700 items-start gap-4"
                       enctype="multipart/form-data"
@@ -65,9 +65,14 @@
                         <label class="mt-0" for="{{ record_form.record_type.id_for_label }}">{{ record_form.record_type.label }}</label>
                         {% render_field record_form.record_type class+="max-h-[165px]" %}
                         <div class="help-text">{{ record_form.record_type.help_text }}</div>
-                        <label class="mt-0" for="{{ record_form.diagnosis_code.id_for_label }}">{{ record_form.diagnosis_code.label }}</label>
-                        {% render_field record_form.diagnosis_code class+="max-h-[165px]" %}
-                        <div class="help-text">{{ record_form.diagnosis_code.help_text }}</div>
+                        <label class="mt-0" for="{{ record_form.medical_specialization.id_for_label }}">{{ record_form.medical_specialization.label }}</label>
+                        {% render_field record_form.medical_specialization class+="max-h-[165px]" %}
+                        <div class="help-text">{{ record_form.medical_specialization.help_text }}</div>
+                        {% if request.user.is_superuser or request.user.job_type == "DOCTOR" %}
+                            <label class="mt-0" for="{{ record_form.diagnosis_code.id_for_label }}">{{ record_form.diagnosis_code.label }}</label>
+                            {% render_field record_form.diagnosis_code class+="max-h-[165px]" %}
+                            <div class="help-text">{{ record_form.diagnosis_code.help_text }}</div>
+                        {% endif %}
                     </div>
                     <div class="flex-1">
                         <label class="mt-0" for="{{ record_form.note.id_for_label }}">{{ record_form.note.label }}</label>
@@ -86,6 +91,12 @@
                             <td class="block md:table-cell font-bold text-gray-500 pr-2">{% translate "Record type" %}:</td>
                             <td>{{ record.record_name }}</td>
                         </tr>
+                        {% if record.medical_specialization %}
+                            <tr class="block md:table-row">
+                                <td class="block md:table-cell font-bold text-gray-500 pr-2">{% translate "Specialization" %}:</td>
+                                <td>{{ record.medical_specialization.name }} ({{ record.medical_specialization.abbreviation }})</td>
+                            </tr>
+                        {% endif %}
                         {% if record.diagnosis_code %}
                             <tr class="block md:table-row">
                                 <td class="block md:table-cell font-bold text-gray-500 pr-2">{% translate "Diagnosis" %}:</td>

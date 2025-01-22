@@ -11,6 +11,7 @@ from ..views import (
     timeline,
     user_settings_view,
     ward,
+    specializations,
 )
 from ..views.floor.floor_view import FloorView  # Importiere die FloorView hier
 from ..views.utility.autocomplete import (
@@ -27,6 +28,11 @@ urlpatterns = [
         include(
             [
                 path("", patients.PatientsListView.as_view(), name="patients"),
+                path(
+                    "upload/",
+                    patients.UploadDataView.as_view(),
+                    name="upload_data",
+                ),
                 path(
                     "<int:pk>/",
                     patients.PatientDetailsView.as_view(),
@@ -127,8 +133,44 @@ urlpatterns = [
                 path(
                     "delete/<int:pk>", ward.WardDeleteView.as_view(), name="delete_ward"
                 ),
-                path("edit/<int:pk>", ward.WardEditView.as_view(), name="edit_ward"),
-
+                path(
+                    "edit/<int:pk>", ward.WardEditView.as_view(), name="edit_ward"
+                ),
+                path(
+                    "details/<int:pk>/",
+                    ward.WardDetailsView.as_view(),
+                    name="ward_details",
+                ),
+                path(
+                    "room/create-multiple/<int:pk>/",
+                    ward.CreateMultipleRoomsView.as_view(),
+                    name="create_multiple_rooms",
+                ),
+                path(
+                    "room/<int:pk>/",
+                    ward.RoomUpdateView.as_view(),
+                    name="update_room",
+                ),
+                path(
+                    "room/delete/<int:pk>",
+                    ward.RoomDeleteView.as_view(),
+                    name="delete_room",
+                ),
+                path(
+                    "room/bed/delete/<int:pk>",
+                    ward.BedDeleteView.as_view(),
+                    name="delete_bed",
+                ),
+                path(
+                    "room/bed/<int:pk>/",
+                    ward.BedUpdateView.as_view(),
+                    name="update_bed",
+                ),
+                path(
+                    "room/<int:pk>/bed/create/",
+                    ward.BedCreateView.as_view(),
+                    name="create_bed",
+                )
             ]
         ),
     ),
@@ -158,6 +200,17 @@ urlpatterns = [
                 path("create/", floor.FloorCreateView.as_view(), name="create_floor"),
                 path("update/", floor.FloorUpdateView.as_view(), name="update_floor"),
                 path("delete/<int:pk>", floor.FloorDeleteView.as_view(), name="delete_floor")
+            ]
+        ),
+    ),
+    path(
+        "specializations/",
+        include(
+            [
+                path("", specializations.SpecializationsListView.as_view(), name="specializations"),
+                path("create", specializations.SpecializationCreateView.as_view(), name="create_specialization"),
+                path("update/<int:pk>", specializations.SpecializationUpdateView.as_view(), name="update_specialization"),
+                path("delete/<int:pk>", specializations.SpecializationDeleteView.as_view(), name="delete_specialization"),
             ]
         ),
     ),

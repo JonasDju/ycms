@@ -4,6 +4,7 @@ import os
 import subprocess
 
 from django.conf import settings
+from django.core.cache import cache
 from django.core.management.base import BaseCommand, CommandParser
 
 from ....cms.models import BedAssignment, Ward
@@ -25,18 +26,20 @@ class Command(BaseCommand):
         return gender_map[g]
 
     def _discretize(self, date):
-        day = max(0, (date.date() - self.zero).days)
-        self.max_day = max(self.max_day, day)
-        return day
+        timedelta = date - self.now.replace(minute=0, second=0, microsecond=0)
+        hours = max(0, timedelta.seconds // 3600 + timedelta.days * 24)
+
+        self.max_hour = max(self.max_hour, hours)
+        return hours
 
     @staticmethod
-    def _call_solver(last_day):
+    def _call_solver(last_hour):
         script = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "call_solver.sh"
         )
         with open(os.devnull, "wb") as devnull:
             subprocess.call(
-                [script, settings.PRA_BASE, "generated", str(last_day)], stdout=devnull
+                [script, settings.PRA_BASE, "generated", str(last_hour)], stdout=devnull
             )
 
     def add_arguments(self, parser: CommandParser) -> None:
@@ -51,8 +54,7 @@ class Command(BaseCommand):
 
     def __init__(self, *args, **kwargs):
         self.now = current_or_travelled_time()
-        self.zero = self.now.date()
-        self.max_day = 0
+        self.max_hour = 0
         super().__init__(*args, **kwargs)
 
     # pylint: disable=arguments-differ
@@ -85,7 +87,7 @@ class Command(BaseCommand):
                     "companion": obj.accompanied,
                     "registration": 0,
                     "admission": self._discretize(obj.admission_date),
-                    "discharge": self._discretize(obj.discharge_date),
+                    "discharge": self._discretize(obj.discharge_date) + 1,
                 }
                 for obj in objects
             ],
@@ -103,10 +105,19 @@ class Command(BaseCommand):
         with open(settings.PRA_INPUT_PATH, "w", encoding="utf-8") as file:
             file.write(json.dumps(instance))
 
-        self._call_solver(self.max_day)
+        self._call_solver(self.max_hour + 1)
+
+        # If the output file does not exist, the algorithm failed to execute or
+        # did not find a feasible solution
+        if not os.path.exists(settings.PRA_OUTPUT_PATH):
+            return ""
 
         with open(settings.PRA_OUTPUT_PATH, "r", encoding="utf-8") as file:
             patient_assignments = json.loads(file.read())["patient_assignments"]
+
+        # Remove the file once it is parsed to make sure that it is not read again
+        # the next time the algorithm fails
+        os.remove(settings.PRA_OUTPUT_PATH)
 
         # The solver does not indicate if an assignment has remained unchanged,
         # and python dicts are a unhashable type, so we have to do this manually

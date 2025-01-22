@@ -48,7 +48,7 @@ class IntakeBedAssignmentForm(CustomModelForm):
         self.fields["admission_date"].initial = current_or_travelled_time()
         self.fields[
             "discharge_date"
-        ].initial = current_or_travelled_time() + datetime.timedelta(days=7)
+        ].initial = current_or_travelled_time() + datetime.timedelta(days=3)
 
     def clean(self):
         """

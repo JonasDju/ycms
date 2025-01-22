@@ -110,6 +110,15 @@ limitations under the License.
                             <i icon-name="sliders-horizontal"></i> {% translate "Settings" %}
                         </a>
                     </li>
+                    {% if perms.cms.change_medicalspecialization %}
+                        <li>
+                            {% url 'cms:protected:specializations' as url %}
+                            <a href="{{ url }}"
+                               class="{% if request.path == url %}selected{% endif %}">
+                                <i icon-name="heart-pulse"></i> {% translate "Specializations" %}  
+                            </a>
+                        </li>
+                    {% endif %} 
                     <li>
                         <a href="https://ycms.readthedocs.io/en/latest/" target="_blank">
                             <i icon-name="file-text"></i> {% translate "Documentation" %}
