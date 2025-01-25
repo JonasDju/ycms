@@ -1566,6 +1566,10 @@ msgid "This bed is currently blocked"
 msgstr "Dieses Bett ist derzeit blockiert"
 
 #: cms/templates/ward/ward_details.html
+msgid "Bed type"
+msgstr "Bettart"
+
+#: cms/templates/ward/ward_details.html
 msgid "Bed blocking type"
 msgstr "Blockierart"
 
