@@ -327,8 +327,6 @@ window.addEventListener("load", () => {
         // this is the case in the ward view, where the validation should use the ward 
         //   that the patient is assigned a bed in, not the "recommended ward"
         if (wardDischargeInfo.dataset.fixedWard) {
-            // TODO: remove
-            console.log(`Form initialized with fixed ward ${wardDischargeInfo.dataset.fixedWard}`);
             fetch(`/intake/allowed-discharge-days/?q=${wardDischargeInfo.dataset.fixedWard}`)
                 .then((response) => response.json())
                 .then((json) => {
