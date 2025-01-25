@@ -1,0 +1,42 @@
+{% load i18n %}
+
+{# Information on the ward's discharge policy #}
+{# Will be moved below the ward select on patient intake page #}
+<div id="ward-discharge-days-info" 
+     class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" 
+     role="alert"
+     data-fixed-ward="{{ fixed_ward_id }}"
+     data-style-valid="text-blue-800 bg-blue-50 dark:text-blue-400"
+     data-style-invalid="text-red-800 bg-red-50 dark:text-red-400">
+    <svg class="flex-shrink-0 inline w-4 h-4 me-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+    </svg>
+    <span data-status-none="{% translate "No days are currently configured for discharge in ward {}." %}"
+          data-status-single="{% translate "Discharges in ward {} possible on {}." %}"
+          data-status-multi="{% translate "Discharges in ward {} possible on {} and {}." %}">
+        Status
+    </span>
+</div>
+{# Information on currently set discharge date's validity and possible option for moving to next valid day #}
+<div id="discharge-date-validity" 
+     class="p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden"
+     data-alert-too-early="{% translate "Discharges cannot be earlier than the admission." %}"
+     data-alert-day-forbidden="{% translate "Discharges in ward {} not allowed on {}." %}"
+     data-date-next-available="{% translate "Next possible discharge in ward {} is on {}." %}"
+     data-date-no-next="{% translate "No next discharge date available in ward {}." %}">
+    <div class="flex items-center">
+        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+        </svg>
+        <div>
+            <span id="status">Discharge valid.</span>
+            <div id="next" class="hidden">No next needed.</div>
+        </div>
+    </div>
+    <button 
+        id="discharge-move-btn" 
+        type="button" 
+        class="mt-2 w-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded px-4 py-3 dark:bg-red-600 dark:hover:bg-red-800 dark:focus:ring-red-900 hidden"
+        data-move-discharge="{% translate "Move discharge to {}." %}">
+    </button>
+</div>

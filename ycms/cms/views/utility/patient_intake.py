@@ -36,6 +36,7 @@ def fetch_ward_allowed_discharge_days(request):
 
         return JsonResponse(
             {
+                "name": ward.nickname,
                 "mask": mask,
                 "allowed_weekdays_short": allowed_days,
                 "weekdays_long": days_of_week.WEEKDAYS_LONG,

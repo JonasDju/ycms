@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-21 02:09+0100\n"
+"POT-Creation-Date: 2025-01-25 20:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -840,6 +840,40 @@ msgstr "Nicht zugewiesene Patienten"
 msgid "Close menu"
 msgstr "Menü schließen"
 
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "No days are currently configured for discharge in ward {}."
+msgstr ""
+"Aktuell sind auf Station {} keine Tage als zulässig zur Entlassung "
+"konfiguriert."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges in ward {} possible on {}."
+msgstr "Entlassungen auf Station {} möglich am {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges in ward {} possible on {} and {}."
+msgstr "Entlassungen auf Station {} möglich am {} und {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges cannot be earlier than the admission."
+msgstr "Entlassungen können nicht vor der Aufnahme liegen."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges in ward {} not allowed on {}."
+msgstr "Entlassungen auf der Station {} nicht möglich am {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Next possible discharge in ward {} is on {}."
+msgstr "Nächstmögliches Entlassungsdatum auf Station {} ist am {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "No next discharge date available in ward {}."
+msgstr "Kein nächstmögliches Entlassungdatum auf Station {} verfügbar."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Move discharge to {}."
+msgstr "Entlassung verschieben zum {}."
+
 #: cms/templates/emails/activation_email.html
 #: cms/templates/emails/activation_email.txt
 msgid "Welcome"
@@ -1241,20 +1275,6 @@ msgid "Patient details"
 msgstr "Patientendaten"
 
 #: cms/templates/patients/patient_intake_form.html
-msgid "Discharges possible on"
-msgstr "Entlassungen zulässig am"
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "and"
-msgstr "und"
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "No days are currently configured for discharge on this ward."
-msgstr ""
-"Aktuell sind auf dieser Station keine Tage als zulässig zur Entlassung "
-"konfiguriert."
-
-#: cms/templates/patients/patient_intake_form.html
 msgid "Estimated stay (nights/discharge date)"
 msgstr "Voraussichtlicher Aufenthalt (Nächte/Entlassungsdatum)"
 
@@ -1273,26 +1293,6 @@ msgstr "Zwei Wochen"
 #: cms/templates/patients/patient_intake_form.html
 msgid "estimated duration of hospital stay in nights"
 msgstr "voraussichtliche Aufenthaltsdauer in Nächten"
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "Discharges not allowed on "
-msgstr "Entlassungen nicht zulässig am "
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "Next possible discharge date is "
-msgstr "Nächtes mögliches Entlassungsdatum ist "
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "No next discharge date available in this ward."
-msgstr "Kein nächstmögliches Entlassungdatum verfügbar auf dieser Station."
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "Move discharge to "
-msgstr "Entlassung verschieben zum "
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "Discharges cannot be earlier than the admission."
-msgstr "Entlassungen können nicht vor der Aufnahme liegen."
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Complete emergency intake"
@@ -1764,11 +1764,14 @@ msgstr "Der Bettzuweisungsalgorithmus ist nicht installiert."
 
 #: cms/views/timeline/timeline_view.py
 msgid "The Gurobi license is missing. Please install it and try again."
-msgstr "Die Gurobi-Lizenz fehlt. Bitte installiere diese und versuche es erneut."
+msgstr ""
+"Die Gurobi-Lizenz fehlt. Bitte installiere diese und versuche es erneut."
 
 #: cms/views/timeline/timeline_view.py
 msgid "The Gurobi license is invalid. Please update it and try again."
-msgstr "Die Gurobi-Lizenz is ungültig. Bitte aktualisiere diese und versuche es erneut."
+msgstr ""
+"Die Gurobi-Lizenz is ungültig. Bitte aktualisiere diese und versuche es "
+"erneut."
 
 #: cms/views/timeline/timeline_view.py
 msgid "Algorithm failed to generate assignment."
@@ -1872,6 +1875,15 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "Discharges possible on"
+#~ msgstr "Entlassungen zulässig am"
+
+#~ msgid "and"
+#~ msgstr "und"
+
+#~ msgid "Discharges not allowed on "
+#~ msgstr "Entlassungen nicht zulässig am "
 
 #~ msgid "An error occured while uploading the file."
 #~ msgstr "Beim Hochladen der Datei trat ein Fehler auf."
