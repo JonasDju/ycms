@@ -29,7 +29,15 @@ class Bed(AbstractBaseModel):
         choices= bed_blocking_types.CHOICES,
         verbose_name=_("bed blocking type"),
         help_text=_("The bed might be blocked"),
-        null=True
+        null=True,
+        blank=True
+    )
+    bed_blocking_reason = models.CharField(
+        max_length=256,
+        verbose_name=_("bed blocking reason"),
+        help_text=_("Reason why the bed is blocked"),
+        null=True,
+        blank=True
     )
     room = models.ForeignKey(
         Room,
@@ -62,10 +70,31 @@ class Bed(AbstractBaseModel):
         return True
     
     @cached_property
+    def is_occupied(self):
+        """
+        Helper property to check if the bed is occupied. Returns True if there
+        is a bed assignment to this bed with a discharge date in the future.
+
+        :return: if the bed is available
+        :rtype: bool
+        """
+
+        if self.assignments.exists():
+            active_assignments = self.assignments.filter(
+                models.Q(admission_date__lte=current_or_travelled_time())
+                & (
+                    models.Q(discharge_date__gt=current_or_travelled_time())
+                    | models.Q(discharge_date__isnull=True)
+                )
+            )
+            return active_assignments.exists()
+        return False
+    
+    @cached_property
     def is_blocked(self):
         """
         Helper property to check if the bed is blocked (and not assigned). Returns True if there
-        is a blocking reason and nit a bed assignment to this bed with a discharge date in the future.
+        is a blocking reason and not a bed assignment to this bed with a discharge date in the future.
 
         :return: if the bed is blocked
         :rtype: bool

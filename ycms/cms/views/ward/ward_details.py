@@ -13,7 +13,7 @@ from django.db import transaction
 from ...models import Ward, Room, Bed, User
 from ...forms import WardForm, RoomForm, BedForm, IntakeBedAssignmentForm, PatientForm
 
-from ...constants import bed_types
+from ...constants import bed_types, bed_blocking_types
 
 logger = logging.getLogger(__name__)
 
@@ -64,6 +64,7 @@ class WardDetailsView(TemplateView):
             "ward": ward,
             "rooms": rooms,
             "bed_types": bed_types.CHOICES,
+            "bed_blocking_types": bed_blocking_types.CHOICES,
             "ward_form": WardForm(instance=ward, prefix=kwargs["pk"]),
             "room_forms": {room.id: RoomForm(instance=room) for room in ward.rooms.all()},
             "bed_forms": {bed.id: BedForm(instance=bed) for bed in (Bed.objects.filter(room__ward=ward))},
@@ -155,10 +156,10 @@ class RoomDeleteView(DeleteView):
     model = Room
 
     def form_valid(self, _form):
-        # Check if any bed in the room is not available
+        # Check if any bed in the room is occupied
         beds = self.object.beds.all()
-        if any(not bed.is_available for bed in beds):
-            messages.error(self.request, _("The room cannot be deleted because it contains unavailable beds."))
+        if any(bed.is_occupied for bed in beds):
+            messages.error(self.request, _("The room cannot be deleted because it contains occupied beds."))
         else:
             self.object.delete()
             messages.success(self.request, _("The room has been deleted."))
@@ -200,9 +201,9 @@ class BedDeleteView(DeleteView):
     model = Bed
 
     def form_valid(self, _form):
-        # Check if the bed is not available
-        if not self.object.is_available:
-            messages.error(self.request, _("The bed cannot be deleted because it is not available."))
+        # Check if the bed is occupied
+        if self.object.is_occupied:
+            messages.error(self.request, _("The bed cannot be deleted because it is occupied."))
         else:
             self.object.delete()
             messages.success(self.request, _("The bed has beed deleted."))   

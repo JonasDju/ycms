@@ -890,6 +890,10 @@ msgstr "Nein"
 msgid "Unassigned Patients"
 msgstr "Nicht zugewiesene Patienten"
 
+#: cms/templates/floor/floor_ward_card.html
+msgid "Blocked Beds"
+msgstr "Blockierte Betten"
+
 #: cms/templates/bed_assignment/bed_assignment_drawer.html
 #: cms/templates/patients/patient_import_drawer.html
 #: cms/templates/ward/ward_drawer.html cms/templates/ward/ward_edit_drawer.html
@@ -1407,6 +1411,10 @@ msgstr "Patient*in hinzufügen"
 msgid "Add"
 msgstr "Hinzufügen"
 
+#: cms/templates/specializations_list.html cms/templates/ward/ward_details.html
+msgid "No blocking"
+msgstr "Nicht blockiert"
+
 #: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
 msgid "Male"
 msgstr "Männlich"
@@ -1547,11 +1555,31 @@ msgstr "Betten in diesem Zimmer"
 #: cms/templates/ward/ward_details.html
 msgid "Here can modify the existing bed type / create a new bed "
 msgstr ""
-"Hier kann der bestehende Bettentyp geändert / ein neues Bett erstellt werden "
+"Hier können bestehende Bettentypen geändert, bestehende Betten blockiert und neue Betten erstellt werden "
 
 #: cms/templates/ward/ward_details.html
 msgid "This bed is currently occupied"
 msgstr "Dieses Bett ist derzeit belegt"
+
+#: cms/templates/ward/ward_details.html
+msgid "This bed is currently blocked"
+msgstr "Dieses Bett ist derzeit blockiert"
+
+#: cms/templates/ward/ward_details.html
+msgid "Bed blocking type"
+msgstr "Blockierart"
+
+#: cms/templates/ward/ward_details.html
+msgid "The bed gets blocked if a blocking type is assigned to it"
+msgstr "Das Bett wird blockiert, wenn ihm eine Blockierart zugewiesen wird"
+
+#: cms/templates/ward/ward_details.html
+msgid "Bed blocking reason"
+msgstr "Blockiergrund"
+
+#: cms/templates/ward/ward_details.html
+msgid "Reason why the bed is blocked"
+msgstr "Grund, weshalb das Bett blockiert ist"
 
 #: cms/templates/ward/ward_details.html
 msgid "- "
@@ -1866,12 +1894,12 @@ msgstr "Diese Raumnummer existiert bereits auf dieser Station"
 
 #: cms/views/ward/ward_details.py
 msgid "Room updated successfully"
-msgstr "Der Raum wurde erfolgreich bearbeitet!"
+msgstr "Der Raum wurde erfolgreich bearbeitet"
 
 #: cms/views/ward/ward_details.py
-msgid "The room cannot be deleted because it contains unavailable beds."
+msgid "The room cannot be deleted because it contains occupied beds."
 msgstr ""
-"Das Zimmer kann nicht gelöscht werden, da es nicht verfügbare Betten enthält."
+"Das Zimmer kann nicht gelöscht werden, da es belegte Betten enthält."
 
 #: cms/views/ward/ward_details.py
 msgid "The room has been deleted."
@@ -1882,12 +1910,12 @@ msgid "Bed updated successfully"
 msgstr "Das Bett wurde erfolgreich aktualisiert"
 
 #: cms/views/ward/ward_details.py
-msgid "The bed cannot be deleted because it is not available."
-msgstr "Das Bett kann nicht gelöscht werden, da es nicht verfügbar ist."
+msgid "The bed cannot be deleted because it is occupied."
+msgstr "Das Bett kann nicht gelöscht werden, da es belegt ist."
 
 #: cms/views/ward/ward_details.py
 msgid "The bed has beed deleted."
-msgstr "Das Bett wurde gelöscht.."
+msgstr "Das Bett wurde gelöscht."
 
 #: cms/views/ward/ward_details.py
 msgid "Bed created successfully"

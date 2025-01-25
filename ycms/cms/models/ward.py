@@ -70,7 +70,17 @@ class Ward(AbstractBaseModel):
         :return: number of occupied beds in the ward
         :rtype: int
         """
-        return self.total_beds - self.available_beds
+        return sum(room.occupied_beds for room in self.rooms.all())
+    
+    @cached_property
+    def total_blocked_beds(self):
+        """
+        Helper property for accessing the wards occupied bed count
+
+        :return: number of blocked beds in the ward
+        :rtype: int
+        """
+        return sum(room.total_blocked_beds for room in self.rooms.all())
 
     @cached_property
     def occupation_rate(self):

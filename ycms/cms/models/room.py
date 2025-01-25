@@ -65,9 +65,8 @@ class Room(AbstractBaseModel):
         :return: number of occupied beds in the room
         :rtype: int
         """
-        #return self.total_beds - self.available_beds
         return max(
-            0, sum(1 for bed in self.beds.all() if bed.is_available)
+            0, sum(1 for bed in self.beds.all() if bed.is_occupied)
         )
     
     @cached_property
@@ -78,7 +77,9 @@ class Room(AbstractBaseModel):
         :return: number of blocked beds in the room
         :rtype: int
         """
-        return self.total_beds - self.available_beds - self.occupied_beds 
+        return max(
+            0, sum(1 for bed in self.beds.all() if bed.is_blocked)
+        )
 
 
     def patients(self):

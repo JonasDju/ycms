@@ -17,4 +17,10 @@ class BedForm(CustomModelForm):
         """
 
         model = Bed
-        fields = ["bed_type"]
+        fields = ["bed_type", "bed_blocking_type", "bed_blocking_reason"]
+
+    def clean_bed_blocking_type(self):
+        bed_blocking_type = self.cleaned_data.get("bed_blocking_type")
+        if bed_blocking_type == "None":
+            return None 
+        return bed_blocking_type

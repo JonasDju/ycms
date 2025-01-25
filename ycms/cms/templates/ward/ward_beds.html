@@ -11,11 +11,10 @@
         {% endfor %}
     {% endwith %}
     <!--blocked beds-->
-    {% with ""|center:room.total_blocked_beds as range %}
-        {% for _ in range %}
-            <div class="flex flex-col items-center gap-1 w-full">
-                <i icon-name="bed-single" class="w-10 h-10 rounded-lg text-gray-400 opacity-50"></i>
-            </div>
-        {% endfor %}
-    {% endwith %}
+    {% for bed in room.blocked_beds %}
+        <div class="m-3">
+            <i icon-name="bed-single" class="w-10 h-10 rounded-lg text-gray-200 opacity-50"></i>
+            <p>{{ bed.bed_blocking_type }}</p>
+        </div>
+    {% endfor %}
 </div>
