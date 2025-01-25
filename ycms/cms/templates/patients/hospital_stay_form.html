@@ -29,6 +29,11 @@
                         <div class="help-text">{{ field.help_text }}</div>
                     </div>
                 {% endfor %}
+                {% if current and stay.bed %}
+                    {% include "bed_assignment/discharge_info.html" with fixed_ward_id=stay.bed.room.ward.id %}
+                {% else %}
+                    {% include "bed_assignment/discharge_info.html" %}
+                {% endif %}
             </div>
             <button type="submit" class="btn mt-4 w-full">{% translate "Save" %}</button>
         </form>

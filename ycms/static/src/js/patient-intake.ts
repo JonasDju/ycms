@@ -467,26 +467,41 @@ window.addEventListener("load", () => {
             delete dischargeInput.dataset.manuallyChanged;
         }));
 
-
-    const wardDischargeInfos = document.querySelectorAll<HTMLDivElement>("#ward-discharge-days-info");
-    
-    wardDischargeInfos.forEach(div => {
+    // init discharge validity info boxes
+    const dischargeDateInfos = document.querySelectorAll<HTMLDivElement>("#discharge-date-validity");
+    dischargeDateInfos.forEach(div => {
         const form = getForm(div);
 
-        // move ward's discharge info below recommended ward if that is used to update the validation
-        if (!div.dataset.fixedWard) {
-            const wardSelect = form.querySelector("#id_recommended_ward") as HTMLSelectElement;
-            const newParent = wardSelect.parentNode?.parentNode;
-            
-            if (newParent) {
-                newParent.appendChild(div);
-            } else {
-                console.log("Could not get grandparent of #id_recommended_ward", div);
-            }
+        const dischargeInput = getFormDischargeInput(form);
+        const newParent = dischargeInput.parentNode?.parentNode;
+
+        if (newParent) {
+            newParent.insertBefore(div, dischargeInput.parentNode?.nextSibling);
+        } else {
+            console.log("Could not move discharge date info", div);
         }
 
         updateDischargeMin(form);
         // perform one update to all forms to show alerts for initial data
         validateDischargePolicy(form);
+    });
+    
+    // init ward discharge policy information
+    const wardDischargeInfos = document.querySelectorAll<HTMLDivElement>("#ward-discharge-days-info");
+    wardDischargeInfos.forEach(div => {
+        const form = getForm(div);
+
+        // move ward's discharge info below recommended ward if that is used to update the validation
+        const prevElement = div.dataset.fixedWard ?
+            getFormDischargeInput(form) :
+            form.querySelector("#id_recommended_ward") as HTMLSelectElement;
+        
+        const newParent = prevElement.parentNode?.parentNode;
+
+        if (newParent) {
+            newParent.insertBefore(div, prevElement.parentNode?.nextSibling);
+        } else {
+            console.log("Could not move ward discharge info", div);
+        }
     });
 });

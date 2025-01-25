@@ -3,7 +3,7 @@
 {# Information on the ward's discharge policy #}
 {# Will be moved below the ward select on patient intake page #}
 <div id="ward-discharge-days-info" 
-     class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" 
+     class="flex items-center p-2 my-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" 
      role="alert"
      data-fixed-ward="{{ fixed_ward_id }}"
      data-style-valid="text-blue-800 bg-blue-50 dark:text-blue-400"
@@ -19,7 +19,7 @@
 </div>
 {# Information on currently set discharge date's validity and possible option for moving to next valid day #}
 <div id="discharge-date-validity" 
-     class="p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden"
+     class="p-2 my-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden"
      data-alert-too-early="{% translate "Discharges cannot be earlier than the admission." %}"
      data-alert-day-forbidden="{% translate "Discharges in ward {} not allowed on {}." %}"
      data-date-next-available="{% translate "Next possible discharge in ward {} is on {}." %}"
