@@ -6,7 +6,7 @@
     <div class="flex justify-between">
         <div>
             <h5 class="leading-none text-xl font-bold text-gray-900 dark:text-white pb-2">{% translate "Patients" %}</h5>
-            <p class="text-base font-normal dark:text-white text-gray-900">{% translate "Anzahl" %}</p>
+            <p class="text-base font-normal dark:text-white text-gray-900">{% translate "Count" %}</p>
         </div>
     </div>
     <div id="area-chart" class="w-full h-64 mt-12"></div> <!-- Bereich für den Graphen -->
@@ -27,6 +27,10 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
+    const translations = {
+        patients: "{% translate 'Patients' %}",
+    };
+
     const data = {{ statistics|safe }};
     const options = {
         chart: {
@@ -73,7 +77,7 @@
         },
         series: [
             {
-                name: 'Patients',
+                name: translations.patients,
                 data: data.map(item => item.patients),
                 color: '#1A56DB'
             }

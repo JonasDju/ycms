@@ -94,7 +94,7 @@ const getChartOptions = () => {
             total: {
               showAlways: true,
               show: true,
-              label: "Patients",
+              label: "{% translate 'Patients' %}",
               fontFamily: "Inter, sans-serif",
               formatter: function (w) {
                 const sum = w.globals.seriesTotals.reduce((a, b) => {
@@ -121,7 +121,11 @@ const getChartOptions = () => {
         top: -2,
       },
     },
-    labels: ["Male", "Female", "Divers"],
+    labels: [
+      "{% translate 'Male' %}",   
+      "{% translate 'Female' %}", 
+      "{% translate 'Divers' %}"  
+    ],
     dataLabels: {
       enabled: false,
     },

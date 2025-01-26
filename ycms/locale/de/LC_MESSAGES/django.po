@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-19 12:19+0100\n"
+"POT-Creation-Date: 2025-01-26 10:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -815,9 +815,45 @@ msgstr "Etagenansicht"
 msgid "Bed Infos"
 msgstr "Bett Infos"
 
+#: cms/templates/home/home_beds.html cms/templates/home/home_patient.html
+msgid "Count"
+msgstr "Anzahl"
+
+#: cms/templates/home/home_beds.html cms/templates/ward/ward_info.html
+msgid "Total"
+msgstr "Gesamt"
+
+#: cms/templates/home/home_beds.html cms/templates/ward/ward_management.html
+msgid "Available"
+msgstr "Verfügbare Betten"
+
+#: cms/templates/home/home_beds.html cms/templates/ward/ward_management.html
+msgid "Occupied"
+msgstr "Belegten Betten"
+
 #: cms/templates/home/home_gender.html
 msgid "Gender Distribution"
 msgstr "Geschlechterverteilung"
+
+#: cms/templates/home/home_gender.html
+#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
+msgid "Male"
+msgstr "Männlich"
+
+#: cms/templates/home/home_gender.html
+#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
+msgid "Female"
+msgstr "Weiblich"
+
+#: cms/templates/home/home_gender.html
+#, fuzzy
+#| msgid "Diverse"
+msgid "Divers"
+msgstr "Divers"
+
+#: cms/templates/home/home_gender.html cms/templates/home/home_patient.html
+msgid "Patients"
+msgstr "Patienten"
 
 #: cms/templates/home/home_infos.html
 #, fuzzy
@@ -836,14 +872,6 @@ msgstr "Gesamtzahl der Ärzte"
 #: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
 msgid "Total Nurses"
 msgstr "Gesamtzahl der Krankenpflegenden"
-
-#: cms/templates/home/home_patient.html
-msgid "Patients"
-msgstr "Patienten"
-
-#: cms/templates/home/home_patient.html
-msgid "Anzahl"
-msgstr ""
 
 #: cms/templates/home/home_patient.html
 msgid "Last 7 days"
@@ -1068,14 +1096,6 @@ msgstr "Patient*in hinzufügen"
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
-msgid "Male"
-msgstr "Männlich"
-
-#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
-msgid "Female"
-msgstr "Weiblich"
-
 #: cms/templates/patients/patients_list.html
 msgid "Diverse"
 msgstr "Divers"
@@ -1127,10 +1147,6 @@ msgstr "Entlassung in"
 #: cms/templates/ward/ward_beds.html
 msgid "Stay"
 msgstr "Aufenthalt"
-
-#: cms/templates/ward/ward_info.html
-msgid "Total"
-msgstr "Gesamt"
 
 #: cms/templates/ward/ward_info.html
 msgid "Bed Availability"
@@ -1195,14 +1211,6 @@ msgstr "Stationsname"
 #: cms/templates/ward/ward_management.html
 msgid "Number of Beds"
 msgstr "Betten"
-
-#: cms/templates/ward/ward_management.html
-msgid "Available"
-msgstr "Verfügbare Betten"
-
-#: cms/templates/ward/ward_management.html
-msgid "Occupied"
-msgstr "Belegten Betten"
 
 #: cms/templates/ward/ward_modal.html
 msgid "Are you sure you want to discharge this patient?"
@@ -1490,6 +1498,3 @@ msgstr "Englisch"
 
 #~ msgid "Register"
 #~ msgstr "Registrieren"
-
-#~ msgid "Count"
-#~ msgstr "Anzahl"

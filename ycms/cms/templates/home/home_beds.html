@@ -62,12 +62,12 @@
         },
       },
       series: [{
-          name: 'Count',
-          data: [
-              { x: 'Total', y: wardInfo.beds_count, fillColor: '#69A9FF' }, 
-              { x: 'Available', y: wardInfo.available_beds, fillColor: '#FFB3D9' }, 
-              { x: 'Occupied', y: wardInfo.occupied_beds, fillColor: '#AEE6C7' } 
-          ],
+        name: '{% translate "Count" %}',
+        data: [
+            { x: "{% translate 'Total' %}", y: wardInfo.beds_count, fillColor: '#69A9FF' }, 
+            { x: "{% translate 'Available' %}", y: wardInfo.available_beds, fillColor: '#FFB3D9' }, 
+            { x: "{% translate 'Occupied' %}", y: wardInfo.occupied_beds, fillColor: '#AEE6C7' } 
+        ],
       }],
       plotOptions: {
           bar: {
@@ -83,7 +83,11 @@
           },
       },
       xaxis: {
-          categories: ['Total', 'Available', 'Occupied'],
+        categories: [
+            "{% translate 'Total' %}",
+            "{% translate 'Available' %}",
+            "{% translate 'Occupied' %}"
+        ],
           labels: {
               style: {
                   colors: '#000000', 
