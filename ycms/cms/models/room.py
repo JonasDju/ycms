@@ -167,7 +167,7 @@ class Room(AbstractBaseModel):
         :return: A readable string representation of the room
         :rtype: str
         """
-        return f"Room {self.room_number} in Ward {self.ward.ward_number}"
+        return f"Room {self.room_number} in Ward {self.ward.nickname}"
 
     def get_repr(self):
         """
@@ -177,8 +177,9 @@ class Room(AbstractBaseModel):
         :return: The canonical string representation of the room
         :rtype: str
         """
-        return f"<Room (number: {self.room_number}, ward: {self.ward.ward_number})>"
+        return f"<Room (number: {self.room_number}, ward: {self.ward.nickname})>"
 
     class Meta:
         verbose_name = _("room")
         verbose_name_plural = _("rooms")
+        unique_together = ('room_number', 'ward')

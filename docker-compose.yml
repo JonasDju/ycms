@@ -12,7 +12,7 @@ services:
       retries: 10
 
   ycms-dev:
-    image: ycms-dev:0.2
+    image: ycms-dev:0.5
     pull_policy: never
     build:
       dockerfile: ./docker/dev/Dockerfile
@@ -23,6 +23,7 @@ services:
       - "8086:8086"
     volumes:
       - ./:/bed-management/ycms
+      - ./gurobi:/opt/gurobi
     profiles: [dev]
     depends_on:
       db:

@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 
+from ...constants import days_of_week
 from ...decorators import permission_required
 from ...forms import (
     IntakeBedAssignmentForm,
@@ -15,7 +16,7 @@ from ...forms import (
     PatientForm,
     UnknownPatientForm,
 )
-from ...models import Patient
+from ...models import Patient, Ward
 from ...models.timetravel_manager import current_or_travelled_time
 
 logger = logging.getLogger(__name__)
@@ -148,12 +149,41 @@ class IntakeFormView(TemplateView):
                 },
             )
 
+        # TODO: make this more general and move to BedAssignmentForm's clean
+        # manual discharge weekday validation against ward's discharge policy
+        if ward := bed_form.cleaned_data["recommended_ward"]:
+            mask = ward.allowed_discharge_days
+            discharge_date = bed_form.cleaned_data["discharge_date"]
+            weekday = discharge_date.weekday()
+
+            if not ((mask >> weekday) & 0b1):
+                messages.error(
+                    request,
+                    _('Discharge in ward "{}" not possible on {}.').format(
+                        ward.name, days_of_week.WEEKDAYS_LONG[weekday]
+                    ),
+                )
+
+                return render(
+                    request,
+                    self.template_name,
+                    self.get_context_data(**kwargs)
+                    | {
+                        "patient_form": patient_form,
+                        "record_form": record_form,
+                        "bed_form": bed_form,
+                    },
+                )
+
         bed_assignment = bed_form.save()
 
         messages.success(
             request,
             _('Intake for patient "{} {}" with diagnosis "{}" has been saved.').format(
                 patient.first_name, patient.last_name, record.diagnosis_code
+            ) if record.diagnosis_code
+            else _('Intake for patient "{} {}" has been saved.').format(
+                patient.first_name, patient.last_name
             ),
         )
 

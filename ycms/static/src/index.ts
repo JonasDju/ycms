@@ -10,6 +10,8 @@ import "./js/utils/menu";
 import "./js/ward/discharge";
 import "./js/ward/assign";
 import "./js/ward-management";
+import "./js/ward-edit";
+import "./js/ward-details";
 import "./js/ward/timeline";
 import "./js/ward/toggle-edit-mode";
 import "./js/ward/progress";
@@ -17,6 +19,8 @@ import { createIconsAt } from "./js/utils/create-icons";
 import "./js/patients-list";
 import "./js/utils/loader";
 import "./js/utils/set-language";
+import "./js/patient-intake";
+import "./js/specializations-list";
 
 window.addEventListener("DOMContentLoaded", () => {
     createIconsAt(document.documentElement);

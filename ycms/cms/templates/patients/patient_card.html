@@ -20,8 +20,16 @@
                         <span class="font-semibold dark:text-white">{% translate "Age" %}:</span> {{ patient.age }}
                     </p>
                     <p>
-                        <span class="font-semibold dark:text-white">{% translate "Gender" %}:</span> {{ patient.gender | title }}
+                        <span class="font-semibold dark:text-white">{% translate "Gender" %}:</span>
+                        {% if patient.gender == 'm' %}
+                            <span style="color: #18aff5;">&#9794;</span>
+                        {% elif patient.gender == 'f' %}
+                            <span style="color: #de1ee8;">&#9792;</span>
+                        {% else %}
+                            <span style="color: #2ecc71;">&#9895;</span>
+                        {% endif %}
                     </p>
+
                     <p>
                         <span class="font-semibold dark:text-white">{% translate "Accompanied" %}:</span>
                         {% if bed_assignment.accompanied %}
@@ -46,6 +54,14 @@
                         <span class="font-semibold dark:text-white">{% translate "Diagnosis" %}:</span>
                         {% if bed_assignment.medical_record.diagnosis_code %}
                             {{ bed_assignment.medical_record.diagnosis_code }} ({{ bed_assignment.medical_record.diagnosis_code.description }})
+                        {% else %}
+                            -
+                        {% endif %}
+                    </p>
+                    <p>
+                        <span class="font-semibold dark:text-white">{% translate "Specialization" %}:</span> 
+                        {% if bed_assignment.medical_record.medical_specialization %}
+                            {{ bed_assignment.medical_record.medical_specialization.name }} ({{ bed_assignment.medical_record.medical_specialization.abbreviation }})
                         {% else %}
                             -
                         {% endif %}

@@ -2,6 +2,7 @@ import datetime
 import logging
 
 from django import forms
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 from ..models import BedAssignment
@@ -47,7 +48,47 @@ class IntakeBedAssignmentForm(CustomModelForm):
         self.fields["admission_date"].initial = current_or_travelled_time()
         self.fields[
             "discharge_date"
-        ].initial = current_or_travelled_time() + datetime.timedelta(days=7)
+        ].initial = current_or_travelled_time() + datetime.timedelta(days=3)
+
+    def clean(self):
+        """
+        This method extends the default ``clean()``-method of the base :class:`~django.forms.ModelForm`
+        to check if the admission date is before the discharge date.
+
+        :return: The cleaned data
+        """
+        cleaned_data = super().clean()
+        admission_date = cleaned_data.get("admission_date")
+        discharge_date = cleaned_data.get("discharge_date")
+        # check if admission date is before discharge date
+        if admission_date and discharge_date:
+            if admission_date > discharge_date:
+                raise ValidationError(
+                    _("Admission date cannot be later than discharge date.")
+                )
+
+        # get all existing assignments for the patient
+        patient = self.instance.medical_record.patient
+        existing_assignments = BedAssignment.objects.filter(
+            medical_record__patient=patient
+        ).exclude(
+            pk=self.instance.pk  # exclude the current assignment
+        )
+
+        # check if the new assignment overlaps with existing assignments
+        for assignment in existing_assignments:
+            # if the new assignment is within the time frame of an existing assignment, raise an error
+            if assignment.admission_date <= discharge_date and (
+                assignment.discharge_date is None
+                or admission_date <= assignment.discharge_date
+            ):
+                raise ValidationError(
+                    _(
+                        "The selected admission and discharge dates overlap with an existing hospital stay."
+                    )
+                )
+
+        return cleaned_data
 
     def save(self, commit=True):
         """

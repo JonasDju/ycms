@@ -1,7 +1,19 @@
-const addRemovalEventListeners = (room: HTMLElement) => {
-    room.querySelectorAll<HTMLElement>(".element-remover").forEach((remover) => {
+const addRemovalEventListeners = (container: HTMLElement) => {
+    container.querySelectorAll<HTMLElement>(".bed-remover").forEach((remover) => {
         remover.addEventListener("click", () => {
-            (remover.parentNode?.parentNode as HTMLElement)?.remove();
+            const bed = remover.closest(".flex.items-center.gap-2");
+            if (bed) {
+                bed.remove();
+            }
+        });
+    });
+
+    container.querySelectorAll<HTMLElement>(".room-remover").forEach((remover) => {
+        remover.addEventListener("click", () => {
+            const room = remover.closest(".new-room");
+            if (room) {
+                room.remove();
+            }
         });
     });
 };
@@ -9,7 +21,10 @@ const addRemovalEventListeners = (room: HTMLElement) => {
 const newBedListener = (room: HTMLElement, newBedPrototype: HTMLElement) => {
     const newBedButton = room.querySelector(".bed-adder") as HTMLElement;
     newBedButton.addEventListener("click", () => {
-        newBedButton.parentNode?.insertBefore(newBedPrototype.cloneNode(true), newBedButton);
+        const newBed = newBedPrototype.cloneNode(true) as HTMLElement;
+        newBed.classList.remove("hidden");
+        newBedButton.parentNode?.insertBefore(newBed, newBedButton);
+        addRemovalEventListeners(room);
     });
 };
 

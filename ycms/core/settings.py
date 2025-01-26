@@ -96,6 +96,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "ycms.core.theme.context_processors.theme",
+                "ycms.core.context_preprocessors.global_context",
             ]
         },
     }

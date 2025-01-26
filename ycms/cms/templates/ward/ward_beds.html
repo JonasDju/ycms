@@ -1,66 +1,11 @@
 {% load i18n %}
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-2">
+<div class="">
     {% for patient in room.patients %}
-        {% if patient.gender == 'm' %}
-            <div class="flex flex-col gap-1 w-full">
-                <div class=" flex flex-col items-center">
-                    <i icon-name="bed-single"
-                       class="w-10 h-10 rounded-lg bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"></i>
-                </div>
-                {% if patient.current_stay.discharge_date %}
-                    <div class="flex justify-end">
-                        <span class="text-sm font-medium text-blue-700 dark:text-white">{{ patient.current_stay.progress }}%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                        <div class="progress-bar bg-blue-600 h-2.5 rounded-full"
-                             data-progress="{{ patient.current_stay.progress }}"></div>
-                    </div>
-                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                        {% translate "Discharge in" %}: {{ patient.current_stay.until_discharge }}
-                    </span>
-                {% endif %}
-                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                    {% translate "Stay" %}: {{ patient.current_stay.duration }}
-                </span>
-            </div>
-        {% else %}
-            <div class="flex flex-col gap-1 w-full">
-                <div class=" flex flex-col items-center">
-                    <i icon-name="bed-single"
-                       class="w-10 h-10 rounded-lg bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-100"></i>
-                </div>
-                {% if patient.current_stay.discharge_date %}
-                    <div class="flex justify-end">
-                        <span class="text-sm font-medium text-red-700 dark:text-white">{{ patient.current_stay.progress }}%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                        <div class="progress-bar bg-red-600 h-2.5 rounded-full"
-                             data-progress="{{ patient.current_stay.progress }}"></div>
-                    </div>
-                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                        {% translate "Discharge in" %}: {{ patient.current_stay.until_discharge }}
-                    </span>
-                {% endif %}
-                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                    {% translate "Stay" %}: {{ patient.current_stay.duration }}
-                </span>
-            </div>
-        {% endif %}
-        {% if patient.current_stay.accompanied %}
-            <div class="flex flex-col gap-1 w-full col-start-2">
-                <div class=" flex flex-col items-center">
-                    <i icon-name="users"
-                       class="w-10 h-10 rounded-lg bg-gray-100 text-gray-600"></i>
-                </div>
-                <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
-                    {% translate "Accompanied" %}
-                </span>
-            </div>
-        {% endif %}
+        {% include "ward/ward_bed_occupied.html" with gender=patient.gender last_name=patient.last_name first_name=patient.first_name current_stay=patient.current_stay patient_id=patient.id%}
     {% endfor %}
     {% with ""|center:room.available_beds as range %}
         {% for _ in range %}
-            <div class="flex flex-col items-center gap-1 w-full">
+            <div class="m-3">
                 <i icon-name="bed-single" class="w-10 h-10 rounded-lg text-green-200"></i>
             </div>
         {% endfor %}

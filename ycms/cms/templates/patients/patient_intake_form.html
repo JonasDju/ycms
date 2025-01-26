@@ -6,110 +6,242 @@
     {% translate "Patient Intake" %}
 {% endblock title %}
 {% block content %}
-    <div class="max-w-6xl mx-auto mt-6">
+    <div class="mx-auto mt-6 max-w-[1664px]">
         <form enctype="multipart/form-data"
-              method="post"
-              id="patient_form"
-              class="mb-12"
-              data-unsaved-warning>
+            method="post"
+            id="patient_form"
+            class="mb-12"
+            data-unsaved-warning>
             {% csrf_token %}
-            <div class="grid xl:grid-cols-2 gap-x-24">
+            {% comment %} <div class="grid xl:grid-cols-2 gap-x-24"> {% endcomment %}
+            <div class="grid grid-cols-6 w-full gap-4">
                 {% with WIDGET_ERROR_CLASS="border-red-500" %}
-                    <div class="flex flex-col gap-8">
-                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option">
-                            <h1 class="heading">{% translate "Select existing patient" %}</h1>
-                            <div class="mt-4">
-                                {% render_field record_form.patient %}
-                                <div class="help-text">{{ record_form.patient.help_text }}</div>
-                            </div>
-                            <div class="absolute top-0 right-0 p-2 text-sm underline cursor-pointer hidden form-reset dark:text-gray-200">
-                                {% translate "reset form" %}
-                            </div>
+                {% comment %} intake model toggle switch, center aligned with patient details {% endcomment %}
+                <div class="flex mx-auto items-center justify-center col-span-2 col-start-2 group/toggle">
+                    <label for="intake-mode-switch" class="font-normal text-gray-700 group-has-[input:not(:checked)]/toggle:text-blue-600 my-3">{% translate "Normal intake" %}</label>
+                    <input type="checkbox"
+                    name="intake_emergency"
+                    id="intake-mode-switch"
+                    class="m-3 relative w-[3.25rem] h-7 p-px !bg-blue-600 border-transparent  !rounded-full cursor-pointer transition-colors ease-in-out duration-200 checked:bg-none checked:text-red-600 before:inline-block before:w-6 before:h-6 before:bg-white dark:before:bg-gray-300 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 peer-focus:ring-red-400">
+                    <label for="intake-mode-switch" class="font-normal text-gray-700 group-has-[input:checked]/toggle:text-blue-600 my-3">{% translate "Emergency intake" %}</label>
+                </div>  
+                {% comment %} Existing patients list {% endcomment %}
+                <div class="flex flex-col col-span-1 row-start-2">
+                <div id="existing-patients" class="p-4 pt-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative">
+                    <h3 class="text-xl font-bold dark:text-white">{% translate "Existing patients" %}</h3>
+                    <input id="selected-patient-id" name="patient" type="text" class="!hidden" value="{{ record_form.fields.patient.id }}">
+                    <button id="cancel-selection-button"
+                        class="absolute top-2 right-2 p-2 hidden rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700"
+                        title="{% translate "Cancel selection" %}">
+                        <i icon-name="x" class="text-red-700 cursor-pointer"></i>
+                    </button>
+                    <div id="patient-search-status" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-100 dark:bg-blue-900 dark:text-blue-400 my-3">
+                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        {% translate "Start typing to search for existing patients." as status_initial %}
+                        <span 
+                            data-status-no-input="{{ status_initial }}"
+                            data-status-too-short="{% translate "Enter at least 3 characters to search." %}"
+                            data-status-results="{% translate "Found {} matches." %}"
+                            data-status-no-results="{% translate "No matching patients found." %}">
+                            {{ status_initial }}
+                        </span>
+                    </div>
+                    <div id="existing-patients-list" class="space-y-2">
+                        <div id="patient-select-prototype" 
+                            class="flex justify-between rounded p-2 cursor-pointer bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-700 data-[selected]:border-gray-700 dark:data-[selected]:border-gray-300 data-[selected]:bg-gray-400 dark:data-[selected]:bg-gray-600 group/patient hidden"
+                            title="{% translate "Select patient" %}">
+                            <span class="text-sm dark:text-gray-200 select-none">
+                                Lastname, Firstname, DateOfBirth
+                            </span>
+                            <svg class="mt-px h-5 w-5 group-hover/patient:visible invisible flex-none fill-gray-500 self-center" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd"></path>
+                            </svg>
                         </div>
-                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option">
-                            <h1 class="heading">{% translate "Or perform emergency intake" %}</h1>
-                            <div class="mt-4">
-                                <div>
-                                    <label for="{{ unknown_patient_form.gender.id_for_label }}"
-                                           class="field-required">{{ unknown_patient_form.gender.label }}</label>
-                                    {% render_field unknown_patient_form.gender %}
-                                    <div class="help-text">{{ unknown_patient_form.gender.help_text }}</div>
-                                </div>
-                                <div>
-                                    <label for="{{ unknown_patient_form.approximate_age.id_for_label }}"
-                                           class="field-required">
-                                        {{ unknown_patient_form.approximate_age.label }}
-                                    </label>
-                                    <div class="flex">
-                                        {% render_field unknown_patient_form.approximate_age class+="bg-gray-200 dark:bg-gray-800 w-full" %}<span id="approximate-age-display"
-      class="ml-2 align-text-bottom dark:text-gray-200"></span>
-                                    </div>
-                                    <div class="help-text">{{ unknown_patient_form.approximate_age.help_text }}</div>
-                                </div>
-                            </div>
-                            <div class="absolute top-0 right-0 p-2 text-sm underline cursor-pointer hidden form-reset dark:text-gray-200">
-                                {% translate "reset form" %}
-                            </div>
+                        {% comment %} existing patients go here {% endcomment %}
+                    </div>
+                </div>
+            </div>
+
+                {% comment %} Patient details {% endcomment %}
+                <div class="flex flex-col col-span-2 col-start-2 row-start-2">
+                <div id="emergency-intake" class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative intake-option">
+                    <h1 class="heading">{% translate "Emergency intake" %}</h1>
+                    <div class="mt-4">
+                        <div>
+                            <label for="{{ unknown_patient_form.gender.id_for_label }}"
+                                    class="field-required">{{ unknown_patient_form.gender.label }}</label>
+                            {% render_field unknown_patient_form.gender %}
+                            <div class="help-text">{{ unknown_patient_form.gender.help_text }}</div>
                         </div>
-                        <div class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative patient-option">
-                            <h1 class="heading">{% translate "Or create new patient" %}</h1>
-                            {% for field in patient_form %}
-                                <div>
-                                    <label for="{{ field.id_for_label }}"
-                                           {% if field.field.required %}class="field-required"{% endif %}>
-                                        {{ field.label }}
-                                    </label>
-                                    {% render_field field %}
-                                    <div class="help-text">{{ field.help_text }}</div>
-                                </div>
-                            {% endfor %}
-                            <div class="absolute top-0 right-0 p-2 text-sm underline cursor-pointer hidden form-reset dark:text-gray-200">
-                                {% translate "reset form" %}
+                        <div>
+                            <label for="{{ unknown_patient_form.approximate_age.id_for_label }}"
+                                    class="field-required">
+                                {{ unknown_patient_form.approximate_age.label }}
+                            </label>
+                            <div class="flex">
+                                {% render_field unknown_patient_form.approximate_age class+="bg-gray-200 dark:bg-gray-800 w-full" %}
+                                <span id="approximate-age-display" class="ml-2 align-text-bottom dark:text-gray-200"></span>
                             </div>
+                            <div class="help-text">{{ unknown_patient_form.approximate_age.help_text }}</div>
                         </div>
                     </div>
-                    <div class="flex flex-col gap-8">
+                    <button class="absolute top-2 right-2 p-2 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 clear-patient-button" 
+                        title="{% translate "Clear inputs" %}">
+                        <i icon-name="eraser" class="text-red-700 cursor-pointer"></i>
+                    </button>
+                </div>
+                <div id="new-patient" class="p-12 bg-gray-200 dark:bg-gray-800 rounded-xl relative intake-option">
+                    <h1 class="heading">{% translate "Patient details" %}</h1>
+                    {% for field in patient_form %}
                         <div>
+                            <label for="{{ field.id_for_label }}"
+                                    {% if field.field.required %}class="field-required"{% endif %}>
+                                {{ field.label }}
+                            </label>
+                            {% render_field field %}
+                            <div class="help-text">{{ field.help_text }}</div>
+                        </div>
+                    {% endfor %}
+                    <div>
+                    </div>
+                    <button class="absolute top-2 right-2 p-2 rounded-xl hover:bg-gray-300 dark:hover:bg-gray-700 clear-patient-button" 
+                        title="{% translate "Clear inputs" %}">
+                        <i icon-name="eraser" class="text-red-700 cursor-pointer"></i>
+                    </button>
+                </div>
+                </div>
+
+                {% comment %} Intake details {% endcomment %}
+                <div class="flex flex-col gap-8 col-span-2 row-start-2">
+                    <div>
+                        <div>
+                            <label for="{{ record_form.medical_specialization.id_for_label }}"
+                                class="field-required">{{ record_form.medical_specialization.label }}</label>
+                            {% render_field record_form.medical_specialization required="" %}
+                            <div class="help-text">{{ record_form.medical_specialization.help_text }}</div>
+                        </div>
+                        {% if request.user.is_superuser or request.user.job_type == "DOCTOR" %}
                             <div>
-                                <label for="{{ record_form.diagnosis_code.id_for_label }}"
-                                       class="field-required">{{ record_form.diagnosis_code.label }}</label>
-                                {% render_field record_form.diagnosis_code %}
-                                <div class="help-text">{{ record_form.diagnosis_code.help_text }}</div>
+                                <label for="{{ record_form.diagnosis_code.id_for_label }}">
+                                    {{ record_form.diagnosis_code.label }}</label>
+                                    {% render_field record_form.diagnosis_code %}
+                                    <div class="help-text">{{ record_form.diagnosis_code.help_text }}</div>
                             </div>
-                            <div>
-                                <label for="{{ record_form.note.id_for_label }}">{{ record_form.note.label }}</label>
-                                {% render_field record_form.note %}
-                                <div class="help-text">{{ record_form.note.help_text }}</div>
-                            </div>
+                        {% endif %}
+                        <div>
+                            <label for="{{ record_form.note.id_for_label }}">{{ record_form.note.label }}</label>
+                            {% render_field record_form.note style="height: 145px;" %}
+                            <div class="help-text">{{ record_form.note.help_text }}</div>
                         </div>
                         <div>
+                            <label for="{{ bed_form.recommended_ward.id_for_label }}"
+                                class="field-required">{{ bed_form.recommended_ward.label }}</label>
+                            {% render_field bed_form.recommended_ward required="" %}
+                            <div class="help-text">{{ bed_form.recommended_ward.help_text }}</div>
+                        </div>
+                        <div id="ward-allowed-discharge-days-info" class="flex items-center p-2 text-base text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 hidden" role="alert">
+                            <svg class="flex-shrink-0 inline w-4 h-4 me-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                            </svg>
+                            <span>{% translate "Discharges possible on" %}&nbsp;</span>
+                            <span id="ward-allowed-discharge-days-first">days</span>
+                            <span id="ward-allowed-discharge-days-and">&nbsp;{% translate "and" %}&nbsp;</span>
+                            <span id="ward-allowed-discharge-days-last">day</span>.
+                        </div>
+                        <div id="ward-no-allowed-discharge-alert" class="flex items-center p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden" role="alert">
+                            <svg class="flex-shrink-0 inline w-4 h-4 me-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                            </svg>
+                            {% translate "No days are currently configured for discharge on this ward." %}
+                        </div>
+                    </div>
+                    <div>
+                        <div class="border-4 border-gray-500 rounded-lg p-4">
                             <div>
                                 <label for="{{ bed_form.admission_date.id_for_label }}"
-                                       class="field-required">{{ bed_form.admission_date.label }}</label>
-                                {% render_field bed_form.admission_date %}
+                                        class="field-required">{{ bed_form.admission_date.label }}</label>
+                                {% render_field bed_form.admission_date required="" %}
                                 <div class="help-text">{{ bed_form.admission_date.help_text }}</div>
                             </div>
                             <div>
-                                <label for="{{ bed_form.discharge_date.id_for_label }}"
-                                       class="field-required">{{ bed_form.discharge_date.label }}</label>
-                                {% render_field bed_form.discharge_date %}
+                                <form>
+                                    <label for="input-patient-intake-stay-duration"
+                                        class="field-required">{% translate "Estimated stay (nights/discharge date)" %}</label>
+                                    <div class="flex gap-4 items-center">
+                                        <input
+                                            type="number"
+                                            id="input-patient-intake-stay-duration"
+                                            class="form-input"
+                                            step="1"
+                                            value="3"
+                                            min="0"
+                                            required
+                                        />
+                                        <div class="inline-flex">
+                                            <button type="button" id="button-patient-intake-2n" class="bg-gray-200 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-l outline outline-1 outline-gray-500 whitespace-nowrap">
+                                            {% translate "two nights" %}
+                                            </button>
+                                            <button type="button" id="button-patient-intake-7n" class="bg-gray-200 hover:bg-gray-400 text-gray-800 py-2 px-4 outline outline-1 outline-gray-500 whitespace-nowrap">
+                                            {% translate "one week" %}
+                                            </button>
+                                            <button type="button" id="button-patient-intake-14n" class="bg-gray-200 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-r outline outline-1 outline-gray-500 whitespace-nowrap">
+                                            {% translate "two weeks" %}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p class="helptext">{% translate "estimated duration of hospital stay in nights" %}</p>
+                                </form>
+                            </div>
+                            <div class="mt-4">
+                                {% render_field bed_form.discharge_date required="" %}
                                 <div class="help-text">{{ bed_form.discharge_date.help_text }}</div>
                             </div>
-                            <div>
-                                <label for="{{ bed_form.recommended_ward.id_for_label }}">{{ bed_form.recommended_ward.label }}</label>
-                                {% render_field bed_form.recommended_ward %}
-                                <div class="help-text">{{ bed_form.recommended_ward.help_text }}</div>
+                            <div id="intake-alert-discharge-invalid" class="p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden">
+                                <div class="flex items-center">
+                                    <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                    </svg>
+                                    <div>
+                                        {% translate "Discharges not allowed on " %}
+                                        <span id="intake-alert-discharge-invalid-day">day</span>.
+                                        <div id="intake-alert-discharge-with-next-day">
+                                            {% translate "Next possible discharge date is " %}
+                                            <span id="intake-alert-discharge-next-day">day</span>.
+                                        </div>
+                                        <div id="intake-alert-discharge-no-next-day">
+                                            {% translate "No next discharge date available in this ward." %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <button id="intake-discharge-move-btn" type="button" class="mt-2 w-full focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded px-4 py-3 dark:bg-red-600 dark:hover:bg-red-800 dark:focus:ring-red-900">
+                                    {% translate "Move discharge to " %}
+                                    <span id="intake-discharge-move-day">day</span>.
+                                </button>
                             </div>
-                            <div>
-                                <label class="flex items-center"
-                                       for="{{ bed_form.accompanied.id_for_label }}">
-                                    {% render_field bed_form.accompanied %} {{ bed_form.accompanied.label }}
-                                </label>
-                                <div class="help-text">{{ bed_form.accompanied.help_text }}</div>
+                            <div id="intake-alert-discharge-before-admission" class="p-2 text-base text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 hidden">
+                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                </svg>
+                                    {% translate "Discharges cannot be earlier than the admission." %}
                             </div>
                         </div>
-                        <button type="submit" class="btn mt-4">{% translate "Complete patient intake" %}</button>
+                        <div>
+                            <label class="flex items-center"
+                                    for="{{ bed_form.accompanied.id_for_label }}">
+                                {% render_field bed_form.accompanied %} {{ bed_form.accompanied.label }}
+                            </label>
+                            <div class="help-text">{{ bed_form.accompanied.help_text }}</div>
+                        </div>
                     </div>
+                    <button id="submit-button" type="submit" class="btn mt-4"
+                        data-message-emergency="{% translate "Complete emergency intake" %}"
+                        data-message-new-patient="{% translate "Complete intake for new patient" %}"
+                        data-message-existing-patient="{% translate "Complete intake for existing patient" %}">
+                        {% translate "Complete patient intake" %}
+                    </button>
+                </div>
                 {% endwith %}
             </div>
         </form>

@@ -52,7 +52,7 @@ class BedAssignment(AbstractBaseModel):
     )
     bed = models.ForeignKey(
         Bed,
-        related_name=("assignments"),
+        related_name=_("assignments"),
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
@@ -101,6 +101,21 @@ class BedAssignment(AbstractBaseModel):
 
         return (
             in_until_discharge_day if until_discharge == 1 else in_until_discharge_days
+        )
+
+    @cached_property
+    def days_til_discharge(self):
+        """
+        Helper property for accessing the information when a patient is discharged in days (int)
+
+        :return: the current bed assignment until discharge
+        :rtype: int
+        """
+        if self.duration is None or self.discharge_date is None:
+            return None
+
+        return int(
+            (self.discharge_date.date() - current_or_travelled_time().date()).days
         )
 
     @cached_property

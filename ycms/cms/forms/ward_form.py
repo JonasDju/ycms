@@ -1,6 +1,6 @@
 import logging
 
-from ..models import Ward
+from ..models import Ward, Floor
 from .custom_model_form import CustomModelForm
 
 logger = logging.getLogger(__name__)
@@ -18,4 +18,9 @@ class WardForm(CustomModelForm):
         """
 
         model = Ward
-        fields = ["ward_number", "floor", "name"]
+        fields = ["name", "nickname", "floor"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["floor"].queryset = Floor.objects.order_by("-order")
+        self.fields["floor"].label_from_instance = lambda obj: obj.name
