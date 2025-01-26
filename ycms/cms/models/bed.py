@@ -123,7 +123,29 @@ class Bed(AbstractBaseModel):
         """
         Helper property to get the human-readable representation of the bed's blocking type
         """
+        if self.bed_blocking_type is None:
+            return "No blocking"
         return dict(bed_blocking_types.CHOICES)[self.bed_blocking_type]
+    
+    @cached_property
+    def bed_blocking_reason_name(self):
+        """
+        Helper property to get the human-readable representation of the bed's blocking type
+        """
+        if self.bed_blocking_reason is None:
+            return ""
+        return self.bed_blocking_reason
+    
+    @cached_property
+    def bed_blocking_description(self):
+        """
+        Helper property to get the human-readable representation of the bed's blocking type
+        """
+        if self.bed_blocking_type is None:
+            return ""
+        if self.bed_blocking_reason is None or self.bed_blocking_reason == "":
+            return dict(bed_blocking_types.CHOICES)[self.bed_blocking_type] 
+        return self.bed_blocking_reason
 
     def __str__(self):
         """

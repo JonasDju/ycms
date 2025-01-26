@@ -14,7 +14,7 @@
     {% for bed in room.blocked_beds %}
         <div class="m-3">
             <i icon-name="bed-single" class="w-10 h-10 rounded-lg text-gray-200 opacity-50"></i>
-            <p>{{ bed.bed_blocking_type }}</p>
+            <p>{{ bed.bed_blocking_description }}</p>
         </div>
     {% endfor %}
 </div>
