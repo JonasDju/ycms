@@ -52,7 +52,7 @@ class BedAssignment(AbstractBaseModel):
     )
     bed = models.ForeignKey(
         Bed,
-        related_name=_("assignments"),
+        related_name=("assignments"),
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
