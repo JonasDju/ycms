@@ -962,19 +962,10 @@ msgstr "Zur Station"
 msgid "Medical details"
 msgstr "Medizinische Details"
 
-#: cms/templates/floor/add_floor.html
-msgid "Full Name"
-msgstr "Vollständiger Name"
+#: cms/templates/patients/hospital_stay_form.html
+msgid "Organizational details"
+msgstr "Organisatorische Details"
 
-#: cms/templates/floor/add_floor.html
-msgid "Short Name"
-msgstr "Abkürzung"
-
-#: cms/templates/floor/add_floor.html
-msgid "Order"
-msgstr ""
-
-#: cms/templates/floor/add_floor.html
 #: cms/templates/patients/hospital_stay_form.html
 msgid "Discharge now"
 msgstr "Jetzt entlassen"
@@ -1364,6 +1355,14 @@ msgstr "Patient*in hinzufügen"
 msgid "Add"
 msgstr "Hinzufügen"
 
+#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
+msgid "Male"
+msgstr "Männlich"
+
+#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
+msgid "Female"
+msgstr "Weiblich"
+
 #: cms/templates/patients/patients_list.html
 msgid "Diverse"
 msgstr "Divers"
@@ -1519,6 +1518,10 @@ msgid "No patients in this room..."
 msgstr "Im Zimmer sind aktuell keine Betten belegt..."
 
 #: cms/templates/ward/ward_info.html
+msgid "Total"
+msgstr "Gesamt"
+
+#: cms/templates/ward/ward_info.html
 msgid "Bed Availability"
 msgstr "Bettenverfügbarkeit"
 
@@ -1533,6 +1536,18 @@ msgstr "Manuell zuweisen"
 #: cms/templates/ward/ward_management.html
 msgid "YCMS at a glance"
 msgstr "YCMS im Überblick"
+
+: cms/templates/ward/ward_management.html
+msgid "Total Wards"
+msgstr "Gesamtzahl der Stationen"
+
+#: cms/templates/ward/ward_management.html
+msgid "Total Doctors"
+msgstr "Gesamtzahl der Ärzte"
+
+#: cms/templates/ward/ward_management.html
+msgid "Total Nurses"
+msgstr "Gesamtzahl der Krankenpflegenden"
 
 #: cms/templates/ward/ward_management.html
 msgid "Total Available Beds"

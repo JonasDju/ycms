@@ -216,7 +216,5 @@ urlpatterns = [
         ),
     ),
     path("settings/", user_settings_view.UserSettingsView.as_view(), name="settings"),
-    path("home/", HomeView.as_view(), name="home"),
-    path("floor/", FloorView.as_view(), name="floor"),
-    path("add_floor/", add_floor, name="add_floor")
+    path("home/", HomeView.as_view(), name="home")
 ]
