@@ -5,34 +5,33 @@
     .apexcharts-datalabel-label,
     .apexcharts-datalabel-value,
     .apexcharts-datalabel-total {
-        fill: #000000 !important; /* Schwarz für Lichtmodus */
+        fill: #000000 !important; 
     }
   
     .apexcharts-legend-text,
     .apexcharts-xaxis text,
     .apexcharts-yaxis text {
-        fill: #000000 !important; /* Achsenbeschriftungen und Legende schwarz */
+        fill: #000000 !important; 
     }
   
     .apexcharts-grid line {
-        stroke: #E0E0E0 !important; /* Grid-Linien hellgrau */
+        stroke: #E0E0E0 !important; 
     }
   
-    /* Dark Mode */
     :root.dark .apexcharts-datalabel-label,
     :root.dark .apexcharts-datalabel-value,
     :root.dark .apexcharts-datalabel-total {
-        fill: #FFFFFF !important; /* Weiß für Dunkelmodus */
+        fill: #FFFFFF !important; 
     }
   
     :root.dark .apexcharts-legend-text,
     :root.dark .apexcharts-xaxis text,
     :root.dark .apexcharts-yaxis text {
-        fill: #FFFFFF !important; /* Achsenbeschriftungen und Legende weiß */
+        fill: #FFFFFF !important; 
     }
   
     :root.dark .apexcharts-grid line {
-        stroke: #374151 !important; /* Grid-Linien dunkler */
+        stroke: #374151 !important; 
     }
   </style>
   
@@ -101,7 +100,6 @@
       },
   };
   
-  // Diagramm erstellen
   var chart = new ApexCharts(document.querySelector("#bar-chart"), barChartOptions);
   chart.render();
   </script>

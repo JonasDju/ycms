@@ -9,7 +9,7 @@
             <p class="text-base font-normal dark:text-white text-gray-900">{% translate "Count" %}</p>
         </div>
     </div>
-    <div id="area-chart" class="w-full h-64 mt-12"></div> <!-- Bereich für den Graphen -->
+    <div id="area-chart" class="w-full h-64 mt-12"></div> 
     <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
         <div class="flex justify-between items-center pt-14">
             <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom"
@@ -23,7 +23,7 @@
     </div>
 </div>
 
-<!-- ApexCharts-Bibliothek einbinden -->
+
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
@@ -34,8 +34,8 @@
     const data = {{ statistics|safe }};
     const options = {
         chart: {
-            height: '250px',  // Hier eine feste Höhe angeben
-            width: '100%',    // Breite auf 100% setzen
+            height: '250px',  
+            width: '100%',    
             type: 'area',
             fontFamily: 'Inter, sans-serif',
             dropShadow: {

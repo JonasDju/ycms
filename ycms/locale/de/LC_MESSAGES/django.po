@@ -1573,6 +1573,14 @@ msgstr "Details über Stationen"
 msgid "Number of Beds"
 msgstr "Betten"
 
+#: cms/templates/ward/ward_management.html
+msgid "Available"
+msgstr "Verfügbare Betten"
+
+#: cms/templates/ward/ward_management.html
+msgid "Occupied"
+msgstr "Belegten Betten"
+
 #: cms/templates/ward/ward_modal.html
 msgid "Are you sure you want to discharge this patient?"
 msgstr "Sind Sie sicher, dass Sie diesen Patienten entlassen möchten?"
