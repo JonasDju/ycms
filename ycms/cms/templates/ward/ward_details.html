@@ -161,6 +161,20 @@
             </small>
             <div class="grid grid-cols-3 md:grid-cols-3 gap-4 mb-12">
                 {% for bed in room.beds.all %}
+                    <!--Prefill -->
+                    <script>
+                        function prefillTextField(select, bedId) {
+                        var textInput = document.getElementById("bed_blocking_reason_" + bedId);
+                        var reasonContainer = document.getElementById("bed_blocking_reason_container_" + bedId);
+                        /*if (selectedValue === "NOBLOCKING") {
+                            reasonContainer.style.display = "none"; // Hide the container
+                        } else {
+                            reasonContainer.style.display = "block"; // Show the container
+                        }*/
+                        var selectedOptionText = select.options[select.selectedIndex].text;
+                        textInput.value = selectedOptionText;
+                        }
+                  </script>
                     <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
                         <div class="flex justify-center items-center mb-4">
                             <i icon-name="bed-single"
@@ -210,9 +224,7 @@
                                     </label>
                                 </div>
                                 <div class="edit-bed-prototype flex items-center gap-2">
-                                    <select name="bed_blocking_type" title="Bed Blocking Type" required="False">
-                                        <option value=None {% if bed.bed_blocking_type is None %}selected{% endif %}>{% translate "No blocking" %}</option>
-                                        
+                                    <select name="bed_blocking_type" title="Bed Blocking Type" required="False" id="bed_blocking_type" onchange="prefillTextField(this, {{ bed.id }})">
                                         {% for value, name in bed_blocking_types %}
                                         <option value="{{ value }}" {% if bed.bed_blocking_type == value %}selected{% endif %}>{{ name }}</option>
                                         {% endfor %}
@@ -229,7 +241,7 @@
                                     </label>
                                 </div>
                                 <div class="edit-bed-prototype flex items-center gap-2">
-                                    <input type="text" maxlength="256" name="bed_blocking_reason", value="{{ bed.bed_blocking_reason_name }}">
+                                    <input type="text" maxlength="256" name="bed_blocking_reason", id="bed_blocking_reason_{{ bed.id }}", value="{{ bed.bed_blocking_reason_name }}">
                                     </input>
                                 </div>
                                 <small class="text-gray-500 mt-1 block">
