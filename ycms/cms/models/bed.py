@@ -56,7 +56,7 @@ class Bed(AbstractBaseModel):
         :return: if the bed is available
         :rtype: bool
         """
-        if self.bed_blocking_type is not None:
+        if self.bed_blocking_type is not None and self.bed_blocking_type != bed_blocking_types.NOTBLOCKED:
             return False
         if self.assignments.exists():
             active_assignments = self.assignments.filter(
@@ -109,7 +109,7 @@ class Bed(AbstractBaseModel):
                 )
             )
             return not active_assignments.exists()
-        return self.bed_blocking_type is not None
+        return self.bed_blocking_type is not None and self.bed_blocking_type != bed_blocking_types.NOTBLOCKED
 
     @cached_property
     def bed_type_name(self):
@@ -124,7 +124,7 @@ class Bed(AbstractBaseModel):
         Helper property to get the human-readable representation of the bed's blocking type
         """
         if self.bed_blocking_type is None:
-            return "No blocking"
+            return "-------"
         return dict(bed_blocking_types.CHOICES)[self.bed_blocking_type]
     
     @cached_property
@@ -132,7 +132,7 @@ class Bed(AbstractBaseModel):
         """
         Helper property to get the human-readable representation of the bed's blocking type
         """
-        if self.bed_blocking_reason is None:
+        if self.bed_blocking_reason is None or self.bed_blocking_type == bed_blocking_types.NOTBLOCKED:
             return ""
         return self.bed_blocking_reason
     
@@ -141,7 +141,7 @@ class Bed(AbstractBaseModel):
         """
         Helper property to get the human-readable representation of the bed's blocking type
         """
-        if self.bed_blocking_type is None:
+        if self.bed_blocking_type is None or self.bed_blocking_type == bed_blocking_types.NOTBLOCKED:
             return ""
         if self.bed_blocking_reason is None or self.bed_blocking_reason == "":
             return dict(bed_blocking_types.CHOICES)[self.bed_blocking_type] 

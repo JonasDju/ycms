@@ -3,6 +3,7 @@ This module contains all string representations of all valid bed blocking types
 """
 from django.utils.translation import gettext_lazy as _
 
+NOTBLOCKED = "NOTBLOCKED"
 DOCTORSHORTAGE = "DOCTORSHORTAGE"
 DOCTORCAREGIVERSHORTAGE = "DOCTORCAREGIVERSHORTAGE"
 NOTOPERATED = "NOTOPERATED"
@@ -19,6 +20,7 @@ OSRR = "OSRR"
 FRANZISKUS = "FRANZISKUS"
 
 CHOICES = (
+    (NOTBLOCKED, _("-------")), 
     (DOCTORSHORTAGE, _("Shortage of doctors")),
     (DOCTORCAREGIVERSHORTAGE, _("Shortage of doctors and caregivers")),
     (NOTOPERATED, _("Currently not in operation")),

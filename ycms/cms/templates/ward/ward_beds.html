@@ -13,8 +13,14 @@
     <!--blocked beds-->
     {% for bed in room.blocked_beds %}
         <div class="m-3">
-            <i icon-name="bed-single" class="w-10 h-10 rounded-lg text-gray-200 opacity-50"></i>
-            <p>{{ bed.bed_blocking_description }}</p>
+            <i icon-name="bed-single" class="w-10 h-10 rounded-lg text-gray-500 opacity-50"></i>
+            <small class="text-gray-500 block" style="word-wrap: break-word; overflow-wrap: break-word">
+                <small>
+                    <small>
+                        {{ bed.bed_blocking_description }}
+                    </small>
+                </small>
+            </small>
         </div>
     {% endfor %}
 </div>
