@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-21 02:09+0100\n"
+"POT-Creation-Date: 2025-01-27 15:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -21,6 +21,10 @@ msgstr ""
 #: cms/apps.py
 msgid "CMS"
 msgstr "CMS"
+
+#: cms/constants/bed_blocking_types.py
+msgid "-------"
+msgstr "-------"
 
 #: cms/constants/bed_blocking_types.py
 msgid "Shortage of doctors"
@@ -302,6 +306,22 @@ msgstr "Betttyp"
 #: cms/models/bed.py
 msgid "specialty bed types may be available"
 msgstr "spezielle Betttypen stehen möglicherweise zur Verfügung"
+
+#: cms/models/bed.py
+msgid "bed blocking type"
+msgstr "Blockierart"
+
+#: cms/models/bed.py
+msgid "The bed might be blocked"
+msgstr "Dieses Bett ist derzeit blockiert"
+
+#: cms/models/bed.py
+msgid "bed blocking reason"
+msgstr "Blockiergrund"
+
+#: cms/models/bed.py cms/templates/ward/ward_details.html
+msgid "Reason why the bed is blocked"
+msgstr "Grund, weshalb das Bett blockiert ist"
 
 #: cms/models/bed.py cms/models/room.py
 msgid "room"
@@ -890,10 +910,6 @@ msgstr "Nein"
 msgid "Unassigned Patients"
 msgstr "Nicht zugewiesene Patienten"
 
-#: cms/templates/floor/floor_ward_card.html
-msgid "Blocked Beds"
-msgstr "Blockierte Betten"
-
 #: cms/templates/bed_assignment/bed_assignment_drawer.html
 #: cms/templates/patients/patient_import_drawer.html
 #: cms/templates/ward/ward_drawer.html cms/templates/ward/ward_edit_drawer.html
@@ -1009,6 +1025,10 @@ msgstr "Belegte Betten"
 #: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_info.html
 msgid "Available Beds"
 msgstr "Verfügbare Betten"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Blocked Beds"
+msgstr "Blockierte Betten"
 
 #: cms/templates/floor/floor_ward_card.html
 msgid "Go to Ward"
@@ -1411,10 +1431,6 @@ msgstr "Patient*in hinzufügen"
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: cms/templates/specializations_list.html cms/templates/ward/ward_details.html
-msgid "No blocking"
-msgstr "Nicht blockiert"
-
 #: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
 msgid "Male"
 msgstr "Männlich"
@@ -1555,7 +1571,8 @@ msgstr "Betten in diesem Zimmer"
 #: cms/templates/ward/ward_details.html
 msgid "Here can modify the existing bed type / create a new bed "
 msgstr ""
-"Hier können bestehende Bettentypen geändert, bestehende Betten blockiert und neue Betten erstellt werden "
+"Hier können bestehende Bettentypen geändert, bestehende Betten blockiert und "
+"neue Betten erstellt werden "
 
 #: cms/templates/ward/ward_details.html
 msgid "This bed is currently occupied"
@@ -1564,6 +1581,10 @@ msgstr "Dieses Bett ist derzeit belegt"
 #: cms/templates/ward/ward_details.html
 msgid "This bed is currently blocked"
 msgstr "Dieses Bett ist derzeit blockiert"
+
+#: cms/templates/ward/ward_details.html
+msgid "- "
+msgstr ""
 
 #: cms/templates/ward/ward_details.html
 msgid "Bed type"
@@ -1580,14 +1601,6 @@ msgstr "Das Bett wird blockiert, wenn ihm eine Blockierart zugewiesen wird"
 #: cms/templates/ward/ward_details.html
 msgid "Bed blocking reason"
 msgstr "Blockiergrund"
-
-#: cms/templates/ward/ward_details.html
-msgid "Reason why the bed is blocked"
-msgstr "Grund, weshalb das Bett blockiert ist"
-
-#: cms/templates/ward/ward_details.html
-msgid "- "
-msgstr ""
 
 #: cms/templates/ward/ward_drawer.html
 msgid "free beds"
@@ -1960,6 +1973,9 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "No blocking"
+#~ msgstr "Nicht blockiert"
 
 #~ msgid "An error occured while uploading the file."
 #~ msgstr "Beim Hochladen der Datei trat ein Fehler auf."
