@@ -92,7 +92,7 @@ class Command(BaseCommand):
                 for obj in objects
             ],
             "rooms": [
-                {"name": str(room.id), "capacity": room.total_beds}
+                {"name": str(room.id), "capacity": room.total_beds - room.total_blocked_beds}
                 for room in ward.rooms.all()
             ],
             "currentPatientAssignment": {
