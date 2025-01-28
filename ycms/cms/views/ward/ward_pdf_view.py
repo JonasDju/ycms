@@ -32,13 +32,19 @@ def generatePDF(request, ward_id):
                                    style=getSampleStyleSheet()['Normal'])
         admission_date = Paragraph(patient.current_admission_date,
                                    style=getSampleStyleSheet()['Normal'])
+
+        if not str(patient.current_diagnose) == "None":
+            dia = str(patient.current_diagnose).split()
+        else:
+            dia = [""]
+
         data.append([discharge_date,
                      admission_date,
                      patient.current_room_short,
                      first_name,
                      last_name,
                      patient.gender,
-                     Paragraph(str(patient.current_diagnose), style=getSampleStyleSheet()['Normal']),
+                     dia[-1],
                      ""])
 
     # Split data into datasets
