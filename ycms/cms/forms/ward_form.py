@@ -56,8 +56,5 @@ class WardForm(CustomModelForm):
         )
 
         # set initial value for weekday field based on backing value (int)
-        if self.instance and self.instance.allowed_discharge_days is not None:
-            selected_weekdays = [
-                (0b1 << day) for day, _ in enumerate(days_of_week.WEEKDAYS_LONG) if self.instance.allowed_discharge_days & (0b1 << day)
-            ]
-            self.initial["allowed_discharge_days"] = selected_weekdays
+        if self.instance:
+            self.initial["allowed_discharge_days"] = self.instance.allowed_discharge_days_binary
