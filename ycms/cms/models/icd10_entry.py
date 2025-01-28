@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from .timetravel_manager import TimetravelManager
 
 from .abstract_base_model import AbstractBaseModel
 
@@ -20,6 +21,7 @@ class ICD10Entry(AbstractBaseModel):
         verbose_name=_("description"),
         help_text=_("ICD-10-GM classification description"),
     )
+    objects = TimetravelManager()
 
     def __str__(self):
         """

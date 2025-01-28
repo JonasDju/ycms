@@ -12,3 +12,4 @@ from .ward_details import (
     BedCreateView, 
     CreateMultipleRoomsView
 )
+from .ward_pdf_view import generatePDF

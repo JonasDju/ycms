@@ -125,6 +125,7 @@ urlpatterns = [
         "ward/",
         include(
             [
+                path("generate_pdf/<int:ward_id>", ward.generatePDF, name="generate_pdf"),
                 path("", ward.WardView.as_view(), name="ward_detail_default"),
                 path("<int:pk>/", ward.WardView.as_view(), name="ward_detail"),
                 path(

@@ -88,7 +88,7 @@ limitations under the License.
                         <li>
                             {% url 'cms:protected:intake' as url %}
                             <a href="{{ url }}"
-                               class="{% if floor_count is not None and floor_count == 0 %}inactiveLink{% endif %} {% if request.path == url %}selected{% endif %}">
+                               class="{% if floor_count is not None and ward_count  == 0 %}inactiveLink{% endif %} {% if request.path == url %}selected{% endif %}">
                                 <i icon-name="user-plus"></i> {% translate "Patient Intake" %}
                             </a>
                         </li>
