@@ -8,32 +8,38 @@ from ...models import Patient, BedAssignment, MedicalRecord, ICD10Entry, Ward, B
 
 
 def generatePDF(request, ward_id):
+    """
+    An export method giving a pdf containing all patients assigned to a ward
+
+    :param ward_id: Ward id of the corresponding ward
+    :type ward_id: id
+
+    :return: A pdf containing all patients assigned to the corresponding ward
+    :rtype: pdf
+    """
     # Request ward
     ward = Ward.objects.get(id=ward_id)
 
-    # Request data
-    data = []
-    for assignment in BedAssignment.objects.filter(recommended_ward_id=ward_id).order_by('discharge_date'):
-        for medrec in MedicalRecord.objects.filter(id=assignment.medical_record_id):
-            for patient in Patient.objects.filter(id=medrec.patient_id):
-                for diagnose in ICD10Entry.objects.filter(id=medrec.diagnosis_code_id):
-                    for bed in Bed.objects.filter(id=assignment.bed_id):
-                        for room in Room.objects.filter(id=bed.room_id):
-                            discharge_date = Paragraph(assignment.discharge_date.strftime("%d.%m.%Y %H:%M"),
-                                                       style=getSampleStyleSheet()['Normal'])
-                            admission_date = Paragraph(assignment.admission_date.strftime("%d.%m.%Y %H:%M"),
-                                                       style=getSampleStyleSheet()['Normal'])
-                            first_name = Paragraph(patient.first_name, style=getSampleStyleSheet()['Normal'])
-                            last_name = Paragraph(patient.last_name, style=getSampleStyleSheet()['Normal'])
+    # Request patients
+    patients = ward.patients
 
-                            data.append([discharge_date,
-                                         admission_date,
-                                         room.room_number,
-                                         first_name,
-                                         last_name,
-                                         patient.gender,
-                                         diagnose.code,
-                                         ""])  # Paragraph in die Notizen-Spalte
+    # get patinets data
+    data = []
+    for patient in patients:
+        first_name = Paragraph(patient.first_name, style=getSampleStyleSheet()['Normal'])
+        last_name = Paragraph(patient.last_name, style=getSampleStyleSheet()['Normal'])
+        discharge_date = Paragraph(patient.current_discharge_date,
+                                   style=getSampleStyleSheet()['Normal'])
+        admission_date = Paragraph(patient.current_admission_date,
+                                   style=getSampleStyleSheet()['Normal'])
+        data.append([discharge_date,
+                     admission_date,
+                     patient.current_room_short,
+                     first_name,
+                     last_name,
+                     patient.gender,
+                     Paragraph(str(patient.current_diagnose), style=getSampleStyleSheet()['Normal']),
+                     ""])
 
     # Split data into datasets
     dataset = [data[i:i + 5] for i in range(0, len(data), 4)]
