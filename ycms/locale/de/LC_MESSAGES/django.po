@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-28 20:07+0100\n"
+"POT-Creation-Date: 2025-01-28 21:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -714,6 +714,10 @@ msgstr " Logo"
 msgid "General"
 msgstr "Allgemein"
 
+#: cms/templates/_base.html
+msgid "Home"
+msgstr "Start"
+
 #: cms/templates/_base.html cms/templates/ward/ward_management.html
 msgid "Ward Management"
 msgstr "Stationsverwaltung"
@@ -1076,6 +1080,72 @@ msgstr "Blockierte Betten"
 #: cms/templates/floor/floor_ward_card.html
 msgid "Go to Ward"
 msgstr "Zur Station"
+
+#: cms/templates/home/home.html
+msgid "Home View"
+msgstr "Start"
+
+#: cms/templates/home/home_beds.html
+msgid "Bed Infos"
+msgstr "Betteninformation"
+
+#: cms/templates/home/home_beds.html cms/templates/home/home_patient.html
+msgid "Count"
+msgstr "Anzahl"
+
+#: cms/templates/home/home_beds.html cms/templates/ward/ward_info.html
+msgid "Total"
+msgstr "Gesamt"
+
+#: cms/templates/home/home_beds.html cms/templates/ward/ward_management.html
+msgid "Available"
+msgstr "Verfügbare Betten"
+
+#: cms/templates/home/home_beds.html cms/templates/ward/ward_management.html
+msgid "Occupied"
+msgstr "Belegten Betten"
+
+#: cms/templates/home/home_gender.html
+msgid "Gender Distribution"
+msgstr "Geschlechterverteilung"
+
+#: cms/templates/home/home_gender.html
+#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
+msgid "Male"
+msgstr "Männlich"
+
+#: cms/templates/home/home_gender.html
+#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
+msgid "Female"
+msgstr "Weiblich"
+
+#: cms/templates/home/home_gender.html
+msgid "Divers"
+msgstr "Divers"
+
+#: cms/templates/home/home_gender.html cms/templates/home/home_patient.html
+msgid "Patients"
+msgstr "Patient*innen"
+
+#: cms/templates/home/home_infos.html
+msgid "Overview"
+msgstr "Überblick"
+
+#: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
+msgid "Total Wards"
+msgstr "Anzahl der Stationen"
+
+#: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
+msgid "Total Doctors"
+msgstr "Anzahl der Ärzte"
+
+#: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
+msgid "Total Nurses"
+msgstr "Anzahl der Krankenpflegenden"
+
+#: cms/templates/home/home_patient.html
+msgid "Last 7 days"
+msgstr "Letzte 7 Tage"
 
 #: cms/templates/patients/hospital_stay_form.html
 msgid "Medical details"
@@ -1440,14 +1510,6 @@ msgstr "Patient*in hinzufügen"
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
-msgid "Male"
-msgstr "Männlich"
-
-#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
-msgid "Female"
-msgstr "Weiblich"
-
 #: cms/templates/patients/patients_list.html
 msgid "Diverse"
 msgstr "Divers"
@@ -1574,18 +1636,19 @@ msgid "Edit existing rooms"
 msgstr "Bestehende Zimmer bearbeiten"
 
 #: cms/templates/ward/ward_details.html
-msgid "Here can change the room number"
-msgstr "Hier kann die Zimmernummer geändert werden"
+msgid "Here, the room number can be changed"
+msgstr "Hier kann die Raumnummer geändert werden"
 
 #: cms/templates/ward/ward_details.html
 msgid "Beds in this room"
 msgstr "Betten in diesem Zimmer"
 
 #: cms/templates/ward/ward_details.html
-msgid "Here can modify the existing bed type / create a new bed "
+msgid ""
+"Here, existing beds can be modified or blocked, and new beds can be created"
 msgstr ""
 "Hier können bestehende Bettentypen geändert, bestehende Betten blockiert und "
-"neue Betten erstellt werden "
+"neue Betten erstellt werden"
 
 #: cms/templates/ward/ward_details.html
 msgid "This bed is currently occupied"
@@ -1628,10 +1691,6 @@ msgid "No patients in this room..."
 msgstr "Im Zimmer sind aktuell keine Betten belegt..."
 
 #: cms/templates/ward/ward_info.html
-msgid "Total"
-msgstr "Gesamt"
-
-#: cms/templates/ward/ward_info.html
 msgid "Bed Availability"
 msgstr "Bettenverfügbarkeit"
 
@@ -1646,18 +1705,6 @@ msgstr "Manuell zuweisen"
 #: cms/templates/ward/ward_management.html
 msgid "YCMS at a glance"
 msgstr "YCMS im Überblick"
-
-#: cms/templates/ward/ward_management.html
-msgid "Total Wards"
-msgstr "Gesamtzahl der Stationen"
-
-#: cms/templates/ward/ward_management.html
-msgid "Total Doctors"
-msgstr "Gesamtzahl der Ärzte"
-
-#: cms/templates/ward/ward_management.html
-msgid "Total Nurses"
-msgstr "Gesamtzahl der Krankenpflegenden"
 
 #: cms/templates/ward/ward_management.html
 msgid "Total Available Beds"
@@ -1682,14 +1729,6 @@ msgstr "Details über Stationen"
 #: cms/templates/ward/ward_management.html
 msgid "Number of Beds"
 msgstr "Betten"
-
-#: cms/templates/ward/ward_management.html
-msgid "Available"
-msgstr "Verfügbare Betten"
-
-#: cms/templates/ward/ward_management.html
-msgid "Occupied"
-msgstr "Belegten Betten"
 
 #: cms/templates/ward/ward_modal.html
 msgid "Are you sure you want to discharge this patient?"
@@ -1931,8 +1970,7 @@ msgstr "Der Raum wurde erfolgreich bearbeitet"
 
 #: cms/views/ward/ward_details.py
 msgid "The room cannot be deleted because it contains occupied beds."
-msgstr ""
-"Das Zimmer kann nicht gelöscht werden, da es belegte Betten enthält."
+msgstr "Das Zimmer kann nicht gelöscht werden, da es belegte Betten enthält."
 
 #: cms/views/ward/ward_details.py
 msgid "The room has been deleted."
@@ -1989,6 +2027,19 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#, fuzzy
+#~| msgid "Ward Information"
+#~ msgid "Information"
+#~ msgstr "Stationsinformationen"
+
+#~ msgid "Here can change the room number"
+#~ msgstr "Hier kann die Zimmernummer geändert werden"
+
+#~ msgid "Here can modify the existing bed type / create a new bed "
+#~ msgstr ""
+#~ "Hier können bestehende Bettentypen geändert, bestehende Betten blockiert "
+#~ "und neue Betten erstellt werden "
 
 #~ msgid "No blocking"
 #~ msgstr "Nicht blockiert"
@@ -2070,9 +2121,6 @@ msgstr "Englisch"
 
 #~ msgid "Create a new bed assignment"
 #~ msgstr "Erstellen Sie eine neue Bettenzuweisung"
-
-#~ msgid "Home"
-#~ msgstr "Start"
 
 #~ msgid "is available"
 #~ msgstr "ist verfügbar"
