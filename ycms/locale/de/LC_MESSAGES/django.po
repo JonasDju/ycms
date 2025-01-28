@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-25 22:52+0100\n"
+"POT-Creation-Date: 2025-01-28 20:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -176,7 +176,8 @@ msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
 
 #: cms/forms/intake_bed_assignment_form.py
 msgid "Discharge date is on an invalid weekday in this ward."
-msgstr "Das Entlassungsdatum auf dieser Station ist an einem unzulässigen Wochentag"
+msgstr ""
+"Das Entlassungsdatum auf dieser Station ist an einem unzulässigen Wochentag"
 
 #: cms/forms/intake_bed_assignment_form.py
 msgid ""
@@ -845,6 +846,10 @@ msgid "Close menu"
 msgstr "Menü schließen"
 
 #: cms/templates/bed_assignment/discharge_info.html
+msgid "Patient is assigned a bed in ward {}."
+msgstr "Patient*in liegt auf Station {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
 msgid "No days are currently configured for discharge in ward {}."
 msgstr ""
 "Aktuell sind auf Station {} keine Tage als zulässig zur Entlassung "
@@ -1451,6 +1456,10 @@ msgstr "Kurzer Stationsname"
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
 msgid "Floor"
 msgstr "Stockwerk"
+
+#: cms/templates/ward/ward_card.html
+msgid "Allowed discharge days"
+msgstr "Zulässige Entlassungstage"
 
 #: cms/templates/ward/ward_card.html
 msgid "Add rooms to this ward"

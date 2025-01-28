@@ -61,10 +61,17 @@ window.addEventListener("load", () => {
         return form.querySelector("#discharge-move-btn") as HTMLButtonElement;
     }
 
-    // Handles the response to the fetch request for the ward's discharge policy
-    // Updates the info text and stores the policy mask and localized weekday names
+    /**
+     * Handles the response to the fetch request for the ward's discharge policy.
+     * Updates the info text and stores the policy mask and localized weekday names.
+     * 
+     * If the stay already has an associated bed assigned, informs about this. 
+     * @param form The form for which to handle the fetch response.
+     * @param json The fetch response data.
+     * @param hasBedAssignment Whether the stay has an associated bed assignment.
+     */
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-    function setWardDischargeInfo(form: HTMLFormElement, json: any): void {
+    function setWardDischargeInfo(form: HTMLFormElement, json: any, hasBedAssignment: boolean = false): void {
         // assumes patient intake view where ward info is fetched 
         const wardDischargeInfoDiv = getFormWardDischargeInfo(form);
         const infoTextSpan = wardDischargeInfoDiv.querySelector("span") as HTMLSpanElement;
@@ -87,22 +94,36 @@ window.addEventListener("load", () => {
         const numAllowedDays = days.length;
         const wardName = json.name;
 
+        let status: string = "";
+        
+        // prepend info that this info is for a fixed ward (where stay has an associated bed)
+        if (hasBedAssignment) {
+            status += formatString(
+                infoTextSpan.dataset.fixedWard || "'Existing Bedassignment' status missing",
+                [wardName]
+            );
+            status += "<br>";
+        }
+
+        // get information string on available days 
         if (numAllowedDays === 0) {
-            infoTextSpan.textContent = formatString(
+            status += formatString(
                 infoTextSpan.dataset.statusNone || "'No days' status missing.",
                 [wardName]
             );
+            // show red box highlighting that there are no available discharge days
             wardDischargeInfoDiv.classList.remove(...wardDischargeInfoDiv.dataset.styleValid?.split(" ") || "")
             wardDischargeInfoDiv.classList.add(...wardDischargeInfoDiv.dataset.styleInvalid?.split(" ") || "")
         } else {
             const lastDay = days.pop();
+
             if (days.length > 0) {
-                infoTextSpan.textContent = formatString(
+                status += formatString(
                     infoTextSpan.dataset.statusMulti || "'Multi day' status missing",
                     [wardName, days.join(", "), lastDay]
                 );
             } else {
-                infoTextSpan.textContent = formatString(
+                status += formatString(
                     infoTextSpan.dataset.statusSingle || "'Single day' status missing",
                     [wardName, lastDay]
                 );
@@ -111,6 +132,9 @@ window.addEventListener("load", () => {
             wardDischargeInfoDiv.classList.remove(...wardDischargeInfoDiv.dataset.styleInvalid?.split(" ") || "")
             wardDischargeInfoDiv.classList.add(...wardDischargeInfoDiv.dataset.styleValid?.split(" ") || "")
         }
+
+        // format as HTML to keep linebreak element
+        infoTextSpan.innerHTML = status;
     };
 
     function isDischargeAfterAdmission(form: HTMLFormElement): boolean {
@@ -331,7 +355,7 @@ window.addEventListener("load", () => {
                 .then((response) => response.json())
                 .then((json) => {
                     // update UI only once (and fetch weekday translations)
-                    setWardDischargeInfo(form, json);
+                    setWardDischargeInfo(form, json, true);
                     validateDischargePolicy(form);
                 });
             return;
@@ -342,6 +366,7 @@ window.addEventListener("load", () => {
                 // hide info text field
                 wardDischargeInfo.classList.add("hidden");
                 delete wardDischargeInfo.dataset.mask;
+                delete wardDischargeInfo.dataset.wardName;
 
                 validateDischargePolicy(form);
             } else {
@@ -489,10 +514,8 @@ window.addEventListener("load", () => {
     wardDischargeInfos.forEach(div => {
         const form = getForm(div);
 
-        // move ward's discharge info below recommended ward if that is used to update the validation
-        const prevElement = div.dataset.fixedWard ?
-            getFormDischargeInput(form) :
-            form.querySelector("#id_recommended_ward") as HTMLSelectElement;
+        // move ward's discharge info below recommended ward input
+        const prevElement = form.querySelector("#id_recommended_ward") as HTMLSelectElement;
         
         const newParent = prevElement.parentNode?.parentNode;
 
