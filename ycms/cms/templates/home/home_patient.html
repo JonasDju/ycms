@@ -1,0 +1,106 @@
+
+{% load i18n %}
+{% load static %} 
+
+<div class="h-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+    <div class="flex justify-between">
+        <div>
+            <h5 class="leading-none text-xl font-bold text-gray-900 dark:text-white pb-2">{% translate "Patients" %}</h5>
+            <p class="text-base font-normal dark:text-white text-gray-900">{% translate "Count" %}</p>
+        </div>
+    </div>
+    <div id="area-chart" class="w-full h-64 mt-12"></div> 
+    <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between">
+        <div class="flex justify-between items-center pt-14">
+            <button id="dropdownDefaultButton" data-dropdown-toggle="lastDaysdropdown" data-dropdown-placement="bottom"
+                class="text-sm font-medium dark:text-white text-gray-900 hover:text-gray-900 text-center inline-flex items-center dark:hover:text-white"
+                type="button">
+                {% translate "Last 7 days" %}
+            </button>
+            <div id="lastDaysdropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+<script>
+    const translations = {
+        patients: "{% translate 'Patients' %}",
+    };
+
+    const data = {{ statistics|safe }};
+    const options = {
+        chart: {
+            height: '250px',  
+            width: '100%',    
+            type: 'area',
+            fontFamily: 'Inter, sans-serif',
+            dropShadow: {
+                enabled: false
+            },
+            toolbar: {
+                show: false
+            }
+        },
+        tooltip: {
+            enabled: true,
+            x: {
+                show: false
+            }
+        },
+        fill: {
+            type: 'gradient',
+            gradient: {
+                opacityFrom: 0.55,
+                opacityTo: 0,
+                shade: '#1C64F2',
+                gradientToColors: ['#1C64F2']
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            width: 6
+        },
+        grid: {
+            show: false,
+            strokeDashArray: 4,
+            padding: {
+                left: 2,
+                right: 2,
+                top: 0
+            }
+        },
+        series: [
+            {
+                name: translations.patients,
+                data: data.map(item => item.patients),
+                color: '#1A56DB'
+            }
+        ],
+        xaxis: {
+            categories: data.map(item => item.category),
+            labels: {
+                show: false
+            },
+            axisBorder: {
+                show: false
+            },
+            axisTicks: {
+                show: false
+            }
+        },
+        yaxis: {
+            show: false
+        }
+    };
+
+    if (document.getElementById('area-chart') && typeof ApexCharts !== 'undefined') {
+        const chart = new ApexCharts(document.getElementById('area-chart'), options);
+        chart.render();
+    }
+</script>

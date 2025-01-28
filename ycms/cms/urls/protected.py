@@ -20,6 +20,7 @@ from ..views.utility.autocomplete import (
     fetch_patient,
 )
 from ..views.utility.patient_intake import fetch_ward_allowed_discharge_days
+from ..views.home.home_view import HomeView
 
 urlpatterns = [
     path("", index.UserBasedRedirectView.as_view(), name="index"),
@@ -215,4 +216,5 @@ urlpatterns = [
         ),
     ),
     path("settings/", user_settings_view.UserSettingsView.as_view(), name="settings"),
+    path("home/", HomeView.as_view(), name="home")
 ]

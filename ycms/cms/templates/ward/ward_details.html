@@ -140,7 +140,7 @@
                            value="{{ room.room_number }}"/>
                 </label>
                 <small class="text-gray-500 mt-1 block">
-                    {% translate "Here can change the room number" %}
+                    {% translate "Here, the room number can be changed" %}
                 </small>
             </div>
             <div class="mt-4 flex justify-end gap-4">
@@ -157,7 +157,7 @@
                 <h1 class="heading">{% translate "Beds in this room" %}</h1>
             </div>
             <small class="text-gray-500 mt-1 block">
-                {% translate "Here can modify the existing bed type / create a new bed " %}
+                {% translate "Here, existing beds can be modified or blocked, and new beds can be created" %}
             </small>
             <div class="grid grid-cols-3 md:grid-cols-3 gap-4 mb-12">
                 {% for bed in room.beds.all %}

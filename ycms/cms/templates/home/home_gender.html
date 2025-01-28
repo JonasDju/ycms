@@ -1,0 +1,183 @@
+
+{% load i18n %}
+{% load static %} 
+<style>
+  .apexcharts-datalabel-label,
+  .apexcharts-datalabel-value,
+  .apexcharts-datalabel-total {
+      fill: #000000 !important; 
+  }
+  
+  .apexcharts-legend-text {
+      color: #000000 !important; 
+  }
+  
+ 
+  :root.dark .apexcharts-datalabel-label,
+  :root.dark .apexcharts-datalabel-value,
+  :root.dark .apexcharts-datalabel-total {
+      fill: #FFFFFF !important; 
+  }
+  
+  :root.dark .apexcharts-legend-text {
+      color: #FFFFFF !important;
+  } 
+</style>
+<div class="w-full h-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+  
+    <div class="flex justify-between mb-3">
+        <div class="flex justify-center items-center">
+            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white pe-1"> {% translate "Gender Distribution" %}</h5>
+          </div>
+        <div>
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+    </svg>
+          </button>
+        </div>
+    </div>
+  
+    <div>
+      <div class="flex" id="devices">
+          <!-- Male Checkbox -->
+          <div class="flex items-center me-4">
+              <input id="male" type="checkbox" value="male" class="w-4 h-4 text-blue-600 bg-blue-100 border-blue-600 rounded focus:ring-blue-500 dark:focus:ring-blue-600 focus:checked:bg-blue-500 checked:bg-blue-500 dark:ring-offset-gray-800 focus:ring-2 dark:border-blue-600" checked>
+              <label for="male" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">{% translate "Male" %}</label>
+          </div>
+  
+          <!-- Female Checkbox -->
+          <div class="flex items-center me-4">
+              <input id="female" type="checkbox" value="female" class="w-4 h-4 text-pink-600 bg-pink-100 border-pink-600 rounded focus:ring-pink-500 focus:checked:bg-pink-500 checked:bg-pink-500 dark:checked:bg-pink-500 hover:checked:bg-pink-500 hover:checked:bg-pink-500 dark:focus:ring-pink-600 dark:ring-offset-gray-800 focus:ring-2 dark:border-pink-600" checked>
+              <label for="female" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">{% translate "Female" %}</label>
+          </div>
+  
+          <!-- Divers Checkbox -->
+          <div class="flex items-center me-4">
+              <input id="divers" type="checkbox" value="divers" class="w-4 h-4 text-green-600 bg-green-100 border-green-600 rounded focus:ring-green-500 focus:checked:bg-green-500 checked:bg-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:checked:bg-green-500 dark:border-green-600" checked>
+              <label for="divers" class="ms-2 text-xs font-medium text-gray-900 dark:text-gray-300">{% translate "Divers" %}</label>
+          </div>
+      </div>
+  </div>  
+  
+    <!-- Donut Chart -->
+    <div class="py-6" id="donut-chart"></div>
+  </div>
+<script>
+const patientGenders = {
+  male_patients: {{ total_patient_genders.male_patients }},
+  female_patients: {{ total_patient_genders.female_patients }},
+  divers_patients: {{ total_patient_genders.divers_patients }}
+};
+const getChartOptions = () => {
+  return {
+    series: [patientGenders.male_patients, patientGenders.female_patients, patientGenders.divers_patients],
+    colors: ["#69A9FF", "#FFB3D9", "#AEE6C7"],
+    chart: {
+      height: 320,
+      width: "100%",
+      type: "donut",
+    },
+    stroke: {
+      colors: ["#3478CC", "#CC6699", "#76C2A3"], 
+      width: 2, 
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          labels: {
+            show: true,
+            name: {
+              show: true,
+              fontFamily: "Inter, sans-serif",
+              offsetY: 20,
+            },
+            total: {
+              showAlways: true,
+              show: true,
+              label: "{% translate 'Patients' %}",
+              fontFamily: "Inter, sans-serif",
+              formatter: function (w) {
+                const sum = w.globals.seriesTotals.reduce((a, b) => {
+                  return a + b
+                }, 0)
+                return sum 
+              },
+            },
+            value: {
+              show: true,
+              fontFamily: "Inter, sans-serif",
+              offsetY: -20,
+              formatter: function (value) {
+                return value
+              },
+            },
+          },
+          size: "80%",
+        },
+      },
+    },
+    grid: {
+      padding: {
+        top: -2,
+      },
+    },
+    labels: [
+      "{% translate 'Male' %}",   
+      "{% translate 'Female' %}", 
+      "{% translate 'Divers' %}"  
+    ],
+    dataLabels: {
+      enabled: false,
+    },
+    color: "grey",
+    legend: {
+      position: "bottom",
+      fontFamily: "Inter, sans-serif",
+    },
+    yaxis: {
+      labels: {
+        formatter: function (value) {
+          return value
+        },
+      },
+    },
+    xaxis: {
+      labels: {
+        formatter: function (value) {
+          return value
+        },
+      },
+      axisTicks: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      },
+    },
+  }
+}
+
+if (document.getElementById("donut-chart") && typeof ApexCharts !== 'undefined') {
+  const chart = new ApexCharts(document.getElementById("donut-chart"), getChartOptions());
+  chart.render();
+
+  const checkboxes = document.querySelectorAll('#devices input[type="checkbox"]');
+
+  function handleCheckboxChange(event, chart) {
+    const checkedCheckboxes = Array.from(checkboxes)
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.value);
+
+    let updatedSeries = [0, 0, 0];
+
+    if (checkedCheckboxes.includes('male')) updatedSeries[0] = patientGenders.male_patients;
+    if (checkedCheckboxes.includes('female')) updatedSeries[1] = patientGenders.female_patients;
+    if (checkedCheckboxes.includes('divers')) updatedSeries[2] = patientGenders.divers_patients;
+
+    chart.updateSeries(updatedSeries);
+  }
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', (event) => handleCheckboxChange(event, chart));
+  });
+}
+</script>  
