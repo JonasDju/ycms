@@ -48,7 +48,7 @@ For Linux and Mac users, the following packages are required before installing t
 * `python3-venv` (only on Debian-based distributions)
 
 If you want to use the "suggest assignment" functionality, additional steps are needed before installing YCMS:
-- clone [TabeaBrandt/patient-to-room_assignment](https://github.com/TabeaBrandt/patient-to-room_assignment/tree/v1) in a folder where you will later clone this repository
+- clone [TabeaBrandt/patient-to-room_assignment](https://github.com/TabeaBrandt/patient-to-room_assignment/tree/main) in a folder where you will later clone this repository
 - inside `patient-to-room_assignment`, do
     - `python -m venv .venv`
     - `. .venv/bin/activate`

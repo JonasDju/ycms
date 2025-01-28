@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.utils.translation import gettext as _
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Table, TableStyle, Paragraph
 from reportlab.lib import colors
@@ -23,7 +24,7 @@ def generatePDF(request, ward_id):
     # Request patients
     patients = ward.patients
 
-    # get patinets data
+    # get patient data
     data = []
     for patient in patients:
         first_name = Paragraph(patient.first_name, style=getSampleStyleSheet()['Normal'])
@@ -48,7 +49,7 @@ def generatePDF(request, ward_id):
                      ""])
 
     # Split data into datasets
-    dataset = [data[i:i + 5] for i in range(0, len(data), 4)]
+    dataset = [data[i:i + 5] for i in range(0, len(data), 5)]
 
     # Set Table Header
     header = ["Entlassung", "Aufnahme", "Raum", "Vorname", "Nachname", "Sex", "Diagnose", "Notizen"]
