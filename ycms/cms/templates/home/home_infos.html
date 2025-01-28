@@ -1,0 +1,29 @@
+
+{% load i18n %}
+{% load static %} 
+<div class="h-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-6 md:p-8">
+    <div class="flex justify-between">
+        <div class="flex items-center space-x-2 mb-6">
+            <span class="material-icons-outlined text-gray-800 cursor-pointer">info</span>
+            <h5 class="leading-none text-xl font-bold text-gray-900 dark:text-white"> {% translate "Overview" %}</h5>
+        </div>
+    </div>
+
+    <!-- Infos List -->
+    <div class="space-y-6">
+        <div class="flex justify-between border-t border-b pb-3 pt-3">
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300"> {% translate "Total Wards" %}:</p>
+            <p class="text-xl font-bold text-gray-900 dark:text-white">{{ infos.wards_count }}</p>
+        </div>
+        <div class="flex justify-between border-b pb-3">
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300"> {% translate "Total Doctors" %}:</p>
+            <p class="text-xl font-bold text-gray-900 dark:text-white">{{ infos.doctors_count }}</p>
+        </div>
+        <div class="flex justify-between border-b pb-3">
+            <p class="text-lg font-medium text-gray-700 dark:text-gray-300"> {% translate "Total Nurses" %}:</p>
+            <p class="text-xl font-bold text-gray-900 dark:text-white">{{ infos.nurses_count }}</p>
+        </div>
+    </div>
+</div>
+
+

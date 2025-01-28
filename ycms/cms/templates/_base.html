@@ -32,7 +32,7 @@ limitations under the License.
                 </button>
             </div>
             <div class="flex flex-col justify-between min-h-full">
-                <a href="{% url 'cms:protected:index' %}"
+                <a href="{% url 'cms:protected:home' %}"
                    class="block border-b dark:border-gray-600 flex items-center text-gray-600 dark:text-white">
                     {% if is_dark_theme %}
                         <img src="{% static 'images/logo-bed.svg' %}"
@@ -51,6 +51,13 @@ limitations under the License.
                 </a>
                 <ul>
                     <span class="block mt-2 px-5 text-gray-500 tracking-wide dark:text-gray-300">{% translate "General" %}</span>
+                    <li>
+                        {% url 'cms:protected:home' as url %}
+                        <a href="{{ url }}"
+                            class="{% if request.path == url %}selected{% endif %}">
+                            <i class="fa fa-chart-bar"></i> &nbsp;{% translate "Home" %}
+                        </a>
+                    </li>
                     {% if perms.cms.add_ward %}
                         <li>
                             {% url 'cms:protected:ward_management' as url %}
