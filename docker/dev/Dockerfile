@@ -5,7 +5,7 @@ ENV YCMS_PORT=8086
 ENV YCMS_DEBUG=1
 
 # Patient to room assignement algorithm
-ARG USER=JonasDju
+ARG USER=TabeaBrandt
 ARG REPO=patient-to-room_assignment
 ARG BRANCH=main
 

@@ -117,6 +117,15 @@ class Patient(AbstractBaseModel):
         return self.current_stay.bed if self.current_stay else None
 
     @cached_property
+    def current_diagnose(self):
+        """
+        Helper property for accessing the patient's current bed
+        :return: the current diagnose code
+        :rtype: str
+        """
+        return self.current_stay.medical_record.diagnosis_code if self.current_stay else None
+
+    @cached_property
     def current_room(self):
         """
         Helper property for accessing the patient's current room
@@ -125,6 +134,15 @@ class Patient(AbstractBaseModel):
         :rtype: ~ycms.cms.models.room.Room
         """
         return self.current_bed.room if self.current_bed else None
+
+    @cached_property
+    def current_room_short(self):
+        """
+        Helper property for accessing the patient's current room
+        :return: the current room_number in short
+        :rtype: str
+        """
+        return self.current_bed.room.room_number if self.current_bed else None
 
     @cached_property
     def current_ward(self):

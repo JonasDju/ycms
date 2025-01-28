@@ -32,6 +32,7 @@ dependencies = [
     "psycopg[binary]",
     "python-magic",
     "pandas",
+    "reportlab"
 ]
 keywords = ["..."]
 license = { text = "Apache2 2.0 License" }
