@@ -82,10 +82,16 @@ After implementing some new features, you should add corresponding test cases. T
 To run existing tests, open a new terminal and execute `./tools/test.sh`. If you wish to only execute tests affected by recent changes, append the `--changed` flag to the former command.
 
 ## Patient-to-Room Assignment Algorithm
-If you want to run the patient-to-room assignment (PRA) algorithm, you need to download a gurobi license file (`gurobi.lic`) 
-and place it inside the `gurobi` folder. An academic or commercial license is needed.
-See this [article](https://support.gurobi.com/hc/en-us/articles/13232844297489-How-do-I-set-up-a-Web-License-Service-WLS-license)
-on how to create and download the license file.
+If you want to run the patient-to-room assignment (PRA) algorithm, you need to download a gurobi [WLS license](https://support.gurobi.com/hc/en-us/articles/13232844297489-How-do-I-set-up-a-Web-License-Service-WLS-license) file (`gurobi.lic`) 
+and place it inside the `gurobi` folder. An academic or commercial WLS license is needed.
+See this [article](https://www.gurobi.com/features/academic-wls-license/) on how to create and download the license file. Please note, that other license types (like the Academic Named-User License) do not work, as they cannot be used inside containers.
+
+You can check if you have the correct type of license file by opening it in a text editor. The content of your `gurobi.lic` file should look like this:
+```
+WLSACCESSID=203dec48-e3f8-46ac-0184-92d7d6ded944
+WLSSECRET=a080cce8-4e01-4e36-955e-61592c5630db
+LICENSEID=12127
+```
 
 
 ## Using the WebUI
