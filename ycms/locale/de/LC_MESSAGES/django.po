@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-26 10:22+0100\n"
+"POT-Creation-Date: 2025-01-27 15:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -21,6 +21,66 @@ msgstr ""
 #: cms/apps.py
 msgid "CMS"
 msgstr "CMS"
+
+#: cms/constants/bed_blocking_types.py
+msgid "-------"
+msgstr "-------"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Shortage of doctors"
+msgstr "Ärztemangel"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Shortage of doctors and caregivers"
+msgstr "Ärzte- und Pflegemangel"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Currently not in operation"
+msgstr "Aktuell nicht betrieben"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Infectious"
+msgstr "Infektiös"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Construction/repair"
+msgstr "Baumaßnahme/Reparatur"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Reserved for patient"
+msgstr "Für Patienten reserviert"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Med. reason/incompliance"
+msgstr "Med. Grund/Incompliance"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Palliative"
+msgstr "Palliativ"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Shortage of caregivers"
+msgstr "Pflegemangel"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Optional service"
+msgstr "Wahlleistung"
+
+#: cms/constants/bed_blocking_types.py
+msgid "OS SR large"
+msgstr "WL EZ groß"
+
+#: cms/constants/bed_blocking_types.py
+msgid "OS SR small"
+msgstr "WL EZ klein"
+
+#: cms/constants/bed_blocking_types.py
+msgid "OS room rate"
+msgstr "WL Room Rate"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Franziskus"
+msgstr "Franziskus"
 
 #: cms/constants/bed_types.py
 msgid "normal"
@@ -246,6 +306,22 @@ msgstr "Betttyp"
 #: cms/models/bed.py
 msgid "specialty bed types may be available"
 msgstr "spezielle Betttypen stehen möglicherweise zur Verfügung"
+
+#: cms/models/bed.py
+msgid "bed blocking type"
+msgstr "Blockierart"
+
+#: cms/models/bed.py
+msgid "The bed might be blocked"
+msgstr "Dieses Bett ist derzeit blockiert"
+
+#: cms/models/bed.py
+msgid "bed blocking reason"
+msgstr "Blockiergrund"
+
+#: cms/models/bed.py cms/templates/ward/ward_details.html
+msgid "Reason why the bed is blocked"
+msgstr "Grund, weshalb das Bett blockiert ist"
 
 #: cms/models/bed.py cms/models/room.py
 msgid "room"
@@ -955,6 +1031,10 @@ msgid "Available Beds"
 msgstr "Verfügbare Betten"
 
 #: cms/templates/floor/floor_ward_card.html
+msgid "Blocked Beds"
+msgstr "Blockierte Betten"
+
+#: cms/templates/floor/floor_ward_card.html
 msgid "Go to Ward"
 msgstr "Zur Station"
 
@@ -1495,15 +1575,36 @@ msgstr "Betten in diesem Zimmer"
 #: cms/templates/ward/ward_details.html
 msgid "Here can modify the existing bed type / create a new bed "
 msgstr ""
-"Hier kann der bestehende Bettentyp geändert / ein neues Bett erstellt werden "
+"Hier können bestehende Bettentypen geändert, bestehende Betten blockiert und "
+"neue Betten erstellt werden "
 
 #: cms/templates/ward/ward_details.html
 msgid "This bed is currently occupied"
 msgstr "Dieses Bett ist derzeit belegt"
 
 #: cms/templates/ward/ward_details.html
+msgid "This bed is currently blocked"
+msgstr "Dieses Bett ist derzeit blockiert"
+
+#: cms/templates/ward/ward_details.html
 msgid "- "
 msgstr ""
+
+#: cms/templates/ward/ward_details.html
+msgid "Bed type"
+msgstr "Bettart"
+
+#: cms/templates/ward/ward_details.html
+msgid "Bed blocking type"
+msgstr "Blockierart"
+
+#: cms/templates/ward/ward_details.html
+msgid "The bed gets blocked if a blocking type is assigned to it"
+msgstr "Das Bett wird blockiert, wenn ihm eine Blockierart zugewiesen wird"
+
+#: cms/templates/ward/ward_details.html
+msgid "Bed blocking reason"
+msgstr "Blockiergrund"
 
 #: cms/templates/ward/ward_drawer.html
 msgid "free beds"
@@ -1537,7 +1638,7 @@ msgstr "Manuell zuweisen"
 msgid "YCMS at a glance"
 msgstr "YCMS im Überblick"
 
-: cms/templates/ward/ward_management.html
+#: cms/templates/ward/ward_management.html
 msgid "Total Wards"
 msgstr "Gesamtzahl der Stationen"
 
@@ -1814,12 +1915,12 @@ msgstr "Diese Raumnummer existiert bereits auf dieser Station"
 
 #: cms/views/ward/ward_details.py
 msgid "Room updated successfully"
-msgstr "Der Raum wurde erfolgreich bearbeitet!"
+msgstr "Der Raum wurde erfolgreich bearbeitet"
 
 #: cms/views/ward/ward_details.py
-msgid "The room cannot be deleted because it contains unavailable beds."
+msgid "The room cannot be deleted because it contains occupied beds."
 msgstr ""
-"Das Zimmer kann nicht gelöscht werden, da es nicht verfügbare Betten enthält."
+"Das Zimmer kann nicht gelöscht werden, da es belegte Betten enthält."
 
 #: cms/views/ward/ward_details.py
 msgid "The room has been deleted."
@@ -1830,12 +1931,12 @@ msgid "Bed updated successfully"
 msgstr "Das Bett wurde erfolgreich aktualisiert"
 
 #: cms/views/ward/ward_details.py
-msgid "The bed cannot be deleted because it is not available."
-msgstr "Das Bett kann nicht gelöscht werden, da es nicht verfügbar ist."
+msgid "The bed cannot be deleted because it is occupied."
+msgstr "Das Bett kann nicht gelöscht werden, da es belegt ist."
 
 #: cms/views/ward/ward_details.py
 msgid "The bed has beed deleted."
-msgstr "Das Bett wurde gelöscht.."
+msgstr "Das Bett wurde gelöscht."
 
 #: cms/views/ward/ward_details.py
 msgid "Bed created successfully"
@@ -1876,6 +1977,9 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#~ msgid "No blocking"
+#~ msgstr "Nicht blockiert"
 
 #~ msgid "An error occured while uploading the file."
 #~ msgstr "Beim Hochladen der Datei trat ein Fehler auf."

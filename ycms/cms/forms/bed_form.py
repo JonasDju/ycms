@@ -17,4 +17,4 @@ class BedForm(CustomModelForm):
         """
 
         model = Bed
-        fields = ["bed_type"]
+        fields = ["bed_type", "bed_blocking_type", "bed_blocking_reason"]
