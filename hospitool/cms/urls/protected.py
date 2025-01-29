@@ -144,6 +144,11 @@ urlpatterns = [
                     name="ward_details",
                 ),
                 path(
+                    "create/",
+                     floor.WardCreateView.as_view(),
+                    name="create_ward"
+                ),
+                path(
                     "room/create-multiple/<int:pk>/",
                     ward.CreateMultipleRoomsView.as_view(),
                     name="create_multiple_rooms",
