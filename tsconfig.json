@@ -30,7 +30,7 @@
     /* Enable strict null checks. */
     "strictNullChecks": true,
     /* List of folders to include type definitions from. */
-    "typeRoots": ["ycms/static/src/types", "node_modules/@types"],
+    "typeRoots": ["hospitool/static/src/types", "node_modules/@types"],
     /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     "esModuleInterop": true,
     /* Skip type checking of declaration files. */

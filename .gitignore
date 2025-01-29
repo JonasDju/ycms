@@ -153,7 +153,7 @@ dmypy.json
 .idea/
 
 # Media files
-ycms/media/*/*
+hospitool/media/*/*
 
 # Docker depencency states
 .packagestate

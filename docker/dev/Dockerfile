@@ -1,8 +1,8 @@
 FROM ubuntu:latest
 
 ENV PYTHON=python3
-ENV YCMS_PORT=8086
-ENV YCMS_DEBUG=1
+ENV HOSPITOOL_PORT=8086
+ENV HOSPITOOL_DEBUG=1
 
 # Patient to room assignement algorithm
 ARG USER=TabeaBrandt
@@ -23,7 +23,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Create directories
-RUN mkdir -p /bed-management/ycms /opt/gurobi
+RUN mkdir -p /bed-management/hospitool /opt/gurobi
 
 # Clone git repository (patient-to-room_assignment)
 ADD https://api.github.com/repos/$USER/$REPO/git/refs/heads/$BRANCH version.json

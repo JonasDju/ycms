@@ -33,8 +33,8 @@ Note: please only use this if you absolutely must work under Windows. If you are
 
 ## Install the project:
 
-- `git clone git@github.com:charludo/ycms.git`
-- `cd ycms`
+- `git clone git@github.com:JonasDju/HospiTool.git`
+- `cd HospiTool`
 - `nvm use node`
 - `./tools/install.sh --pre-commit --python=python3` (since Ubuntu ships with 3.10 instead of the default 3.9 from the script...)
 

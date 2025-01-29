@@ -2,7 +2,7 @@ import pytest
 from django.test.client import Client
 from django.urls import reverse
 
-from ycms.cms.models import User
+from hospitool.cms.models import User
 
 
 @pytest.mark.django_db

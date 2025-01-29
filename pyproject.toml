@@ -3,7 +3,7 @@ build-backend = "setuptools.build_meta"
 requires = ["setuptools"]
 
 [project]
-name = "ycms"
+name = "hospitool"
 description = "..."
 authors = [
     { name = "...", email = "x@x.x" },
@@ -181,18 +181,18 @@ dev-pinned = [
 ]
 
 [project.urls]
-"Source Code" = "https://github.com/charludo/ycms"
-"Issues" = "https://github.com/charludo/ycms/issues"
+"Source Code" = "https://github.com/JonasDju/HospiTool"
+"Issues" = "https://github.com/JonasDju/HospiTool/issues"
 
 [tool.setuptools]
-script-files = ["ycms/ycms-cli"]
+script-files = ["hospitool/hospitool-cli"]
 license-files = ["LICENSE.txt", "NOTICE.md"]
 
 [tool.setuptools.dynamic]
-version = { attr = "ycms.__version__" }
+version = { attr = "hospitool.__version__" }
 
 [tool.setuptools.packages.find]
-include = ["ycms*"]
+include = ["hospitool*"]
 
 [tool.bumpver]
 current_version = "2023.10.0"
@@ -208,7 +208,7 @@ Bump version to {new_version}
 "pyproject.toml" = [
     'current_version = "{version}"',
 ]
-"ycms/__init__.py" = [
+"hospitool/__init__.py" = [
     '__version__ = "{version}"',
 ]
 "docs/src/conf.py" = [
@@ -251,7 +251,7 @@ ignore-paths = [
   "build",
 ]
 fail-on = "I"
-django-settings-module="ycms.core.settings"
+django-settings-module="hospitool.core.settings"
 
 [tool.pylint.design]
 max-args = 7
@@ -281,4 +281,4 @@ output-format = "colorized"
 "/tests/"="unused-argument,missing-function-docstring"
 
 [tool.coverage.run]
-omit = ["ycms/core/management/commands/*", "ycms/core/circleci_settings.py", "ycms/core/wsgi.py"]
+omit = ["hospitool/core/management/commands/*", "hospitool/core/circleci_settings.py", "hospitool/core/wsgi.py"]

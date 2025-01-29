@@ -53,8 +53,8 @@ else
         user@host$ su postgres
         postgres@host$ psql
 
-        > DROP DATABASE ycms;
-        > CREATE DATABASE ycms;
+        > DROP DATABASE hospitool;
+        > CREATE DATABASE hospitool;
     " | print_info
     fi
 

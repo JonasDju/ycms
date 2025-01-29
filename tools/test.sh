@@ -71,7 +71,7 @@ fi
 
 # Determine whether coverage data should be collected
 if [[ -z "${CHANGED}" && -z "${TEST_PATH}" ]]; then
-    PYTEST_ARGS+=("--cov=ycms" "--cov-report=html")
+    PYTEST_ARGS+=("--cov=hospitool" "--cov-report=html")
 fi
 
 # Check whether test path exists

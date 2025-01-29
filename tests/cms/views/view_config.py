@@ -236,7 +236,7 @@ VIEWS = [
                 [ROOT, ZBM, STATION_MANAGEMENT],
                 {
                     "personnel_id": "ABCDE12345",
-                    "email": "test@ycms.de",
+                    "email": "test@hospitool.de",
                     "job_type": "DOCTOR",
                     "first_name": "First",
                     "last_name": "Last",

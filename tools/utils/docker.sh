@@ -19,7 +19,7 @@
 # This function waits for the docker database container
 function wait_for_docker_container {
     # Wait until container is ready and accepts database connections
-    until docker exec "${DOCKER_CONTAINER_NAME}" psql -U ycms -d "${YCMS}" -c "select 1" > /dev/null 2>&1; do
+    until docker exec "${DOCKER_CONTAINER_NAME}" psql -U hospitool -d "${HOSPITOOL}" -c "select 1" > /dev/null 2>&1; do
         sleep 0.1
     done
 }
@@ -29,7 +29,7 @@ function create_docker_container {
     echo "Creating new PostgreSQL database docker container..." | print_info
     mkdir -p "${BASE_DIR}/.postgres"
     # Run new container
-    docker run -d --name "${DOCKER_CONTAINER_NAME}" -e "POSTGRES_USER=ycms" -e "POSTGRES_PASSWORD=password" -e "POSTGRES_DB=${YCMS}" -v "${BASE_DIR}/.postgres:/var/lib/postgresql" -p 5434:5432 postgres > /dev/null
+    docker run -d --name "${DOCKER_CONTAINER_NAME}" -e "POSTGRES_USER=hospitool" -e "POSTGRES_PASSWORD=password" -e "POSTGRES_DB=${HOSPITOOL}" -v "${BASE_DIR}/.postgres:/var/lib/postgresql" -p 5434:5432 postgres > /dev/null
     wait_for_docker_container
     echo "✔ Created database container" | print_success
     # Set up exit trap to stop docker container when script ends

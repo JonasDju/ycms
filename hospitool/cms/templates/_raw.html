@@ -1,0 +1,93 @@
+{% load static %}
+{% load i18n %}
+{% load render_bundle from webpack_loader %}
+{% comment %}
+Copyright [2019] [Integreat Project]
+Copyright [2023] [YCMS]
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+{% endcomment %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}"
+      class="{% if is_dark_theme %}dark{% endif %}">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no, user-scalable=no" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="hospitool" />
+        <title>{{ "HospiTool"|title }} |
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <link rel="shortcut icon"
+              type="image/svg"
+              href="{% static 'images/favicon.svg' %}" />
+        {% render_bundle 'main' 'js' %}
+        {% render_bundle 'main' 'css' %}
+        {% block javascript_head %}
+        {% endblock javascript_head %}
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    </head>
+    <body class="font-default text-lg bg-background-50">
+        {% if messages and not messages_suppressed %}
+            <div id="messages"
+                 class="absolute md:top-8 md:right-8 flex flex-col max-w-screen-sm z-50">
+                {% for msg in messages %}
+                    {% if msg.level_tag == 'info' %}
+                        <div class="message bg-blue-100 border-l-4 border-blue-500 dark:bg-blue-700 dark:border-blue-400"
+                             role="alert">
+                            <p class="!text-blue-500 dark:!text-blue-50">{{ msg.message }}</p>
+                            <i icon-name="x" class="message-close"></i>
+                        </div>
+                    {% endif %}
+                    {% if msg.level_tag == 'success' %}
+                        <div class="message bg-green-100 border-l-4 border-green-500 dark:bg-green-700 dark:border-green-400"
+                             role="alert">
+                            <p class="!text-green-500 dark:!text-green-50">{{ msg.message }}</p>
+                            <i icon-name="x" class="message-close"></i>
+                        </div>
+                    {% endif %}
+                    {% if msg.level_tag == 'warning' %}
+                        <div class="message bg-yellow-100 border-l-4 border-yellow-500 dark:bg-yellow-700 dark:border-yellow-400"
+                             role="alert">
+                            <p class="!text-yellow-600 dark:!text-yellow-60">{{ msg.message }}</p>
+                            <i icon-name="x" class="message-close"></i>
+                        </div>
+                    {% endif %}
+                    {% if msg.level_tag == 'error' %}
+                        <div class="message bg-red-100 border-l-4 border-red-500 dark:bg-red-700 dark:border-red-400"
+                             role="alert">
+                            <p class="!text-red-500 dark:!text-red-50">{{ msg.message }}</p>
+                            <i icon-name="x" class="message-close"></i>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div id="loader-container" class="hidden relative">
+            <div class="fixed top-0 left-0 right-0 bottom-0 bg-black/50 z-[9998]"></div>
+            <div class="text-blue-800 dark:text-blue-600 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[9999]">
+                <i icon-name="loader-2" class="w-12 h-12 animate-spin"></i>
+            </div>
+        </div>
+        {% block raw_content %}
+        {% endblock raw_content %}
+        {% block javascript %}
+        {% endblock javascript %}
+    </body>
+</html>

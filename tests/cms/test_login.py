@@ -47,7 +47,7 @@ def test_login_success(load_test_data, client, settings, personnel_id):
 @pytest.mark.django_db
 @pytest.mark.parametrize(
     "personnel_id",
-    ["root", "manager@ycms.de", "ROOT_00001", "non-existing-email@example.com", ""],
+    ["root", "manager@hospitool.de", "ROOT_00001", "non-existing-email@example.com", ""],
 )
 def test_login_failure(load_test_data, client, settings, personnel_id):
     """
