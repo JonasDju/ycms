@@ -99,16 +99,18 @@ class Bed(AbstractBaseModel):
         :return: if the bed is blocked
         :rtype: bool
         """
- 
+
         if self.assignments.exists():
             active_assignments = self.assignments.filter(
                 models.Q(admission_date__lte=current_or_travelled_time())
                 & (
-                    models.Q(discharge_date__gt=current_or_travelled_time())
-                    | models.Q(discharge_date__isnull=True)
+                        models.Q(discharge_date__gt=current_or_travelled_time())
+                        | models.Q(discharge_date__isnull=True)
                 )
             )
-            return not active_assignments.exists()
+            if active_assignments.exists():
+                return False
+
         return self.bed_blocking_type is not None and self.bed_blocking_type != bed_blocking_types.NOTBLOCKED
 
     @cached_property

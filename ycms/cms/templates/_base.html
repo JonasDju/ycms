@@ -58,15 +58,6 @@ limitations under the License.
                             <i class="fa fa-chart-bar"></i> &nbsp;{% translate "Home" %}
                         </a>
                     </li>
-                    {% if perms.cms.add_ward %}
-                        <li>
-                            {% url 'cms:protected:ward_management' as url %}
-                            <a href="{{ url }}"
-                               class="{% if floor_count is not None and floor_count == 0 %}inactiveLink{% endif %} {% if request.path == url %}selected{% endif %}">
-                                <i icon-name="activity"></i> {% translate "Ward Management" %}
-                            </a>
-                        </li>
-                    {% endif %}
                     {% if perms.cms.change_patient %}
                         <li>
                             {% url 'cms:protected:patients' as url %}
@@ -95,7 +86,7 @@ limitations under the License.
                         <li>
                             {% url 'cms:protected:intake' as url %}
                             <a href="{{ url }}"
-                               class="{% if floor_count is not None and ward_count  == 0 %}inactiveLink{% endif %} {% if request.path == url %}selected{% endif %}">
+                               class="{% if ward_count is not None and ward_count == 0 %}inactiveLink{% endif %} {% if request.path == url %}selected{% endif %}">
                                 <i icon-name="user-plus"></i> {% translate "Patient Intake" %}
                             </a>
                         </li>
@@ -122,10 +113,10 @@ limitations under the License.
                             {% url 'cms:protected:specializations' as url %}
                             <a href="{{ url }}"
                                class="{% if request.path == url %}selected{% endif %}">
-                                <i icon-name="heart-pulse"></i> {% translate "Specializations" %}  
+                                <i icon-name="heart-pulse"></i> {% translate "Specializations" %}
                             </a>
                         </li>
-                    {% endif %} 
+                    {% endif %}
                     <li>
                         <a href="https://ycms.readthedocs.io/en/latest/" target="_blank">
                             <i icon-name="file-text"></i> {% translate "Documentation" %}

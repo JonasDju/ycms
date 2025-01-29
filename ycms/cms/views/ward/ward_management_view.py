@@ -129,8 +129,9 @@ class WardDeleteView(DeleteView):
     """
     View to delete a ward 
     """
+
     model = Ward
-    
+
     def get_success_url(self):
         # Get the referer URL or default to ward management
         referer = self.request.META.get('HTTP_REFERER', '')
@@ -183,12 +184,12 @@ class WardEditView(UpdateView):
                     room_counter = 0
                     bed_counter = 0
                     duplicate_rooms = []
-                    
+
                     for room_number, beds in json.loads(room_dict).items():
                         # Check if room number already exists
                         if ward.rooms.filter(room_number=room_number).exists():
                             duplicate_rooms.append(room_number)
-                
+
                     if duplicate_rooms:
                         messages.error(
                             self.request,
@@ -198,7 +199,7 @@ class WardEditView(UpdateView):
                         )
                         # Raise exception to rollback transaction
                         raise ValueError("Duplicate room numbers found")
-                    
+
                     for room_number, beds in json.loads(room_dict).items():
                         room = Room.objects.create(
                             ward=ward,
@@ -209,7 +210,7 @@ class WardEditView(UpdateView):
                         for bed_type in beds:
                             bed_counter += 1
                             Bed.objects.create(room=room, creator=self.request.user, bed_type=bed_type)
-                    
+
                     if room_counter > 0:
                         messages.success(
                             self.request,
@@ -220,7 +221,7 @@ class WardEditView(UpdateView):
                     messages.success(
                         self.request, _("Ward information has been successfully updated!")
                     )
-                    
+
             except ValueError:
                 # Return to the same page without saving anything
                 return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
@@ -230,5 +231,5 @@ class WardEditView(UpdateView):
             messages.success(
                 self.request, _("Ward information has been successfully updated!")
             )
-        
+
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))

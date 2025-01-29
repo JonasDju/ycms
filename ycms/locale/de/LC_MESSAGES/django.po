@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-28 21:24+0100\n"
+"POT-Creation-Date: 2025-01-29 11:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -237,7 +237,7 @@ msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
 #: cms/forms/intake_bed_assignment_form.py
 msgid "Discharge date is on an invalid weekday in this ward."
 msgstr ""
-"Das Entlassungsdatum auf dieser Station ist an einem unzulässigen Wochentag"
+"Das Entlassungsdatum auf dieser Station ist an einem unzulässigen Wochentag."
 
 #: cms/forms/intake_bed_assignment_form.py
 msgid ""
@@ -718,10 +718,6 @@ msgstr "Allgemein"
 msgid "Home"
 msgstr "Start"
 
-#: cms/templates/_base.html cms/templates/ward/ward_management.html
-msgid "Ward Management"
-msgstr "Stationsverwaltung"
-
 #: cms/templates/_base.html
 msgid "Patient Data"
 msgstr "Patientendaten"
@@ -865,7 +861,8 @@ msgid "Unassign"
 msgstr "Zuweisung aufheben"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
-#: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
+#: cms/templates/delete_modal.html cms/templates/floor/create_floor.html
+#: cms/templates/floor/create_ward.html cms/templates/floor/update_floor.html
 #: cms/templates/patients/patient_card.html
 #: cms/templates/specializations_list.html cms/templates/timeline/timeline.html
 #: cms/templates/ward/ward_card.html
@@ -963,6 +960,11 @@ msgstr "Kein nächstmögliches Entlassungdatum auf Station {} verfügbar."
 msgid "Move discharge to {}."
 msgstr "Entlassung verschieben zum {}."
 
+#: cms/templates/delete_modal.html cms/templates/specializations_list.html
+#: cms/templates/ward/ward_details.html
+msgid "Delete"
+msgstr "Löschen"
+
 #: cms/templates/emails/activation_email.html
 #: cms/templates/emails/activation_email.txt
 msgid "Welcome"
@@ -1014,11 +1016,13 @@ msgstr "Nutzen Sie den folgenden Link um ein neues Passwort festzulegen."
 msgid "Add New Floor"
 msgstr "Neue Etage hinzufügen"
 
-#: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
+#: cms/templates/floor/create_floor.html cms/templates/floor/create_ward.html
+#: cms/templates/floor/update_floor.html
 msgid "Full Name"
 msgstr "Vollständiger Name"
 
-#: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
+#: cms/templates/floor/create_floor.html cms/templates/floor/create_ward.html
+#: cms/templates/floor/update_floor.html
 msgid "Short Name"
 msgstr "Abkürzung"
 
@@ -1031,6 +1035,14 @@ msgstr "Abkürzung"
 #: cms/templates/ward/ward_details.html
 msgid "Save"
 msgstr "Speichern"
+
+#: cms/templates/floor/create_ward.html cms/templates/ward/ward_management.html
+msgid "Add New Ward"
+msgstr "Neue Station hinzufügen"
+
+#: cms/templates/floor/create_ward.html
+msgid "Continue to details"
+msgstr "Erstellung fortsetzen"
 
 #: cms/templates/floor/floor.html
 msgid "Info"
@@ -1051,6 +1063,17 @@ msgstr "Etage bearbeiten"
 #: cms/templates/floor/floor.html
 msgid "Close"
 msgstr "Schließen"
+
+#: cms/templates/floor/floor.html
+msgid "Add ward"
+msgstr "Station hinzufügen"
+
+#: cms/templates/floor/floor.html
+#, python-format
+msgid ""
+"Are you sure you want to delete floor %(floor_name)s? This will delete all "
+"%(num_wards)s wards on this floor."
+msgstr "Sind Sie sicher, dass die Etage %(floor_name)s gelöscht werden soll? Diese Aktion wird alle %(num_wards)s Stationen auf dieser Etage löschen."
 
 #: cms/templates/floor/floor_ward_card.html
 msgid "Are you sure you want to delete this ward?"
@@ -1551,10 +1574,6 @@ msgstr "Abk."
 msgid "Add new medical specialization"
 msgstr "Neue Fachrichtung hinzufügen"
 
-#: cms/templates/specializations_list.html cms/templates/ward/ward_details.html
-msgid "Delete"
-msgstr "Löschen"
-
 #: cms/templates/timeline/timeline.html
 msgid "unsaved bed assignment changes"
 msgstr "ungespeicherte Bettzuweisungsänderungen"
@@ -1703,6 +1722,10 @@ msgid "Manually Assign"
 msgstr "Manuell zuweisen"
 
 #: cms/templates/ward/ward_management.html
+msgid "Ward Management"
+msgstr "Stationsverwaltung"
+
+#: cms/templates/ward/ward_management.html
 msgid "YCMS at a glance"
 msgstr "YCMS im Überblick"
 
@@ -1717,10 +1740,6 @@ msgstr "Gesamtzahl der belegten Betten"
 #: cms/templates/ward/ward_management.html
 msgid "Add a New Ward"
 msgstr "Eine Neue Station Hinzufügen"
-
-#: cms/templates/ward/ward_management.html
-msgid "Add New Ward"
-msgstr "Neue Station Hinzufügen"
 
 #: cms/templates/ward/ward_management.html
 msgid "Details about Wards"
@@ -1806,6 +1825,10 @@ msgid ""
 msgstr ""
 "Wir haben eine Bestätigungsmail an \"{}\" gesandt. Bitten nutzen Sie den "
 "Link in der E-Mail, um Ihren Account zu aktivieren."
+
+#: cms/views/floor/add_ward.py
+msgid "Ward \"{}\" was added successfully!"
+msgstr "Station \"{}\" wurde erfolgreich hinzugefügt!"
 
 #: cms/views/floor/change_floor.py
 msgid "Floor \"{}\" was added successfully!"
@@ -1985,7 +2008,7 @@ msgid "The bed cannot be deleted because it is occupied."
 msgstr "Das Bett kann nicht gelöscht werden, da es belegt ist."
 
 #: cms/views/ward/ward_details.py
-msgid "The bed has beed deleted."
+msgid "The bed has been deleted."
 msgstr "Das Bett wurde gelöscht."
 
 #: cms/views/ward/ward_details.py
@@ -2027,6 +2050,16 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#, fuzzy
+#~| msgid "Are you sure you want to delete this ward?"
+#~ msgid "Are you sure you want to delete floor"
+#~ msgstr "Sind Sie sicher, dass diese Station gelöscht werden soll?"
+
+#, fuzzy
+#~| msgid "Order of the floor"
+#~ msgid "wards on this floor."
+#~ msgstr "Reihenfolge des Stockwerks"
 
 #, fuzzy
 #~| msgid "Ward Information"
