@@ -65,7 +65,22 @@ class Room(AbstractBaseModel):
         :return: number of occupied beds in the room
         :rtype: int
         """
-        return self.total_beds - self.available_beds
+        return max(
+            0, sum(1 for bed in self.beds.all() if bed.is_occupied)
+        )
+    
+    @cached_property
+    def total_blocked_beds(self):
+        """
+        Helper property for accessing the rooms blocked bed count
+
+        :return: number of blocked beds in the room
+        :rtype: int
+        """
+        return max(
+            0, sum(1 for bed in self.beds.all() if bed.is_blocked)
+        )
+
 
     def patients(self):
         """
@@ -158,6 +173,16 @@ class Room(AbstractBaseModel):
         :rtype: list
         """
         return [bed for bed in self.beds.all() if bed.is_available]
+    
+    @cached_property
+    def blocked_beds(self):
+        """
+        Helper property for accessing the free bed
+
+        :return: free beds in the room
+        :rtype: list
+        """
+        return [bed for bed in self.beds.all() if bed.is_blocked]
 
     def __str__(self):
         """
@@ -182,3 +207,4 @@ class Room(AbstractBaseModel):
     class Meta:
         verbose_name = _("room")
         verbose_name_plural = _("rooms")
+        unique_together = ('room_number', 'ward')

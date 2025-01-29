@@ -181,6 +181,9 @@ class IntakeFormView(TemplateView):
             request,
             _('Intake for patient "{} {}" with diagnosis "{}" has been saved.').format(
                 patient.first_name, patient.last_name, record.diagnosis_code
+            ) if record.diagnosis_code
+            else _('Intake for patient "{} {}" has been saved.').format(
+                patient.first_name, patient.last_name
             ),
         )
 

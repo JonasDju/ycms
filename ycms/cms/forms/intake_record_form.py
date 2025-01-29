@@ -37,14 +37,12 @@ class IntakeRecordForm(CustomModelForm):
         super().__init__(*args, **kwargs)
 
         if initial_patient:
-            initial = (
-                initial_patient.id,
-                f"{initial_patient.last_name}, {initial_patient.first_name}, {initial_patient.date_of_birth}",
-            )
-            self.fields["patient"].choices = [initial]
+            self.fields["patient"] = initial_patient
         else:
+            # this is necessary for intake_form_view.post(), where patient is set as instance attribute
+            # and popped below (intake_record_form.save())...
             self.fields["patient"].required = False
-            self.fields["patient"].choices = [("", _("Search for existing patient"))]
+
         self.fields["diagnosis_code"].choices = [("", _("Search for diagnosis code"))]
         self.fields["diagnosis_code"].widget.attrs["class"] = "async_diagnosis_code"
 

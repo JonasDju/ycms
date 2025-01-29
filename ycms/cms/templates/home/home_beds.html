@@ -1,0 +1,106 @@
+{% load i18n %}
+{% load static %} 
+<style>
+    /* Standard-Lichtmodus */
+    .apexcharts-datalabel-label,
+    .apexcharts-datalabel-value,
+    .apexcharts-datalabel-total {
+        fill: #000000 !important; 
+    }
+  
+    .apexcharts-legend-text,
+    .apexcharts-xaxis text,
+    .apexcharts-yaxis text {
+        fill: #000000 !important; 
+    }
+  
+    .apexcharts-grid line {
+        stroke: #E0E0E0 !important; 
+    }
+  
+    :root.dark .apexcharts-datalabel-label,
+    :root.dark .apexcharts-datalabel-value,
+    :root.dark .apexcharts-datalabel-total {
+        fill: #FFFFFF !important; 
+    }
+  
+    :root.dark .apexcharts-legend-text,
+    :root.dark .apexcharts-xaxis text,
+    :root.dark .apexcharts-yaxis text {
+        fill: #FFFFFF !important; 
+    }
+  
+    :root.dark .apexcharts-grid line {
+        stroke: #374151 !important; 
+    }
+  </style>
+  
+  <div class=" h-full w-full bg-white rounded-lg shadow dark:bg-gray-800 p-6 md:p-8">
+      <div class="flex justify-between">
+          <div>
+              <h5 class="leading-none text-xl font-bold text-gray-900 dark:text-white pb-4"> {% translate "Bed Infos" %}</h5>
+          </div>
+      </div>
+      <div id="bar-chart" class="w-full h-64"></div>
+  </div>
+  
+  <script>
+  var wardInfo = {
+      beds_count: {{ infos.beds_count }},
+      occupied_beds: {{ infos.occupied_beds }},
+      available_beds: {{ infos.available_beds }},
+  };
+  
+  var barChartOptions = {
+      chart: {
+          type: 'bar',
+          height: 350,
+          background: 'transparent', 
+          toolbar: {
+            show: false 
+        },
+      },
+      series: [{
+        name: '{% translate "Count" %}',
+        data: [
+            { x: "{% translate 'Total' %}", y: wardInfo.beds_count, fillColor: '#69A9FF' }, 
+            { x: "{% translate 'Available' %}", y: wardInfo.available_beds, fillColor: '#FFB3D9' }, 
+            { x: "{% translate 'Occupied' %}", y: wardInfo.occupied_beds, fillColor: '#AEE6C7' } 
+        ],
+      }],
+      plotOptions: {
+          bar: {
+              horizontal: false,
+              endingShape: 'rounded',
+              columnWidth: '50%',
+          },
+      },
+      dataLabels: {
+          enabled: false,
+          style: {
+              colors: ['#000000'],
+          },
+      },
+      xaxis: {
+        categories: [
+            "{% translate 'Total' %}",
+            "{% translate 'Available' %}",
+            "{% translate 'Occupied' %}"
+        ],
+          labels: {
+              style: {
+                  colors: '#000000', 
+              },
+              rotate: -45,  
+            rotateAlways: true,
+          },
+      },
+      grid: {
+          borderColor: '#E0E0E0', 
+      },
+  };
+  
+  var chart = new ApexCharts(document.querySelector("#bar-chart"), barChartOptions);
+  chart.render();
+  </script>
+

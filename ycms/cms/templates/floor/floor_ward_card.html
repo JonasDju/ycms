@@ -27,8 +27,15 @@
             <div id="confirm-modal-{{ ward.id }}" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
                 <div class="w-full lg:w-1/3 rounded-lg border border-gray-300 bg-white p-8 shadow-md dark:bg-gray-800 dark:border-gray-700">
                     <div class="flex flex-col items-center justify-center">
-                        <p id="modal-message-{{ ward.id }}" class="mb-4 text-gray-700 text-center"></p>
+                        <p id="modal-message-{{ ward.id }}" class="mb-4 text-gray-700 text-center">
+                            {% if not ward.occupied_beds > 0 %}
+                            {% translate "Are you sure you want to delete this ward?" %}
+                            {% else %}
+                            {% translate "Wards with occupied beds cannot be deleted." %}
+                            {% endif %}
+                        </p>
                         <div class="flex justify-center gap-4">
+                            {% if not ward.occupied_beds > 0 %}
                             <button class="modal-confirm px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                                     data-ward-id="{{ ward.id }}">
                                 {% translate "Yes" %}
@@ -37,6 +44,16 @@
                                     data-ward-id="{{ ward.id }}">
                                 {% translate "No" %}
                             </button>
+                            {% else %}
+                            <button class="modal-confirm hidden px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                                    data-ward-id="{{ ward.id }}">
+                                {% translate "Yes" %}
+                            </button>
+                            <button class="modal-cancel px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                                    data-ward-id="{{ ward.id }}">
+                                {% translate "Okay" %}
+                            </button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -58,11 +75,12 @@
         .diverse-icon { color: #2ecc71; }
     </style>
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-        <span>{% trans "Total Beds" %}: <strong>{{ ward.total_beds }}</strong></span>
-        <br>
-        <span>{% trans "Occupied beds" %}: <strong> {{ ward.occupied_beds }} </strong></span>
+        <span>
+            {% trans "Occupied beds" %}: <strong> {{ ward.occupied_beds }} </strong></span>
         <br>
         <span>{% trans "Available Beds" %}: <strong>{{ ward.available_beds }}</strong></span>
+        <br>
+        <span>{% trans "Blocked Beds" %}: <strong>{{ ward.total_blocked_beds }}</strong></span>
         <br>
         <span>
             {% trans "Unassigned Patients" %}

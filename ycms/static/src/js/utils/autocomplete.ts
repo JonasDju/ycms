@@ -5,8 +5,9 @@ const newTomSelect = (element: string, endpoint: string) => {
     if (!domElement) {
         return;
     }
+    const isDisabled = domElement.hasAttribute("disabled");
     /* eslint-disable-next-line no-new */
-    new TomSelect(element, {
+    const tomSelect = new TomSelect(element, {
         valueField: "id",
         labelField: "name",
         searchField: ["id", "name"],
@@ -14,6 +15,12 @@ const newTomSelect = (element: string, endpoint: string) => {
         items: [...domElement.options].map((el) => el.value),
         /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
         load: (query: string, callback: any) => {
+            // tomselect element may be disabled when user has no permissions to use it
+            if (isDisabled) {
+                callback([]);
+                return;
+            }
+
             const url = `/autocomplete/${endpoint}/?q=${encodeURIComponent(query)}`;
             fetch(url)
                 .then((response) => response.json())
@@ -22,6 +29,10 @@ const newTomSelect = (element: string, endpoint: string) => {
                 });
         },
     });
+
+    if (isDisabled) {
+        tomSelect.disable();
+    }
 };
 
 window.addEventListener("load", () => {

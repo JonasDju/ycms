@@ -15,9 +15,9 @@
                     {% endwith %}
                     <button id="printer"
                             class="ml-4 px-4 py-2 btn md:mb-0"
-                            type="button">
+                            type="button"
+                            onclick="location.href='{% url 'cms:protected:generate_pdf' ward_id=ward.id %}'">
                         <i icon-name="printer"></i>
-                        {% translate "Print" %}
                     </button>
                 </div>
             </div>

@@ -39,9 +39,9 @@ class PatientDetailsView(TemplateView):
         return {
             "patient": patient,
             "patient_form": PatientForm(instance=patient, prefix=kwargs["pk"]),
-            "record_form": RecordForm(),
+            "record_form": RecordForm(user=self.request.user),
             "current_stay_forms": (
-                RecordForm(instance=patient.current_stay.medical_record),
+                RecordForm(instance=patient.current_stay.medical_record, user=self.request.user),
                 IntakeBedAssignmentForm(instance=patient.current_stay),
             )
             if patient.current_stay
@@ -50,7 +50,7 @@ class PatientDetailsView(TemplateView):
                 (
                     stay,
                     (
-                        RecordForm(instance=stay.medical_record),
+                        RecordForm(instance=stay.medical_record, user=self.request.user),
                         IntakeBedAssignmentForm(instance=stay),
                     ),
                 )
@@ -103,6 +103,12 @@ class IntakeUpdateView(UpdateView):
         )
         if not bed_assignment_form.is_valid():
             return self.form_invalid(bed_assignment_form)
+        
+        # check if user is allowed to modify diagnosis
+        user = self.request.user
+        if not (user.is_superuser or user.job_type == "DOCTOR"):
+            # replace incoming diagnosis_code with old value
+            form.instance.diagnosis_code = self.get_object().diagnosis_code
 
         form.save()
         bed_assignment_form.save()
