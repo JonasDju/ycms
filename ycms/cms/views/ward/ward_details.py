@@ -209,7 +209,7 @@ class BedDeleteView(DeleteView):
             messages.error(self.request, _("The bed cannot be deleted because it is occupied."))
         else:
             self.object.delete()
-            messages.success(self.request, _("The bed has beed deleted."))
+            messages.success(self.request, _("The bed has been deleted."))
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
 
     def form_invalid(self, form):
