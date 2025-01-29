@@ -75,14 +75,7 @@ class TimelineView(TemplateView):
         :rtype: ~django.template.response.TemplateResponse
         """
         pk = kwargs.get("pk")
-        if Ward.objects.filter(id=pk).count() == 0 and Ward.objects.count() > 0:
-            pk = Ward.objects.first().id
-        try:
-            ward = Ward.objects.get(id=pk)
-            timeline_data = self._get_timeline_data(ward, suggestions)
-        except:
-            ward = None
-            timeline_data = None
+        ward = Ward.objects.get(id=pk)
         wards = Ward.objects.all()
 
         suggestions = {}
@@ -93,7 +86,7 @@ class TimelineView(TemplateView):
             "ward": ward,
             "wards": wards,
             "selected_ward_id": pk,
-            "timeline_data": timeline_data,
+            "timeline_data": self._get_timeline_data(ward, suggestions),
             "suggestions": json.dumps(suggestions),
             **super().get_context_data(**kwargs),
         }
