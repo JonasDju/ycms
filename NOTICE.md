@@ -1,5 +1,5 @@
-[YCMS](https://github.com/charludo/ycms)
-Copyright © 2023 YCMS.
+[HospiTool](https://github.com/JonasDju/HospiTool)
+Copyright © 2025 YCMS.
 All rights reserved.
 
 _________________
@@ -8,6 +8,9 @@ This repository includes code from:
 
 [Integreat CMS](https://github.com/digitalfabrik/integreat-cms)
 Copyright © 2018 [Tür an Tür - Digitalfabrik gGmbH](https://github.com/digitalfabrik) and [individual contributors](https://github.com/digitalfabrik/integreat-cms/graphs/contributors).
+All rights reserved.
+
+[YCMS](https://github.com/charludo/ycms) Copyright © 2023
 All rights reserved.
 
 _________________

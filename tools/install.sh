@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# This script installs YCMS in a local virtual environment.
+# This script installs HospiTool in a local virtual environment.
 # A Postgres SQL server is needed to run the CMS (optionally inside a docker container).
 
 # Import utility functions
@@ -174,6 +174,6 @@ if [[ -n "${PRE_COMMIT}" ]]; then
     echo "✔ Installed pre-commit hooks" | print_success
 fi
 
-echo -e "\n✔ The YCMS was successfully installed 😻" | print_success
+echo -e "\n✔ The HospiTool was successfully installed 😻" | print_success
 echo -e "Use the following command to start the development server:\n" | print_info
 echo -e "\t$(dirname "${BASH_SOURCE[0]}")/run.sh\n" | print_bold

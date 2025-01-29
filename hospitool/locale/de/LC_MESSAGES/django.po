@@ -1,0 +1,2212 @@
+# Language file for the german translation of the HospiTool
+# Copyright (C) 2023 YCMS
+# This file is distributed under the same license as the CMS package.
+# HospiTool <info@hospitool-app.de>
+# https://github.com/JonasDju/
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-29 11:52+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: HospiTool <info@hospitool-app.de>\n"
+"Language-Team: HospiTool <info@hospitool-app.de>\n"
+"Language: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cms/apps.py
+msgid "CMS"
+msgstr "CMS"
+
+#: cms/constants/bed_blocking_types.py
+msgid "-------"
+msgstr "-------"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Shortage of doctors"
+msgstr "Ärztemangel"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Shortage of doctors and caregivers"
+msgstr "Ärzte- und Pflegemangel"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Currently not in operation"
+msgstr "Aktuell nicht betrieben"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Infectious"
+msgstr "Infektiös"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Construction/repair"
+msgstr "Baumaßnahme/Reparatur"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Reserved for patient"
+msgstr "Für Patienten reserviert"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Med. reason/incompliance"
+msgstr "Med. Grund/Incompliance"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Palliative"
+msgstr "Palliativ"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Shortage of caregivers"
+msgstr "Pflegemangel"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Optional service"
+msgstr "Wahlleistung"
+
+#: cms/constants/bed_blocking_types.py
+msgid "OS SR large"
+msgstr "WL EZ groß"
+
+#: cms/constants/bed_blocking_types.py
+msgid "OS SR small"
+msgstr "WL EZ klein"
+
+#: cms/constants/bed_blocking_types.py
+msgid "OS room rate"
+msgstr "WL Room Rate"
+
+#: cms/constants/bed_blocking_types.py
+msgid "Franziskus"
+msgstr "Franziskus"
+
+#: cms/constants/bed_types.py
+msgid "normal"
+msgstr "normales"
+
+#: cms/constants/bed_types.py
+msgid "small"
+msgstr "kleines"
+
+#: cms/constants/bed_types.py
+msgid "with ventilator"
+msgstr "mit Beatmungsgerät"
+
+#: cms/constants/days_of_week.py
+msgid "Monday"
+msgstr "Montag"
+
+#: cms/constants/days_of_week.py
+msgid "Tuesday"
+msgstr "Dienstag"
+
+#: cms/constants/days_of_week.py
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+#: cms/constants/days_of_week.py
+msgid "Thursday"
+msgstr "Donnerstag"
+
+#: cms/constants/days_of_week.py
+msgid "Friday"
+msgstr "Freitag"
+
+#: cms/constants/days_of_week.py
+msgid "Saturday"
+msgstr "Samstag"
+
+#: cms/constants/days_of_week.py
+msgid "Sunday"
+msgstr "Sonntag"
+
+#: cms/constants/days_of_week.py
+msgid "Mon"
+msgstr "Mo"
+
+#: cms/constants/days_of_week.py
+msgid "Tue"
+msgstr "Di"
+
+#: cms/constants/days_of_week.py
+msgid "Wed"
+msgstr "Mi"
+
+#: cms/constants/days_of_week.py
+msgid "Thu"
+msgstr "Do"
+
+#: cms/constants/days_of_week.py
+msgid "Fri"
+msgstr "Fr"
+
+#: cms/constants/days_of_week.py
+msgid "Sat"
+msgstr "Sa"
+
+#: cms/constants/days_of_week.py
+msgid "Sun"
+msgstr "So"
+
+#: cms/constants/gender.py
+msgid "male"
+msgstr "männlich"
+
+#: cms/constants/gender.py
+msgid "female"
+msgstr "weiblich"
+
+#: cms/constants/gender.py
+msgid "diverse"
+msgstr "divers"
+
+#: cms/constants/group_names.py
+msgid "Medical Personnel"
+msgstr "medizinische Angestellte"
+
+#: cms/constants/group_names.py
+msgid "Station Management"
+msgstr "Stationsmanagement"
+
+#: cms/constants/group_names.py
+msgid "Central Bed Management"
+msgstr "Zentrales Bettmanagement"
+
+#: cms/constants/insurance_types.py
+msgid "statutory"
+msgstr "gesetzlich"
+
+#: cms/constants/insurance_types.py
+msgid "private"
+msgstr "privat"
+
+#: cms/constants/job_types.py
+msgid "Administrator"
+msgstr "Administrator*in"
+
+#: cms/constants/job_types.py
+msgid "Dr."
+msgstr "Dr."
+
+#: cms/constants/job_types.py
+msgid "Nurse"
+msgstr "Krankenpfleger*in"
+
+#: cms/constants/record_types.py
+msgid "patient intake form"
+msgstr "Patientenaufnahmeformular"
+
+#: cms/constants/record_types.py cms/models/medical_record.py
+msgid "note"
+msgstr "Notiz"
+
+#: cms/constants/record_types.py
+msgid "lab report"
+msgstr "Laborwerte"
+
+#: cms/forms/authentication/password_reset_request_form.py
+msgid "Enter your email"
+msgstr "Email eingeben"
+
+#: cms/forms/authentication/registration_form.py
+msgid "Permission group"
+msgstr "Berechtigungsgruppe"
+
+#: cms/forms/authentication/registration_form.py
+msgid "Determines what permissions the user will have"
+msgstr "Legt fest, welche Berechtigungen der Nutzer / die Nutzerin haben wird"
+
+#: cms/forms/authentication/registration_form.py
+msgid "An account for the personnel ID \"{}\" does already exist."
+msgstr "Ein Account für die Personalnummer \"{}\" existiert bereits."
+
+#: cms/forms/authentication/registration_form.py
+msgid "An account for the email \"{}\" does already exist."
+msgstr "Ein Account für die Email \"{}\" existiert bereits."
+
+#: cms/forms/custom_model_form.py
+msgid "Enter {} here"
+msgstr "{} hier eingeben"
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid "Admission date cannot be later than discharge date."
+msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid "Discharge date is on an invalid weekday in this ward."
+msgstr ""
+"Das Entlassungsdatum auf dieser Station ist an einem unzulässigen Wochentag."
+
+#: cms/forms/intake_bed_assignment_form.py
+msgid ""
+"The selected admission and discharge dates overlap with an existing hospital "
+"stay."
+msgstr ""
+"Der ausgewählte Zeitraum kollidiert mit einem existierenden "
+"Krankenhausaufenthalt."
+
+#: cms/forms/intake_record_form.py cms/forms/patients/record_form.py
+msgid "Search for diagnosis code"
+msgstr "Diagnosecodes durchsuchen"
+
+#: cms/forms/medical_specialization_form.py
+msgid "The abbreviation {} conflicts with an existing one."
+msgstr "Die Abkürzung {} steht mit einer anderen im Konflikt."
+
+#: cms/forms/unknown_patient_form.py
+msgid "Approximate age"
+msgstr "Ungefähres Alter"
+
+#: cms/forms/unknown_patient_form.py
+msgid "Best guess for the patient's approximate age"
+msgstr "Schätzung des ungefähren Alters des Patienten/der Patientin"
+
+#: cms/forms/upload_csv_form.py
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Patient only"
+msgstr "Nur Patient"
+
+#: cms/forms/upload_csv_form.py
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Patient + medical record"
+msgstr "Patient + medizinische Unterlage"
+
+#: cms/forms/upload_csv_form.py
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Patient + stay"
+msgstr "Patient + Aufenthalt"
+
+#: cms/forms/upload_csv_form.py
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Patient + ward"
+msgstr "Patient + Station"
+
+#: cms/forms/upload_csv_form.py
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Patient + bed"
+msgstr "Patient + Bett"
+
+#: cms/forms/upload_csv_form.py
+msgid "Choose categories to import"
+msgstr "Wähle zu importende Kategorien"
+
+#: cms/import_data.py
+msgid "The CSV file could not be read."
+msgstr "Die CSV-Datei konnte nicht gelesen werden."
+
+#: cms/import_data.py
+msgid "Missing columns: "
+msgstr "Fehlende Spalten: "
+
+#: cms/import_data.py
+msgid "An error occured when importing entry no. {}."
+msgstr "Beim Importieren von Eintrag Nr. {} trat ein Fehler auf."
+
+#: cms/models/bed.py
+msgid "bed type"
+msgstr "Betttyp"
+
+#: cms/models/bed.py
+msgid "specialty bed types may be available"
+msgstr "spezielle Betttypen stehen möglicherweise zur Verfügung"
+
+#: cms/models/bed.py
+msgid "bed blocking type"
+msgstr "Blockierart"
+
+#: cms/models/bed.py
+msgid "The bed might be blocked"
+msgstr "Dieses Bett ist derzeit blockiert"
+
+#: cms/models/bed.py
+msgid "bed blocking reason"
+msgstr "Blockiergrund"
+
+#: cms/models/bed.py cms/templates/ward/ward_details.html
+msgid "Reason why the bed is blocked"
+msgstr "Grund, weshalb das Bett blockiert ist"
+
+#: cms/models/bed.py cms/models/room.py
+msgid "room"
+msgstr "Zimmer"
+
+#: cms/models/bed.py
+msgid "The room this bed belongs to"
+msgstr "Zimmer, zu welchem dieses Bett gehört"
+
+#: cms/models/bed.py cms/models/bed_assignment.py
+msgid "bed"
+msgstr "Bett"
+
+#: cms/models/bed.py
+msgid "beds"
+msgstr "Betten"
+
+#: cms/models/bed_assignment.py
+msgid "admission date"
+msgstr "Aufnahmedatum"
+
+#: cms/models/bed_assignment.py
+msgid "date the hospital stay begins"
+msgstr "Datum zu dem der Krankenhausaufenthalt beginnt"
+
+#: cms/models/bed_assignment.py
+msgid "estimated discharge date"
+msgstr "Voraussichtliches Entlassungsdatum"
+
+#: cms/models/bed_assignment.py
+msgid "date the hospital stay is estimated to end"
+msgstr "Datum der voraussichtlichen Entlassung"
+
+#: cms/models/bed_assignment.py
+msgid "accompanied"
+msgstr "mit Begleitung"
+
+#: cms/models/bed_assignment.py
+msgid "Whether the patient is accompanied by a chaperone"
+msgstr "Ob der Patient / die Patientin eine Belgeitperson hat"
+
+#: cms/models/bed_assignment.py cms/models/medical_record.py
+msgid "medical record"
+msgstr "medizinische Unterlage"
+
+#: cms/models/bed_assignment.py
+msgid "The medical record associated with this bed assignment"
+msgstr "Die mit dieser Bettzuweisung gehörende medizinische Unterlage"
+
+#: cms/models/bed_assignment.py
+msgid "recommended ward"
+msgstr "empfohlene Station"
+
+#: cms/models/bed_assignment.py
+msgid "Recommendation for stay at this ward"
+msgstr "Empfehlung zur Unterbringung auf dieser Station"
+
+#: cms/models/bed_assignment.py
+msgid "assignments"
+msgstr "Bettzuweisungen"
+
+#: cms/models/bed_assignment.py
+msgid "The bed assigned to the patient"
+msgstr "Diesem Patienten / dieser Patientin zugewiesenes Bett"
+
+#: cms/models/bed_assignment.py
+msgid "days"
+msgstr "Tage"
+
+#: cms/models/bed_assignment.py cms/templates/timetravel_controls.html
+msgid "day"
+msgstr "Tag"
+
+#: cms/models/bed_assignment.py
+msgid "{} days"
+msgstr "{} Tagen"
+
+#: cms/models/bed_assignment.py
+msgid "{} day"
+msgstr "{} Tag"
+
+#: cms/models/bed_assignment.py
+msgid "bed assignment"
+msgstr "Bettzuweisung"
+
+#: cms/models/bed_assignment.py
+msgid "bed assignments"
+msgstr "Bettzuweisungen"
+
+#: cms/models/floor.py
+msgid "floor order"
+msgstr "Stockwerkreihenfolge"
+
+#: cms/models/floor.py
+msgid "Order of the floor"
+msgstr "Reihenfolge des Stockwerks"
+
+#: cms/models/floor.py
+msgid "floor name"
+msgstr "Stockwerkname"
+
+#: cms/models/floor.py
+msgid "Name of the floor"
+msgstr "Name des Stockwerks"
+
+#: cms/models/floor.py
+msgid "floor code"
+msgstr "Stockwerkabkürzung"
+
+#: cms/models/floor.py
+msgid "Nickname of the floor"
+msgstr "Abkürzung für das Stockwerk"
+
+#: cms/models/floor.py
+msgid "floor"
+msgstr "Stockwerk"
+
+#: cms/models/floor.py
+msgid "floors"
+msgstr "Stockwerke"
+
+#: cms/models/icd10_entry.py
+msgid "code"
+msgstr "Code"
+
+#: cms/models/icd10_entry.py
+msgid "ICD-10-GM classification code"
+msgstr "ICD-10-GM Klassifizierungscode"
+
+#: cms/models/icd10_entry.py
+msgid "description"
+msgstr "Beschreibung"
+
+#: cms/models/icd10_entry.py
+msgid "ICD-10-GM classification description"
+msgstr "ICD-10-GM Klassifizierungsbeschreibung"
+
+#: cms/models/icd10_entry.py
+msgid "ICD-10 entry"
+msgstr "ICD-10 Eintrag"
+
+#: cms/models/icd10_entry.py
+msgid "ICD-10 entries"
+msgstr "ICD-10 Einträge"
+
+#: cms/models/medical_record.py cms/models/patient.py
+msgid "patient"
+msgstr "Patient*in"
+
+#: cms/models/medical_record.py
+msgid "The patient associated with this medical record"
+msgstr "Der / die zu dieser medizinischen Unterlage gehörende Patient*in"
+
+#: cms/models/medical_record.py
+msgid "diagnosis code"
+msgstr "Diagnosecode"
+
+#: cms/models/medical_record.py
+msgid "Diagnosis code according to ICD-10"
+msgstr "Diagnosecode nach ICD-10"
+
+#: cms/models/medical_record.py cms/models/medical_specialization.py
+msgid "medical specialization"
+msgstr "Fachrichtung"
+
+#: cms/models/medical_record.py
+msgid "Medical specialization of the patient's treatment."
+msgstr "Fachrichtung der Behandlung"
+
+#: cms/models/medical_record.py
+msgid "record type"
+msgstr "Unterlagenart"
+
+#: cms/models/medical_record.py
+msgid "type of this record"
+msgstr "Art dieser Unterlage"
+
+#: cms/models/medical_record.py
+msgid "Additional notes for this medical record"
+msgstr "Zusätzliche Notizen zu dieser medizinischen Unterlage"
+
+#: cms/models/medical_record.py
+msgid "medical records"
+msgstr "medizinische Unterlagen"
+
+#: cms/models/medical_specialization.py
+msgid "specialization name"
+msgstr "Fachrichtung"
+
+#: cms/models/medical_specialization.py
+msgid "Name of this medical specialization."
+msgstr "Name der Fachrichtung."
+
+#: cms/models/medical_specialization.py
+msgid "abbreviation"
+msgstr "Abkürzung"
+
+#: cms/models/medical_specialization.py
+msgid "Abbreviation of this medical specialization."
+msgstr "Abkürzung dieser Fachrichtung."
+
+#: cms/models/medical_specialization.py
+msgid "medical specializations"
+msgstr "Fachrichtungen"
+
+#: cms/models/patient.py
+msgid "insurance type"
+msgstr "Versicherungstyp"
+
+#: cms/models/patient.py
+msgid "Whether the patient is privately insured or not"
+msgstr "Ob der Patient / die Patientin privat versichert ist oder nicht"
+
+#: cms/models/patient.py cms/models/user.py
+msgid "first name"
+msgstr "Vorname"
+
+#: cms/models/patient.py
+msgid "First name of the patient"
+msgstr "Vorname des Patienten / der Patientin"
+
+#: cms/models/patient.py cms/models/user.py
+msgid "last name"
+msgstr "Nachname"
+
+#: cms/models/patient.py
+msgid "Last name of the patient"
+msgstr "Nachname des Patienten / der Patientin"
+
+#: cms/models/patient.py
+msgid "gender"
+msgstr "Geschlecht"
+
+#: cms/models/patient.py
+msgid "Gender of the patient"
+msgstr "Geschlecht des Patienten / der Patientin"
+
+#: cms/models/patient.py
+msgid "date of birth"
+msgstr "Geburtsdatum"
+
+#: cms/models/patient.py
+msgid "Date of birth of the patient"
+msgstr "Geburtsdatum des Patienten / der Patientin"
+
+#: cms/models/patient.py
+msgid "age"
+msgstr "Alter"
+
+#: cms/models/patient.py
+msgid "insurance"
+msgstr "Versicherung"
+
+#: cms/models/patient.py
+msgid "today"
+msgstr "Heute"
+
+#: cms/models/patient.py
+msgid "{} days ago"
+msgstr "vor {} Tagen"
+
+#: cms/models/patient.py
+msgid "{} day ago"
+msgstr "vor {} Tag"
+
+#: cms/models/patient.py
+msgid "in {} days"
+msgstr "in {} Tagen"
+
+#: cms/models/patient.py
+msgid "in {} day"
+msgstr "in {} Tag"
+
+#: cms/models/patient.py
+msgid "patients"
+msgstr "Patient*innen"
+
+#: cms/models/room.py
+msgid "room number"
+msgstr "Zimmernummer"
+
+#: cms/models/room.py
+msgid "number of this room within its ward"
+msgstr "Nummer des Zimmers auf dieser Station"
+
+#: cms/models/room.py cms/models/ward.py
+msgid "ward"
+msgstr "Station"
+
+#: cms/models/room.py
+msgid "The ward this room belongs to"
+msgstr "DIe Station zu der dieses Zimmer gehört"
+
+#: cms/models/room.py
+msgid "rooms"
+msgstr "Zimmer"
+
+#: cms/models/user.py
+msgid "personnel ID"
+msgstr "Personalnummer"
+
+#: cms/models/user.py
+msgid "Employment ID number of the hospital staff. Used for authentication."
+msgstr ""
+"Personalnummer der im Krankenhaus angestellten. Wird zur Anmeldung genutzt."
+
+#: cms/models/user.py
+msgid "email"
+msgstr "E-Mail"
+
+#: cms/models/user.py
+msgid "Valid email address for this user"
+msgstr "Gültige E-Mail-Adresse für diesen Benutzer"
+
+#: cms/models/user.py
+msgid "job type"
+msgstr "Arbeitsart"
+
+#: cms/models/user.py
+msgid "Job type of the employee"
+msgstr "Arbeitsart dieses Angestellte / dieser Angestellten"
+
+#: cms/models/user.py
+msgid "First name of the employee"
+msgstr "Vorname des Angestellten / der Angestellten"
+
+#: cms/models/user.py
+msgid "Last name of the employee"
+msgstr "Nachname des Angestellten / der Angestellten"
+
+#: cms/models/user.py cms/templates/ward/ward_edit_drawer.html
+#: cms/templates/ward/ward_selection_form.html
+msgid "Ward"
+msgstr "Station"
+
+#: cms/models/user.py
+msgid "Ward this employee is assigned to (if any)"
+msgstr "Station, welcher diese*r Angestelle zugeordnet ist (optional)"
+
+#: cms/models/user.py
+msgid "user"
+msgstr "Benutzer"
+
+#: cms/models/user.py
+msgid "users"
+msgstr "Benutzer"
+
+#: cms/models/ward.py
+msgid "Floor this ward is located on"
+msgstr "Stockwerk, auf dem sich diese Station befindet"
+
+#: cms/models/ward.py
+msgid "ward name"
+msgstr "Stationsname"
+
+#: cms/models/ward.py
+msgid "Name this ward is commonly referred to by"
+msgstr "Name, der üblicherweise für diese Station verwendet wird"
+
+#: cms/models/ward.py
+msgid "ward nickname"
+msgstr "kurzer Stationsname"
+
+#: cms/models/ward.py
+msgid "Nickname of this ward"
+msgstr "Abkürzung für den Stationsnamen"
+
+#: cms/models/ward.py
+msgid "allowed discharge days"
+msgstr "zulässige Entlassungstage"
+
+#: cms/models/ward.py
+msgid "Days of the week where discharges are allowed in this ward"
+msgstr "Tage an denen auf dieser Station Entlassungen zulässig sind"
+
+#: cms/models/ward.py
+msgid "wards"
+msgstr "Stationen"
+
+#: cms/templates/_base.html
+msgid " Logo"
+msgstr " Logo"
+
+#: cms/templates/_base.html
+msgid "General"
+msgstr "Allgemein"
+
+#: cms/templates/_base.html
+msgid "Home"
+msgstr "Start"
+
+#: cms/templates/_base.html
+msgid "Patient Data"
+msgstr "Patientendaten"
+
+#: cms/templates/_base.html
+msgid "Views"
+msgstr "Ansichten"
+
+#: cms/templates/_base.html cms/templates/floor/floor.html
+msgid "Floor View"
+msgstr "Etagenansicht"
+
+#: cms/templates/_base.html
+msgid "Ward View"
+msgstr "Stationsansicht"
+
+#: cms/templates/_base.html cms/templates/patients/patient_intake_form.html
+msgid "Patient Intake"
+msgstr "Patientenaufnahme"
+
+#: cms/templates/_base.html cms/templates/user_settings.html
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: cms/templates/_base.html
+msgid "Create User"
+msgstr "Nutzer anlegen"
+
+#: cms/templates/_base.html
+msgid "Specializations"
+msgstr "Fachrichtungen"
+
+#: cms/templates/_base.html
+msgid "Documentation"
+msgstr "Dokumentation"
+
+#: cms/templates/_base.html
+msgid "Logout"
+msgstr "Abmelden"
+
+#: cms/templates/_base.html
+msgid "Start Timetravel"
+msgstr "Zeitreise Starten"
+
+#: cms/templates/_base.html
+msgid "Stop Timetravel"
+msgstr "Zeitreise Beenden"
+
+#: cms/templates/_base.html
+msgid "Turn on the light"
+msgstr "Mach das Licht an"
+
+#: cms/templates/_base.html
+msgid "Turn off the light"
+msgstr "Mach das Licht aus"
+
+#: cms/templates/_base.html
+msgid "Logged in as"
+msgstr "Angemeldet als"
+
+#: cms/templates/_base.html
+msgid "Toggle sidebar"
+msgstr "Seitenleiste umschalten"
+
+#: cms/templates/authentication/create_user.html
+msgid "Registration"
+msgstr "Registrierung"
+
+#: cms/templates/authentication/create_user.html
+msgid "Create a new user"
+msgstr "Neuen Benutzer anlegen"
+
+#: cms/templates/authentication/create_user.html
+#: cms/templates/patients/patient_details.html
+#: cms/templates/ward/ward_details.html
+msgid "Create"
+msgstr "Anlegen"
+
+#: cms/templates/authentication/login.html
+msgid "Login"
+msgstr "Login"
+
+#: cms/templates/authentication/login.html
+msgid "The username or the password is incorrect."
+msgstr "Der Benutzername oder das Passwort sind inkorrekt."
+
+#: cms/templates/authentication/login.html
+msgid "Please try again."
+msgstr "Bitte erneut versuchen."
+
+#: cms/templates/authentication/login.html
+msgid "Enter your personnel ID"
+msgstr "Personalnummer eingeben"
+
+#: cms/templates/authentication/login.html
+msgid "Enter your password"
+msgstr "Passwort eingeben"
+
+#: cms/templates/authentication/login.html
+msgid "Forgot password?"
+msgstr "Passwort vergessen?"
+
+#: cms/templates/authentication/login.html
+msgid "Sign In"
+msgstr "Einloggen"
+
+#: cms/templates/authentication/password_reset_confirm.html
+msgid "Set a new password"
+msgstr "Neues Passwort festlegen"
+
+#: cms/templates/authentication/password_reset_confirm.html
+msgid "Set password"
+msgstr "Passwort festlegen"
+
+#: cms/templates/authentication/password_reset_request.html
+msgid "Request password reset"
+msgstr "Passwortrücksetzung anfordern"
+
+#: cms/templates/authentication/password_reset_request.html
+msgid "Request reset"
+msgstr "Rücksetzung anfordern"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+msgid "Assign the patient"
+msgstr "Patienten zuordnen"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+msgid "Assigning patient"
+msgstr "Patient*in zuordnen:"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+msgid "More reassignment options"
+msgstr "Weitere Bettzuweisungsoptionen"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+msgid "Move patient to different ward"
+msgstr "Patient*in auf andere Station verschieben"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+msgid "Unassign"
+msgstr "Zuweisung aufheben"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+#: cms/templates/delete_modal.html cms/templates/floor/create_floor.html
+#: cms/templates/floor/create_ward.html cms/templates/floor/update_floor.html
+#: cms/templates/patients/patient_card.html
+#: cms/templates/specializations_list.html cms/templates/timeline/timeline.html
+#: cms/templates/ward/ward_card.html
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+#: cms/templates/ward/ward_room_card.html
+msgid "Mixed Gender"
+msgstr "Gemischtes Geschlecht"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+msgid "Age gap is large"
+msgstr "Großer Altersunterschied"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+#: cms/templates/ward/ward_room_card.html
+msgid "Mixed insurance"
+msgstr "Gemischte Versicherung"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+msgid "Are you sure you want to assign the patient to Room {}?"
+msgstr "Sind Sie sicher, dass Sie dem Patienten Zimmer {} zuweisen möchten?"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+msgid "Assign to Room {} may cause:"
+msgstr "Zu Zimmer {} zuweisen kann führen:"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+#: cms/templates/ward/ward.html
+msgid "Corridor"
+msgstr "Gang"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+#: cms/templates/ward/ward_modal.html
+msgid "Close modal"
+msgstr "Modal schließen"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_modal.html
+msgid "Yes"
+msgstr "Ja"
+
+#: cms/templates/bed_assignment/assign_bed_assignment.html
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_modal.html
+msgid "No"
+msgstr "Nein"
+
+#: cms/templates/bed_assignment/bed_assignment_drawer.html
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_info.html
+msgid "Unassigned Patients"
+msgstr "Nicht zugewiesene Patienten"
+
+#: cms/templates/bed_assignment/bed_assignment_drawer.html
+#: cms/templates/patients/patient_import_drawer.html
+#: cms/templates/ward/ward_drawer.html cms/templates/ward/ward_edit_drawer.html
+msgid "Close menu"
+msgstr "Menü schließen"
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Patient is assigned a bed in ward {}."
+msgstr "Patient*in liegt auf Station {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "No days are currently configured for discharge in ward {}."
+msgstr ""
+"Aktuell sind auf Station {} keine Tage als zulässig zur Entlassung "
+"konfiguriert."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges in ward {} possible on {}."
+msgstr "Entlassungen auf Station {} möglich am {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges in ward {} possible on {} and {}."
+msgstr "Entlassungen auf Station {} möglich am {} und {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges cannot be earlier than the admission."
+msgstr "Entlassungen können nicht vor der Aufnahme liegen."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges in ward {} not allowed on {}."
+msgstr "Entlassungen auf der Station {} nicht möglich am {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Next possible discharge in ward {} is on {}."
+msgstr "Nächstmögliches Entlassungsdatum auf Station {} ist am {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "No next discharge date available in ward {}."
+msgstr "Kein nächstmögliches Entlassungdatum auf Station {} verfügbar."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Move discharge to {}."
+msgstr "Entlassung verschieben zum {}."
+
+#: cms/templates/delete_modal.html cms/templates/specializations_list.html
+#: cms/templates/ward/ward_details.html
+msgid "Delete"
+msgstr "Löschen"
+
+#: cms/templates/emails/activation_email.html
+#: cms/templates/emails/activation_email.txt
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: cms/templates/emails/activation_email.html
+#: cms/templates/emails/activation_email.txt
+msgid ""
+"You are receiving this e-mail because an account with HospiTool has been created "
+"for you."
+msgstr ""
+"Sie erhalten diese Email da für Sie ein Account im HospiTool angelegt wurde."
+
+#: cms/templates/emails/activation_email.html
+#: cms/templates/emails/activation_email.txt
+msgid "Please use the link below to activate your account."
+msgstr "Nutzen Sie den folgenden Link um Ihren Account zu aktivieren."
+
+#: cms/templates/emails/activation_email.txt
+#: cms/templates/emails/password_reset_email.txt
+msgid ""
+"If using the link above does not work, please copy the URL and paste it into "
+"the address bar of your browser."
+msgstr ""
+"Falls obiger Link nicht funktioniert, kopieren Sie die URL bitte und fügen "
+"Sie sie in der Adresszeile Ihres Browsers ein."
+
+#: cms/templates/emails/password_reset_email.html
+#: cms/templates/emails/password_reset_email.txt
+msgid "Hello"
+msgstr "Hallo"
+
+#: cms/templates/emails/password_reset_email.html
+#: cms/templates/emails/password_reset_email.txt
+msgid ""
+"You are receiving this e-mail because you requested a password reset in "
+"HospiTool. If you did not perform this action, please ignore this email."
+msgstr ""
+"Sie erhalten diese Email da Sie eine Passwortrücksetzung im HospiTool beantragt "
+"haben. Falls Sie dies nicht getan haben sollten, ignorieren Sie diese Email "
+"bitte."
+
+#: cms/templates/emails/password_reset_email.html
+#: cms/templates/emails/password_reset_email.txt
+msgid "Use the link below to set a new password."
+msgstr "Nutzen Sie den folgenden Link um ein neues Passwort festzulegen."
+
+#: cms/templates/floor/create_floor.html
+msgid "Add New Floor"
+msgstr "Neue Etage hinzufügen"
+
+#: cms/templates/floor/create_floor.html cms/templates/floor/create_ward.html
+#: cms/templates/floor/update_floor.html
+msgid "Full Name"
+msgstr "Vollständiger Name"
+
+#: cms/templates/floor/create_floor.html cms/templates/floor/create_ward.html
+#: cms/templates/floor/update_floor.html
+msgid "Short Name"
+msgstr "Abkürzung"
+
+#: cms/templates/floor/create_floor.html cms/templates/floor/update_floor.html
+#: cms/templates/patients/hospital_stay_form.html
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patient_details.html
+#: cms/templates/specializations_list.html cms/templates/timeline/timeline.html
+#: cms/templates/user_settings.html cms/templates/ward/ward_card.html
+#: cms/templates/ward/ward_details.html
+msgid "Save"
+msgstr "Speichern"
+
+#: cms/templates/floor/create_ward.html cms/templates/ward/ward_management.html
+msgid "Add New Ward"
+msgstr "Neue Station hinzufügen"
+
+#: cms/templates/floor/create_ward.html
+msgid "Continue to details"
+msgstr "Erstellung fortsetzen"
+
+#: cms/templates/floor/floor.html
+msgid "Info"
+msgstr ""
+
+#: cms/templates/floor/floor.html
+msgid "Admin detected"
+msgstr "Admin erkannt"
+
+#: cms/templates/floor/floor.html
+msgid "Delete floor"
+msgstr "Etage löschen"
+
+#: cms/templates/floor/floor.html cms/templates/floor/update_floor.html
+msgid "Edit floor"
+msgstr "Etage bearbeiten"
+
+#: cms/templates/floor/floor.html
+msgid "Close"
+msgstr "Schließen"
+
+#: cms/templates/floor/floor.html
+msgid "Add ward"
+msgstr "Station hinzufügen"
+
+#: cms/templates/floor/floor.html
+#, python-format
+msgid ""
+"Are you sure you want to delete floor %(floor_name)s? This will delete all "
+"%(num_wards)s wards on this floor."
+msgstr "Sind Sie sicher, dass die Etage %(floor_name)s gelöscht werden soll? Diese Aktion wird alle %(num_wards)s Stationen auf dieser Etage löschen."
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Are you sure you want to delete this ward?"
+msgstr "Sind Sie sicher, dass diese Station gelöscht werden soll?"
+
+#: cms/templates/floor/floor_ward_card.html
+#: cms/views/ward/ward_management_view.py
+msgid "Wards with occupied beds cannot be deleted."
+msgstr "Stationen mit belegten Betten können nicht gelöscht werden."
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Okay"
+msgstr "Okay"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Occupied beds"
+msgstr "Belegte Betten"
+
+#: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_info.html
+msgid "Available Beds"
+msgstr "Verfügbare Betten"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Blocked Beds"
+msgstr "Blockierte Betten"
+
+#: cms/templates/floor/floor_ward_card.html
+msgid "Go to Ward"
+msgstr "Zur Station"
+
+#: cms/templates/home/home.html
+msgid "Home View"
+msgstr "Start"
+
+#: cms/templates/home/home_beds.html
+msgid "Bed Infos"
+msgstr "Betteninformation"
+
+#: cms/templates/home/home_beds.html cms/templates/home/home_patient.html
+msgid "Count"
+msgstr "Anzahl"
+
+#: cms/templates/home/home_beds.html cms/templates/ward/ward_info.html
+msgid "Total"
+msgstr "Gesamt"
+
+#: cms/templates/home/home_beds.html cms/templates/ward/ward_management.html
+msgid "Available"
+msgstr "Verfügbare Betten"
+
+#: cms/templates/home/home_beds.html cms/templates/ward/ward_management.html
+msgid "Occupied"
+msgstr "Belegten Betten"
+
+#: cms/templates/home/home_gender.html
+msgid "Gender Distribution"
+msgstr "Geschlechterverteilung"
+
+#: cms/templates/home/home_gender.html
+#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
+msgid "Male"
+msgstr "Männlich"
+
+#: cms/templates/home/home_gender.html
+#: cms/templates/patients/patients_list.html cms/templates/ward/ward_info.html
+msgid "Female"
+msgstr "Weiblich"
+
+#: cms/templates/home/home_gender.html
+msgid "Divers"
+msgstr "Divers"
+
+#: cms/templates/home/home_gender.html cms/templates/home/home_patient.html
+msgid "Patients"
+msgstr "Patient*innen"
+
+#: cms/templates/home/home_infos.html
+msgid "Overview"
+msgstr "Überblick"
+
+#: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
+msgid "Total Wards"
+msgstr "Anzahl der Stationen"
+
+#: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
+msgid "Total Doctors"
+msgstr "Anzahl der Ärzte"
+
+#: cms/templates/home/home_infos.html cms/templates/ward/ward_management.html
+msgid "Total Nurses"
+msgstr "Anzahl der Krankenpflegenden"
+
+#: cms/templates/home/home_patient.html
+msgid "Last 7 days"
+msgstr "Letzte 7 Tage"
+
+#: cms/templates/patients/hospital_stay_form.html
+msgid "Medical details"
+msgstr "Medizinische Details"
+
+#: cms/templates/patients/hospital_stay_form.html
+msgid "Organizational details"
+msgstr "Organisatorische Details"
+
+#: cms/templates/patients/hospital_stay_form.html
+msgid "Discharge now"
+msgstr "Jetzt entlassen"
+
+#: cms/templates/patients/hospital_stay_form.html
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patients_list.html
+msgid "Transfer"
+msgstr "Verschieben"
+
+#: cms/templates/patients/hospital_stay_form.html
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patients_list.html
+msgid "Assign bed"
+msgstr "Bett zuweisen"
+
+#: cms/templates/patients/hospital_stay_form.html
+msgid "Cancel planned stay"
+msgstr "Geplanten Aufenthalt absagen"
+
+#: cms/templates/patients/patient_card.html cms/templates/ward/ward_info.html
+msgid "Patient Information"
+msgstr "Patienteninformationen"
+
+#: cms/templates/patients/patient_card.html
+msgid "Personal Details"
+msgstr "Persönliche Daten"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/specializations_list.html
+msgid "Name"
+msgstr "Name"
+
+#: cms/templates/patients/patient_card.html
+msgid "Age"
+msgstr "Alter"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patients_list.html
+msgid "Gender"
+msgstr "Geschlecht"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patient_details.html cms/templates/ward/ward_bed.html
+msgid "Accompanied"
+msgstr "Begleitet"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patients_list.html
+msgid "Privately insured"
+msgstr "Privatversichert"
+
+#: cms/templates/patients/patient_card.html
+msgid "Hospital Stay Details"
+msgstr "Details zum Krankenhausaufenthalt"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patient_details.html
+msgid "Diagnosis"
+msgstr "Diagnose"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patient_details.html
+msgid "Specialization"
+msgstr "Fachrichtung"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patient_details.html
+msgid "Note"
+msgstr "Notiz"
+
+#: cms/templates/patients/patient_card.html
+msgid "Admission date"
+msgstr "Aufnahmedatum"
+
+#: cms/templates/patients/patient_card.html
+msgid "Discharge date"
+msgstr "Entlassungsdatum"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/specializations_list.html
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patients_list.html
+#: cms/templates/ward/ward_management.html
+msgid "Details"
+msgstr "Details"
+
+#: cms/templates/patients/patient_card.html
+#: cms/templates/patients/patient_details.html
+msgid "Discharge"
+msgstr "Entlassen"
+
+#: cms/templates/patients/patient_card.html
+msgid "Edit Patient Information"
+msgstr "Patienteninformationen bearbeiten"
+
+#: cms/templates/patients/patient_card.html
+msgid "Edit Personal Details"
+msgstr "Persönliche Daten bearbeiten"
+
+#: cms/templates/patients/patient_card.html
+msgid "Edit Hospital Stay Details"
+msgstr "Details zum Krankenhausaufenthalt bearbeiten"
+
+#: cms/templates/patients/patient_card_wrapper.html
+msgid "Edit Patient Stay"
+msgstr "Patientenaufenthalt bearbeiten"
+
+#: cms/templates/patients/patient_details.html
+msgid "Current hospital stay"
+msgstr "Aktueller Krankenhausaufenthalt"
+
+#: cms/templates/patients/patient_details.html
+msgid "Planned hospital stays"
+msgstr "Geplante Krankenhausaufenthalte"
+
+#: cms/templates/patients/patient_details.html
+msgid "Plan new stay"
+msgstr "Neuen Aufenthalt planen"
+
+#: cms/templates/patients/patient_details.html
+msgid "No planned stays."
+msgstr "Keine geplanten Krankenhausaufenthalte."
+
+#: cms/templates/patients/patient_details.html
+msgid "Medical history (by date descending)"
+msgstr "Krankengeschichte (absteigend nach Datum)"
+
+#: cms/templates/patients/patient_details.html
+msgid "Record type"
+msgstr "Unterlagenart"
+
+#: cms/templates/patients/patient_details.html
+msgid "Admission"
+msgstr "Aufnahme"
+
+#: cms/templates/patients/patient_details.html
+msgid "Bed"
+msgstr "Bett"
+
+#: cms/templates/patients/patient_details.html
+#: cms/templates/patients/patients_list.html
+#: cms/templates/ward/ward_drawer.html cms/templates/ward/ward_room_card.html
+msgid "Room"
+msgstr "Zimmer"
+
+#: cms/templates/patients/patient_details.html
+msgid "Type"
+msgstr "Typ"
+
+#: cms/templates/patients/patient_details.html
+msgid ""
+"No hospital stay data is associated with this intake. Most likely, the stay "
+"was cancelled in advance."
+msgstr ""
+"Mit dieser Aufnahme sind keine Aufenthaltsdaten assoziiert. Vermutlich wurde "
+"der Krankenhausaufenthalt im Vorhinein abgesagt."
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Import patient data"
+msgstr "Patientendaten importieren"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid ""
+"For each entry in the uploaded file, the import feature searches for the "
+"corresponding patient in the database. If a matching entry already exists, "
+"it is updated with potentially new medical records or hospital stays. If "
+"there is no matching entry, a new patient is created in the database. When "
+"there is an error during the import (e.g. due to a date with wrong format or "
+"non-existing wards), the import is canceled and all changes from the import "
+"are reverted."
+msgstr ""
+"Für jeden Eintrag in der hochgeladenen Datei sucht das Import Feature in der "
+"Datenbank nach dem entsprechenden Patienten. Wenn ein passender Eintrag "
+"bereits existiert, wird dieser mit ggf. neuen medizinischen Unteralgen oder "
+"Krankenhausaufenthalten aktualisiert. Wenn kein passender Eintrag existiert, "
+"wird ein neuer Patient in der Datenbank erstellt. Wenn beim Import ein "
+"Fehler auftritt (z.B. wegen eines Datums mit falschem Format oder nicht-"
+"existierender Stationen), wird der Import abgebrochen und alle bisherigen "
+"Änderungen des Imports rückgängig gemacht."
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Category"
+msgstr "Kategorie"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Required Fields"
+msgstr "Benötigte Felder"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "or empty"
+msgstr "oder leer"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "or"
+msgstr "oder"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "no or"
+msgstr "nein oder"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "yes"
+msgstr "ja"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "*Dates have to be provided in the following format: DD.MM.YYYY HH:MM"
+msgstr "*Daten müssen in folgendem Format angegeben werden: DD.MM.YYYY HH:MM"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid ""
+"**Caution: Currently, neither already assigned nor imported accompanied "
+"patients are handled correctly and thus rooms can be overfilled!"
+msgstr ""
+"**Achtung: Aktuell werden weder bereits zugewiesene noch importierte "
+"begleitete Patienten korrekt verarbeitet, weshalb Räume überfüllt werden "
+"können!"
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid ""
+"***For the options ward and bed, the provided data for the required fields "
+"have to exist in the hospital, otherwise the import fails."
+msgstr ""
+"***Für die Optionen Station und Bett müssen die für die benötigten Felder "
+"übergebenen Daten im Krankenhaus existieren, andernfalls schlägt der Import "
+"fehl."
+
+#: cms/templates/patients/patient_import_drawer.html
+msgid "Upload"
+msgstr "Hochladen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Normal intake"
+msgstr "Normale Aufnahme"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Emergency intake"
+msgstr "Notaufnahme"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Existing patients"
+msgstr "Bestandspatient*innen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Cancel selection"
+msgstr "Auswahl aufheben"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Start typing to search for existing patients."
+msgstr "Patientendaten eingeben um die Bestandspatient*innen zu durchsuchen."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Enter at least 3 characters to search."
+msgstr "Geben Sie mindestens 3 Buchstaben ein, um zu suchen."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Found {} matches."
+msgstr "{} Patient*innen gefunden."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "No matching patients found."
+msgstr "Keine übereinstimmenden Bestandspatient*innen gefunden."
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Select patient"
+msgstr "Patient*in auswählen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Clear inputs"
+msgstr "Eingaben löschen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Patient details"
+msgstr "Patientendaten"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Estimated stay (nights/discharge date)"
+msgstr "Voraussichtlicher Aufenthalt (Nächte/Entlassungsdatum)"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "two nights"
+msgstr "Zwei Nächte"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "one week"
+msgstr "Eine Woche"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "two weeks"
+msgstr "Zwei Wochen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "estimated duration of hospital stay in nights"
+msgstr "voraussichtliche Aufenthaltsdauer in Nächten"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Complete emergency intake"
+msgstr "Notaufnahme abschließen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Complete intake for new patient"
+msgstr "Aufnahme für neue*n Patient*in abschließen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Complete intake for existing patient"
+msgstr "Aufnahme für Bestandspatient*in abschließen"
+
+#: cms/templates/patients/patient_intake_form.html
+msgid "Complete patient intake"
+msgstr "Patientenaufnahme abschließen"
+
+#: cms/templates/patients/patients_list.html
+msgid "Manage Patients"
+msgstr "Patient*innen verwalten"
+
+#: cms/templates/patients/patients_list.html
+msgid "Patients list"
+msgstr "Patientenliste"
+
+#: cms/templates/patients/patients_list.html
+msgid "Import patient data from CSV file"
+msgstr "Patientendaten aus CSV-Datei importieren"
+
+#: cms/templates/patients/patients_list.html
+msgid "Search for name..."
+msgstr "Nach Name suchen..."
+
+#: cms/templates/patients/patients_list.html
+msgid "Patient name"
+msgstr "Patientenname"
+
+#: cms/templates/patients/patients_list.html
+msgid "Date of Birth"
+msgstr "Geburtsdatum"
+
+#: cms/templates/patients/patients_list.html
+msgid "Status"
+msgstr "Status"
+
+#: cms/templates/patients/patients_list.html
+msgid "Action"
+msgstr "Aktion"
+
+#: cms/templates/patients/patients_list.html
+msgid "Add patient"
+msgstr "Patient*in hinzufügen"
+
+#: cms/templates/patients/patients_list.html
+#: cms/templates/specializations_list.html cms/templates/ward/ward_details.html
+msgid "Add"
+msgstr "Hinzufügen"
+
+#: cms/templates/patients/patients_list.html
+msgid "Diverse"
+msgstr "Divers"
+
+#: cms/templates/patients/patients_list.html
+msgid "Date of birth"
+msgstr "Geburtsdatum"
+
+#: cms/templates/patients/patients_list.html
+msgid "Stays in:"
+msgstr "Liegt in:"
+
+#: cms/templates/patients/patients_list.html
+msgid "Waits for bed assignment in ward"
+msgstr "Wartet auf Bettenzuweisung in Station"
+
+#: cms/templates/patients/patients_list.html
+msgid "Waits for assignment to ward"
+msgstr "Wartet auf Stationszuweisung"
+
+#: cms/templates/patients/patients_list.html
+#, python-format
+msgid "Page %(cur_num)s of %(max_num)s"
+msgstr "Seite %(cur_num)s von %(max_num)s"
+
+#: cms/templates/specializations_list.html
+msgid "Manage Specializations"
+msgstr "Fachrichtungen bearbeiten"
+
+#: cms/templates/specializations_list.html
+msgid "Edit medical specialization"
+msgstr "Fachrichtungen bearbeiten"
+
+#: cms/templates/specializations_list.html
+msgid "Abbr."
+msgstr "Abk."
+
+#: cms/templates/specializations_list.html
+msgid "Add new medical specialization"
+msgstr "Neue Fachrichtung hinzufügen"
+
+#: cms/templates/timeline/timeline.html
+msgid "unsaved bed assignment changes"
+msgstr "ungespeicherte Bettzuweisungsänderungen"
+
+#: cms/templates/timeline/timeline.html cms/templates/ward/ward_info.html
+msgid "Suggest Assignment"
+msgstr "Zuweisung vorschlagen"
+
+#: cms/templates/timetravel_controls.html
+msgid "hour"
+msgstr "Stunde"
+
+#: cms/templates/timetravel_controls.html
+msgid "minute"
+msgstr "Minute"
+
+#: cms/templates/user_settings.html
+msgid "Change password"
+msgstr "Passwort ändern"
+
+#: cms/templates/ward/ward_bed.html
+msgid "Discharge in"
+msgstr "Entlassung in"
+
+#: cms/templates/ward/ward_bed.html
+msgid "Stay"
+msgstr "Aufenthalt"
+
+#: cms/templates/ward/ward_card.html
+msgid "Ward Information"
+msgstr "Stationsinformationen"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Ward Name"
+msgstr "Stationsname"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Ward Nickname"
+msgstr "Kurzer Stationsname"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
+msgid "Floor"
+msgstr "Stockwerk"
+
+#: cms/templates/ward/ward_card.html
+msgid "Allowed discharge days"
+msgstr "Zulässige Entlassungstage"
+
+#: cms/templates/ward/ward_card.html
+msgid "Add rooms to this ward"
+msgstr "Zimmer auf dieser Station hinzufügen"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
+#: cms/templates/ward/ward_management.html
+msgid "Room number"
+msgstr "Zimmernummer"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
+#: cms/templates/ward/ward_management.html
+msgid "Beds"
+msgstr "Betten"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
+#: cms/templates/ward/ward_management.html
+msgid "Add bed"
+msgstr "Bett hinzufügen"
+
+#: cms/templates/ward/ward_card.html cms/templates/ward/ward_details.html
+#: cms/templates/ward/ward_management.html
+msgid "Add room"
+msgstr "Zimmer hinzufügen"
+
+#: cms/templates/ward/ward_details.html
+msgid "Create new rooms"
+msgstr "Neue Zimmer erstellen"
+
+#: cms/templates/ward/ward_details.html
+msgid "Edit existing rooms"
+msgstr "Bestehende Zimmer bearbeiten"
+
+#: cms/templates/ward/ward_details.html
+msgid "Here, the room number can be changed"
+msgstr "Hier kann die Raumnummer geändert werden"
+
+#: cms/templates/ward/ward_details.html
+msgid "Beds in this room"
+msgstr "Betten in diesem Zimmer"
+
+#: cms/templates/ward/ward_details.html
+msgid ""
+"Here, existing beds can be modified or blocked, and new beds can be created"
+msgstr ""
+"Hier können bestehende Bettentypen geändert, bestehende Betten blockiert und "
+"neue Betten erstellt werden"
+
+#: cms/templates/ward/ward_details.html
+msgid "This bed is currently occupied"
+msgstr "Dieses Bett ist derzeit belegt"
+
+#: cms/templates/ward/ward_details.html
+msgid "This bed is currently blocked"
+msgstr "Dieses Bett ist derzeit blockiert"
+
+#: cms/templates/ward/ward_details.html
+msgid "- "
+msgstr ""
+
+#: cms/templates/ward/ward_details.html
+msgid "Bed type"
+msgstr "Bettart"
+
+#: cms/templates/ward/ward_details.html
+msgid "Bed blocking type"
+msgstr "Blockierart"
+
+#: cms/templates/ward/ward_details.html
+msgid "The bed gets blocked if a blocking type is assigned to it"
+msgstr "Das Bett wird blockiert, wenn ihm eine Blockierart zugewiesen wird"
+
+#: cms/templates/ward/ward_details.html
+msgid "Bed blocking reason"
+msgstr "Blockiergrund"
+
+#: cms/templates/ward/ward_drawer.html
+msgid "free beds"
+msgstr "freie Betten"
+
+#: cms/templates/ward/ward_drawer.html
+msgid "Bed assignment in the room"
+msgstr "Bettenzuweisung im Zimmer"
+
+#: cms/templates/ward/ward_drawer.html
+msgid "No patients in this room..."
+msgstr "Im Zimmer sind aktuell keine Betten belegt..."
+
+#: cms/templates/ward/ward_info.html
+msgid "Bed Availability"
+msgstr "Bettenverfügbarkeit"
+
+#: cms/templates/ward/ward_info.html cms/templates/ward/ward_management.html
+msgid "Total Beds"
+msgstr "Gesamtzahl der Betten"
+
+#: cms/templates/ward/ward_info.html
+msgid "Manually Assign"
+msgstr "Manuell zuweisen"
+
+#: cms/templates/ward/ward_management.html
+msgid "Ward Management"
+msgstr "Stationsverwaltung"
+
+#: cms/templates/ward/ward_management.html
+msgid "HospiTool at a glance"
+msgstr "HospiTool im Überblick"
+
+#: cms/templates/ward/ward_management.html
+msgid "Total Available Beds"
+msgstr "Gesamtzahl der verfügbaren Betten"
+
+#: cms/templates/ward/ward_management.html
+msgid "Total Occupied Beds"
+msgstr "Gesamtzahl der belegten Betten"
+
+#: cms/templates/ward/ward_management.html
+msgid "Add a New Ward"
+msgstr "Eine Neue Station Hinzufügen"
+
+#: cms/templates/ward/ward_management.html
+msgid "Details about Wards"
+msgstr "Details über Stationen"
+
+#: cms/templates/ward/ward_management.html
+msgid "Number of Beds"
+msgstr "Betten"
+
+#: cms/templates/ward/ward_modal.html
+msgid "Are you sure you want to discharge this patient?"
+msgstr "Sind Sie sicher, dass Sie diesen Patienten entlassen möchten?"
+
+#: cms/templates/ward/ward_mode_switch.html
+msgid "Ward mode"
+msgstr "Stationsmodus"
+
+#: cms/templates/ward/ward_mode_switch.html
+msgid "Timeline mode"
+msgstr "Timelinemodus"
+
+#: cms/templates/ward/ward_room_card.html
+msgid "Age gap is large (> 20)"
+msgstr "Der Altersunterschied ist groß (> 20)"
+
+#: cms/utils/email_utils.py
+msgid "HospiTool | Activate your account"
+msgstr "HospiTool | Aktivieren Sie Ihren Account"
+
+#: cms/utils/email_utils.py
+msgid "activation mail"
+msgstr "Aktivierungs-Mail"
+
+#: cms/utils/email_utils.py
+msgid "HospiTool | Your requested password reset"
+msgstr "HospiTool | Ihre angeforderte Passwortrücksetzung"
+
+#: cms/utils/email_utils.py
+msgid "password reset mail"
+msgstr "Passwort-Zurücksetzen-Mail"
+
+#: cms/views/authentication/password_reset_confirm_view.py
+msgid "You are already logged in."
+msgstr "Sie sind bereits eingeloggt."
+
+#: cms/views/authentication/password_reset_confirm_view.py
+msgid "The account you are trying to set a password for does not exist."
+msgstr ""
+"Der Account für den Sie versuchen ein Passwort zu setzen existiert nicht."
+
+#: cms/views/authentication/password_reset_confirm_view.py
+msgid "This password reset link is invalid."
+msgstr "Der Passwort-Zurücksetzen-Link ist ungültig."
+
+#: cms/views/authentication/password_reset_confirm_view.py
+msgid "It may have already been used."
+msgstr "Möglicherweise wurde er bereits verwendet."
+
+#: cms/views/authentication/password_reset_confirm_view.py
+msgid "Please request a new link to reset your password."
+msgstr "Bitte fordern Sie einen neuen Passwort-Zurücksetzen-Link an."
+
+#: cms/views/authentication/password_reset_confirm_view.py
+msgid "Your password has been successfully reset."
+msgstr "Ihr Passwort wurde erfolgreich zurückgesetzt."
+
+#: cms/views/authentication/password_reset_confirm_view.py
+msgid "You can now log in with your new password."
+msgstr "Sie können Sich nun mit Ihrem neuen Passwort einloggen."
+
+#: cms/views/authentication/password_reset_request_view.py
+msgid ""
+"An email has been sent to \"{}\". Please use the link in the email to reset "
+"your password."
+msgstr ""
+"Wir haben eine Bestätigungsmail an \"{}\" gesandt. Bitten nutzen Sie den "
+"Link in der E-Mail, um Ihr Passwort zurückzusetzen."
+
+#: cms/views/authentication/registration_view.py
+msgid ""
+"A confirmation email has been sent to \"{}\". Please use the link in the "
+"email to activate the account."
+msgstr ""
+"Wir haben eine Bestätigungsmail an \"{}\" gesandt. Bitten nutzen Sie den "
+"Link in der E-Mail, um Ihren Account zu aktivieren."
+
+#: cms/views/floor/add_ward.py
+msgid "Ward \"{}\" was added successfully!"
+msgstr "Station \"{}\" wurde erfolgreich hinzugefügt!"
+
+#: cms/views/floor/change_floor.py
+msgid "Floor \"{}\" was added successfully!"
+msgstr "Stockwerk \"{}\" wurde erfolgreich hinzugefügt!"
+
+#: cms/views/floor/change_floor.py
+msgid "Floor \"{}\" was edited successfully!"
+msgstr "Stockwerk \"{}\" wurde erfolgreich bearbeitet!"
+
+#: cms/views/floor/change_floor.py
+msgid "Floor has been deleted."
+msgstr "Das Stockwerk wurde gelöscht."
+
+#: cms/views/patients/assign_view.py
+msgid "Successfully assigned \"{}, {}\" to bed {} in room {}."
+msgstr "\"{}, {}\" erfolgreich zu Bett {} in Raum {} zugewiesen."
+
+#: cms/views/patients/assign_view.py
+msgid "Successfully unassigned \"{}, {}\"."
+msgstr "Zuewisung für \"{}, {}\" erfolgreich aufgehoben."
+
+#: cms/views/patients/assign_view.py
+msgid "Successfully moved \"{}, {}\" to {}."
+msgstr "\"{}, {}\" erfolgreich nach {} verschoben."
+
+#: cms/views/patients/intake_form_view.py
+msgid "Patient \"{} {}\" has been saved."
+msgstr "Patient*in \"{} {}\" wurde gespeichert."
+
+#: cms/views/patients/intake_form_view.py
+msgid "Discharge in ward \"{}\" not possible on {}."
+msgstr "Entlassung in Station \"{}\" nicht möglich am {}."
+
+#: cms/views/patients/intake_form_view.py
+msgid "Intake for patient \"{} {}\" with diagnosis \"{}\" has been saved."
+msgstr ""
+"Aufnahme für Patient*in \"{} {}\" mit Diagnose \"{}\" wurde gespeichert."
+
+#: cms/views/patients/intake_form_view.py
+msgid "Intake for patient \"{} {}\" has been saved."
+msgstr "Aufnahme für Patient*in \"{} {}\" wurde gespeichert."
+
+#: cms/views/patients/patient_details_view.py
+msgid "New record has been created."
+msgstr "Neue medizinische Unterlage wurde erstellt."
+
+#: cms/views/patients/patient_details_view.py
+msgid "Hospital stay for patient {}, {} has been updated."
+msgstr "Krankenhausaufenthalt für Patient*in {}, {} wurde bearbeitet."
+
+#: cms/views/patients/patient_details_view.py
+msgid "The planned stay has been canceled."
+msgstr "Der geplante Krankenhausaufenthalt wurde abgesagt."
+
+#: cms/views/patients/patients_list_view.py
+msgid "Data was successfully imported."
+msgstr "Daten wurden erfolgreich importiert."
+
+#: cms/views/patients/patients_list_view.py
+msgid "New patients added: {}"
+msgstr "Neue Patienten hinzugefügt: {}"
+
+#: cms/views/patients/patients_list_view.py
+msgid "Duplicated entries found: {}"
+msgstr "Doppelte Einträge gefunden: {}"
+
+#: cms/views/patients/patients_list_view.py
+msgid "Entries updated: {}"
+msgstr "Einträge aktualisiert: {}"
+
+#: cms/views/patients/patients_list_view.py
+msgid "No entries were added or updated."
+msgstr "Es wurden keine Einträge hinzugefügt oder aktualisiert."
+
+#: cms/views/patients/patients_list_view.py
+msgid "Patient {}, {} has been created."
+msgstr "Patient*in {}, {} wurde hinzugefügt."
+
+#: cms/views/patients/patients_list_view.py
+msgid "Patient {}, {} has been updated."
+msgstr "Patient*in {}, {} wurde bearbeitet."
+
+#: cms/views/patients/patients_list_view.py
+msgid "Patient has been deleted."
+msgstr "Patient*in wurde gelöscht."
+
+#: cms/views/patients/update_patient_stay_view.py
+msgid ""
+"Patient \"{} {}\"  and their current stay from {} to {} have been saved."
+msgstr ""
+"Patient*in \"{} {}\"  und aktueller Krankenhausaufenthalt von {} bis {} "
+"wurden gespeichert."
+
+#: cms/views/specializations.py
+msgid "Specialization {} ({}) has been created."
+msgstr "Fachrichtung {} ({}) wurde erstellt."
+
+#: cms/views/specializations.py
+msgid "Specialization {} ({}) has been updated."
+msgstr "Fachrichtung {} ({}) wurde aktualisiert."
+
+#: cms/views/specializations.py
+msgid "Specialization {} ({}) has been deleted."
+msgstr "Fachrichtung {} ({}) wurde gelöscht."
+
+#: cms/views/timeline/timeline_view.py
+msgid "The PRA algorithm is not installed."
+msgstr "Der Bettzuweisungsalgorithmus ist nicht installiert."
+
+#: cms/views/timeline/timeline_view.py
+msgid "The Gurobi license is missing. Please install it and try again."
+msgstr ""
+"Die Gurobi-Lizenz fehlt. Bitte installiere diese und versuche es erneut."
+
+#: cms/views/timeline/timeline_view.py
+msgid "The Gurobi license is invalid. Please update it and try again."
+msgstr ""
+"Die Gurobi-Lizenz is ungültig. Bitte aktualisiere diese und versuche es "
+"erneut."
+
+#: cms/views/timeline/timeline_view.py
+msgid "Algorithm failed to generate assignment."
+msgstr "Der Algorithmus konnte keine Zuweisung generieren."
+
+#: cms/views/timeline/timeline_view.py
+msgid "unassigned"
+msgstr "nicht zugewiesen"
+
+#: cms/views/timeline/timeline_view.py
+msgid "{} of {} assignments have successfully been saved."
+msgstr "{} von {} Zuweisungen wurden erfolgreich gespeichert."
+
+#: cms/views/timeline/timeline_view.py
+msgid "{} assignments failed. The patients have been unassigned."
+msgstr ""
+"{} Zuweisungen sind fehlgeschlagen. Die Zuweisungen der Patient*innen wurden "
+"aufgehoben."
+
+#: cms/views/user_settings_view.py
+msgid "Your settings were successfully updated!"
+msgstr "Deine Einstellungen wurden erfolgreich geändert!"
+
+#: cms/views/user_settings_view.py
+msgid "Your password was successfully updated!"
+msgstr "Dein Passwort wurde erfolgreich geändert!"
+
+#: cms/views/ward/ward_details.py
+msgid "Following room numbers already exist: {}"
+msgstr "Die folgenden Zimmernummern existieren bereits: {}"
+
+#: cms/views/ward/ward_details.py
+msgid "Successfully created {} rooms"
+msgstr "Räume erfolgeich erstell: {}"
+
+#: cms/views/ward/ward_details.py
+msgid "This room number already exists in this ward"
+msgstr "Diese Raumnummer existiert bereits auf dieser Station"
+
+#: cms/views/ward/ward_details.py
+msgid "Room updated successfully"
+msgstr "Der Raum wurde erfolgreich bearbeitet"
+
+#: cms/views/ward/ward_details.py
+msgid "The room cannot be deleted because it contains occupied beds."
+msgstr "Das Zimmer kann nicht gelöscht werden, da es belegte Betten enthält."
+
+#: cms/views/ward/ward_details.py
+msgid "The room has been deleted."
+msgstr "Der Raum wurde gelöscht."
+
+#: cms/views/ward/ward_details.py
+msgid "Bed updated successfully"
+msgstr "Das Bett wurde erfolgreich aktualisiert"
+
+#: cms/views/ward/ward_details.py
+msgid "The bed cannot be deleted because it is occupied."
+msgstr "Das Bett kann nicht gelöscht werden, da es belegt ist."
+
+#: cms/views/ward/ward_details.py
+msgid "The bed has been deleted."
+msgstr "Das Bett wurde gelöscht."
+
+#: cms/views/ward/ward_details.py
+msgid "Bed created successfully"
+msgstr "Bett erfolgreich erstellt"
+
+#: cms/views/ward/ward_management_view.py
+msgid "Addition of new ward \"{}\" successful!"
+msgstr "Hinzufügung der neuen Station \"{}\" erfolgreich!"
+
+#: cms/views/ward/ward_management_view.py
+msgid "Added {} rooms with {} beds to \"{}\"."
+msgstr "{} Räume mit {} Betten zu \"{}\" hinzugefügt."
+
+#: cms/views/ward/ward_management_view.py
+msgid "The ward has been deleted."
+msgstr "Die Station wurde gelöscht."
+
+#: cms/views/ward/ward_management_view.py
+msgid "The following room numbers already exist: {}"
+msgstr "Die folgenden Zimmernummern existieren bereits: {}"
+
+#: cms/views/ward/ward_management_view.py
+msgid "Added {} new rooms with {} new beds to the ward."
+msgstr "Der Station wurden {} neue Zimmer mit {} neuen Betten hinzugefügt."
+
+#: cms/views/ward/ward_management_view.py
+msgid "Ward information has been successfully updated!"
+msgstr "Deine Einstellungen wurden erfolgreich geändert!"
+
+#: core/apps.py
+msgid "Core"
+msgstr "Core"
+
+#: core/settings.py
+msgid "German"
+msgstr "Deutsch"
+
+#: core/settings.py
+msgid "English"
+msgstr "Englisch"
+
+#, fuzzy
+#~| msgid "Are you sure you want to delete this ward?"
+#~ msgid "Are you sure you want to delete floor"
+#~ msgstr "Sind Sie sicher, dass diese Station gelöscht werden soll?"
+
+#, fuzzy
+#~| msgid "Order of the floor"
+#~ msgid "wards on this floor."
+#~ msgstr "Reihenfolge des Stockwerks"
+
+#, fuzzy
+#~| msgid "Ward Information"
+#~ msgid "Information"
+#~ msgstr "Stationsinformationen"
+
+#~ msgid "Here can change the room number"
+#~ msgstr "Hier kann die Zimmernummer geändert werden"
+
+#~ msgid "Here can modify the existing bed type / create a new bed "
+#~ msgstr ""
+#~ "Hier können bestehende Bettentypen geändert, bestehende Betten blockiert "
+#~ "und neue Betten erstellt werden "
+
+#~ msgid "No blocking"
+#~ msgstr "Nicht blockiert"
+
+#~ msgid "Discharges possible on"
+#~ msgstr "Entlassungen zulässig am"
+
+#~ msgid "and"
+#~ msgstr "und"
+
+#~ msgid "Discharges not allowed on "
+#~ msgstr "Entlassungen nicht zulässig am "
+
+#~ msgid "An error occured while uploading the file."
+#~ msgstr "Beim Hochladen der Datei trat ein Fehler auf."
+
+#~ msgid "Only files with extension .csv are allowed."
+#~ msgstr "Es sind nur Dateien mit Dateiendung .csv erlaubt."
+
+#~ msgid "reset form"
+#~ msgstr "zurücksetzen"
+
+#~ msgid "Or create new patient"
+#~ msgstr "Oder neue Patient*in hinzufügen"
+
+#~ msgid "ward number"
+#~ msgstr "Stationsnummer"
+
+#~ msgid "Number of the ward"
+#~ msgstr "Nummer der Station"
+
+#~ msgid "Occupation rate"
+#~ msgstr "Belegungsrate"
+
+#~ msgid "Confirm"
+#~ msgstr "Passwort bestätigen"
+
+#~ msgid "Ward Number"
+#~ msgstr "Stationsnummer"
+
+#~ msgid "Assign"
+#~ msgstr "Zuweisen"
+
+#~ msgid "Hostpital Stay Details"
+#~ msgstr "Details zum Krankenhausaufenthalt"
+
+#~ msgid "Bed Assignments"
+#~ msgstr "Bettzuweisungen"
+
+#~ msgid ""
+#~ "You do not have permission view patient data. To do so, please log in."
+#~ msgstr ""
+#~ "Sie haben keine Berechtigung zum Betrachten von Patientendaten. Um dies "
+#~ "zu tun, loggen Sie sich bitte ein."
+
+#~ msgid "in Ward"
+#~ msgstr "in Station"
+
+#~ msgid "to ward"
+#~ msgstr "zu Station"
+
+#~ msgid "Diagnosis code"
+#~ msgstr "Diagnosecode"
+
+#~ msgid "Name: Wrong syntax. Use \"Lastname, Firstname\"."
+#~ msgstr "Name: Falsche Syntax. Benutze \"Nachname, Vorname\"."
+
+#~ msgid "DOB"
+#~ msgstr "Geb. Dat."
+
+#~ msgid "Added by"
+#~ msgstr "Hinzugefügt von"
+
+#~ msgid "Added at"
+#~ msgstr "Hinzugefügt am"
+
+#~ msgid "New Bed Assignment"
+#~ msgstr "Neue Bettenzuweisung"
+
+#~ msgid "Create a new bed assignment"
+#~ msgstr "Erstellen Sie eine neue Bettenzuweisung"
+
+#~ msgid "is available"
+#~ msgstr "ist verfügbar"
+
+#~ msgid "current availability status of the bed"
+#~ msgstr "aktueller Verfügbarkeitsstatus des Betts"
+
+#~ msgid "The patient assigned to the bed"
+#~ msgstr "Diesem Bett zugewiesene*r Patient*in"
+
+#~ msgid "registration date"
+#~ msgstr "Registrierung"
+
+#~ msgid "date the need for a hospital stay became known"
+#~ msgstr ""
+#~ "Datum zu dem die Notwendigkeit eines Krankenhausaufenthalts bekannt wurde"
+
+#~ msgid "Fields with * are required."
+#~ msgstr "Felder mit * sind Pflichtfelder."
+
+#~ msgid "Manager"
+#~ msgstr "Manager"
+
+#~ msgid "Passwords do not match."
+#~ msgstr "Die Passwörter stimmen nicht überein."
+
+#~ msgid "The display name \"{}\" is already taken."
+#~ msgstr "Der Anzeigename \"{}\" ist bereits vergeben."
+
+#~ msgid "display name"
+#~ msgstr "Anzeigename"
+
+#~ msgid "This name will be shown as the author of changes"
+#~ msgstr "Dieser Name wird als Autor von Änderungen angezeigt"
+
+#~ msgid "Register as an Offer Provider"
+#~ msgstr "Als Maßnahmen-Anbieter registrieren"
+
+#~ msgid "Sign Up"
+#~ msgstr "Registrieren"
+
+#~ msgid "This account activation link is invalid."
+#~ msgstr "Der Accountaktivierungslink ist ungültig."
+
+#~ msgid ""
+#~ "Please contact an administrator to request a new link to activate your "
+#~ "account."
+#~ msgstr ""
+#~ "Bitte kontaktieren Sie einen Administrator um einen neuen Link "
+#~ "anzufordern."
+
+#~ msgid "File too large. Size should not exceed {}."
+#~ msgstr "Datei zu groß. Größe darf {} nicht überschreiten."
+
+#~ msgid "Register"
+#~ msgstr "Registrieren"

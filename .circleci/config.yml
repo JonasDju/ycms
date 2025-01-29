@@ -40,13 +40,13 @@ jobs:
           key: pip-{{ checksum "pyproject.toml" }}-v1
           paths:
             - .venv
-            - ycms.egg-info
+            - hospitool.egg-info
             - /home/circleci/.cache/pip
       - persist_to_workspace:
           root: .
           paths:
             - .venv
-            - ycms.egg-info
+            - hospitool.egg-info
   npm-install:
     docker:
       - image: "cimg/node:lts"
@@ -103,12 +103,12 @@ jobs:
       - run:
           name: Compile translation file
           command: |
-            cd ycms
-            ycms-cli compilemessages --settings=ycms.core.circleci_settings
+            cd hospitool
+            hospitool-cli compilemessages --settings=hospitool.core.circleci_settings
       - persist_to_workspace:
           root: .
           paths:
-            - ycms/locale/*/LC_MESSAGES/django.mo
+            - hospitool/locale/*/LC_MESSAGES/django.mo
   djlint:
     docker:
       - image: cimg/python:3.9.16
@@ -122,7 +122,7 @@ jobs:
           command: echo "source .venv/bin/activate" >> $BASH_ENV
       - run:
           name: Check formatting of Django templates
-          command: djlint --check --lint ycms
+          command: djlint --check --lint hospitool
   eslint:
     docker:
       - image: "cimg/node:lts"
@@ -183,15 +183,15 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - ycms/static/dist
-            - ycms/webpack-stats.json
+            - hospitool/static/dist
+            - hospitool/webpack-stats.json
   test:
     docker:
       - image: cimg/python:3.9.16
       - image: cimg/postgres:14.1
         environment:
-          POSTGRES_USER: ycms
-          POSTGRES_DB: ycms
+          POSTGRES_USER: hospitool
+          POSTGRES_DB: hospitool
           POSTGRES_PASSWORD: password
     resource_class: small
     parallelism: 2
@@ -205,11 +205,11 @@ jobs:
       - run:
           name: Migrate database
           command: |
-            cd ycms
-            ycms-cli migrate --settings=ycms.core.circleci_settings
+            cd hospitool
+            hospitool-cli migrate --settings=hospitool.core.circleci_settings
       - run:
           name: Run tests
-          command: pytest --circleci-parallelize --disable-warnings --cov=ycms --cov-report xml --junitxml=test-results/junit.xml  --ds=ycms.core.circleci_settings
+          command: pytest --circleci-parallelize --disable-warnings --cov=hospitool --cov-report xml --junitxml=test-results/junit.xml  --ds=hospitool.core.circleci_settings
       - store_test_results:
           path: test-results
       - store_artifacts:

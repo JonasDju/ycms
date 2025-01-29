@@ -6,7 +6,7 @@ compute_hash() {
 }
 
 # Change directory to make sure to ignore files in the venv
-cd ycms || exit 1
+cd hospitool || exit 1
 
 # Compute the SHA256 hash of the file
 FILE_PATH="locale/de/LC_MESSAGES/django.po"
@@ -25,13 +25,13 @@ if [ -f "$HASH_FILE" ]; then
         echo "No updated translations found."
     else
         echo "Translation file has been modified. Recompiling..."
-        ycms-cli compilemessages --verbosity 1
+        hospitool-cli compilemessages --verbosity 1
         echo "$CURRENT_HASH" > "$HASH_FILE"
     fi
 else
     # If the hash file does not exist, create it and compile messages
     echo "Compiling translations..."
-    ycms-cli compilemessages --verbosity 1
+    hospitool-cli compilemessages --verbosity 1
     mkdir -p "$(dirname "$HASH_FILE")"
     echo "$CURRENT_HASH" > "$HASH_FILE"
 fi

@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Switch into the ycms base dir and activate python environment
-cd ycms
+# Switch into the hospitool base dir and activate python environment
+cd hospitool
 . .venv/bin/activate
 
 # Specify DJANGO_SETTINGS_MODULE for pytest to work with
-export DJANGO_SETTINGS_MODULE="ycms.core.settings"
+export DJANGO_SETTINGS_MODULE="hospitool.core.settings"
 
 # Delete outdated code coverage report
 CODE_COVERAGE_DIR="htmlcov"
@@ -55,7 +55,7 @@ fi
 
 # Determine whether coverage data should be collected
 if [[ -z "${CHANGED}" && -z "${TEST_PATH}" ]]; then
-    PYTEST_ARGS+=("--cov=ycms" "--cov-report=html")
+    PYTEST_ARGS+=("--cov=hospitool" "--cov-report=html")
 fi
 
 # Check whether test path exists

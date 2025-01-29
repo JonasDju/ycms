@@ -2,27 +2,27 @@ services:
   db:
     image: postgres:15
     environment:
-      - POSTGRES_USER=ycms
-      - POSTGRES_DB=ycms
+      - POSTGRES_USER=hospitool
+      - POSTGRES_DB=hospitool
       - POSTGRES_PASSWORD=password
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ycms -d ycms"]
+      test: ["CMD-SHELL", "pg_isready -U hospitool -d hospitool"]
       interval: 1s
       timeout: 5s
       retries: 10
 
-  ycms-dev:
-    image: ycms-dev:0.6
+  hospitool-dev:
+    image: hospitool-dev:1.0
     pull_policy: never
     build:
       dockerfile: ./docker/dev/Dockerfile
       context: .
     environment:
-      - YCMS_DB_HOST=db
+      - HOSPITOOL_DB_HOST=db
     ports:
       - "8086:8086"
     volumes:
-      - ./:/bed-management/ycms
+      - ./:/bed-management/hospitool
       - ./gurobi:/opt/gurobi
     profiles: [dev]
     depends_on:

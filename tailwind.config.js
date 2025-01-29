@@ -16,8 +16,8 @@ const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: [
-    "./ycms/cms/templates/**/*.html",
-    "./ycms/static/src/js/**/*.{js,ts,tsx}",
+    "./hospitool/cms/templates/**/*.html",
+    "./hospitool/static/src/js/**/*.{js,ts,tsx}",
     "./node_modules/flowbite/**/*.js",
   ],
   theme: {
@@ -57,8 +57,8 @@ module.exports = {
         },
       },
       backgroundImage: {
-        "ycms-icon": "url('../images/favicon.svg')",
-        "ycms-logo": "url('../images/logo-bed.svg')",
+        "hospitool-icon": "url('../images/favicon.svg')",
+        "hospitool-logo": "url('../images/logo-bed.svg')",
       },
       fontFamily: {
         "default": ["Roboto", "Raleway", "Lateef", "Noto Sans SC", "sans-serif", "Noto Sans Ethiopic"],

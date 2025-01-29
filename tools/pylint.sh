@@ -25,5 +25,5 @@ require_installed
 # Run pylint
 echo "Starting code linting with pylint..." | print_info
 # Explicitly include cli which does not have a .py ending
-pylint . ycms/ycms-cli
+pylint . hospitool/hospitool-cli
 echo "✔ Linting finished" | print_success

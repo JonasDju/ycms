@@ -16,11 +16,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 module.exports = {
   entry: {
-    main: "./ycms/static/src/index.ts",
+    main: "./hospitool/static/src/index.ts",
   },
   output: {
     filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "ycms/static/dist"),
+    path: path.resolve(__dirname, "hospitool/static/dist"),
     clean: true,
     assetModuleFilename: "assets/[name]-[hash][ext][query]",
   },
@@ -101,6 +101,6 @@ module.exports = {
       filename: "[name].[contenthash].css",
       chunkFilename: "[id].[contenthash].css",
     }),
-    new BundleTracker({ filename: "./ycms/webpack-stats.json" }),
+    new BundleTracker({ filename: "./hospitool/webpack-stats.json" }),
   ],
 };

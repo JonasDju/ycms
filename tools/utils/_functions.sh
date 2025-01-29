@@ -32,11 +32,11 @@ if [[ "$*" == *"--verbose"* ]]; then
     # The shell writes a trace for each command to standard error after it expands the command and before it executes it.
     set -vx
 fi
-# The Port on which the YCMS development server should be started (do not use 9000 since this is used for webpack)
-YCMS_PORT=8086
+# The Port on which the HospiTool development server should be started (do not use 9000 since this is used for webpack)
+HOSPITOOL_PORT=8086
 # The name of the used database docker container
-DOCKER_CONTAINER_NAME="ycms_django_postgres"
-YCMS="ycms"
+DOCKER_CONTAINER_NAME="hospitool_django_postgres"
+HOSPITOOL="hospitool"
 
 # Change to dev tools directory
 cd "$(dirname "${BASH_SOURCE[0]}")"
@@ -48,7 +48,7 @@ cd ..
 # The absolute path to the base directory of the repository
 BASE_DIR=$(pwd)
 # The path to the package
-PACKAGE_DIR_REL="ycms"
+PACKAGE_DIR_REL="hospitool"
 PACKAGE_DIR="${BASE_DIR}/${PACKAGE_DIR_REL}"
 # The filename of the currently running script
 SCRIPT_NAME=$(basename "$0")
@@ -59,10 +59,10 @@ SCRIPT_ARGS=("$@")
 # The verbosity of the output (can be one of {0,1,2,3})
 SCRIPT_VERBOSITY="1"
 
-# This function shows a success message once the YCMS development server is running
+# This function shows a success message once the HospiTool development server is running
 function listen_for_devserver {
-    until nc -z localhost "$YCMS_PORT"; do sleep 0.1; done
-    echo "✔ Started YCMS at http://localhost:${YCMS_PORT}" | print_success
+    until nc -z localhost "$HOSPITOOL_PORT"; do sleep 0.1; done
+    echo "✔ Started HospiTool at http://localhost:${HOSPITOOL_PORT}" | print_success
 }
 
 # This function makes sure a database is available
@@ -71,7 +71,7 @@ function require_database {
     if [[ "$(env bash -c "command -v docker")" ]]; then
          echo "✔ Docker detected" | print_success
         # Set docker settings
-        export DJANGO_SETTINGS_MODULE="ycms.core.docker_settings"
+        export DJANGO_SETTINGS_MODULE="hospitool.core.docker_settings"
         # Make sure a docker container is up and running
         ensure_docker_container_running
     elif nc -z localhost 5432; then
@@ -81,7 +81,7 @@ function require_database {
         migrate_database
 
         # Set default settings for other dev tools, e.g. testing
-        export DJANGO_SETTINGS_MODULE="ycms.core.settings"
+        export DJANGO_SETTINGS_MODULE="hospitool.core.settings"
     else
         echo -e "Docker or PostgresQL are required for running this project."  | print_error
         exit 1
@@ -97,22 +97,22 @@ function migrate_database {
         deescalate_privileges mkdir -pv "${PACKAGE_DIR}/cms/migrations"
         deescalate_privileges touch "${PACKAGE_DIR}/cms/migrations/__init__.py"
         # Generate migration files
-        deescalate_privileges ycms-cli makemigrations --verbosity "${SCRIPT_VERBOSITY}"
+        deescalate_privileges hospitool-cli makemigrations --verbosity "${SCRIPT_VERBOSITY}"
         # Execute migrations
-        deescalate_privileges ycms-cli migrate --verbosity "${SCRIPT_VERBOSITY}"
+        deescalate_privileges hospitool-cli migrate --verbosity "${SCRIPT_VERBOSITY}"
         echo "✔ Finished database migrations" | print_success
         DATABASE_MIGRATED=1
     fi
 
     # Load permissions fixture
-    deescalate_privileges ycms-cli loaddata permissions
+    deescalate_privileges hospitool-cli loaddata permissions
 }
 
 
-# This function checks if the ycms is installed
+# This function checks if the HospiTool is installed
 function require_installed {
-    if [[ -z "$YCMS_INSTALLED" ]]; then
-        echo "Checking if YCMS is installed..." | print_info
+    if [[ -z "$HOSPITOOL_INSTALLED" ]]; then
+        echo "Checking if HospiTool is installed..." | print_info
         # Check if script was invoked with sudo
         if [[ $(id -u) == 0 ]] && [[ -n "$SUDO_USER" ]]; then
             # overwrite $HOME directory in case script was called with sudo but without the -E flag
@@ -128,20 +128,20 @@ function require_installed {
             echo -e "\t$(dirname "${BASH_SOURCE[0]}")/install.sh\n" | print_bold
             exit 1
         fi
-        # Check if ycms-cli is available in virtual environment
-        if [[ ! -x "$(env bash -c "command -v ycms-cli")" ]]; then
-            echo -e "The YCMS is not installed. Please install it with:\n"  | print_error
+        # Check if hospitool-cli is available in virtual environment
+        if [[ ! -x "$(env bash -c "command -v hospitool-cli")" ]]; then
+            echo -e "The HospiTool is not installed. Please install it with:\n"  | print_error
             echo -e "\t$(dirname "${BASH_SOURCE[0]}")/install.sh\n" | print_bold
             exit 1
         fi
-        echo "✔ YCMS is installed" | print_success
-        YCMS_INSTALLED=1
-        export YCMS_INSTALLED
+        echo "✔ HospiTool is installed" | print_success
+        HOSPITOOL_INSTALLED=1
+        export HOSPITOOL_INSTALLED
         # Check if script is running in CircleCI context and set DEBUG=True if not
         if [[ -z "$CIRCLECI" ]]; then
             # Set debug mode for
-            YCMS_DEBUG=1
-            export YCMS_DEBUG
+            HOSPITOOL_DEBUG=1
+            export HOSPITOOL_DEBUG
         fi
     fi
 }

@@ -1,0 +1,182 @@
+{% extends "_base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}
+    {% translate "Ward Management" %}
+{% endblock title %}
+{% block content %}
+    <div class="flex justify-center items-center">
+        <div class="container mx-auto">
+            <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2">
+                <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+                    <div class="mb-4 text-2xl font-semibold dark:text-white">{% translate "HospiTool at a glance" %}</div>
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div>
+                            <div class="text-lg font-semibold dark:text-white">{% translate "Total Wards" %}</div>
+                            <div class="text-3xl font-bold dark:text-white">{{ wards_count }}</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold dark:text-white">{% translate "Total Doctors" %}</div>
+                            <div class="text-3xl font-bold dark:text-white">{{ doctors_count }}</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold dark:text-white">{% translate "Total Nurses" %}</div>
+                            <div class="text-3xl font-bold dark:text-white">{{ nurses_count }}</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold dark:text-white">{% translate "Total Beds" %}</div>
+                            <div class="text-3xl font-bold dark:text-white">{{ beds_count }}</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold dark:text-white">{% translate "Total Available Beds" %}</div>
+                            <div class="text-3xl font-bold dark:text-white">{{ available_beds }}</div>
+                        </div>
+                        <div>
+                            <div class="text-lg font-semibold dark:text-white">{% translate "Total Occupied Beds" %}</div>
+                            <div class="text-3xl font-bold dark:text-white">{{ occupied_beds }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2">
+                <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700">
+                    <div class="mb-4 text-2xl font-semibold dark:text-white">{% translate "Add a New Ward" %}</div>
+                    <br>
+                    <form enctype="multipart/form-data"
+                          method="post"
+                          id="ward_form"
+                          class="mb-8"
+                          data-unsaved-warning>
+                        {% csrf_token %}
+                        <div class="grid xl:grid-cols-3 gap-4">
+                            {% for field in ward_form %}
+                                <div class="grow w-full">
+                                    <label for="{{ field.id_for_label }}"
+                                           {% if field.field.required %}class="field-required"{% endif %}>
+                                        {{ field.label }}
+                                    </label>
+                                    {# render weekday selection manually #}
+                                    {% if field.name == "allowed_discharge_days" %}
+                                        <div id="{{ field.id }}" class="flex flex-wrap gap-2">
+                                            {% for value, label in field.field.choices %}
+                                                <label class="mt-0 mb-0.5 flex flex-col items-center w-[40px] font-semibold text-base flex-none">
+                                                    <input 
+                                                        class="!mr-0"
+                                                        type="checkbox" 
+                                                        name="{{ field.html_name }}" 
+                                                        value="{{ value }}"
+                                                        {% if value in field.value %}checked{% endif %}>
+                                                    {{ label }}
+                                                </label>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {% render_field field %}
+                                    {% endif %}
+                                    <div class="help-text">{{ field.help_text }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <input type="hidden" id="rooms" name="rooms" value="">
+                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-2 mt-4 mb-6">
+                            <div class="hidden new-room-prototype new-room flex flex-col gap-4 col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                <div class="!-mb-4 help-text">{% translate "Room number" %}</div>
+                                <div class="flex items-center gap-2">
+                                    <input class="w-full"
+                                           type="text"
+                                           placeholder="{% translate "Room number" %}" />
+                                    <i icon-name="minus-circle"
+                                       class="room-remover text-red-600 cursor-pointer"></i>
+                                </div>
+                                <div class="!-mb-4 help-text">{% translate "Beds" %}</div>
+                                <div class="new-bed-prototype flex items-center gap-2">
+                                    <select>
+                                        {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                                    </select>
+                                    <div>
+                                        <i icon-name="minus-circle"
+                                           class="bed-remover text-red-600 cursor-pointer"></i>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <select>
+                                        {% for value, name in bed_types %}<option value="{{ value }}">{{ name }}</option>{% endfor %}
+                                    </select>
+                                    <div>
+                                        <i icon-name="minus-circle"
+                                           class="bed-remover text-red-600 cursor-pointer"></i>
+                                    </div>
+                                </div>
+                                <div class="bed-adder flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                    <p class="hover:text-blue-600">
+                                        {% translate "Add bed" %} <i icon-name="plus-circle"></i>
+                                    </p>
+                                </div>
+                            </div>
+                            <div id="new-room-button"
+                                 class="flex justify-center items-center cursor-pointer col-span-1 rounded-lg border border-gray-300 bg-white p-4 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                                <h2 class="hover:text-blue-600">
+                                    {% translate "Add room" %} <i icon-name="plus-circle"></i>
+                                </h2>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn w-full md:w-auto self-center">{% translate "Add New Ward" %}</button>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2">
+                <div class="rounded-lg border border-gray-300 bg-white p-4 shadow-md flex flex-col h-full dark:bg-gray-800 dark:border-gray-700 overflow-x-auto">
+                    <div class="mb-4 text-2xl font-semibold dark:text-white">{% translate "Details about Wards" %}</div>
+                    <table class="min-w-full dark:text-white">
+                        <tr>
+                            <th align="left">{% translate "Ward Name" %}</th>
+                            <th align="left">{% translate "Ward Nickname" %}</th>
+                            <th align="left">{% translate "Floor" %}</th>
+                            <th align="left">{% translate "Number of Beds" %}</th>
+                            <th align="left">{% translate "Available" %}</th>
+                            <th align="left">{% translate "Occupied" %}</th>
+
+                            <th align="left"></th>
+
+                        </tr>
+                        {% for ward in wards %}
+
+                            <tr>
+                                <td>{{ ward.name }}</td>
+                                <td>{{ ward.nickname }}</td>
+                                <td>{{ ward.floor.name }}</td>
+                                <td>{{ ward.total_beds }}</td>
+                                <td>{{ ward.available_beds }}</td>
+                                <td>{{ ward.occupied_beds }}</td>
+                                <td align="left">
+                                    <button class="grow text-red-700 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
+                                            data-drawer-show="drawer-right-{{ ward.id }}"
+                                            data-drawer-target="drawer-right-{{ ward.id }}"
+                                            data-drawer-placement="right"
+                                            aria-controls="drawer-right-{{ ward.id }}">
+                                        <i icon-name="pencil" class="text-blue-600 cursor-pointer"></i>
+                                    </button>
+                                    <button class="grow text-red-700 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-red-300 rounded px-5 py-2.5 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-900"
+                                            data-delete-ward
+                                            data-occupied-beds="{{ ward.occupied_beds }}"
+                                            data-form-id="delete-ward-{{ ward.id }}"
+                                            form="delete-ward-{{ ward.id }}"
+                                    >       <i icon-name="minus-circle" class="element-remover text-red-600 cursor-pointer"></i>
+                                    </button>
+                                    <a href="{% url "cms:protected:ward_details" ward.id %}"
+                                        class="text-blue-500 border-2 border-blue-500 hover:border-blue-700 hover:text-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-700 rounded px-5 py-2.5">
+                                        {% translate "Details" %}
+                                    </a>
+                                </td>
+                            </tr>
+                           {% include "ward/ward_edit_drawer.html" %}
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

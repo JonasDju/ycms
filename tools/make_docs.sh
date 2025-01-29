@@ -64,7 +64,7 @@ sed --in-place '1s/^/Changelog\n=========\n\n/' ${DOC_SRC_DIR}/changelog.rst
 
 # Convert markdown-links to ReStructuredText-links
 # shellcheck disable=SC2016
-sed --in-place --regexp-extended 's|\[#([0-9]+)\]\(https://github\.com/charludo/ycms/issues/([0-9]+)\)|:github:`#\1 <issues/\1>`|' ${DOC_SRC_DIR}/changelog.rst
+sed --in-place --regexp-extended 's|\[#([0-9]+)\]\(https://github\.com/JonasDju/HospiTool/issues/([0-9]+)\)|:github:`#\1 <issues/\1>`|' ${DOC_SRC_DIR}/changelog.rst
 
 
 if [[ -z "$READTHEDOCS" ]]; then

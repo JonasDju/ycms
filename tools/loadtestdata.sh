@@ -24,21 +24,21 @@ require_installed
 require_database
 
 # User accounts, wards, rooms, beds
-deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/hospital_data.json" --verbosity "${SCRIPT_VERBOSITY}"
+deescalate_privileges hospitool-cli loaddata "${PACKAGE_DIR}/cms/fixtures/hospital_data.json" --verbosity "${SCRIPT_VERBOSITY}"
 # Full ICD10 catalog. Very slow startup time, disabled for development purposes.
-# deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/icd10_data.json" --verbosity "${SCRIPT_VERBOSITY}"
+# deescalate_privileges hospitool-cli loaddata "${PACKAGE_DIR}/cms/fixtures/icd10_data.json" --verbosity "${SCRIPT_VERBOSITY}"
 
 # Partial ICD10 catalog. Only contains the ICD10 entries present in the patient data.
-deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/test_data_icd10.json" --verbosity "${SCRIPT_VERBOSITY}"
+deescalate_privileges hospitool-cli loaddata "${PACKAGE_DIR}/cms/fixtures/test_data_icd10.json" --verbosity "${SCRIPT_VERBOSITY}"
 # Patient data
-deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/test_data.json" --verbosity "${SCRIPT_VERBOSITY}"
+deescalate_privileges hospitool-cli loaddata "${PACKAGE_DIR}/cms/fixtures/test_data.json" --verbosity "${SCRIPT_VERBOSITY}"
 
 # Partial ICD10 catalog. Only contains the ICD10 entries present in the patient data.
-deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/final_test_data_icd10.json" --verbosity "${SCRIPT_VERBOSITY}"
+deescalate_privileges hospitool-cli loaddata "${PACKAGE_DIR}/cms/fixtures/final_test_data_icd10.json" --verbosity "${SCRIPT_VERBOSITY}"
 # Patient data
-deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/final_test_data.json" --verbosity "${SCRIPT_VERBOSITY}"
+deescalate_privileges hospitool-cli loaddata "${PACKAGE_DIR}/cms/fixtures/final_test_data.json" --verbosity "${SCRIPT_VERBOSITY}"
 
 # Medical specialization (Fachrichtungen) data
-deescalate_privileges ycms-cli loaddata "${PACKAGE_DIR}/cms/fixtures/specializations_data.json" --verbosity "${SCRIPT_VERBOSITY}"
+deescalate_privileges hospitool-cli loaddata "${PACKAGE_DIR}/cms/fixtures/specializations_data.json" --verbosity "${SCRIPT_VERBOSITY}"
 
 echo "✔ Imported test data" | print_success

@@ -24,7 +24,7 @@ require_installed
 ensure_not_root
 
 # Relative path to translation file from the base directory
-TRANSLATION_FILE="ycms/locale/de/LC_MESSAGES/django.po"
+TRANSLATION_FILE="hospitool/locale/de/LC_MESSAGES/django.po"
 
 echo "Resolving translation conflicts..." | print_info
 
