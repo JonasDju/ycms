@@ -235,6 +235,11 @@ msgid "Admission date cannot be later than discharge date."
 msgstr "Das Aufnahmedatum darf nicht nach dem Entlassungsdatum liegen."
 
 #: cms/forms/intake_bed_assignment_form.py
+msgid "Discharge date is on an invalid weekday in this ward."
+msgstr ""
+"Das Entlassungsdatum auf dieser Station ist an einem unzulässigen Wochentag."
+
+#: cms/forms/intake_bed_assignment_form.py
 msgid ""
 "The selected admission and discharge dates overlap with an existing hospital "
 "stay."
@@ -917,6 +922,44 @@ msgstr "Nicht zugewiesene Patienten"
 msgid "Close menu"
 msgstr "Menü schließen"
 
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Patient is assigned a bed in ward {}."
+msgstr "Patient*in liegt auf Station {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "No days are currently configured for discharge in ward {}."
+msgstr ""
+"Aktuell sind auf Station {} keine Tage als zulässig zur Entlassung "
+"konfiguriert."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges in ward {} possible on {}."
+msgstr "Entlassungen auf Station {} möglich am {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges in ward {} possible on {} and {}."
+msgstr "Entlassungen auf Station {} möglich am {} und {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges cannot be earlier than the admission."
+msgstr "Entlassungen können nicht vor der Aufnahme liegen."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Discharges in ward {} not allowed on {}."
+msgstr "Entlassungen auf der Station {} nicht möglich am {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Next possible discharge in ward {} is on {}."
+msgstr "Nächstmögliches Entlassungsdatum auf Station {} ist am {}."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "No next discharge date available in ward {}."
+msgstr "Kein nächstmögliches Entlassungdatum auf Station {} verfügbar."
+
+#: cms/templates/bed_assignment/discharge_info.html
+msgid "Move discharge to {}."
+msgstr "Entlassung verschieben zum {}."
+
 #: cms/templates/delete_modal.html cms/templates/specializations_list.html
 #: cms/templates/ward/ward_details.html
 msgid "Delete"
@@ -1414,20 +1457,6 @@ msgid "Patient details"
 msgstr "Patientendaten"
 
 #: cms/templates/patients/patient_intake_form.html
-msgid "Discharges possible on"
-msgstr "Entlassungen zulässig am"
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "and"
-msgstr "und"
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "No days are currently configured for discharge on this ward."
-msgstr ""
-"Aktuell sind auf dieser Station keine Tage als zulässig zur Entlassung "
-"konfiguriert."
-
-#: cms/templates/patients/patient_intake_form.html
 msgid "Estimated stay (nights/discharge date)"
 msgstr "Voraussichtlicher Aufenthalt (Nächte/Entlassungsdatum)"
 
@@ -1446,26 +1475,6 @@ msgstr "Zwei Wochen"
 #: cms/templates/patients/patient_intake_form.html
 msgid "estimated duration of hospital stay in nights"
 msgstr "voraussichtliche Aufenthaltsdauer in Nächten"
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "Discharges not allowed on "
-msgstr "Entlassungen nicht zulässig am "
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "Next possible discharge date is "
-msgstr "Nächtes mögliches Entlassungsdatum ist "
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "No next discharge date available in this ward."
-msgstr "Kein nächstmögliches Entlassungdatum verfügbar auf dieser Station."
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "Move discharge to "
-msgstr "Entlassung verschieben zum "
-
-#: cms/templates/patients/patient_intake_form.html
-msgid "Discharges cannot be earlier than the admission."
-msgstr "Entlassungen können nicht vor der Aufnahme liegen."
 
 #: cms/templates/patients/patient_intake_form.html
 msgid "Complete emergency intake"
@@ -1608,6 +1617,10 @@ msgstr "Kurzer Stationsname"
 #: cms/templates/ward/ward_card.html cms/templates/ward/ward_management.html
 msgid "Floor"
 msgstr "Stockwerk"
+
+#: cms/templates/ward/ward_card.html
+msgid "Allowed discharge days"
+msgstr "Zulässige Entlassungstage"
 
 #: cms/templates/ward/ward_card.html
 msgid "Add rooms to this ward"
@@ -2063,6 +2076,15 @@ msgstr "Englisch"
 
 #~ msgid "No blocking"
 #~ msgstr "Nicht blockiert"
+
+#~ msgid "Discharges possible on"
+#~ msgstr "Entlassungen zulässig am"
+
+#~ msgid "and"
+#~ msgstr "und"
+
+#~ msgid "Discharges not allowed on "
+#~ msgstr "Entlassungen nicht zulässig am "
 
 #~ msgid "An error occured while uploading the file."
 #~ msgstr "Beim Hochladen der Datei trat ein Fehler auf."

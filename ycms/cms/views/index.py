@@ -25,6 +25,6 @@ class UserBasedRedirectView(RedirectView):
         :rtype: ~django.http.HttpResponseRedirect
         """
         default_url = group_names.DEFAULT_VIEWS.get(
-            str(self.request.user.group), "cms:protected:ward_detail_default"
+            str(self.request.user.group), "cms:protected:home"
         )
         return reverse_lazy(default_url)

@@ -153,6 +153,7 @@
                         <div class="help-text">{{ field.help_text }}</div>
                     </div>
                 {% endfor %}
+                {% include "bed_assignment/discharge_info.html" with fixed_ward_id=bed_assignment.bed.room.ward.id %}
             </div>
         </div>
         <!-- Buttons -->

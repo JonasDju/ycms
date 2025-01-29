@@ -5,7 +5,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
-from ..models import BedAssignment
+from ..models import BedAssignment, Ward
 from ..models.timetravel_manager import current_or_travelled_time
 from .custom_model_form import CustomModelForm
 
@@ -24,7 +24,7 @@ class IntakeBedAssignmentForm(CustomModelForm):
         """
 
         model = BedAssignment
-        fields = ["admission_date", "discharge_date", "recommended_ward", "accompanied"]
+        fields = ["recommended_ward", "admission_date", "discharge_date", "accompanied"]
         widgets = {
             "admission_date": forms.DateTimeInput(
                 format=("%Y-%m-%dT%H:%M"), attrs={"type": "datetime-local"}
@@ -66,6 +66,24 @@ class IntakeBedAssignmentForm(CustomModelForm):
                 raise ValidationError(
                     _("Admission date cannot be later than discharge date.")
                 )
+            
+        # validate new discharge day against the wards discharge policy
+        if discharge_date:
+            # validate against current ward if the patient is currenty assigned somewhere
+            if self.instance.bed:
+                discharge_mask = self.instance.bed.room.ward.allowed_discharge_days
+            elif ward := cleaned_data.get("recommended_ward"):
+                discharge_mask = ward.allowed_discharge_days
+            else:
+                # no restrictions on discharged
+                discharge_mask = 0b1111111
+
+            # date.weekday() starts at Monday = 0
+            if not (discharge_mask & (0b1 << discharge_date.weekday())):
+                raise ValidationError(
+                    _("Discharge date is on an invalid weekday in this ward.")
+                )
+
 
         # get all existing assignments for the patient
         patient = self.instance.medical_record.patient

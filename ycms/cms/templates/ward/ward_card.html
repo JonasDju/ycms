@@ -27,7 +27,7 @@
                                 <input
                                     type="text"
                                     id="id_name_{{ ward.id }}"
-                                    name="name"
+                                    name="{{ ward.id }}-name"
                                     value="{{ ward.name }}"
                                     class="form-control"
                                     {% if ward_form.fields.name.required %}required{% endif %} />
@@ -41,7 +41,7 @@
                                 <input
                                     type="text"
                                     id="id_nickname_{{ ward.id }}"
-                                    name="nickname"
+                                    name="{{ ward.id }}-nickname"
                                     value="{{ ward.nickname }}"
                                     class="form-control"
                                     {% if ward_form.fields.nickname.required %}required{% endif %} />
@@ -52,7 +52,7 @@
                                        class="{% if ward_form.fields.floor.required %}field-required{% endif %}">
                                     {% translate "Floor" %}
                                 </label>
-                                <select name="floor" id="id_floor_{{ ward.id }}">
+                                <select name="{{ ward.id }}-floor" id="id_floor_{{ ward.id }}">
                                     {% for floor in ward_form.fields.floor.queryset %}
                                         <option value="{{ floor.id }}" {% if ward.floor.id == floor.id %}selected{% endif %}>
                                             {{ floor.name }}
@@ -61,6 +61,27 @@
                                 </select>
                                 <div class="help-text">{{ ward_form.fields.floor.help_text }}</div>
                             </div>
+                            <div>
+                                <label for="id_allowed_discharge_days_{{ ward.id }}"
+                                       class="{% if ward_form.fields.allowed_discharge_days.required %}field-required{% endif %}">
+                                    {% translate "Allowed discharge days" %}
+                                </label>
+                                <div class="flex flex-wrap gap-2">
+                                    {% for value, label in ward_form.allowed_discharge_days.field.choices %}
+                                        <label class="mt-0 mb-0.5 flex flex-col items-center w-[40px] font-semibold text-base flex-none">
+                                            <input 
+                                                class="!mr-0"
+                                                type="checkbox" 
+                                                name="{{ ward.id }}-allowed_discharge_days" 
+                                                value="{{ value }}"
+                                                {% if value in ward.allowed_discharge_days_binary %}checked{% endif %}>
+                                            {{ label }}
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                                <div class="help-text">{{ ward_form.fields.allowed_discharge_days.help_text }}</div>
+                            </div>
+
 
                             <div class="mt-4">
                                 <h3 class="text-2xl font-semibold dark:text-white mb-4">{% translate "Add rooms to this ward" %}</h3>

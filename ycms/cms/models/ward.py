@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
+from ..constants import days_of_week
 from .abstract_base_model import AbstractBaseModel
 from .floor import Floor
 from .patient import Patient
@@ -162,6 +163,22 @@ class Ward(AbstractBaseModel):
             t[0]: t[1]
             for t in sorted(gender_dict.items(), key=lambda x: x[0], reverse=True)
         }
+    
+    @cached_property
+    def allowed_discharge_days_binary(self):
+        """
+        Helper property for accessing a list of the configured days where discharged are allowed as binary values.
+        The values are bitshifted by their position in the week, i.e. Mo = 0b1, Tue = 0b01, ..., Sun = 0b1000000.
+
+        :return: list of allowed discharge days in the ward 
+        :rtype: list [ int ]
+        """
+        if self.allowed_discharge_days:
+            return [
+                (0b1 << day) for day, _ in enumerate(days_of_week.WEEKDAYS_LONG) if self.allowed_discharge_days & (0b1 << day)
+            ]
+        else:
+            return []
 
     def __str__(self):
         """

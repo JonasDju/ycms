@@ -57,7 +57,24 @@
                                            {% if field.field.required %}class="field-required"{% endif %}>
                                         {{ field.label }}
                                     </label>
-                                    {% render_field field %}
+                                    {# render weekday selection manually #}
+                                    {% if field.name == "allowed_discharge_days" %}
+                                        <div id="{{ field.id }}" class="flex flex-wrap gap-2">
+                                            {% for value, label in field.field.choices %}
+                                                <label class="mt-0 mb-0.5 flex flex-col items-center w-[40px] font-semibold text-base flex-none">
+                                                    <input 
+                                                        class="!mr-0"
+                                                        type="checkbox" 
+                                                        name="{{ field.html_name }}" 
+                                                        value="{{ value }}"
+                                                        {% if value in field.value %}checked{% endif %}>
+                                                    {{ label }}
+                                                </label>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {% render_field field %}
+                                    {% endif %}
                                     <div class="help-text">{{ field.help_text }}</div>
                                 </div>
                             {% endfor %}
