@@ -165,7 +165,7 @@
 
         {% if floors|length > 0 %}
             document.getElementById("deleteModalFrom").action = "{% url "cms:protected:delete_floor" current_floor.id %}";
-            document.getElementById("deleteModalText").innerText = "{% trans "Are you sure you want to delete floor" %} {{ current_floor.name }}? {% trans "This will delete all" %} {{ floor_wards|length }} {% trans "wards on this floor." %}";
+            document.getElementById("deleteModalText").innerText = "{% blocktranslate with floor_name=current_floor.name num_wards=floor_wards|length %}Are you sure you want to delete floor {{ floor_name }}? This will delete all {{ num_wards }} wards on this floor.{% endblocktranslate %}";
         {% endif %}
     </script>
     {% endif %}

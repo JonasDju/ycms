@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-29 11:34+0100\n"
+"POT-Creation-Date: 2025-01-29 11:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: YCMS <info@ycms-app.de>\n"
 "Language-Team: YCMS <info@ycms-app.de>\n"
@@ -1026,20 +1026,11 @@ msgid "Add ward"
 msgstr "Station hinzufügen"
 
 #: cms/templates/floor/floor.html
-#, fuzzy
-#| msgid "Are you sure you want to delete this ward?"
-msgid "Are you sure you want to delete floor"
-msgstr "Sind Sie sicher, dass diese Station gelöscht werden soll?"
-
-#: cms/templates/floor/floor.html
-msgid "This will delete all"
-msgstr ""
-
-#: cms/templates/floor/floor.html
-#, fuzzy
-#| msgid "Order of the floor"
-msgid "wards on this floor."
-msgstr "Reihenfolge des Stockwerks"
+#, python-format
+msgid ""
+"Are you sure you want to delete floor %(floor_name)s? This will delete all "
+"%(num_wards)s wards on this floor."
+msgstr "Sind Sie sicher, dass die Etage %(floor_name)s gelöscht werden soll? Diese Aktion wird alle %(num_wards)s Stationen auf dieser Etage löschen."
 
 #: cms/templates/floor/floor_ward_card.html
 msgid "Are you sure you want to delete this ward?"
@@ -2046,6 +2037,16 @@ msgstr "Deutsch"
 #: core/settings.py
 msgid "English"
 msgstr "Englisch"
+
+#, fuzzy
+#~| msgid "Are you sure you want to delete this ward?"
+#~ msgid "Are you sure you want to delete floor"
+#~ msgstr "Sind Sie sicher, dass diese Station gelöscht werden soll?"
+
+#, fuzzy
+#~| msgid "Order of the floor"
+#~ msgid "wards on this floor."
+#~ msgstr "Reihenfolge des Stockwerks"
 
 #, fuzzy
 #~| msgid "Ward Information"

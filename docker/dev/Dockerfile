@@ -20,7 +20,6 @@ RUN apt-get update && apt-get install -y \
     netcat-traditional \
     gettext \
     pcregrep \
-    reportlab \
     && rm -rf /var/lib/apt/lists/*
 
 # Create directories
