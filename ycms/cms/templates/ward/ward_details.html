@@ -201,7 +201,7 @@
                             action="{% url "cms:protected:update_bed" bed.id %}"
                             data-unsaved-warning>
                             {% csrf_token %}
-                            <div class="mb-4">    
+                            <div class="mb-4">
                                 <div class="grow w-full">
                                     <label for="bed_type"></label>
                                     <p>{% translate "Bed type" %}</p>
@@ -218,7 +218,7 @@
                             {% if not bed.is_occupied %}
                             <div class="mb-4">
                                 <div class="grow w-full">
-                                    <label for="bed_blocking_type"></label>            
+                                    <label for="bed_blocking_type"></label>
                                         <p>{% translate "Bed blocking type" %}</p>
                                     </label>
                                 </div>
@@ -235,7 +235,7 @@
                             </div>
                             <div class="mb-4">
                                 <div class="grow w-full">
-                                    <label for="bed_blocking_reason"></label>            
+                                    <label for="bed_blocking_reason"></label>
                                         <p>{% translate "Bed blocking reason" %}</p>
                                     </label>
                                 </div>

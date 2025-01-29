@@ -8,10 +8,10 @@ from ..views import (
     floor,
     index,
     patients,
+    specializations,
     timeline,
     user_settings_view,
     ward,
-    specializations,
 )
 from ..views.floor.floor_view import FloorView  # Importiere die FloorView hier
 from ..views.utility.autocomplete import (

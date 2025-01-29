@@ -17,12 +17,14 @@ from ...constants import bed_types, bed_blocking_types
 
 logger = logging.getLogger(__name__)
 
+
 @method_decorator(permission_required("cms.view_ward"), name="dispatch")
 class WardDetailsView(TemplateView):
     """
     View to see all information about a single ward
     and its rooms and beds
     """
+
     template_name = "ward/ward_details.html"
 
     def get_context_data(self, **kwargs):
@@ -70,14 +72,14 @@ class WardDetailsView(TemplateView):
             "bed_forms": {bed.id: BedForm(instance=bed) for bed in (Bed.objects.filter(room__ward=ward))},
             **super().get_context_data(**kwargs),
         }
-    
+
 
 @method_decorator(permission_required("cms.add_rooms"), name="dispatch")
 class CreateMultipleRoomsView(CreateView):
     def post(self, request, pk):
         ward = get_object_or_404(Ward, pk=pk)
         rooms_data = json.loads(request.POST.get('rooms', '{}'))
-        
+
         # Track errors for duplicate rooms
         duplicate_rooms = []
         created_rooms = []
@@ -96,7 +98,7 @@ class CreateMultipleRoomsView(CreateView):
                         creator=request.user
                     )
                     created_rooms.append(room_number)
-                    
+
                     for bed_type in bed_types:
                         Bed.objects.create(
                             room=room,
@@ -127,6 +129,7 @@ class RoomUpdateView(UpdateView):
     """
     View to update a room
     """
+
     model = Room
     form_class = RoomForm
 
@@ -138,21 +141,21 @@ class RoomUpdateView(UpdateView):
         form.save()
         messages.success(self.request, _("Room updated successfully"))
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         form.add_error_messages(self.request)
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
 
-
     def get_success_url(self):
         return reverse_lazy("cms:protected:ward_details", kwargs={"pk": self.object.ward.id})
-    
+
 
 @method_decorator(permission_required("cms.add_ward"), name="dispatch")
 class RoomDeleteView(DeleteView):
     """
     View to delete a room
     """
+
     model = Room
 
     def form_valid(self, _form):
@@ -165,11 +168,9 @@ class RoomDeleteView(DeleteView):
             messages.success(self.request, _("The room has been deleted."))
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
 
-
     def form_invalid(self, form):
         form.add_error_messages(self.request)
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
-
 
 
 @method_decorator(permission_required("cms.add_ward"), name="dispatch")
@@ -177,6 +178,7 @@ class BedUpdateView(UpdateView):
     """
     View to update a bed
     """
+
     model = Bed
     form_class = BedForm
 
@@ -184,20 +186,21 @@ class BedUpdateView(UpdateView):
         form.save()
         messages.success(self.request, _("Bed updated successfully"))
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         form.add_error_messages(self.request)
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
 
     def get_success_url(self):
         return reverse_lazy("cms:protected:ward_details", kwargs={"pk": self.object.room.ward.id})
-    
+
 
 @method_decorator(permission_required("cms.add_ward"), name="dispatch")
 class BedDeleteView(DeleteView):
     """
     View to delete a bed
     """
+
     model = Bed
 
     def form_valid(self, _form):
@@ -206,19 +209,20 @@ class BedDeleteView(DeleteView):
             messages.error(self.request, _("The bed cannot be deleted because it is occupied."))
         else:
             self.object.delete()
-            messages.success(self.request, _("The bed has beed deleted."))   
+            messages.success(self.request, _("The bed has been deleted."))
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
 
     def form_invalid(self, form):
         form.add_error_messages(self.request)
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))
-    
+
 
 @method_decorator(permission_required("cms.add_ward"), name="dispatch")
 class BedCreateView(CreateView):
     """
     View to create a bed
     """
+
     model = Bed
     success_url = reverse_lazy("cms:protected:ward_details")
     form_class = BedForm
@@ -231,7 +235,7 @@ class BedCreateView(CreateView):
         form.save()
         messages.success(self.request, _("Bed created successfully"))
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         form.add_error_messages(self.request)
         return HttpResponseRedirect(self.request.META.get("HTTP_REFERER"))

@@ -52,8 +52,8 @@
                             <button class="modal-cancel px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
                                     data-ward-id="{{ ward.id }}">
                                 {% translate "Okay" %}
-                            </button>                        
-                            {% endif %}                        
+                            </button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -78,9 +78,9 @@
         <span>
             {% trans "Occupied beds" %}: <strong> {{ ward.occupied_beds }} </strong></span>
         <br>
-        <span >{% trans "Available Beds" %}: <strong>{{ ward.available_beds }}</strong></span>
+        <span>{% trans "Available Beds" %}: <strong>{{ ward.available_beds }}</strong></span>
         <br>
-        <span >{% trans "Blocked Beds" %}: <strong>{{ ward.total_blocked_beds }}</strong></span>
+        <span>{% trans "Blocked Beds" %}: <strong>{{ ward.total_blocked_beds }}</strong></span>
         <br>
         <span>
             {% trans "Unassigned Patients" %}
