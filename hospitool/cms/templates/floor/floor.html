@@ -159,9 +159,7 @@
             document.getElementById("floorIdUpdate").value = {% if current_floor is not None %}{{ current_floor.id }}{% else %}0{% endif %};;
         }
         const updateButton = document.getElementById("updateFloorButton");
-        if (updateButton) {
-            updateButton.onclick = updateFloor;
-        }
+        updateFloor();
 
         {% if floors|length > 0 %}
             document.getElementById("deleteModalFrom").action = "{% url "cms:protected:delete_floor" current_floor.id %}";
