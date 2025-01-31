@@ -109,11 +109,11 @@
             </div>
         </div>
     </div>
-    {% include "delete_modal.html" %}
     {% include "floor/create_floor.html" %}
-    {% include "floor/create_ward.html" %}
     {% if floor_count > 0 %}
-    {% include "floor/update_floor.html" %}
+        {% include "delete_modal.html" %}
+        {% include "floor/create_ward.html" %}
+        {% include "floor/update_floor.html" %}
     {% endif %}
 
     {% if user.is_staff %}
@@ -146,24 +146,22 @@
             bottomButton.onclick = createFloorAtBottom;
         }
 
-        function createNewWard() {
-            document.getElementById("wardFloorId").value = {{ current_floor.id }};
-        }
-        const addWardButton = document.getElementById("addWardButton");
-        addWardButton.onclick = createNewWard;
-
-        function updateFloor() {
-            document.getElementById("floorNameUpdate").value = "{{ current_floor.name }}";
-            document.getElementById("floorCodeUpdate").value = "{{ current_floor.code }}";
-            document.getElementById("floorOrderUpdate").value = {% if current_floor is not None %}{{ current_floor.order }}{% else %}0{% endif %};
-            document.getElementById("floorIdUpdate").value = {% if current_floor is not None %}{{ current_floor.id }}{% else %}0{% endif %};;
-        }
-        const updateButton = document.getElementById("updateFloorButton");
-        if (updateButton) {
-            updateButton.onclick = updateFloor;
-        }
-
         {% if floors|length > 0 %}
+            function createNewWard() {
+                document.getElementById("wardFloorId").value = {{ current_floor.id }};
+            }
+            const addWardButton = document.getElementById("addWardButton");
+            addWardButton.onclick = createNewWard;
+
+            function updateFloor() {
+                document.getElementById("floorNameUpdate").value = "{{ current_floor.name }}";
+                document.getElementById("floorCodeUpdate").value = "{{ current_floor.code }}";
+                document.getElementById("floorOrderUpdate").value = {% if current_floor is not None %}{{ current_floor.order }}{% else %}0{% endif %};
+                document.getElementById("floorIdUpdate").value = {% if current_floor is not None %}{{ current_floor.id }}{% else %}0{% endif %};;
+            }
+            const updateButton = document.getElementById("updateFloorButton");
+            updateFloor();
+
             document.getElementById("deleteModalFrom").action = "{% url "cms:protected:delete_floor" current_floor.id %}";
             document.getElementById("deleteModalText").innerText = "{% blocktranslate with floor_name=current_floor.name num_wards=floor_wards|length %}Are you sure you want to delete floor {{ floor_name }}? This will delete all {{ num_wards }} wards on this floor.{% endblocktranslate %}";
         {% endif %}
