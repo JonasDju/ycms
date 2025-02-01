@@ -16,7 +16,7 @@ class WeekdaySelectField(forms.MultipleChoiceField):
     def prepare_value(self, value):
         """ Convert binary-encoded int backing field to selection of weekdays. """
         if isinstance(value, int):
-            return [day for day, name in enumerate(days_of_week.WEEKDAYS_LONG)]
+            return [day for day, name in enumerate(days_of_week.WEEKDAYS_LONG) if value & day]
         return value
     
     def to_python(self, value):
