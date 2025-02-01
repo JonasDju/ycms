@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import gettext as _
 from django.views.generic import TemplateView
 
+from ...constants import days_of_week
 from ...decorators import permission_required
 from ...forms import WardForm
 from ...models import Floor
@@ -34,6 +35,9 @@ class WardCreateView(TemplateView):
         """
         data = {k: v for k, v in request.POST.items()}
         data["floor"] = Floor.objects.get(pk=request.POST["floor_id"])
+        # manually set discharge days default to all days (otherwise overwritten when cleaning for whatever reason)
+        data["allowed_discharge_days"] = [0b1 << day for day in range(len(days_of_week.WEEKDAYS_SHORT))]
+        
         ward_form = WardForm(
             data=data, additional_instance_attributes={"creator": request.user}
         )
