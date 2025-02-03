@@ -854,7 +854,7 @@ msgstr "Weitere Bettzuweisungsoptionen"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
 msgid "Move patient to different ward"
-msgstr "Patient*in auf andere Station verschieben"
+msgstr "Patient*in auf andere Station verlegen"
 
 #: cms/templates/bed_assignment/assign_bed_assignment.html
 msgid "Unassign"
@@ -1089,7 +1089,7 @@ msgid "Okay"
 msgstr "Okay"
 
 #: cms/templates/floor/floor_ward_card.html
-msgid "Occupied beds"
+msgid "Occupied Beds"
 msgstr "Belegte Betten"
 
 #: cms/templates/floor/floor_ward_card.html cms/templates/ward/ward_info.html
@@ -1186,7 +1186,7 @@ msgstr "Jetzt entlassen"
 #: cms/templates/patients/patient_card.html
 #: cms/templates/patients/patients_list.html
 msgid "Transfer"
-msgstr "Verschieben"
+msgstr "Verlegen"
 
 #: cms/templates/patients/hospital_stay_form.html
 #: cms/templates/patients/patient_card.html
